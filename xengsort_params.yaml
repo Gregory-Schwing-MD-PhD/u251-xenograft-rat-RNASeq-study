@@ -1,0 +1,10 @@
+# Input/Output
+input: "ANALYSIS/samplesheet.csv"
+outdir: "ANALYSIS/xengsort_out"
+
+# References
+# RAT (Host) - Using Toplevel (Release 110)
+host_fasta: "ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.dna.toplevel.fa.gz"
+
+# HUMAN (Graft) - Using Primary Assembly (GENCODE v44)
+graft_fasta: "ANALYSIS/refs/human/GRCh38.primary_assembly.genome.fa.gz"

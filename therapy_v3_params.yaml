@@ -1,0 +1,44 @@
+study_name: "U251_Therapy_v3_Sensitivity"
+outdir: "./ANALYSIS/results_therapy_v3"
+max_cpus: 16
+deseq2_cores: 8
+
+# --- INPUTS ---
+gtf: "/wsu/home/go/go24/go2432/u251-transcriptomic-evolution/ANALYSIS/refs/human/GRCh38.primary_assembly.annotation.gtf.gz"
+gene_sets_files: "/wsu/home/go/go24/go2432/u251-transcriptomic-evolution/ANALYSIS/refs/pathways/human/combined_human.gmt"
+# --- GSEA (small-N safe) ---
+gsea_run: true
+gsea_permute: "gene_set"          # required for N<7
+gsea_metric: "Diff_of_Classes"    # required for N<3 (Signal2Noise crashes)
+gsea_nperm: 1000
+gsea_rnd_seed: "1234"
+gsea_scoring_scheme: "weighted"
+gsea_sort: "real"
+gsea_order: "descending"
+gsea_set_max: 500
+gsea_set_min: 15
+gsea_norm: "meandiv"
+gsea_rnd_type: "no_balance"
+gsea_make_sets: true
+gsea_median: false
+gsea_num: 100
+gsea_plot_top_x: 20
+gsea_save_rnd_lists: false
+gsea_zip_report: false
+
+# --- gProfiler2 ORA ---
+gprofiler2_run: true
+gprofiler2_organism: "hsapiens"
+
+# --- DESeq2 / filtering ---
+filtering_min_abundance: 10
+deseq2_vs_method: "rlog"
+deseq2_min_replicates_for_replace: 99    # disable outlier replacement at small N
+differential_min_fold_change: 1.5
+differential_subset_to_contrast_samples: true
+
+# --- Exploratory ---
+exploratory_main_variable: "Classification"
+exploratory_n_features: 5000
+exploratory_clustering_method: "ward.D2"
+exploratory_cor_method: "spearman"

@@ -1,0 +1,24 @@
+FROM mambaorg/micromamba:latest
+
+USER root
+
+# 1. Install xengsort and multiqc into base
+RUN micromamba install -y -n base \
+    -c bioconda -c conda-forge -c defaults \
+    "python>=3.12,<3.13" xengsort=2.1.0 multiqc=1.21 procps-ng \
+    && micromamba clean --all --yes
+
+# 2. Initialize micromamba for the internal user
+RUN micromamba shell init --shell bash
+
+# 3. Force the PATH (This is the most important line for Singularity)
+ENV PATH="/opt/conda/bin:$PATH"
+
+# 4. Point BASH_ENV to the user's home, not root
+ENV BASH_ENV="/home/$MAMBA_USER/.bashrc"
+ENV MAMBA_DOCKERFILE_ACTIVATE=1
+
+WORKDIR /data
+USER $MAMBA_USER
+
+CMD ["/bin/bash"]

@@ -1,0 +1,9 @@
+input: "ANALYSIS/human_evolution_paired.csv"
+outdir: "ANALYSIS/results_human_final"
+fasta: "ANALYSIS/refs/human/GRCh38.primary_assembly.genome.fa.gz"
+gtf: "ANALYSIS/refs/human/GRCh38.primary_assembly.annotation.gtf.gz"
+skip_bbsplit: true
+aligner: "star_salmon"
+featurecounts_group_type: "gene_type"
+max_cpus: 16
+max_memory: "250.GB"
