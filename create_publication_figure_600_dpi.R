@@ -43,6 +43,17 @@ dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 # Constants
 PADJ_CUTOFF <- 0.05
 LOG2FC_CUTOFF <- 1.0
+
+# --- Panel B threshold sweep + gene labels ---
+THRESHOLDS       <- c(0.585, 1.0, 1.5, 2.0)
+THRESHOLD_LABELS <- c("|log2FC| > 0.585  (>1.5x)",
+                      "|log2FC| > 1.0    (>2x)",
+                      "|log2FC| > 1.5    (>2.83x)",
+                      "|log2FC| > 2.0    (>4x)")
+THRESHOLD_COLORS <- c("#fee090", "#fdae61", "#f46d43", "#a50026")  # light -> dark
+LABEL_TIERS      <- c("3", "4")   # tiers to draw gene labels on (>1.5, >2.0)
+LABEL_MAX_N      <- 30            # cap on number of gene labels
+
 STRING_SCORE_CUT <- 400
 TOP_HUBS_N <- 15
 N_TOP_VAR <- 500
@@ -421,117 +432,155 @@ p_panel_a <- ggdraw(p_panel_a_combined) +
     draw_label("A", x = 0.02, y = 0.98, fontface = "bold", size = 24, color = "black")
 
 # ==============================================================================
-# PANEL B: SUPERIMPOSED VOLCANO PLOTS (THREE CONTRASTS)
+# PANEL B: VOLCANO PLOT WITH log2FC THRESHOLD SWEEP + GENE-SYMBOL LABELS
+# (one DE contrast: TARGET_CONTRAST)
 # ==============================================================================
-cat("Panel B: Creating superimposed volcano plots...\n")
+cat("Panel B: Creating volcano plot with threshold sweep + gene labels...\n")
 
-contrasts_to_plot <- c("brain_adaptation", "therapy_impact", "total_evolution")
-contrast_labels <- c(
-    "brain_adaptation" = "Culture vs Primary",
-    "therapy_impact" = "Primary vs Recurrent",
-    "total_evolution" = "Culture vs Recurrent"
-)
-contrast_colors <- c(
-    "brain_adaptation" = "#1f77b4",
-    "therapy_impact" = "#ff7f0e",
-    "total_evolution" = "#2ca02c"
-)
+# Reuse the single DE result already loaded into res_df.
+res_b <- res_df %>%
+    dplyr::filter(!is.na(log2FoldChange),
+                  !is.na(padj),
+                  is.finite(log2FoldChange),
+                  padj > 0)
 
-volcano_data_list <- list()
-gene_counts <- data.frame(
-    Contrast = character(),
-    Label = character(),
-    Up = integer(),
-    Down = integer(),
+# -- Tier assignment: each gene gets the strictest |log2FC| threshold it passes
+res_b$tier <- "ns"
+for (i in seq_along(THRESHOLDS)) {
+    passes <- res_b$padj < PADJ_CUTOFF & abs(res_b$log2FoldChange) > THRESHOLDS[i]
+    res_b$tier[passes] <- as.character(i)
+}
+tier_levels <- c("ns", as.character(seq_along(THRESHOLDS)))
+res_b$tier  <- factor(res_b$tier, levels = tier_levels)
+
+# -- Per-threshold up/down counts (independent at each cutoff)
+gene_counts_b <- data.frame(
+    Threshold = THRESHOLDS,
+    Label     = THRESHOLD_LABELS,
+    Up        = sapply(THRESHOLDS, function(t)
+                  sum(res_b$padj < PADJ_CUTOFF & res_b$log2FoldChange >  t, na.rm = TRUE)),
+    Down      = sapply(THRESHOLDS, function(t)
+                  sum(res_b$padj < PADJ_CUTOFF & res_b$log2FoldChange < -t, na.rm = TRUE))
+)
+cat("  Threshold sweep:\n")
+print(gene_counts_b)
+write.csv(gene_counts_b,
+          file.path(OUT_DIR, "panelB_threshold_sweep_counts.csv"),
+          row.names = FALSE)
+
+# -- neglog10p (no pre-clamping; coord_cartesian handles zoom)
+res_b$neglog10p <- -log10(res_b$padj)
+
+# -- Data-driven plot extents (99.9th percentile guards single outliers)
+finite_x <- res_b$log2FoldChange[is.finite(res_b$log2FoldChange)]
+finite_y <- res_b$neglog10p[is.finite(res_b$neglog10p)]
+
+x_data_max <- max(abs(quantile(finite_x,
+                               probs = c(0.001, 0.999), na.rm = TRUE)))
+y_data_max <- as.numeric(quantile(finite_y, 0.999, na.rm = TRUE))
+
+# Guarantee threshold lines and FDR line are visible.
+x_data_max <- max(x_data_max, max(THRESHOLDS) + 0.3)
+y_data_max <- max(y_data_max, -log10(PADJ_CUTOFF) + 0.5)
+
+# Padding: enough on x for count annotations, modest on y for breathing room.
+x_lim <- c(-x_data_max * 1.30, x_data_max * 1.30)
+y_lim <- c(0, y_data_max * 1.12)
+
+# -- Annotation placement (relative to dynamic limits)
+ann_x_left   <- x_lim[1] * 0.78
+ann_x_right  <- x_lim[2] * 0.78
+ann_y_top    <- y_lim[2] * 0.95
+ann_y_bottom <- y_lim[2] * 0.55
+y_positions  <- seq(ann_y_top, ann_y_bottom, length.out = length(THRESHOLDS))
+
+text_annotations_b <- data.frame(
+    x     = c(rep(ann_x_left,  length(THRESHOLDS)),
+              rep(ann_x_right, length(THRESHOLDS))),
+    y     = c(y_positions, y_positions),
+    label = c(paste0(THRESHOLD_LABELS, "\n↓ ", gene_counts_b$Down),
+              paste0(THRESHOLD_LABELS, "\n↑ ", gene_counts_b$Up)),
+    Color = c(THRESHOLD_COLORS, THRESHOLD_COLORS),
     stringsAsFactors = FALSE
 )
 
-for (contrast in contrasts_to_plot) {
-    contrast_file_vol <- file.path(RESULTS_DIR, "tables/differential", paste0(contrast, ".deseq2.results.tsv"))
+fdr_label_x <- x_lim[2] * 0.92
+fdr_label_y <- -log10(PADJ_CUTOFF) + y_lim[2] * 0.04
 
-    if (!file.exists(contrast_file_vol)) {
-        cat(sprintf("  Warning: %s not found, skipping\n", basename(contrast_file_vol)))
-        next
-    }
+# -- Gene-symbol labels: strict-threshold hits only, real symbols only.
+# res_b$symbol was populated upstream by map_genes_to_symbols().
+# Drop rows whose "symbol" is still an Ensembl ID (i.e., failed to map).
+label_genes <- res_b %>%
+    dplyr::filter(tier %in% LABEL_TIERS,
+                  !is.na(symbol),
+                  symbol != "",
+                  !grepl("^ENSG[0-9]+(\\.[0-9]+)?$", symbol)) %>%
+    dplyr::arrange(desc(abs(log2FoldChange))) %>%
+    head(LABEL_MAX_N)
 
-    res_contrast <- read.table(contrast_file_vol, header = TRUE, sep = "\t", quote = "")
-    if (grepl("^[0-9]+$", rownames(res_contrast)[1])) rownames(res_contrast) <- res_contrast$gene_id
-    if(!"symbol" %in% colnames(res_contrast)) res_contrast$symbol <- map_genes_to_symbols(rownames(res_contrast))
+cat(sprintf("  Labeling %d gene symbols (tiers %s, top by |log2FC|)\n",
+            nrow(label_genes), paste(LABEL_TIERS, collapse = "/")))
 
-    res_contrast <- res_contrast %>%
-        dplyr::filter(!is.na(log2FoldChange), !is.na(padj), is.finite(log2FoldChange), padj > 0)
+# -- Colour / alpha mappings
+color_map <- c("ns" = "grey80",
+               setNames(THRESHOLD_COLORS, as.character(seq_along(THRESHOLDS))))
+alpha_map <- c("ns" = 0.20,
+               setNames(rep(0.85, length(THRESHOLDS)),
+                        as.character(seq_along(THRESHOLDS))))
+label_map <- c("ns" = "ns (padj ≥ 0.05 or |log2FC| ≤ 0.585)",
+               setNames(THRESHOLD_LABELS, as.character(seq_along(THRESHOLDS))))
 
-    res_contrast$Contrast <- contrast
-    res_contrast$ContrastLabel <- contrast_labels[contrast]
-    volcano_data_list[[contrast]] <- res_contrast
+vline_df <- data.frame(xintercept = c(-THRESHOLDS, THRESHOLDS))
 
-    n_up <- sum(res_contrast$padj < PADJ_CUTOFF & res_contrast$log2FoldChange > LOG2FC_CUTOFF, na.rm = TRUE)
-    n_down <- sum(res_contrast$padj < PADJ_CUTOFF & res_contrast$log2FoldChange < -LOG2FC_CUTOFF, na.rm = TRUE)
+# Pretty title from TARGET_CONTRAST (e.g. "therapy_impact" -> "Therapy Impact")
+contrast_title <- gsub("_", " ", TARGET_CONTRAST)
+contrast_title <- tools::toTitleCase(contrast_title)
 
-    gene_counts <- rbind(gene_counts, data.frame(
-        Contrast = contrast,
-        Label = contrast_labels[contrast],
-        Up = n_up,
-        Down = n_down,
-        stringsAsFactors = FALSE
-    ))
-
-    cat(sprintf("  %s: %d up, %d down\n", contrast_labels[contrast], n_up, n_down))
-}
-
-volcano_data <- do.call(rbind, volcano_data_list)
-volcano_data$neglog10p <- -log10(volcano_data$padj)
-volcano_data$neglog10p <- pmin(volcano_data$neglog10p, 50)
-volcano_data$log2FoldChange <- pmax(pmin(volcano_data$log2FoldChange, 10), -10)
-
-volcano_data$alpha_value <- ifelse(volcano_data$Contrast == "total_evolution", 0.15,
-                                    ifelse(volcano_data$Contrast == "therapy_impact", 0.5,
-                                           0.5))
-
-text_annotations <- data.frame(
-    x = c(-7, -7, -7, 7, 7, 7),
-    y = c(49, 42, 35, 49, 42, 35),
-    label = c(
-        paste0(gene_counts$Label[1], "\n↓ ", gene_counts$Down[1]),
-        paste0(gene_counts$Label[2], "\n↓ ", gene_counts$Down[2]),
-        paste0(gene_counts$Label[3], "\n↓ ", gene_counts$Down[3]),
-        paste0(gene_counts$Label[1], "\n↑ ", gene_counts$Up[1]),
-        paste0(gene_counts$Label[2], "\n↑ ", gene_counts$Up[2]),
-        paste0(gene_counts$Label[3], "\n↑ ", gene_counts$Up[3])
-    ),
-    Contrast = rep(contrasts_to_plot, 2)
-)
-text_annotations$Color <- contrast_colors[text_annotations$Contrast]
-
-p_panel_b_plot <- ggplot(volcano_data, aes(x = log2FoldChange, y = neglog10p)) +
-    geom_point(aes(color = Contrast, shape = Contrast, alpha = alpha_value), size = 1.5) +
-    scale_alpha_identity() +
-    geom_hline(yintercept = -log10(PADJ_CUTOFF), linetype = "dashed", color = "grey30", linewidth = 0.6) +
-    geom_vline(xintercept = c(-LOG2FC_CUTOFF, LOG2FC_CUTOFF), linetype = "dashed", color = "grey30", linewidth = 0.6) +
-    annotate("text", x = 9, y = -log10(PADJ_CUTOFF) + 2,
-             label = paste0("FDR = ", PADJ_CUTOFF), size = 4, color = "grey30", fontface = "bold") +
-    annotate("text", x = LOG2FC_CUTOFF, y = 48,
-             label = paste0("FC = ", 2^LOG2FC_CUTOFF), size = 4, color = "grey30", fontface = "bold", angle = 90) +
-    annotate("text", x = -LOG2FC_CUTOFF, y = 48,
-             label = paste0("FC = ", 2^LOG2FC_CUTOFF), size = 4, color = "grey30", fontface = "bold", angle = 90) +
-    geom_text(data = text_annotations,
-              aes(x = x, y = y, label = label, color = Contrast),
-              size = 5, fontface = "bold", hjust = 0.5, vjust = 0.5,
+p_panel_b_plot <- ggplot(res_b, aes(x = log2FoldChange, y = neglog10p)) +
+    geom_point(aes(color = tier, alpha = tier), size = 1.4) +
+    scale_color_manual(values = color_map, labels = label_map,
+                       name = "Significance tier", drop = FALSE) +
+    scale_alpha_manual(values = alpha_map, guide = "none") +
+    geom_hline(yintercept = -log10(PADJ_CUTOFF),
+               linetype = "dashed", color = "grey30", linewidth = 0.6) +
+    geom_vline(data = vline_df, aes(xintercept = xintercept),
+               linetype = "dashed", color = "grey60", linewidth = 0.35) +
+    annotate("text", x = fdr_label_x, y = fdr_label_y,
+             label = paste0("FDR = ", PADJ_CUTOFF),
+             size = 4, color = "grey30", fontface = "bold") +
+    geom_text(data = text_annotations_b,
+              aes(x = x, y = y, label = label),
+              color = text_annotations_b$Color,
+              size = 3.6, fontface = "bold", hjust = 0.5, vjust = 0.5,
               show.legend = FALSE) +
-    scale_color_manual(values = contrast_colors, name = "Contrast", labels = contrast_labels) +
-    scale_shape_manual(values = c("brain_adaptation" = 16,
-                                   "therapy_impact" = 17,
-                                   "total_evolution" = 4),
-                       name = "Contrast", labels = contrast_labels) +
-    labs(title = "Differential Expression Across Contrasts",
-         subtitle = paste0("Thresholds: FDR < ", PADJ_CUTOFF, ", |log2FC| > ", LOG2FC_CUTOFF),
+    {if (nrow(label_genes) > 0)
+        geom_text_repel(data = label_genes,
+                        aes(x = log2FoldChange, y = neglog10p, label = symbol),
+                        size = 3.2,
+                        fontface = "italic",
+                        color = "black",
+                        box.padding = 0.4,
+                        point.padding = 0.3,
+                        segment.color = "grey50",
+                        segment.size = 0.3,
+                        segment.alpha = 0.7,
+                        max.overlaps = 25,
+                        min.segment.length = 0.1,
+                        force = 2,
+                        seed = 12345,
+                        inherit.aes = FALSE)
+    } +
+    coord_cartesian(xlim = x_lim, ylim = y_lim, expand = FALSE, clip = "on") +
+    labs(title    = paste0("Differential Expression: ", contrast_title),
+         subtitle = "DESeq2 Wald | padj < 0.05 | |log2FC| threshold sweep",
          x = expression(log[2]~"Fold Change"),
          y = expression(-log[10]~"Adjusted P-value")) +
+    guides(color = guide_legend(override.aes = list(size = 3, alpha = 1), ncol = 1)) +
     theme_publication(base_size = 14) +
     theme(legend.position = "bottom",
-          legend.text = element_text(size = 12),
-          legend.title = element_text(size = 13, face = "bold"),
-          plot.subtitle = element_text(size = 11, color = "grey40", hjust = 0.5))
+          legend.text     = element_text(size = 10),
+          legend.title    = element_text(size = 11, face = "bold"),
+          plot.subtitle   = element_text(size = 11, color = "grey40", hjust = 0.5))
 
 p_panel_b <- ggdraw(p_panel_b_plot) +
     draw_label("B", x = 0.02, y = 0.98, fontface = "bold", size = 24, color = "black")
