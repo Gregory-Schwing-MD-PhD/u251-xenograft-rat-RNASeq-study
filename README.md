@@ -301,7 +301,7 @@ The following `therapy_v3_params.yaml` settings are explicitly chosen to keep th
 | `gsea_set_min` / `gsea_set_max`            | `15` / `500`        | Standard MSigDB-style bounds; excludes degenerate small or over-broad gene sets.                                                   |
 | `gsea_rnd_seed`                            | `1234`              | Fixed seed for reproducibility of the GSEA permutation null.                                                                       |
 
-What is **not** done: no batch-correction term is added (the design is `~ Classification`, not `~ batch + Classification`), no surrogate-variable correction (sva / RUVSeq), and no manual outlier exclusion beyond the prior removal of `IL64B`. The intent is that the single biological covariate (`Classification`) is the only modeled effect, and that small-N robustness is handled by the parameter choices above plus the threshold sweep below.
+What is **not** done in the *primary* DE call: no batch-correction term is added (the design is `~ Classification`, not `~ batch + Classification`), no surrogate-variable correction, and no manual outlier exclusion beyond the prior removal of `IL64B`. The intent is that the single biological covariate (`Classification`) is the only modeled effect, and that small-N robustness is handled by the parameter choices above plus the threshold sweep below. Separately, a **RUVSeq contamination-adjustment sensitivity analysis** ([Phase 2B](#phase-2b-contamination-adjustment-sensitivity-analysis-ruvseq)) re-runs this same contrast with factors of unwanted variation added as covariates, to test whether the findings survive correction for residual cross-species contamination.
 
 #### DE-gene calling: threshold sweep (not a single cutoff)
 
@@ -315,6 +315,44 @@ The pipeline writes the full per-gene results table; significance is then evalua
 | > 2.0                 | > 4-fold                      | Most stringent; tests whether the top-hit signature persists.   |
 
 The threshold sweep is applied post-hoc in `create_publication_figure_600_dpi.R` against the full DESeq2 results table. The intent is to characterize **signature robustness** — i.e., which genes / pathways remain enriched as the effect-size requirement tightens — rather than to report a single cherry-picked cutoff. Pathway enrichment (GSEA, gProfiler2 ORA) is rerun against each significant set so that downstream interpretation (drug prioritization, PPI hubs) can also be evaluated for threshold sensitivity.
+
+### Phase 2B: Contamination-adjustment sensitivity analysis (RUVSeq)
+
+**Tools:** `RUVSeq::RUVs` + DESeq2, driven by `run_ruvseq.sh`; metadata derived by `ANALYSIS/build_metadata_from_xengsort.py`.
+
+**Status:** Standalone sensitivity analysis — **not** part of the automated `main.nf` / nf-core call. You launch it after Phase 1 (xengsort) and Phase 2 (Salmon) have produced their outputs.
+
+#### Why this step exists
+
+xengsort is the best available cross-species read sorter, but it cannot fully remove rat reads whose sequence is highly conserved with their human ortholog (ribosomal proteins, translation factors, histones, tubulins). Those reads are misclassified as `graft` and then misaligned by Salmon onto the human ortholog, producing a per-gene, sample-dependent contamination signal that scales with rat tissue fraction. Because Recurrent tumors carry a **lower graft fraction** than Primary tumors, this contamination differs systematically between the two groups in the DE contrast — which can manufacture artifactual differential expression in conserved gene families. (The "translation/ribosome downregulation in recurrence" signal is the highest-risk finding; the HIF/iron drug-prioritization axis is low-risk, because those genes are not unusually conserved.)
+
+#### How it corrects for it
+
+The three in-vivo samples with negligible graft fraction — the two procedural controls (`N168B`, `N269B`) plus the failed-graft `IL64B` (~0.3% graft, i.e. effectively rat brain) — passed through the identical library prep, sequencing, xengsort, and Salmon pipeline. Any human-gene signal they carry is, by construction, contamination. `RUVSeq::RUVs` estimates factors of unwanted variation **W** from these control replicates; **W** is then added as covariate(s) to the DESeq2 model. The controls anchor **W** but are excluded from the Primary-vs-Recurrent contrast itself.
+
+| Sample | Role                   | graft % | host % |
+| ------ | ---------------------- | ------- | ------ |
+| IL64B  | Control (failed graft) | 0.33    | 93.59  |
+| N168B  | Control (procedural)   | 0.55    | 93.57  |
+| N269B  | Control (procedural)   | 4.90    | 86.95  |
+
+#### How to run it
+
+From the repo root, on Warrior:
+
+```bash
+sbatch run_ruvseq.sh
+```
+
+Under SLURM (4 CPU, 32 GB, 1 h walltime) this:
+
+1. **Derives metadata.** `ANALYSIS/build_metadata_from_xengsort.py` parses the `## Classification Statistics` block of each `ANALYSIS/xengsort_out/<sample>.txt`, computes `graft` / `host` / `both` percentages as `count / total`, and appends them to `ANALYSIS/metadata_base.csv` → `ANALYSIS/metadata_full.csv`. The fractions are **never hand-entered**; `metadata_full.csv` is a build artifact regenerated on every run (and is git-ignored).
+2. **Estimates W and re-runs DE.** `ANALYSIS/ruvseq_contamination_adjustment.R` pre-filters genes (count ≥ 10 in ≥ 3 samples), runs `RUVs` at k = 1, 2, 3, and fits DESeq2 with `design = ~ W_1 + … + W_k + Classification` on the 6 Primary/Recurrent samples, alongside an unadjusted baseline (`~ Classification`).
+3. **Diagnostics + k selection.** Concordance vs baseline (Spearman of log2FC, Jaccard of significant gene sets at padj < 0.05 & \|log2FC\| > 1, top-20 overlap), PCA before/after adjustment, and a Primary-vs-Recurrent silhouette per setting. The recommended k maximizes that silhouette. **Caveat:** a single 3-replicate control group spans at most ~2 effective factors, so k = 3 is near-degenerate and the silhouette heuristic is noisy at n = 3/group — k = 2 is the conventional default if the automatic pick is k = 1 or k = 3.
+
+#### Outputs
+
+Written to `ANALYSIS/results_ruvseq/` (see its [README](ANALYSIS/results_ruvseq/README.md)): adjusted DE tables per k, baseline DE, estimated W factors, concordance summary CSV, before/after PCA PDF, and `ruvseq_recommended_k.txt`. To adopt the adjustment as the primary result, point `create_publication_figure_600_dpi.R` at `ruvseq_adjusted_de_k{recommended}.tsv` instead of the baseline DESeq2 table.
 
 ---
 
