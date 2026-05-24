@@ -30,7 +30,7 @@
 #   1. Load Salmon gene counts + full metadata (9 in-vivo samples)
 #   2. Pre-filter low-count genes
 #   3. Designate the 3 Control samples as the RUVs replicate set (scIdx)
-#   4. Estimate W at k = 1, 2, 3 via RUVs (all genes as controls, cIdx)
+#   4. Estimate W at k = 1, 2 via RUVs (all genes as controls, cIdx)
 #   5. DESeq2 with design ~ W_1 + ... + W_k + Classification on Primary vs
 #      Recurrent (Controls used only to estimate W, excluded from the contrast)
 #   6. Baseline DESeq2 (~ Classification), same Primary-vs-Recurrent contrast
@@ -72,7 +72,7 @@ dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 # Analysis constants
 PADJ_CUTOFF   <- 0.05
 LOG2FC_CUTOFF <- 1.0
-K_VALUES      <- c(1, 2, 3)
+K_VALUES      <- c(1, 2)   # one 3-replicate control group supports at most 2 RUV factors; k>=3 is not estimable
 GROUP_COLORS  <- c("Control"   = "#1f77b4",
                    "Primary"   = "#ff7f0e",
                    "Recurrent" = "#d62728")
@@ -265,8 +265,8 @@ set <- betweenLaneNormalization(set, which = "upper")
 ctrl_idx <- match(ctrl_samples, colnames(counts_ruv))
 scIdx <- matrix(ctrl_idx, nrow = 1)
 cat("    scIdx (Control sample column indices):", paste(ctrl_idx, collapse = ", "), "\n")
-cat("    NOTE: a single 3-replicate group spans <= 2 effective factors;\n")
-cat("          k=3 is reported for completeness but may be near-degenerate.\n\n")
+cat("    NOTE: a single 3-replicate control group supports at most 2 RUV\n")
+cat("          factors, so k is tested at 1 and 2 (k>=3 is not estimable).\n\n")
 
 # ==============================================================================
 # STEP 4-5: RUVs AT EACH k + ADJUSTED DESeq2 ON PRIMARY vs RECURRENT
@@ -313,7 +313,15 @@ run_adjusted_de <- function(k) {
         W[contrast_samples, , drop = FALSE],
         row.names = contrast_samples,
         check.names = FALSE)
-    design_terms <- c(paste0("W_", seq_len(k)), "Classification")
+    # Use the number of factors RUVs ACTUALLY returned: a single replicate group
+    # caps at (n_replicates - 1) factors, so requesting more silently yields
+    # fewer. Building the design off `k` instead of ncol(W) would reference a
+    # nonexistent W column.
+    k_eff <- ncol(W)
+    if (k_eff < k)
+        cat("    NOTE: RUVs returned", k_eff, "factor(s) for requested k =", k,
+            "(control group caps it); using", k_eff, "\n")
+    design_terms <- c(paste0("W_", seq_len(k_eff)), "Classification")
     design_form  <- as.formula(paste("~", paste(design_terms, collapse = " + ")))
     cat("    design:", deparse(design_form), "\n")
 
@@ -368,8 +376,11 @@ concordance_row <- function(label, df) {
         m <- merge(res_baseline[, c("gene_id", "log2FoldChange")],
                    df[, c("gene_id", "log2FoldChange")],
                    by = "gene_id", suffixes = c("_base", "_k"))
-        sp  <- suppressWarnings(cor(m$log2FoldChange_base, m$log2FoldChange_k,
-                                    method = "spearman", use = "complete.obs"))
+        ok  <- is.finite(m$log2FoldChange_base) & is.finite(m$log2FoldChange_k)
+        sp  <- if (sum(ok) >= 3)
+                   suppressWarnings(cor(m$log2FoldChange_base[ok], m$log2FoldChange_k[ok],
+                                        method = "spearman"))
+               else NA_real_
         jac <- jaccard(base_sig, s)
         ovl <- length(intersect(base_top20, top_n_ids(df, 20)))
     }

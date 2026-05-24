@@ -28,24 +28,24 @@ contrast itself.
 | File | Description |
 |------|-------------|
 | `ruvseq_baseline_de.tsv` | Unadjusted DESeq2 (`~ Classification`), Recurrent vs Primary. Reference. |
-| `ruvseq_adjusted_de_k1.tsv` / `_k2.tsv` / `_k3.tsv` | DESeq2 with design `~ W_1..W_k + Classification`, Recurrent vs Primary. log2FC > 0 = up in Recurrent. |
+| `ruvseq_adjusted_de_k1.tsv` / `_k2.tsv` | DESeq2 with design `~ W_1..W_k + Classification`, Recurrent vs Primary. log2FC > 0 = up in Recurrent. |
 | `ruvseq_estimated_W_factors.csv` | Estimated W per sample, per k (long format: `sample, Classification, k_setting, factor, value`). |
 | `ruvseq_concordance_summary.csv` | Per-setting metrics vs baseline: Spearman(log2FC), Jaccard(sig sets), n sig up/down, top-20 overlap, Primary-vs-Recurrent silhouette. `recommended` column flags the chosen k. |
-| `ruvseq_pca_before_after.pdf` | 2×2 PCA grid (baseline + k=1,2,3) coloured by Classification; adjusted panels have the W effect residualised out. |
-| `ruvseq_recommended_k.txt` | Single integer (1, 2, or 3): the k with the highest Primary-vs-Recurrent silhouette. |
+| `ruvseq_pca_before_after.pdf` | PCA grid (baseline + k=1,2) coloured by Classification; adjusted panels have the W effect residualised out. |
+| `ruvseq_recommended_k.txt` | Single integer (1 or 2): the k with the highest Primary-vs-Recurrent silhouette. |
 
 ## Method notes
 
 - **Pre-filter:** keep genes with count ≥ 10 in ≥ 3 samples.
 - **RUVs:** all retained genes as negative controls (`cIdx = rownames(set)`);
   `scIdx` = a single replicate group of the 3 Control samples. A single
-  3-replicate group spans at most 2 effective factors, so **k=3 is reported for
-  completeness but may be near-degenerate** — treat it with caution.
+  3-replicate group supports **at most 2 factors** of unwanted variation, so only
+  **k = 1, 2** are tested (k ≥ 3 is not estimable and would collapse to k = 2).
 - **Significance threshold:** `padj < 0.05` and `|log2FC| > 1`.
 - **k selection:** maximum Primary-vs-Recurrent silhouette in PC1–PC2 over
-  k ∈ {1,2,3}. The silhouette heuristic is **noisy at this sample size (n=3 per
+  k ∈ {1,2}. The silhouette heuristic is **noisy at this sample size (n=3 per
   group)**; k=2 is the conventional RUVSeq default and a reasonable manual
-  override if the automatic pick is k=1 or k=3.
+  override if the automatic pick is k=1.
 - **Significance is not interpreted here.** Adopt a k, then point the
   publication-figure script at `ruvseq_adjusted_de_k{k}.tsv` if desired.
 
