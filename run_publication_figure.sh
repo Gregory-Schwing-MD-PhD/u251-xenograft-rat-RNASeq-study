@@ -42,8 +42,17 @@ NORM_FILE="${RESULTS_DIR}/tables/processed_abundance/all.rlog.tsv"
 METADATA_FILE="ANALYSIS/metadata_therapy.csv"
 VISUAL_ABSTRACT_SRC="ASSETS/Visual_abstract.png"
 VISUAL_ABSTRACT_LINK="Experiment_Visual_Abstract.png"
-OUT_DIR="publication_figure"
 TARGET_CONTRAST="therapy_impact"
+
+# Optional positional args, for comparing decontamination approaches:
+#   $1 = DE results table to use INSTEAD of the differentialabundance output
+#        (repo-relative; e.g. ANALYSIS/results_ruvseq/ruvseq_adjusted_de_k2.tsv)
+#   $2 = label suffix for the figure output dir (e.g. ruvseq -> publication_figure_ruvseq)
+DE_RESULTS_OVERRIDE="${1:-}"
+FIG_LABEL="${2:-}"
+OUT_DIR="publication_figure${FIG_LABEL:+_$FIG_LABEL}"
+DE_ARG=""
+[ -n "$DE_RESULTS_OVERRIDE" ] && DE_ARG="/data/$DE_RESULTS_OVERRIDE"
 
 echo "Verifying input files..."
 for path in "$NORM_FILE" "$COMBINED_GMT" "$STRING_DIR" "$METADATA_FILE" "$VISUAL_ABSTRACT_SRC"; do
@@ -91,6 +100,7 @@ echo "  STRING Dir:       $STRING_DIR"
 echo "  Visual Abstract:  $VISUAL_ABSTRACT_SRC -> $VISUAL_ABSTRACT_LINK"
 echo "  Output Dir:       $OUT_DIR"
 echo "  Target Contrast:  $TARGET_CONTRAST"
+echo "  DE override:      ${DE_RESULTS_OVERRIDE:-<none (use differentialabundance output)>}"
 echo ""
 
 singularity exec --bind "$PWD:/data" --pwd /data "$IMG_PATH" \
@@ -101,7 +111,8 @@ singularity exec --bind "$PWD:/data" --pwd /data "$IMG_PATH" \
     "/data/$STRING_DIR" \
     "/data/$OUT_DIR" \
     "$TARGET_CONTRAST" \
-    "/data/$METADATA_FILE"
+    "/data/$METADATA_FILE" \
+    "$DE_ARG"
 
 exit_code=$?
 

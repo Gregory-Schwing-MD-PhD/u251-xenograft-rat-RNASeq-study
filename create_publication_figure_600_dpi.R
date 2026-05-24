@@ -37,6 +37,11 @@ STRING_DIR <- args[4]
 OUT_DIR <- args[5]
 TARGET_CONTRAST <- args[6]
 METADATA_CSV <- args[7]
+# Optional 8th arg: a DE results table to use INSTEAD of the differentialabundance
+# output (e.g. a RUVSeq-adjusted or hard-filter table), so the volcano + GSEA
+# panels regenerate for a different decontamination approach. PCA/expression
+# panels still come from VST_FILE / RESULTS_DIR.
+DE_RESULTS_OVERRIDE <- if (length(args) >= 8 && nzchar(args[8])) args[8] else ""
 
 dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 
@@ -343,7 +348,9 @@ string_net <- fread(link_f)
 if(ncol(string_net) >= 3) colnames(string_net)[1:3] <- c("protein1", "protein2", "combined_score")
 string_net <- string_net[combined_score >= STRING_SCORE_CUT]
 
-contrast_file <- file.path(RESULTS_DIR, "tables/differential", paste0(TARGET_CONTRAST, ".deseq2.results.tsv"))
+contrast_file <- if (nzchar(DE_RESULTS_OVERRIDE)) DE_RESULTS_OVERRIDE else
+    file.path(RESULTS_DIR, "tables/differential", paste0(TARGET_CONTRAST, ".deseq2.results.tsv"))
+cat("Using DE results table:", contrast_file, "\n")
 res_df <- read.table(contrast_file, header=TRUE, sep="\t", quote="")
 if (grepl("^[0-9]+$", rownames(res_df)[1])) rownames(res_df) <- res_df$gene_id
 if(!"symbol" %in% colnames(res_df)) res_df$symbol <- map_genes_to_symbols(rownames(res_df))
