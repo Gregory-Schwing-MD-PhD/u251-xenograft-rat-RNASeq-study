@@ -66,13 +66,18 @@ COUNTS_TSV <- if (length(args) >= 1) args[1] else
     "ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_counts.tsv"
 META_CSV   <- if (length(args) >= 2) args[2] else "ANALYSIS/metadata_full.csv"
 OUT_DIR    <- if (length(args) >= 3) args[3] else "ANALYSIS/results_ruvseq"
+# Optional 4th arg: comma/semicolon-separated control sample IDs to use as the
+# RUVs anchor (scIdx). Default = all samples with Classification == "Control".
+# Use this to drop an outlier control (e.g. the failed-graft IL64B).
+RUV_CONTROLS <- if (length(args) >= 4 && nzchar(args[4]))
+    trimws(strsplit(args[4], "[,;]")[[1]]) else NULL
 
 dir.create(OUT_DIR, showWarnings = FALSE, recursive = TRUE)
 
 # Analysis constants
 PADJ_CUTOFF   <- 0.05
 LOG2FC_CUTOFF <- 1.0
-K_VALUES      <- c(1, 2)   # one 3-replicate control group supports at most 2 RUV factors; k>=3 is not estimable
+MAX_K         <- 2         # cap on RUV factors; estimable k = min(n_anchor_controls - 1, MAX_K)
 GROUP_COLORS  <- c("Control"   = "#1f77b4",
                    "Primary"   = "#ff7f0e",
                    "Recurrent" = "#d62728")
@@ -230,9 +235,22 @@ print(table(meta$Classification))
 
 ctrl_samples     <- meta$sample[meta$Classification == "Control"]
 contrast_samples <- meta$sample[meta$Classification %in% c("Primary", "Recurrent")]
-cat("    Controls (W estimation):", paste(ctrl_samples, collapse = ", "), "\n")
+
+# Which controls anchor the RUVs fit (scIdx). Default = all Control samples;
+# override via the 4th CLI arg to drop an outlier control.
+if (is.null(RUV_CONTROLS)) {
+    ruv_controls <- ctrl_samples
+} else {
+    bad <- setdiff(RUV_CONTROLS, colnames(counts))
+    if (length(bad)) stop("RUV control(s) not found in counts: ", paste(bad, collapse = ", "))
+    ruv_controls <- RUV_CONTROLS
+}
+if (length(ruv_controls) < 2)
+    stop("RUVs needs >= 2 anchor controls; got: ", paste(ruv_controls, collapse = ", "))
+
+cat("    All Control samples   :", paste(ctrl_samples, collapse = ", "), "\n")
+cat("    RUV anchor controls   :", paste(ruv_controls, collapse = ", "), "\n")
 cat("    Contrast (Pri vs Rec) :", paste(contrast_samples, collapse = ", "), "\n\n")
-if (length(ctrl_samples) < 2) stop("RUVs needs >= 2 Control replicates.")
 
 # ==============================================================================
 # STEP 2: PRE-FILTER LOW-COUNT GENES
@@ -260,13 +278,24 @@ set <- newSeqExpressionSet(
 # only inside RUVs to estimate W; raw counts are passed to DESeq2 separately.
 set <- betweenLaneNormalization(set, which = "upper")
 
-# scIdx: one replicate group = the Control samples (their indices into the
-# columns of `set`). A single group needs no -1 padding.
-ctrl_idx <- match(ctrl_samples, colnames(counts_ruv))
+# Diagnostic: how similar are the Control samples to each other? A control that
+# correlates poorly with the others (e.g. the failed-graft IL64B, which has seen
+# needle insertion / gliosis the procedural controls have not) would dominate the
+# within-group variance and bias W away from the true contamination axis.
+if (length(ctrl_samples) >= 2) {
+    lc <- log2(counts_ruv[, ctrl_samples, drop = FALSE] + 1)
+    cat("    Control-sample Spearman correlation (log2, RUV gene set):\n")
+    print(round(cor(lc, method = "spearman"), 3))
+}
+
+# scIdx: one replicate group = the chosen anchor controls (column indices into
+# `set`). A single group of m replicates supports at most (m - 1) factors.
+ctrl_idx <- match(ruv_controls, colnames(counts_ruv))
 scIdx <- matrix(ctrl_idx, nrow = 1)
-cat("    scIdx (Control sample column indices):", paste(ctrl_idx, collapse = ", "), "\n")
-cat("    NOTE: a single 3-replicate control group supports at most 2 RUV\n")
-cat("          factors, so k is tested at 1 and 2 (k>=3 is not estimable).\n\n")
+K_VALUES <- seq_len(min(length(ruv_controls) - 1L, MAX_K))
+cat("    scIdx (anchor control column indices):", paste(ctrl_idx, collapse = ", "), "\n")
+cat(sprintf("    %d anchor control(s) -> testing k = %s (max estimable = m-1)\n\n",
+            length(ruv_controls), paste(K_VALUES, collapse = ", ")))
 
 # ==============================================================================
 # STEP 4-5: RUVs AT EACH k + ADJUSTED DESeq2 ON PRIMARY vs RECURRENT

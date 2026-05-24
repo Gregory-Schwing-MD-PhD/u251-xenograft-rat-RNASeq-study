@@ -50,7 +50,13 @@ GEN_SCRIPT="ANALYSIS/build_metadata_from_xengsort.py"
 BASE_METADATA="ANALYSIS/metadata_base.csv"
 XENGSORT_DIR="ANALYSIS/xengsort_out"
 METADATA="ANALYSIS/metadata_full.csv"
-OUT_DIR="ANALYSIS/results_ruvseq"
+
+# Optional positional args (to compare control sets):
+#   $1 = comma-separated RUV anchor control IDs (e.g. "N168B,N269B" to drop the
+#        failed-graft IL64B). Empty -> all Classification==Control samples.
+#   $2 = output dir (use a new one to keep both runs, e.g. ANALYSIS/results_ruvseq_2ctrl)
+RUV_CONTROLS="${1:-}"
+OUT_DIR="${2:-ANALYSIS/results_ruvseq}"
 
 mkdir -p "$OUT_DIR" slurm_logs
 
@@ -98,13 +104,15 @@ echo "  R script : $R_SCRIPT"
 echo "  Counts   : $COUNTS"
 echo "  Metadata : $METADATA"
 echo "  Out dir  : $OUT_DIR"
+echo "  Controls : ${RUV_CONTROLS:-<all Classification==Control>}"
 
 set +e
 singularity exec --bind "$PWD:/data" --pwd /data "$IMG_PATH" \
     Rscript "/data/$R_SCRIPT" \
     "/data/$COUNTS" \
     "/data/$METADATA" \
-    "/data/$OUT_DIR"
+    "/data/$OUT_DIR" \
+    "$RUV_CONTROLS"
 exit_code=$?
 set -e
 
