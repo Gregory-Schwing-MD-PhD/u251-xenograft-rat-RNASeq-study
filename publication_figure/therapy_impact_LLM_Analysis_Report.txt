@@ -1,0 +1,268 @@
+================================================================================
+  ALL-PANEL ANALYSIS REPORT (LLM) - U251 GBM | contrast: therapy_impact
+  Generated: 2026-05-25
+  Drug Integrated Score = |NES|^1.5 x BBB_penetration  (higher=better; no target term)
+================================================================================
+
+PANEL A - DESIGN: orthotopic U251 GBM xenograft (RNU rat) +/- MRI-guided LITT;
+  human reads recovered by xengsort (k=25); DE contrast = therapy_impact.
+
+PANEL B - GLOBAL STRUCTURE:
+  PCA variance explained: PC1=41.8%, PC2=26.2%, PC3=14.0%, PC4=10.7%, PC5=7.3%
+  PERMANOVA (Euclidean, 999 perm; Primary_U2 vs Recurrent_U2; n=6): R2=0.278, F=1.54, p=0.100
+  Differential expression: 23 up, 12 down (padj<0.05, |log2FC|>1).
+
+PANEL C - SUBTYPE TRAJECTORIES (mean signature z per stage; [sig]=limma p<0.05):
+  Garofano_GPM           Primary_U2=+0.20 -> Recurrent_U2=-0.20
+  Garofano_MTC           Primary_U2=-0.32 -> Recurrent_U2=+0.32   [sig: RecurrentU2_vs_PrimaryU2]
+  Garofano_NEU           Primary_U2=+0.19 -> Recurrent_U2=-0.19
+  Neftel_AC              Primary_U2=+0.63 -> Recurrent_U2=-0.63   [sig: RecurrentU2_vs_PrimaryU2]
+  Neftel_MES             Primary_U2=+0.11 -> Recurrent_U2=-0.11
+  Neftel_NPC             Primary_U2=+0.44 -> Recurrent_U2=-0.44   [sig: RecurrentU2_vs_PrimaryU2]
+  Neftel_OPC             Primary_U2=-0.34 -> Recurrent_U2=+0.34
+  Verhaak_Classical      Primary_U2=-0.06 -> Recurrent_U2=+0.06
+  Verhaak_Mesenchymal    Primary_U2=-0.12 -> Recurrent_U2=+0.12
+  Verhaak_Proneural      Primary_U2=-0.06 -> Recurrent_U2=+0.06
+
+PANEL D - TOP ENRICHED PATHWAYS (FDR<0.05, by |NES|):
+   1. REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION         NES=-3.17  FDR=1.6e-26
+   2. KEGG_RIBOSOME                                      NES=-3.15  FDR=4.9e-26
+   3. KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION      NES=-3.13  FDR=6.4e-25
+   4. REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DE NES=-3.11  FDR=6.7e-25
+   5. REACTOME_SELENOAMINO_ACID_METABOLISM               NES=-3.10  FDR=6.7e-25
+   6. REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TAR NES=-3.10  FDR=6.4e-25
+   7. WP_CYTOPLASMIC_RIBOSOMAL_PROTEINS                  NES=-3.02  FDR=1.1e-20
+   8. REACTOME_NONSENSE_MEDIATED_DECAY_NMD               NES=-2.99  FDR=4.3e-22
+   9. REACTOME_EUKARYOTIC_TRANSLATION_INITIATION         NES=-2.99  FDR=9.2e-22
+  10. REACTOME_CELLULAR_RESPONSE_TO_STARVATION           NES=-2.89  FDR=4.9e-21
+  11. REACTOME_REGULATION_OF_EXPRESSION_OF_SLITS_AND_ROB NES=-2.74  FDR=8.4e-17
+  12. BILANGES_SERUM_AND_RAPAMYCIN_SENSITIVE_GENES       NES=-2.74  FDR=3.6e-12
+  13. REACTOME_TRANSLATION                               NES=-2.73  FDR=2.3e-24
+  14. GOBP_CYTOPLASMIC_TRANSLATION                       NES=-2.71  FDR=6.7e-16
+  15. REACTOME_SARS_COV_2_MODULATES_HOST_TRANSLATION_MAC NES=-2.69  FDR=4e-11
+  16. REACTOME_INFLUENZA_INFECTION                       NES=-2.67  FDR=1.9e-15
+  17. REACTOME_SARS_COV_1_MODULATES_HOST_TRANSLATION_MAC NES=-2.64  FDR=1.5e-10
+  18. KEGG_MEDICUS_PATHOGEN_SARS_COV_2_NSP1_TO_TRANSLATI NES=-2.63  FDR=2.7e-09
+  19. PECE_MAMMARY_STEM_CELL_UP                          NES=-2.55  FDR=4e-11
+  20. CHNG_MULTIPLE_MYELOMA_HYPERPLOID_UP                NES=-2.54  FDR=3.7e-08
+
+PANEL E - PPI HUB GENES (top by degree): BGN, COL1A1, IGFBP3, RYR2, COL17A1, LRP1, HMCN1, PCLO, PRELP, GPC3, CALB1
+
+PANEL F - POLYPHARMACOLOGY (multi-target drugs hitting >=3 pathways): deferoxamine, nilutamide, mesalazine, benserazide
+
+PANEL G - DRUG-PATHWAY GENE OVERLAP (top pairs by shared genes):
+  deferoxamine  x  HSIAO_HOUSEKEEPING_GENES : 10 genes
+  benserazide  x  HSIAO_HOUSEKEEPING_GENES : 9 genes
+  hyoscyamine  x  HSIAO_HOUSEKEEPING_GENES : 9 genes
+  nilutamide  x  HSIAO_HOUSEKEEPING_GENES : 9 genes
+  benserazide  x  REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_P : 8 genes
+  hyoscyamine  x  REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_P : 8 genes
+  oxolinic acid  x  REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_P : 8 genes
+  nilutamide  x  REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_P : 8 genes
+
+PANEL H-I - TOP DRUG CANDIDATES (ranked by Integrated Score = |NES|^1.5 x BBB):
+--------------------------------------------------------------------------------
+RANK 1: ciclopirox
+   IntegratedScore=3.4 | NES=-2.261 | FDR=1.66e-05 | BBB=1 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1413 | MW=207.27 | LogP=2.44 | PSA=42.23 | clinical_trials=0 | targets=NA
+
+RANK 2: ciclopirox
+   IntegratedScore=3.167 | NES=-2.156 | FDR=5.86e-05 | BBB=1 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1413 | MW=207.27 | LogP=2.44 | PSA=42.23 | clinical_trials=0 | targets=NA
+
+RANK 3: dimethyloxalylglycine
+   IntegratedScore=3.044 | NES=-2.388 | FDR=4e-06 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL92309 | MW=175.14 | LogP=-1.55 | PSA=81.7 | clinical_trials=0 | targets=NA
+
+RANK 4: hyoscyamine
+   IntegratedScore=2.74 | NES=-1.958 | FDR=0.0158 | BBB=1 (HIGH BBB Penetration) | clinical_phase=-1
+   ChEMBL=CHEMBL1331216 | MW=289.37 | LogP=1.93 | PSA=49.77 | clinical_trials=0 | targets=NA
+
+RANK 5: 3-METHOXYCATECHOL
+   IntegratedScore=2.68 | NES=-1.929 | FDR=0.0481 | BBB=1 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1518159 | MW=140.14 | LogP=1.11 | PSA=49.69 | clinical_trials=0 | targets=NA
+
+RANK 6: oxolinic acid
+   IntegratedScore=2.616 | NES=-1.898 | FDR=0.0319 | BBB=1 (HIGH BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL416755 | MW=261.23 | LogP=1.45 | PSA=77.76 | clinical_trials=0 | targets=NA
+
+RANK 7: LY-294002
+   IntegratedScore=2.402 | NES=-2.039 | FDR=0.000818 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=-1
+   ChEMBL=CHEMBL98350 | MW=307.35 | LogP=3.3 | PSA=42.68 | clinical_trials=0 | targets=NA
+
+RANK 8: pyrantel
+   IntegratedScore=2.399 | NES=-1.792 | FDR=0.0394 | BBB=1 (HIGH BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL1626223 | MW=206.31 | LogP=2.5 | PSA=15.6 | clinical_trials=0 | targets=NA
+
+RANK 9: GW-8510
+   IntegratedScore=2.351 | NES=-2.01 | FDR=0.00492 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL4303385 | MW=364.44 | LogP=3.89 | PSA=77.1 | clinical_trials=0 | targets=NA
+
+RANK 10: ifosfamide
+   IntegratedScore=2.272 | NES=-1.728 | FDR=0.0751 | BBB=1 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1024 | MW=261.09 | LogP=1.88 | PSA=41.57 | clinical_trials=0 | targets=NA
+
+RANK 11: pentetrazol
+   IntegratedScore=2.24 | NES=-1.946 | FDR=0.0245 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL116943 | MW=138.17 | LogP=0.4 | PSA=43.6 | clinical_trials=0 | targets=NA
+
+RANK 12: progesterone
+   IntegratedScore=2.121 | NES=-1.877 | FDR=0.0362 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL103 | MW=314.47 | LogP=4.72 | PSA=34.14 | clinical_trials=0 | targets=NA
+
+RANK 13: primidone
+   IntegratedScore=2.104 | NES=-1.866 | FDR=0.0327 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL856 | MW=218.26 | LogP=0.54 | PSA=58.2 | clinical_trials=0 | targets=NA
+
+RANK 14: Metformin
+   IntegratedScore=2.066 | NES=-2.058 | FDR=0.00833 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1431 | MW=129.17 | LogP=-1.03 | PSA=88.99 | clinical_trials=0 | targets=NA
+
+RANK 15: CUMENE HYDROPEROXIDE
+   IntegratedScore=2.058 | NES=-1.618 | FDR=0.203 | BBB=1 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1518369 | MW=152.19 | LogP=2.41 | PSA=29.46 | clinical_trials=0 | targets=NA
+
+RANK 16: metoprolol
+   IntegratedScore=1.977 | NES=-1.908 | FDR=0.0235 | BBB=0.75 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL2356097 | MW=652.83 | LogP=1.61 | PSA=50.72 | clinical_trials=0 | targets=NA
+
+RANK 17: tolbutamide
+   IntegratedScore=1.97 | NES=-1.572 | FDR=0.219 | BBB=1 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL782 | MW=270.35 | LogP=1.78 | PSA=75.27 | clinical_trials=0 | targets=NA
+
+RANK 18: Chloranil
+   IntegratedScore=1.953 | NES=-1.563 | FDR=0.204 | BBB=1 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL192627 | MW=245.88 | LogP=2.52 | PSA=34.14 | clinical_trials=0 | targets=NA
+
+RANK 19: nilutamide
+   IntegratedScore=1.94 | NES=-1.884 | FDR=0.00687 | BBB=0.75 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1274 | MW=317.22 | LogP=2.45 | PSA=92.55 | clinical_trials=0 | targets=NA
+
+RANK 20: Lysergide
+   IntegratedScore=1.907 | NES=-1.538 | FDR=0.221 | BBB=1 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL4764888 | MW=323.44 | LogP=2.91 | PSA=39.34 | clinical_trials=0 | targets=NA
+
+RANK 21: Fenbuconazole
+   IntegratedScore=1.875 | NES=-1.729 | FDR=0.0401 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1879687 | MW=336.83 | LogP=4.03 | PSA=54.5 | clinical_trials=0 | targets=NA
+
+RANK 22: malathion
+   IntegratedScore=1.875 | NES=-1.662 | FDR=0.131 | BBB=0.875 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1200468 | MW=330.36 | LogP=2.12 | PSA=71.06 | clinical_trials=0 | targets=NA
+
+RANK 23: atovaquone
+   IntegratedScore=1.84 | NES=-1.707 | FDR=0.0929 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1450 | MW=366.84 | LogP=5.51 | PSA=54.37 | clinical_trials=0 | targets=NA
+
+RANK 24: 1,6,7,8,9,11a,12,13,14,14a-Decahydro-1,13-dihydroxy-6-methyl-4H-cyclopent [f]oxacyclotridecin-4-one
+   IntegratedScore=1.804 | NES=-1.482 | FDR=0.193 | BBB=1 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL2402356 | MW=308.37 | LogP=1.53 | PSA=83.83 | clinical_trials=0 | targets=NA
+
+RANK 25: ethaverine
+   IntegratedScore=1.765 | NES=-1.66 | FDR=0.116 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL1555736 | MW=395.5 | LogP=5.42 | PSA=49.81 | clinical_trials=0 | targets=NA
+
+RANK 26: 3-amino-1,2,4-triazole
+   IntegratedScore=1.745 | NES=-1.648 | FDR=0.178 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL15571 | MW=69.07 | LogP=-0.2 | PSA=41.57 | clinical_trials=0 | targets=NA
+
+RANK 27: LY-294002
+   IntegratedScore=1.736 | NES=-1.642 | FDR=0.126 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=-1
+   ChEMBL=CHEMBL98350 | MW=307.35 | LogP=3.3 | PSA=42.68 | clinical_trials=0 | targets=NA
+
+RANK 28: 1-Naphthyl isothiocyanate
+   IntegratedScore=1.731 | NES=-1.639 | FDR=0.164 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1381098 | MW=185.25 | LogP=3.57 | PSA=12.36 | clinical_trials=0 | targets=NA
+
+RANK 29: Axitinib
+   IntegratedScore=1.605 | NES=-1.559 | FDR=0.199 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1289926 | MW=386.48 | LogP=4.64 | PSA=70.67 | clinical_trials=0 | targets=NA
+
+RANK 30: oxygen
+   IntegratedScore=1.605 | NES=-1.558 | FDR=0.000818 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1234886 | MW=32 | LogP=0.07 | PSA=34.14 | clinical_trials=0 | targets=NA
+
+RANK 31: PHOSPHINE
+   IntegratedScore=1.601 | NES=-1.556 | FDR=0.14 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL2227836 | MW=34 | LogP=0.06 | PSA=0 | clinical_trials=0 | targets=NA
+
+RANK 32: 6-Thioguanine
+   IntegratedScore=1.545 | NES=-1.695 | FDR=0.161 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL727 | MW=167.2 | LogP=0.6 | PSA=83.38 | clinical_trials=0 | targets=NA
+
+RANK 33: OZONE
+   IntegratedScore=1.544 | NES=-1.518 | FDR=0.198 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=3
+   ChEMBL=CHEMBL2447938 | MW=48 | LogP=-1.12 | PSA=51.43 | clinical_trials=0 | targets=NA
+
+RANK 34: GNF-PF-3832
+   IntegratedScore=1.536 | NES=-1.513 | FDR=0.242 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL261693 | MW=272.31 | LogP=3.66 | PSA=42.85 | clinical_trials=0 | targets=NA
+
+RANK 35: betulinic acid
+   IntegratedScore=1.532 | NES=-1.922 | FDR=0.019 | BBB=0.575 (MODERATE BBB Penetration) | clinical_phase=1
+   ChEMBL=CHEMBL269277 | MW=456.71 | LogP=7.09 | PSA=57.53 | clinical_trials=0 | targets=NA
+
+RANK 36: heptachlor
+   IntegratedScore=1.521 | NES=-1.503 | FDR=0.219 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1903207 | MW=389.32 | LogP=4.45 | PSA=12.53 | clinical_trials=0 | targets=NA
+
+RANK 37: 7-DIETHYLAMINO-4-METHYLCOUMARIN
+   IntegratedScore=1.512 | NES=-1.671 | FDR=0.141 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL3416552 | MW=402.45 | LogP=4.04 | PSA=70.83 | clinical_trials=0 | targets=NA
+
+RANK 38: econazole
+   IntegratedScore=1.492 | NES=-1.484 | FDR=0.221 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL808 | MW=381.69 | LogP=5.8 | PSA=27.05 | clinical_trials=0 | targets=NA
+
+RANK 39: mefloquine
+   IntegratedScore=1.491 | NES=-1.483 | FDR=0.109 | BBB=0.825 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL172 | MW=378.32 | LogP=4.45 | PSA=45.15 | clinical_trials=0 | targets=NA
+
+RANK 40: trimipramine
+   IntegratedScore=1.477 | NES=-1.645 | FDR=0.125 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1200948 | MW=410.51 | LogP=4.12 | PSA=6.48 | clinical_trials=0 | targets=NA
+
+RANK 41: 6-Thioguanine
+   IntegratedScore=1.458 | NES=-1.631 | FDR=0.134 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL727 | MW=167.2 | LogP=0.6 | PSA=83.38 | clinical_trials=0 | targets=NA
+
+RANK 42: propantheline bromide
+   IntegratedScore=1.455 | NES=-1.629 | FDR=0.177 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1240 | MW=448.4 | LogP=4.73 | PSA=35.53 | clinical_trials=0 | targets=NA
+
+RANK 43: benzethonium chloride
+   IntegratedScore=1.402 | NES=-1.589 | FDR=0.198 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL221753 | MW=448.09 | LogP=6.07 | PSA=18.46 | clinical_trials=0 | targets=NA
+
+RANK 44: estropipate
+   IntegratedScore=1.401 | NES=-1.588 | FDR=0.155 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1200980 | MW=436.57 | LogP=3.29 | PSA=80.67 | clinical_trials=0 | targets=NA
+
+RANK 45: thioridazine
+   IntegratedScore=1.395 | NES=-1.584 | FDR=0.0334 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1200916 | MW=407.05 | LogP=5.89 | PSA=6.48 | clinical_trials=0 | targets=NA
+
+RANK 46: dexverapamil
+   IntegratedScore=1.363 | NES=-1.778 | FDR=0.108 | BBB=0.575 (MODERATE BBB Penetration) | clinical_phase=2
+   ChEMBL=CHEMBL197 | MW=454.61 | LogP=5.09 | PSA=63.95 | clinical_trials=0 | targets=NA
+
+RANK 47: Escitalopram oxalate
+   IntegratedScore=1.323 | NES=-1.528 | FDR=0.23 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=4
+   ChEMBL=CHEMBL1200322 | MW=414.43 | LogP=3.81 | PSA=36.26 | clinical_trials=0 | targets=NA
+
+RANK 48: CP-690334-01
+   IntegratedScore=1.314 | NES=-1.521 | FDR=0.142 | BBB=0.7 (HIGH BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL4303229 | MW=423.55 | LogP=5 | PSA=66.84 | clinical_trials=0 | targets=NA
+
+RANK 49: pomiferin
+   IntegratedScore=1.248 | NES=-1.677 | FDR=0.101 | BBB=0.575 (MODERATE BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL4436688 | MW=418.49 | LogP=5.32 | PSA=86.99 | clinical_trials=0 | targets=NA
+
+RANK 50: 7-aminocephalosporanic acid
+   IntegratedScore=1.242 | NES=-1.671 | FDR=0.134 | BBB=0.575 (MODERATE BBB Penetration) | clinical_phase=NA
+   ChEMBL=CHEMBL1615585 | MW=272.28 | LogP=-0.87 | PSA=109.93 | clinical_trials=0 | targets=NA
+
+================================================================================
+GUIDANCE: DSigDB GSEA NES<0 = drug opposes disease; BBB>=0.5 = plausible CNS penetration. Prioritise high Integrated Score + BBB + clinical phase.
+Note: deduplicate drugs (multiple DSigDB signatures of one drug can repeat in the ranking).
+================================================================================

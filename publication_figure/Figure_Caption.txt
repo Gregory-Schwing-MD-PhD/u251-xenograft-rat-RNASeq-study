@@ -1,0 +1,35 @@
+FIGURE: U251 Transcriptomic Evolution and Therapeutic Target Discovery - FINAL VERSION
+
+FINAL FIXES:
+- ✅ Panel G: Heatmap rendered at 10000x10000 @ 600 DPI with NO pathway truncation
+- ✅ Panel G: 70mm bottom padding for full rotated pathway labels
+- ✅ Panel G: 8 inches vertical space for column names
+- ✅ Panel G: Row/column gaps of 2mm for better readability
+- ✅ Caption: REMOVED (add caption separately in your document)
+
+CAPTION TEXT:
+Figure: U251 Transcriptomic Evolution Through LITT Therapy and Therapeutic Target Discovery.
+(A) Global transcriptomic structure: PCA biplot showing evolutionary trajectory from in vitro
+culture through primary tumor to post-LITT recurrence, with gene driver arrows indicating major
+contributors to variance; scree plot quantifies variance explained by principal components.
+(B) Differential expression landscape: Superimposed volcano plots for three experimental contrasts
+(blue=brain adaptation, orange=therapy impact, green=total evolution), with gene counts annotated
+for up/down-regulated genes (FDR<0.05, |log2FC|>1); dashed lines mark significance thresholds
+(vertical: FC=2, horizontal: FDR=0.05).
+(C) Subtype trajectory analysis: Longitudinal evolution of GBM molecular subtypes (Verhaak,
+Neftel, Garofano classifications) across LITT therapy; asterisks indicate statistically significant
+pairwise changes via arrayWeights-adjusted limma with FDR correction (*p<0.05, **p<0.01, ***p<0.001).
+(D) Semantic pathway organization: Hierarchical clustering of enriched pathways (FDR<0.05) based
+on gene overlap, grouped into functional modules with clade labels.
+(E) Protein interaction network: STRING-based PPI network of differentially expressed genes;
+red nodes=hub proteins with highest connectivity (top 15 by degree centrality).
+(F) Polypharmacology landscape: Bipartite network connecting drug candidates to enriched pathways
+based on shared gene sets (>=3 genes); triangular nodes indicate multi-target drugs affecting >=3 pathways.
+(G) Drug-pathway mechanistic overlap: Heatmap quantifying shared genes between top drug signatures
+and enriched biological pathways, revealing mechanism-of-action relationships.
+(H) Integrated drug scoring: 2D visualization of drug candidates plotted by therapeutic enrichment
+(|NES|) vs BBB penetration (threshold=0.5); point size represents integrated score (|NES|^1.5 x BBB),
+color indicates polypharmacology potential.
+(I) Top drug candidates: Ranked table of 20 prioritized drugs with key metrics including normalized
+enrichment score, BBB penetration probability, clinical trial activity, pathway coverage, and
+composite integrated score.
