@@ -1115,6 +1115,40 @@ if(!is.null(pathway_results) && !is.null(drug_results) &&
 
             unlink(temp_heatmap_file)
 
+            # --- Standalone, publication-ready Panel G heatmap (clean, no panel letter) ---
+            # The PI wants this heatmap on its own as the abstract figure, so render it
+            # directly from ComplexHeatmap at print scale (vector PDF + 600-dpi PNG) with
+            # fonts sized for a single figure rather than a 1/9 tile of the 30x30 composite.
+            # ComplexHeatmap auto-reserves space for the (full, untruncated) names, so we
+            # just give it a tall canvas and generous name-size caps instead of manual padding.
+            tryCatch({
+                ht_standalone <- Heatmap(
+                    overlap_mat, name = "Shared\ngenes",
+                    col = colorRamp2(c(0, max(overlap_mat)/2, max(overlap_mat)),
+                                     c("white", "#fee090", "#d73027")),
+                    cluster_rows = TRUE, cluster_columns = TRUE,
+                    column_title = "Drug-Pathway Gene Overlap",
+                    column_title_gp = gpar(fontsize = 18, fontface = "bold"),
+                    row_names_gp = gpar(fontsize = 11),
+                    column_names_gp = gpar(fontsize = 10),
+                    column_names_rot = -60,
+                    column_names_side = "bottom",
+                    heatmap_legend_param = list(title_gp = gpar(fontsize = 13),
+                                                labels_gp = gpar(fontsize = 12)),
+                    row_gap = unit(1, "mm"), column_gap = unit(1, "mm"),
+                    rect_gp = gpar(col = "grey92", lwd = 0.5),
+                    row_names_max_width = unit(4, "inches"),
+                    column_names_max_height = unit(6, "inches"))
+
+                g_pdf <- file.path(OUT_DIR, "Panel_G_heatmap.pdf")
+                g_png <- file.path(OUT_DIR, "Panel_G_heatmap.png")
+                pdf(g_pdf, width = 12, height = 11); draw(ht_standalone); dev.off()
+                png(g_png, width = 12, height = 11, units = "in", res = 600)
+                draw(ht_standalone); dev.off()
+                cat(sprintf("  ✓ Standalone Panel G heatmap: %s (+ .pdf)\n", g_png))
+            }, error = function(e)
+                cat("  WARNING: standalone Panel G heatmap failed:", conditionMessage(e), "\n"))
+
             p_panel_g <- ggdraw(p_panel_g_plot) +
                 draw_label("G", x = 0.02, y = 0.98, fontface = "bold", size = 24, color = "black")
         } else {
@@ -1290,6 +1324,27 @@ ggsave(
 )
 
 cat("  ✓ Created PDF version\n")
+
+# ==============================================================================
+# STANDALONE PANELS: also save each panel (A-I) as its own image, named by the
+# letter it occupies in the composite (Panel_A.png ... Panel_I.png) so the
+# abstract/slides can reuse any single panel without cropping the 9-panel figure.
+# These carry the same corner letter as in the composite; the clean, letter-free
+# heatmap for the abstract is written separately above as Panel_G_heatmap.{png,pdf}.
+# ==============================================================================
+cat("Saving standalone panels (A-I)...\n")
+panel_objects <- list(A = p_panel_a, B = p_panel_b, C = p_panel_c,
+                      D = p_panel_d, E = p_panel_e, F = p_panel_f,
+                      G = p_panel_g, H = p_panel_h, I = p_panel_i)
+for (lt in names(panel_objects)) {
+    f_png <- file.path(OUT_DIR, sprintf("Panel_%s.png", lt))
+    tryCatch({
+        ggsave(filename = f_png, plot = panel_objects[[lt]],
+               width = 10, height = 10, dpi = 300, bg = "white")
+        cat(sprintf("  ✓ %s\n", f_png))
+    }, error = function(e)
+        cat(sprintf("  WARNING: could not save %s: %s\n", f_png, conditionMessage(e))))
+}
 
 
 captions <- c(

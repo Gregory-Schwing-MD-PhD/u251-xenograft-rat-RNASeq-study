@@ -159,6 +159,18 @@ for opt in \
     if [ -f "$opt" ]; then echo "✓ $opt"; else echo "○ not generated: $opt"; fi
 done
 
+# Standalone panels (one image per A-I) + the clean, letter-free Panel G heatmap
+# the PI wants as the abstract figure. Reported, not required -> no failure.
+echo ""
+echo "Standalone panels (optional):"
+for lt in A B C D E F G H I; do
+    p="$OUT_DIR/Panel_${lt}.png"
+    if [ -f "$p" ]; then echo "✓ $p"; else echo "○ not generated: $p"; fi
+done
+for opt in "$OUT_DIR/Panel_G_heatmap.png" "$OUT_DIR/Panel_G_heatmap.pdf"; do
+    if [ -f "$opt" ]; then echo "✓ $opt (clean heatmap for abstract)"; else echo "○ not generated: $opt"; fi
+done
+
 if [ "$all_present" = false ]; then
     echo ""
     echo "WARNING: Some expected outputs are missing"
