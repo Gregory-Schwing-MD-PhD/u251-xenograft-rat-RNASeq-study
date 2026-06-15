@@ -171,6 +171,14 @@ for opt in "$OUT_DIR/Panel_G_heatmap.png" "$OUT_DIR/Panel_G_heatmap.pdf"; do
     if [ -f "$opt" ]; then echo "✓ $opt (clean heatmap for abstract)"; else echo "○ not generated: $opt"; fi
 done
 
+# Neuro-Oncology Letter to the Editor Figure 1 (2-panel: volcano+subtype | polypharm).
+# Built only if the R script's drug-discovery branch produced p_panel_f_plot.
+echo ""
+echo "Neuro-Oncology Letter Figure 1 (optional):"
+for opt in "$OUT_DIR/Figure1_Letter_NeuroOnc.png" "$OUT_DIR/Figure1_Letter_NeuroOnc.pdf"; do
+    if [ -f "$opt" ]; then echo "✓ $opt"; else echo "○ not generated: $opt"; fi
+done
+
 if [ "$all_present" = false ]; then
     echo ""
     echo "WARNING: Some expected outputs are missing"
@@ -193,6 +201,10 @@ echo "  • PDF (vector):   $OUT_DIR/Publication_Figure_9Panel_VOLCANO_COMPLETE.
 echo "  • Captions:       $OUT_DIR/Figure_Caption.txt"
 echo "  • LLM report:     $OUT_DIR/${TARGET_CONTRAST}_LLM_Analysis_Report.txt  (all panels A-I)"
 echo "  • Drug CSV:       $OUT_DIR/${TARGET_CONTRAST}_Drug_Profiles_Comprehensive.csv"
+echo ""
+echo "Neuro-Oncology Letter Figure 1 (2-panel A=volcano+subtype, B=polypharm):"
+echo "  • PNG: $OUT_DIR/Figure1_Letter_NeuroOnc.png"
+echo "  • PDF: $OUT_DIR/Figure1_Letter_NeuroOnc.pdf"
 echo ""
 echo "Panel Layout (3×3 grid):"
 echo "  A. Experimental Design (Gemini visual abstract)"

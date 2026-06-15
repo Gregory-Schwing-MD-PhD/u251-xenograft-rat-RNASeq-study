@@ -1326,6 +1326,40 @@ ggsave(
 cat("  ✓ Created PDF version\n")
 
 # ==============================================================================
+# LETTER FIGURE (Neuro-Oncology Letter to the Editor): 2-panel composite
+# Panel A = volcano (Panel B in composite) + subtype trajectories (Panel C)
+#           side-by-side, so the letter's "Panel A" carries both findings.
+# Panel B = polypharmacology network (Panel F in composite).
+# Built from the clean (letter-free) panel plot objects so we can stamp fresh
+# A/B labels. Wrapped in tryCatch -> cannot break the main composite output.
+# ==============================================================================
+tryCatch({
+    if (exists("p_panel_b_plot") && exists("p_panel_c_plot") && exists("p_panel_f_plot")) {
+        cat("Building Neuro-Oncology letter Figure 1 (2-panel composite)...\n")
+        panel_a_combo <- cowplot::plot_grid(
+            p_panel_b_plot, p_panel_c_plot,
+            nrow = 1, rel_widths = c(1.1, 1))
+        panel_a_labeled <- ggdraw(panel_a_combo) +
+            draw_label("A", x = 0.01, y = 0.99, fontface = "bold", size = 22)
+        panel_b_labeled <- ggdraw(p_panel_f_plot) +
+            draw_label("B", x = 0.01, y = 0.99, fontface = "bold", size = 22)
+        letter_fig <- cowplot::plot_grid(
+            panel_a_labeled, panel_b_labeled,
+            ncol = 1, rel_heights = c(1, 1.3))
+
+        f_png <- file.path(OUT_DIR, "Figure1_Letter_NeuroOnc.png")
+        f_pdf <- file.path(OUT_DIR, "Figure1_Letter_NeuroOnc.pdf")
+        ggsave(f_png, letter_fig, width = 14, height = 14, dpi = 600, bg = "white")
+        ggsave(f_pdf, letter_fig, width = 14, height = 14, bg = "white")
+        cat(sprintf("  ✓ Letter Figure 1: %s (+ .pdf)\n", f_png))
+    } else {
+        cat("  WARNING: skipping letter Figure 1; need p_panel_{b,c,f}_plot ",
+            "(drug discovery may have been skipped).\n", sep = "")
+    }
+}, error = function(e)
+    cat("  WARNING: letter Figure 1 generation failed:", conditionMessage(e), "\n"))
+
+# ==============================================================================
 # STANDALONE PANELS: also save each panel (A-I) as its own image, named by the
 # letter it occupies in the composite (Panel_A.png ... Panel_I.png) so the
 # abstract/slides can reuse any single panel without cropping the 9-panel figure.

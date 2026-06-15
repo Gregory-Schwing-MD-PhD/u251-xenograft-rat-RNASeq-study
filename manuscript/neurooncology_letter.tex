@@ -1,0 +1,122 @@
+%%
+%% Letter to the Editor -- Neuro-Oncology (Oxford University Press / SNO)
+%% Based on the OUP authoring template (see oup-authoring-template.tex).
+%%
+%% Word count target: < 600 words for the letter body (paragraphs 1-4 below),
+%% excluding title, affiliations, references, figure legend, and declarations.
+%% Single figure (two panels A,B); no abstract; no keywords; no section
+%% headings inside the body; max 6 references; no supplementary data.
+%%
+
+\documentclass[unnumsec,webpdf,contemporary,large]{oup-authoring-template}
+
+\graphicspath{{Fig/}}
+
+\begin{document}
+
+\journaltitle{Neuro-Oncology}
+\DOI{DOI added during production}
+\copyrightyear{2026}
+\pubyear{2026}
+\vol{XX}
+\issue{X}
+\access{Published: Date added during production}
+\appnotes{Letter to the Editor}
+
+\firstpage{1}
+
+\title[Post-LITT glioblastoma transcriptomic roadmap]{Post-LITT glioblastoma recurrence is marked by translational shutdown and a mitochondrial subtype shift: a transcriptomic roadmap for combinatorial therapy}
+
+\author[1,$\ast$]{Gregory John Schwing}
+\author[2]{Indrani Datta}
+\author[2]{Tavarekere Nagaraja}
+\author[3]{Ian Lee}
+
+\address[1]{\orgdiv{Department of General Surgery}, \orgname{Detroit Medical Center / Wayne State University}, \orgaddress{\city{Detroit}, \state{MI}, \country{USA}}}
+\address[2]{\orgdiv{Department of Public Health Sciences}, \orgname{Hermelin Brain Tumor Center, Henry Ford Health}, \orgaddress{\city{Detroit}, \state{MI}, \country{USA}}}
+\address[3]{\orgdiv{Department of Neurosurgery}, \orgname{Hermelin Brain Tumor Center, Henry Ford Health}, \orgaddress{\city{Detroit}, \state{MI}, \country{USA}}}
+
+\corresp[$\ast$]{Corresponding author. \href{mailto:go2432@wayne.edu}{go2432@wayne.edu}}
+
+\received{}{}{}
+\revised{}{}{}
+\accepted{}{}{}
+
+%% No abstract / no keywords / no boxedtext for a Letter to the Editor.
+\maketitle
+
+%% =========================================================================
+%% LETTER BODY -- target < 600 words, no section headings.
+%% =========================================================================
+
+\noindent To the Editor --- Laser interstitial thermal therapy (LITT) is increasingly deployed for deep-seated and recurrent glioblastoma, yet how the sublethal thermal penumbra reshapes the molecular state of cells that survive and seed recurrence remains poorly defined~\cite{LITT_review}. Most preclinical work has focused on cytoreductive efficacy and on transient blood--brain-barrier disruption~\cite{LITT_BBB}; the cell-intrinsic transcriptional program of post-LITT residual disease has not been systematically described. To begin to close this gap, we performed bulk RNA-seq on matched primary (pre-LITT, $n=3$) and recurrent (post-LITT, $n=3$) tumors from a U251 orthotopic xenograft in athymic RNU/RNU rats treated with MRI-guided LITT, processed through xengsort cross-species read-sorting~\cite{xengsort} to isolate the human tumor transcriptome from host signal.
+
+Primary and recurrent transcriptomes were globally distinct (Figure~\ref{fig1}A; PCA PC1 41.8\%, PC2 26.2\%; PERMANOVA $R^{2}=0.278$), and the differentially expressed gene set (35 genes at FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$) was dominated by a striking translational shutdown: GSEA showed extreme depletion of eukaryotic translation elongation (NES\,$=-3.17$, FDR\,$=1.6\times10^{-26}$), ribosome assembly, and translation initiation modules in the recurrent tumors, accompanied by activation of the EIF2AK4 (GCN2) amino-acid-starvation arm of the integrated stress response. This translation/ISR signature was paired with a coherent molecular-subtype reorganization --- a shift toward the Garofano Mitochondrial state~\cite{Garofano} and away from Neftel astrocyte-like and neural-progenitor-like programs~\cite{Neftel} --- consistent with a stress-adapted, metabolically reprogrammed persister population. Protein--protein interaction hubs in the differential set (\textit{BGN}, \textit{COL1A1}, \textit{IGFBP3}, \textit{CALB1}) further suggest extracellular-matrix and calcium-signaling remodeling around these residual cells.
+
+We treated this signature as the target of an in-silico drug-repurposing pipeline (DSigDB GSEA~\cite{DSigDB}, with candidates reranked by an integrated score combining therapeutic enrichment magnitude with predicted blood--brain-barrier permeability). The top-ranked agents converged on two axes that are mechanistically coherent with translational shutdown under metabolic stress (Figure~\ref{fig1}B): the HIF/iron axis --- the iron-chelator/HIF-$1\alpha$ stabilizer ciclopirox and the prolyl-hydroxylase inhibitor dimethyloxalylglycine --- and the PI3K/mTOR pathway, where the canonical inhibitor LY-294002 ranked in the top ten. We emphasize that this is a roadmap, not a result: the nominated agents are advanced for future preclinical interrogation as LITT adjuncts, not as validated therapeutics.
+
+We acknowledge the limitations frankly. The sample size ($n=3$ per arm) is small, the study uses a single cell-line xenograft, and no wet-lab functional or pharmacological validation is presented; the work is explicitly hypothesis-generating. We nevertheless believe the signal warrants early reporting: the magnitude of the translation/ISR effect, its convergence with an interpretable subtype shift, and the mechanistic coherence of the nominated drug classes are unlikely to be incidental. As LITT moves further into front-line and salvage glioblastoma practice, defining the transcriptional state of post-thermal residual disease --- and prospectively designing combinatorial regimens that target it --- will be essential to extending the benefit of an otherwise minimally invasive cytoreductive modality.
+
+%% =========================================================================
+%% FIGURE  (single figure, two panels; legend < 75 words)
+%% =========================================================================
+\begin{figure}[!h]
+\centering
+\includegraphics[width=\linewidth]{Figure1.pdf}
+\caption{Transcriptomic and therapeutic landscape of post-LITT glioblastoma recurrence. \textbf{(A)} Volcano plot of differentially expressed genes (DESeq2; FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$) between primary and recurrent tumors, paired with Garofano and Neftel subtype-enrichment scores showing the shift toward the Garofano Mitochondrial state and away from Neftel AC/NPC programs. \textbf{(B)} In-silico drug-repurposing network linking DSigDB-prioritized agents to enriched transcriptional programs, highlighting convergence on the HIF/iron axis (ciclopirox, DMOG) and PI3K/mTOR (LY-294002).\label{fig1}}
+\end{figure}
+
+%% =========================================================================
+%% Journal-required declarations  (not part of the < 600 word body)
+%% =========================================================================
+\section*{Conflicts of interest}
+The authors declare no competing interests.
+
+\section*{Funding}
+[Funding source and grant numbers to be added.]
+
+\section*{Data availability}
+Raw sequencing data have been deposited in the NCBI Gene Expression Omnibus under accession [GSEXXXXXX]. Analysis code is available at \url{https://github.com/Gregory-Schwing-MD-PhD/u251-xenograft-murine-RNASeq-study}.
+
+\section*{Author contributions}
+I.L.\ conceived the study and performed the MRI-guided LITT procedures and tissue collection. G.J.S.\ performed the bioinformatic and pharmacogenomic analyses and drafted the manuscript. I.D.\ and T.N.\ contributed to study design, statistical interpretation, and manuscript revision. All authors reviewed and approved the final version.
+
+%% =========================================================================
+%% References  (max 6)  -- placeholders; replace with the canonical citations
+%% before submission.
+%% =========================================================================
+\begin{thebibliography}{6}
+
+\bibitem[LITT review(Year)]{LITT_review}
+[Author~A, Author~B, et~al.]
+\newblock Laser interstitial thermal therapy for high-grade glioma: clinical outcomes and indications.
+\newblock \emph{[Journal]}, [vol]([iss]):[pages], [Year]. \emph{[Replace with the canonical clinical review/series.]}
+
+\bibitem[LITT BBB(Year)]{LITT_BBB}
+[Author~A, Author~B, et~al.]
+\newblock Transient peritumoral blood--brain-barrier disruption following laser interstitial thermal therapy.
+\newblock \emph{[Journal]}, [vol]([iss]):[pages], [Year]. \emph{[Replace with the Leuthardt et al. PLoS ONE 2016 paper or current equivalent.]}
+
+\bibitem[Zentgraf and Rahmann(2021)]{xengsort}
+Jens Zentgraf and Sven Rahmann.
+\newblock Fast lightweight accurate xenograft sorting.
+\newblock \emph{Algorithms for Molecular Biology}, 16(1):2, 2021.
+
+\bibitem[Neftel et al.(2019)]{Neftel}
+Cyril Neftel, Julie Laffy, Mariella~G Filbin, et~al.
+\newblock An integrative model of cellular states, plasticity, and genetics for glioblastoma.
+\newblock \emph{Cell}, 178(4):835--849.e21, 2019.
+
+\bibitem[Garofano et al.(2021)]{Garofano}
+Luciano Garofano, Simona Migliozzi, Young~Taek Oh, et~al.
+\newblock Pathway-based classification of glioblastoma uncovers a mitochondrial subtype with therapeutic vulnerabilities.
+\newblock \emph{Nature Cancer}, 2(2):141--156, 2021.
+
+\bibitem[Yoo et al.(2015)]{DSigDB}
+Minjae Yoo, Jimin Shin, Jihye Kim, et~al.
+\newblock DSigDB: drug signatures database for gene set analysis.
+\newblock \emph{Bioinformatics}, 31(18):3069--3071, 2015.
+
+\end{thebibliography}
+
+\end{document}
