@@ -53,7 +53,7 @@ echo "Host=$FTP_HOST  Space=$REMOTE_SPACE  Subfolder=$SUBFOLDER"
 echo "Job started on host $(hostname) at $(date)"
 
 # ---------------- connectivity check (fails fast if compute node is firewalled) ----------------
-if ! lftp -u "$FTP_USER,$FTP_PASS" "$FTP_HOST" -e "set ftp:ssl-allow no; set net:timeout 25; set net:max-retries 1; cd $REMOTE_SPACE; ls; bye" >/dev/null 2>&1; then
+if ! lftp -u "$FTP_USER,$FTP_PASS" "$FTP_HOST" -e "set dns:order inet; set ftp:ssl-allow no; set net:timeout 25; set net:max-retries 1; cd $REMOTE_SPACE; ls; bye" >/dev/null 2>&1; then
   echo "ERROR: could not reach $FTP_HOST from this node." >&2
   echo "Compute nodes are likely firewalled from the internet. Run the upload from a" >&2
   echo "login node inside screen/tmux instead, or use a data-transfer node/partition." >&2
@@ -63,12 +63,13 @@ echo "Connectivity OK -- starting transfer at $(date)"
 
 # ---------------- transfer ----------------
 lftp -u "$FTP_USER,$FTP_PASS" "$FTP_HOST" <<EOF
+set dns:order "inet"
 set ftp:ssl-allow no
 set net:max-retries 5
 set net:timeout 30
 set net:reconnect-interval-base 10
 cd $REMOTE_SPACE
-mkdir -f $SUBFOLDER
+mkdir -p $SUBFOLDER
 cd $SUBFOLDER
 lcd $FASTQ_DIR
 mput -c *.fastq.gz
