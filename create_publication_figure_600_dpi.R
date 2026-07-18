@@ -803,17 +803,81 @@ gsea_combined <- tryCatch({
          verbose = FALSE, eps = 1e-50, seed = TRUE)
 }, error = function(e) NULL)
 
+# ------------------------------------------------------------------------------
+# Panel D reports the small-N Broad GSEA that was actually configured for this
+# study (therapy_v3_params.yaml: gsea_permute=gene_set, Diff_of_Classes, 1000
+# perms) rather than clusterProfiler's eps=1e-50 fgsea tail estimate, which is
+# not appropriate at n=3/arm. We keep clusterProfiler to build the tree geometry
+# (pairwise_termsim/treeplot need the gseaResult S4 object + core_enrichment),
+# but overlay the pipeline's NES / nominal-p / FDR-q onto the *displayed* tree.
+#
+# IMPORTANT: only the Panel-D tree is switched. `pathway_results` (used by the
+# drug-discovery and report code below) stays on clusterProfiler, because that
+# code filters UP-regulated pathways at p.adjust<0.05; the conservative small-N
+# FDRs would empty that filter and blank the drug panels. The paper's reported
+# GSEA numbers already come from the pipeline (in the manuscript text).
+load_pipeline_gsea <- function(results_dir, contrast) {
+    gdir <- file.path(results_dir, "report", "gsea", contrast)
+    files <- list.files(gdir, pattern = "gsea_report_for_.*\\.tsv$",
+                        recursive = TRUE, full.names = TRUE)
+    if (length(files) == 0) return(NULL)
+    dfs <- lapply(files, function(f) {
+        d <- tryCatch(read.delim(f, check.names = FALSE, stringsAsFactors = FALSE),
+                      error = function(e) NULL)
+        if (is.null(d) || !all(c("NAME", "NES", "FDR q-val") %in% colnames(d))) return(NULL)
+        data.frame(
+            ID   = trimws(as.character(d[["NAME"]])),
+            NES  = suppressWarnings(as.numeric(d[["NES"]])),
+            pval = suppressWarnings(as.numeric(d[["NOM p-val"]])),
+            padj = suppressWarnings(as.numeric(d[["FDR q-val"]])),
+            stringsAsFactors = FALSE)
+    })
+    dfs <- Filter(Negate(is.null), dfs)
+    if (length(dfs) == 0) return(NULL)
+    out <- do.call(rbind, dfs)
+    out <- out[!is.na(out$ID) & !duplicated(out$ID), , drop = FALSE]
+    # 1000 permutations => nominal p only resolves to ~1e-3; floor it there.
+    out$pval[is.finite(out$pval) & out$pval < 1e-3] <- 1e-3
+    out
+}
+pipe_gsea <- if (!is.null(gsea_combined)) load_pipeline_gsea(RESULTS_DIR, TARGET_CONTRAST) else NULL
+
 if (!is.null(gsea_combined) && nrow(gsea_combined) > 0) {
     gsea_combined <- pairwise_termsim(gsea_combined)
-    pathway_results <- gsea_combined@result
+    pathway_results <- gsea_combined@result   # clusterProfiler stats -> drug/report code (unchanged)
 
-    p_panel_d_tree <- treeplot(gsea_combined, cluster.params = list(n = 5),
+    # Tree object: overlay pipeline stats when the pipeline GSEA report is present
+    gsea_tree     <- gsea_combined
+    tree_subtitle <- paste0("GSEA enrichment (FDR < ", PADJ_CUTOFF, ")")
+    if (!is.null(pipe_gsea)) {
+        res  <- gsea_tree@result
+        m    <- match(trimws(res$ID), pipe_gsea$ID)
+        keep <- !is.na(m)
+        if (sum(keep) >= 5) {
+            res$NES[keep]      <- pipe_gsea$NES[m[keep]]
+            res$pvalue[keep]   <- pipe_gsea$pval[m[keep]]
+            res$p.adjust[keep] <- pipe_gsea$padj[m[keep]]
+            if ("qvalue" %in% colnames(res)) res$qvalue[keep] <- pipe_gsea$padj[m[keep]]
+            gsea_tree@result <- res[keep, , drop = FALSE]   # keep only pipeline-reported sets
+            gsea_tree <- pairwise_termsim(gsea_tree)
+            tree_subtitle <- "Broad GSEA (gene-set permutation, n=3/arm); node colour = FDR q"
+            cat("Panel D: overlaid pipeline small-N GSEA on ", sum(keep), " pathways.\n", sep = "")
+        } else {
+            cat("Panel D: <5 pathways matched the pipeline GSEA report; keeping clusterProfiler stats.\n")
+        }
+    } else {
+        cat("Panel D: pipeline GSEA report not found under ",
+            file.path(RESULTS_DIR, "report/gsea", TARGET_CONTRAST),
+            "; keeping clusterProfiler stats.\n", sep = "")
+    }
+
+    p_panel_d_tree <- treeplot(gsea_tree, cluster.params = list(n = 5),
                           cladelab_offset = 8,
                           tiplab_offset = 0.3,
                           fontsize_cladelab = 4,
                           fontsize = 2) +
         hexpand(.35) +
-        labs(subtitle = paste0("GSEA enrichment (FDR < ", PADJ_CUTOFF, ")")) +
+        labs(subtitle = tree_subtitle) +
         theme(plot.subtitle = element_text(size = 9, color = "grey40", hjust = 0.5))
 
     p_panel_d <- ggdraw(p_panel_d_tree) +
