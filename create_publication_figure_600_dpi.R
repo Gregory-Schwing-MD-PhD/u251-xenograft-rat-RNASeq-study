@@ -1429,7 +1429,8 @@ tryCatch({
             theme_publication(base_size = 12) +
             theme(legend.position = "bottom",
                   strip.text = element_text(size = 11, face = "bold"),
-                  axis.text.x = element_text(angle = 30, hjust = 1))
+                  axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),
+                  plot.margin = margin(5, 12, 5, 5))
         if (nrow(sa) > 0) {
             p_subtype_letter <- p_subtype_letter +
                 geom_text(data = sa, aes(x = x, y = y, label = label),
@@ -1443,15 +1444,23 @@ tryCatch({
         # low-ranked agents. For the letter, show the ranked candidates directly.
         p_drug_letter <- NULL
         if (exists("drug_profiles") && length(drug_profiles) > 0) {
-            dp <- drug_profiles[seq_len(min(10, length(drug_profiles)))]
+            # Use cleaned agent names (strip the DSigDB "MCF7 UP" / "CTD 000..."
+            # suffixes) and keep only the best-scoring signature per agent, so the
+            # same drug cannot occupy several of the ten slots.
             drug_df <- data.frame(
-                Drug  = vapply(dp, function(p) as.character(p$drug_name), character(1)),
-                Score = vapply(dp, function(p) as.numeric(p$integrated_score), numeric(1)),
-                BBB   = vapply(dp, function(p) {
+                Drug  = vapply(drug_profiles,
+                               function(p) clean_drug_name(as.character(p$drug_name)),
+                               character(1)),
+                Score = vapply(drug_profiles, function(p) as.numeric(p$integrated_score), numeric(1)),
+                BBB   = vapply(drug_profiles, function(p) {
                             v <- tryCatch(p$bbb$bbb_score, error = function(e) NA)
                             if (is.null(v) || is.na(v)) 0 else as.numeric(v)
                         }, numeric(1)),
                 stringsAsFactors = FALSE)
+            drug_df <- drug_df[nzchar(drug_df$Drug), , drop = FALSE]
+            drug_df <- drug_df[order(-drug_df$Score), , drop = FALSE]
+            drug_df <- drug_df[!duplicated(drug_df$Drug), , drop = FALSE]
+            drug_df <- utils::head(drug_df, 10)
             drug_df <- drug_df[order(drug_df$Score), , drop = FALSE]
             drug_df$Drug <- factor(drug_df$Drug, levels = drug_df$Drug)
 
@@ -1481,8 +1490,20 @@ tryCatch({
             stop("no drug panel available for letter Figure 1")
         }
 
+        # Drop the volcano's title/subtitle for the letter (the caption carries
+        # that information) and compact its legend -- otherwise the title is
+        # clipped and the tier legend eats a third of the panel.
+        volcano_letter <- p_panel_b_plot +
+            labs(title = NULL, subtitle = NULL) +
+            theme(legend.position = "bottom",
+                  legend.box = "vertical",
+                  legend.key.size = unit(0.5, "lines"),
+                  legend.text = element_text(size = 8),
+                  legend.title = element_text(size = 9),
+                  plot.margin = margin(5, 5, 5, 5))
+
         panel_a_combo <- cowplot::plot_grid(
-            p_panel_b_plot, p_subtype_letter,
+            volcano_letter, p_subtype_letter,
             nrow = 1, rel_widths = c(1.45, 1))
         panel_a_labeled <- ggdraw(panel_a_combo) +
             draw_label("A", x = 0.01, y = 0.99, fontface = "bold", size = 22)
