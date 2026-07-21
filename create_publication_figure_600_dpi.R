@@ -1391,63 +1391,44 @@ cat("  ✓ Created PDF version\n")
 
 # ==============================================================================
 # LETTER FIGURE (Neuro-Oncology Letter to the Editor): 2-panel composite
-# Panel A = volcano (Panel B in composite) + subtype trajectories (Panel C)
-#           side-by-side, so the letter's "Panel A" carries both findings.
-# Panel B = polypharmacology network (Panel F in composite).
+#   Panel A = volcano, full width and full height so it is legible in print
+#   Panel B = top repurposing candidates; agents whose own signature overlaps
+#             the depleted translation/ISR programs are drawn in red
+# The subtype-trajectory plots were deliberately dropped -- a handful of lines
+# added little, and the numbers are reported in the letter text instead.
 # Built from the clean (letter-free) panel plot objects so we can stamp fresh
 # A/B labels. Wrapped in tryCatch -> cannot break the main composite output.
 # ==============================================================================
 tryCatch({
-    if (exists("p_panel_b_plot") && exists("traj_data") && exists("traj_summary")) {
+    if (exists("p_panel_b_plot")) {
         cat("Building Neuro-Oncology letter Figure 1 (2-panel composite)...\n")
 
-        # --- Panel A right: ONLY the three subtypes discussed in the letter -----
-        # The 9-panel Panel C facets all 10 signatures, which is illegible at
-        # journal column width. The letter only claims a Garofano-Mitochondrial
-        # gain and a Neftel AC/NPC loss, so show exactly those.
-        LETTER_SIGS <- c("Garofano_MTC", "Neftel_AC", "Neftel_NPC")
-        td <- traj_data[traj_data$Signature %in% LETTER_SIGS, , drop = FALSE]
-        ts <- traj_summary[traj_summary$Signature %in% LETTER_SIGS, , drop = FALSE]
-        sa <- if (exists("sig_annotations") && nrow(sig_annotations) > 0) {
-            sig_annotations[sig_annotations$Signature_Full %in% unique(ts$Signature_Full), , drop = FALSE]
-        } else data.frame()
-
-        p_subtype_letter <- ggplot(td, aes(x = Stage, y = Score)) +
-            geom_ribbon(data = ts,
-                        aes(x = Stage, ymin = Mean - SE, ymax = Mean + SE,
-                            fill = Signature, group = Signature),
-                        inherit.aes = FALSE, alpha = 0.2) +
-            geom_line(data = ts,
-                      aes(x = Stage, y = Mean, color = Signature, group = Signature),
-                      inherit.aes = FALSE, linewidth = 1, alpha = 0.9) +
-            geom_point(aes(fill = Class, shape = Class), size = 2.2, alpha = 0.7) +
-            facet_wrap(~Signature_Full, scales = "free_y", ncol = 1) +
-            scale_fill_manual(values = GROUP_COLORS, name = "Stage") +
-            scale_color_brewer(palette = "Set1", guide = "none") +
-            scale_shape_manual(values = GROUP_SHAPES, name = "Stage") +
-            labs(x = NULL, y = "Signature z-score") +
-            theme_publication(base_size = 12) +
+        # --- Panel A: the volcano, full width ---------------------------------
+        # Drop the title/subtitle (the caption carries them, and the title was
+        # being clipped) and lay the significance-tier legend out in a single
+        # horizontal row so it stops wasting a block of vertical space.
+        volcano_letter <- p_panel_b_plot +
+            labs(title = NULL, subtitle = NULL) +
+            guides(color = guide_legend(nrow = 1, byrow = TRUE),
+                   fill  = guide_legend(nrow = 1, byrow = TRUE)) +
             theme(legend.position = "bottom",
-                  strip.text = element_text(size = 11, face = "bold"),
-                  axis.text.x = element_text(angle = 0, hjust = 0.5, size = 10),
-                  plot.margin = margin(5, 12, 5, 5))
-        if (nrow(sa) > 0) {
-            p_subtype_letter <- p_subtype_letter +
-                geom_text(data = sa, aes(x = x, y = y, label = label),
-                          inherit.aes = FALSE, size = 5, fontface = "bold")
-        }
+                  legend.direction = "horizontal",
+                  legend.box = "horizontal",
+                  legend.spacing.y = unit(0, "pt"),
+                  legend.spacing.x = unit(4, "pt"),
+                  legend.key.height = unit(0.7, "lines"),
+                  legend.margin = margin(0, 0, 0, 0),
+                  legend.text = element_text(size = 9),
+                  legend.title = element_text(size = 10),
+                  plot.margin = margin(5, 8, 0, 5))
 
-        # --- Panel B: the agents actually named in the letter -------------------
-        # The polypharmacology network (Panel F) selects drugs by >=3 shared
-        # leading-edge genes, which EXCLUDES the top integrated-score candidates
-        # named in the text (ciclopirox / DMOG / LY-294002) and instead surfaces
-        # low-ranked agents. For the letter, show the ranked candidates directly.
+        # --- Panel B: ranked repurposing candidates ---------------------------
         p_drug_letter <- NULL
         if (exists("drug_profiles") && length(drug_profiles) > 0) {
-            # Use cleaned agent names (strip the DSigDB "MCF7 UP" / "CTD 000..."
-            # suffixes) and keep only the best-scoring signature per agent, so the
+            # Cleaned agent names, best-scoring signature per agent only, so the
             # same drug cannot occupy several of the ten slots.
             drug_df <- data.frame(
+                RawID = vapply(drug_profiles, function(p) as.character(p$drug_name), character(1)),
                 Drug  = vapply(drug_profiles,
                                function(p) clean_drug_name(as.character(p$drug_name)),
                                character(1)),
@@ -1461,67 +1442,83 @@ tryCatch({
             drug_df <- drug_df[order(-drug_df$Score), , drop = FALSE]
             drug_df <- drug_df[!duplicated(drug_df$Drug), , drop = FALSE]
             drug_df <- utils::head(drug_df, 10)
+
+            # Flag agents whose own signature overlaps the depleted
+            # translation / ISR programs -- the shared mechanism -- red.
+            drug_df$OnMechanism <- FALSE
+            if (exists("pathway_results") && !is.null(pathway_results) &&
+                exists("drug_results")   && !is.null(drug_results) &&
+                "core_enrichment" %in% colnames(pathway_results) &&
+                "core_enrichment" %in% colnames(drug_results)) {
+                pr <- pathway_results[!is.na(pathway_results$NES) & pathway_results$NES < 0, , drop = FALSE]
+                pr <- pr[grepl("TRANSLATION|RIBOSOM|EIF2AK4|STARVATION|NONSENSE_MEDIATED",
+                               pr$ID, ignore.case = TRUE), , drop = FALSE]
+                mech_genes <- unique(unlist(strsplit(paste(pr$core_enrichment, collapse = "/"), "/")))
+                mech_genes <- mech_genes[nzchar(mech_genes)]
+                if (length(mech_genes) > 0) {
+                    for (i in seq_len(nrow(drug_df))) {
+                        row_i <- drug_results[drug_results$ID == drug_df$RawID[i], , drop = FALSE]
+                        if (nrow(row_i) > 0) {
+                            dg <- unlist(strsplit(as.character(row_i$core_enrichment[1]), "/"))
+                            drug_df$OnMechanism[i] <- length(intersect(dg, mech_genes)) >= 3
+                        }
+                    }
+                }
+            }
+            cat("  Letter Panel B: ", sum(drug_df$OnMechanism), " of ", nrow(drug_df),
+                " agents overlap the translation/ISR programs.\n", sep = "")
+
             drug_df <- drug_df[order(drug_df$Score), , drop = FALSE]
             drug_df$Drug <- factor(drug_df$Drug, levels = drug_df$Drug)
+            drug_df$Mech <- ifelse(drug_df$OnMechanism,
+                                   "shares genes with the depleted translation/ISR programs",
+                                   "other top-ranked agent")
 
             p_drug_letter <- ggplot(drug_df, aes(x = Score, y = Drug)) +
-                geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug),
-                             color = "grey70", linewidth = 0.9) +
-                geom_point(aes(fill = BBB), shape = 21, size = 6,
-                           stroke = 0.6, color = "grey20") +
-                geom_text(aes(label = sprintf("%.1f", Score)), hjust = -0.7, size = 4) +
-                scale_fill_gradient(low = "#fdd0a2", high = "#e6550d",
-                                    name = "Predicted BBB permeability", limits = c(0, 1)) +
+                geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug, color = Mech),
+                             linewidth = 1) +
+                geom_point(aes(color = Mech), size = 5) +
+                geom_text(aes(label = sprintf("%.1f", Score)), hjust = -0.7, size = 3.8) +
+                scale_color_manual(
+                    values = c("shares genes with the depleted translation/ISR programs" = "#c0392b",
+                               "other top-ranked agent" = "grey55"),
+                    name = NULL, drop = FALSE) +
                 scale_x_continuous(expand = expansion(mult = c(0.02, 0.20))) +
-                labs(title = "Top-ranked repurposing candidates",
-                     subtitle = "integrated score = |NES|^1.5 x predicted BBB permeability",
+                labs(subtitle = "integrated score = |NES|^1.5 x predicted BBB permeability",
                      x = "Integrated score", y = NULL) +
                 theme_publication(base_size = 12) +
                 theme(legend.position = "bottom",
+                      legend.direction = "vertical",
+                      legend.key.height = unit(0.8, "lines"),
+                      legend.margin = margin(0, 0, 0, 0),
+                      legend.text = element_text(size = 9),
                       axis.text.y = element_text(size = 11, face = "bold"),
-                      plot.title = element_text(size = 14, face = "bold", hjust = 0.5),
-                      plot.subtitle = element_text(size = 9, color = "grey40", hjust = 0.5))
+                      plot.subtitle = element_text(size = 9, color = "grey40", hjust = 0.5),
+                      plot.margin = margin(5, 10, 5, 5))
         } else if (exists("p_panel_f_plot")) {
             cat("  NOTE: no drug_profiles; falling back to polypharmacology network.\n")
             p_drug_letter <- p_panel_f_plot
         }
 
-        if (is.null(p_drug_letter)) {
-            stop("no drug panel available for letter Figure 1")
-        }
+        if (is.null(p_drug_letter)) stop("no drug panel available for letter Figure 1")
 
-        # Drop the volcano's title/subtitle for the letter (the caption carries
-        # that information) and compact its legend -- otherwise the title is
-        # clipped and the tier legend eats a third of the panel.
-        volcano_letter <- p_panel_b_plot +
-            labs(title = NULL, subtitle = NULL) +
-            theme(legend.position = "bottom",
-                  legend.box = "vertical",
-                  legend.key.size = unit(0.5, "lines"),
-                  legend.text = element_text(size = 8),
-                  legend.title = element_text(size = 9),
-                  plot.margin = margin(5, 5, 5, 5))
-
-        panel_a_combo <- cowplot::plot_grid(
-            volcano_letter, p_subtype_letter,
-            nrow = 1, rel_widths = c(1.45, 1))
-        panel_a_labeled <- ggdraw(panel_a_combo) +
-            draw_label("A", x = 0.01, y = 0.99, fontface = "bold", size = 22)
+        panel_a_labeled <- ggdraw(volcano_letter) +
+            draw_label("A", x = 0.01, y = 0.99, fontface = "bold", size = 20)
         panel_b_labeled <- ggdraw(p_drug_letter) +
-            draw_label("B", x = 0.01, y = 0.99, fontface = "bold", size = 22)
+            draw_label("B", x = 0.01, y = 0.99, fontface = "bold", size = 20)
+
         letter_fig <- cowplot::plot_grid(
             panel_a_labeled, panel_b_labeled,
-            ncol = 1, rel_heights = c(1.35, 1))
+            ncol = 1, rel_heights = c(1.6, 1))
 
-        # Sized for a full-width (two-column) journal float, not a 3.4in column.
+        # Full-width (two-column) journal float.
         f_png <- file.path(OUT_DIR, "Figure1_Letter_NeuroOnc.png")
         f_pdf <- file.path(OUT_DIR, "Figure1_Letter_NeuroOnc.pdf")
-        ggsave(f_png, letter_fig, width = 7.2, height = 8.0, dpi = 600, bg = "white")
-        ggsave(f_pdf, letter_fig, width = 7.2, height = 8.0, bg = "white")
+        ggsave(f_png, letter_fig, width = 7.5, height = 9.0, dpi = 600, bg = "white")
+        ggsave(f_pdf, letter_fig, width = 7.5, height = 9.0, bg = "white")
         cat(sprintf("  ✓ Letter Figure 1: %s (+ .pdf)\n", f_png))
     } else {
-        cat("  WARNING: skipping letter Figure 1; need p_panel_b_plot + traj_data ",
-            "(drug discovery may have been skipped).\n", sep = "")
+        cat("  WARNING: skipping letter Figure 1; p_panel_b_plot not available.\n")
     }
 }, error = function(e)
     cat("  WARNING: letter Figure 1 generation failed:", conditionMessage(e), "\n"))
