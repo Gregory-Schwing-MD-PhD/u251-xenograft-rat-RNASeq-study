@@ -1409,8 +1409,8 @@ tryCatch({
         # horizontal row so it stops wasting a block of vertical space.
         volcano_letter <- p_panel_b_plot +
             labs(title = NULL, subtitle = NULL) +
-            guides(color = guide_legend(nrow = 1, byrow = TRUE),
-                   fill  = guide_legend(nrow = 1, byrow = TRUE)) +
+            guides(color = guide_legend(nrow = 2, byrow = TRUE),
+                   fill  = guide_legend(nrow = 2, byrow = TRUE)) +
             theme(legend.position = "bottom",
                   legend.direction = "horizontal",
                   legend.box = "horizontal",
@@ -1420,7 +1420,7 @@ tryCatch({
                   legend.margin = margin(0, 0, 0, 0),
                   legend.text = element_text(size = 9),
                   legend.title = element_text(size = 10),
-                  plot.margin = margin(5, 8, 0, 5))
+                  plot.margin = margin(5, 8, 14, 5))
 
         # --- Panel B: ranked repurposing candidates ---------------------------
         p_drug_letter <- NULL
@@ -1443,36 +1443,27 @@ tryCatch({
             drug_df <- drug_df[!duplicated(drug_df$Drug), , drop = FALSE]
             drug_df <- utils::head(drug_df, 10)
 
-            # Flag agents whose own signature overlaps the depleted
-            # translation / ISR programs -- the shared mechanism -- red.
-            drug_df$OnMechanism <- FALSE
-            if (exists("pathway_results") && !is.null(pathway_results) &&
-                exists("drug_results")   && !is.null(drug_results) &&
-                "core_enrichment" %in% colnames(pathway_results) &&
-                "core_enrichment" %in% colnames(drug_results)) {
-                pr <- pathway_results[!is.na(pathway_results$NES) & pathway_results$NES < 0, , drop = FALSE]
-                pr <- pr[grepl("TRANSLATION|RIBOSOM|EIF2AK4|STARVATION|NONSENSE_MEDIATED",
-                               pr$ID, ignore.case = TRUE), , drop = FALSE]
-                mech_genes <- unique(unlist(strsplit(paste(pr$core_enrichment, collapse = "/"), "/")))
-                mech_genes <- mech_genes[nzchar(mech_genes)]
-                if (length(mech_genes) > 0) {
-                    for (i in seq_len(nrow(drug_df))) {
-                        row_i <- drug_results[drug_results$ID == drug_df$RawID[i], , drop = FALSE]
-                        if (nrow(row_i) > 0) {
-                            dg <- unlist(strsplit(as.character(row_i$core_enrichment[1]), "/"))
-                            drug_df$OnMechanism[i] <- length(intersect(dg, mech_genes)) >= 3
-                        }
-                    }
-                }
-            }
-            cat("  Letter Panel B: ", sum(drug_df$OnMechanism), " of ", nrow(drug_df),
-                " agents overlap the translation/ISR programs.\n", sep = "")
+            # Colour by the two mechanistic axes the letter actually argues.
+            # This is a deliberate curated mapping: a gene-overlap heuristic was
+            # tried first, but it flagged agents unrelated to the argument and
+            # left ciclopirox / DMOG / LY-294002 unmarked, so the figure
+            # contradicted the text.
+            MECH_HIF  <- c("ciclopirox", "dimethyloxalylglycine", "dmog", "deferoxamine")
+            MECH_PI3K <- c("ly-294002", "ly294002", "wortmannin",
+                           "rapamycin", "sirolimus", "everolimus")
+            key <- tolower(trimws(as.character(drug_df$Drug)))
+            drug_df$Mech <- ifelse(key %in% MECH_HIF,  "HIF/iron axis",
+                            ifelse(key %in% MECH_PI3K, "PI3K/mTOR",
+                                   "other top-ranked agent"))
+            cat("  Letter Panel B: HIF/iron=", sum(drug_df$Mech == "HIF/iron axis"),
+                ", PI3K/mTOR=", sum(drug_df$Mech == "PI3K/mTOR"),
+                ", other=", sum(drug_df$Mech == "other top-ranked agent"), "\n", sep = "")
 
             drug_df <- drug_df[order(drug_df$Score), , drop = FALSE]
             drug_df$Drug <- factor(drug_df$Drug, levels = drug_df$Drug)
-            drug_df$Mech <- ifelse(drug_df$OnMechanism,
-                                   "shares genes with the depleted translation/ISR programs",
-                                   "other top-ranked agent")
+            drug_df$Mech <- factor(drug_df$Mech,
+                                   levels = c("HIF/iron axis", "PI3K/mTOR",
+                                              "other top-ranked agent"))
 
             p_drug_letter <- ggplot(drug_df, aes(x = Score, y = Drug)) +
                 geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug, color = Mech),
@@ -1480,8 +1471,9 @@ tryCatch({
                 geom_point(aes(color = Mech), size = 5) +
                 geom_text(aes(label = sprintf("%.1f", Score)), hjust = -0.7, size = 3.8) +
                 scale_color_manual(
-                    values = c("shares genes with the depleted translation/ISR programs" = "#c0392b",
-                               "other top-ranked agent" = "grey55"),
+                    values = c("HIF/iron axis" = "#c0392b",
+                               "PI3K/mTOR" = "#2471a3",
+                               "other top-ranked agent" = "grey60"),
                     name = NULL, drop = FALSE) +
                 scale_x_continuous(expand = expansion(mult = c(0.02, 0.20))) +
                 labs(subtitle = "integrated score = |NES|^1.5 x predicted BBB permeability",
@@ -1494,7 +1486,7 @@ tryCatch({
                       legend.text = element_text(size = 9),
                       axis.text.y = element_text(size = 11, face = "bold"),
                       plot.subtitle = element_text(size = 9, color = "grey40", hjust = 0.5),
-                      plot.margin = margin(5, 10, 5, 5))
+                      plot.margin = margin(18, 10, 5, 5))
         } else if (exists("p_panel_f_plot")) {
             cat("  NOTE: no drug_profiles; falling back to polypharmacology network.\n")
             p_drug_letter <- p_panel_f_plot
