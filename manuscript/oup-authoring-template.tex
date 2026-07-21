@@ -48,22 +48,24 @@
 %% LETTER BODY -- target < 600 words, no section headings.
 %% =========================================================================
 
-\noindent To the Editor --- Laser interstitial thermal therapy (LITT) is increasingly deployed for deep-seated and recurrent glioblastoma, yet how the sublethal thermal penumbra reshapes the molecular state of cells that survive and seed recurrence remains poorly defined~\cite{LITT_review}. Most preclinical work has focused on cytoreductive efficacy and on transient blood--brain-barrier disruption~\cite{NagarajaLITT}; the cell-intrinsic transcriptional program of post-LITT residual disease has not been systematically described. To begin to close this gap, we performed bulk RNA-seq on matched primary (pre-LITT, $n=3$) and recurrent (post-LITT, $n=3$) tumors from a U251N orthotopic xenograft in athymic RNU/RNU rats treated with MRI-guided LITT in the previously described rat glioblastoma model~\cite{NagarajaLITT}, processed through xengsort cross-species read-sorting~\cite{xengsort} to isolate the human tumor transcriptome from host signal.
+\noindent To the Editor --- Laser interstitial thermal therapy (LITT) is increasingly deployed for deep-seated and recurrent glioblastoma, and profiling of the ablation margin has begun: single-cell studies have characterized the surrounding blood vessels, which transiently open the blood--brain barrier after ablation~\cite{Cleary}, and the immune microenvironment of the sublethal zone in a rodent model~\cite{Tao}. What the surviving tumor cells themselves do --- the transcriptional program of cells that persist in this zone and seed recurrence --- remains undefined.
+
+We previously characterized a rat orthotopic U251N xenograft model of post-LITT recurrence --- MRI-guided ablation in athymic RNU/RNU rats --- by imaging, histology, and bulk RNA-seq of matched primary (pre-LITT) and recurrent (post-LITT) tumors~\cite{NagarajaJNS}. Here we reanalyze that dataset ($n=3$ per arm) using differential-expression and enrichment settings configured for small samples, extend it to in-silico drug repurposing, and release the underlying sequencing data publicly (GSE338105). Human tumor reads were resolved from rat host signal by xengsort cross-species read-sorting~\cite{xengsort}.
 
 Primary and recurrent transcriptomes were globally distinct (Figure~\ref{fig1}A; PCA PC1 41.8\%, PC2 26.2\%), and the differentially expressed gene set (DESeq2; 35 genes at FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$; 23 up- and 12 down-regulated) was dominated by a coordinated translational-repression signature: small-sample GSEA (gene-set permutation, $n=3$ per arm) ranked eukaryotic translation elongation (NES\,$=-1.96$), the EIF2AK4 (GCN2) amino-acid-deficiency response (NES\,$=-1.95$), ribosome (NES\,$=-1.94$), and cellular-response-to-starvation (NES\,$=-1.93$) among the most depleted gene sets in the recurrent tumors (nominal $p<0.001$; FDR $q\approx0.15$--$0.25$) --- a coherent leading-edge signature of integrated-stress-response (ISR)-driven translational repression. This translation/ISR signature was paired with a coherent molecular-subtype reorganization --- a shift toward the Garofano Mitochondrial state (signature $z$ $-0.32\!\rightarrow\!+0.32$)~\cite{Garofano} and away from Neftel astrocyte-like ($+0.63\!\rightarrow\!-0.63$) and neural-progenitor-like ($+0.44\!\rightarrow\!-0.44$) programs~\cite{Neftel} --- consistent with a stress-adapted, metabolically reprogrammed persister population. Protein--protein interaction hubs in the differential set (\textit{BGN}, \textit{COL1A1}, \textit{IGFBP3}, \textit{CALB1}) further suggest extracellular-matrix and calcium-signaling remodeling around these residual cells.
 
-We treated this signature as the target of an in-silico drug-repurposing pipeline (DSigDB GSEA~\cite{DSigDB}, with candidates reranked by an integrated score --- $|\mathrm{NES}|^{1.5}$ weighted by predicted blood--brain-barrier permeability --- that combines therapeutic enrichment magnitude with central-nervous-system penetrance). The top-ranked agents converged on two axes that are mechanistically coherent with translational shutdown under metabolic stress (Figure~\ref{fig1}B): the HIF/iron axis --- the iron-chelator/HIF-$1\alpha$ stabilizer ciclopirox (rank 1; integrated score 3.4) and the prolyl-hydroxylase inhibitor dimethyloxalylglycine (rank 3; 3.0) --- and the PI3K/mTOR pathway, where the canonical inhibitor LY-294002 ranked seventh (integrated score 2.4). We emphasize that this is a roadmap, not a result: the nominated agents are advanced for future preclinical interrogation as LITT adjuncts, not as validated therapeutics.
+We treated this signature as the target of an in-silico drug-repurposing pipeline (GSEA against the DSigDB drug-signature database, with candidates reranked by an integrated score --- $|\mathrm{NES}|^{1.5}$ weighted by predicted blood--brain-barrier permeability --- that combines therapeutic enrichment magnitude with central-nervous-system penetrance). The top-ranked agents converged on two axes that are mechanistically coherent with translational shutdown under metabolic stress (Figure~\ref{fig1}B): the HIF/iron axis --- the iron-chelator/HIF-$1\alpha$ stabilizer ciclopirox (rank 1; integrated score 3.4) and the prolyl-hydroxylase inhibitor dimethyloxalylglycine (rank 3; 3.0) --- and the PI3K/mTOR pathway, where the canonical inhibitor LY-294002 ranked seventh (integrated score 2.4). We emphasize that this is a roadmap, not a result: the nominated agents are advanced for future preclinical interrogation as LITT adjuncts, not as validated therapeutics.
 
 We acknowledge the following study limitations. The sample size ($n=3$ per arm) is small, the study uses a single cell-line xenograft, and no wet-lab functional or pharmacological validation is presented; the work is explicitly hypothesis-generating. Nevertheless, we believe the data warrant early reporting: the magnitude of the translation/ISR effect, its convergence with an interpretable subtype shift, and the mechanistic coherence of the nominated drug classes are unlikely to be incidental. As LITT moves further into front-line and salvage glioblastoma practice, defining the transcriptional state of post-thermal residual disease --- and prospectively designing combinatorial regimens that target it --- will be essential to extending the benefit of an otherwise minimally invasive cytoreductive modality.
 
 %% =========================================================================
 %% FIGURE  (single figure, two panels; legend < 75 words)
 %% =========================================================================
-\begin{figure}[!h]
+\begin{figure*}[!t]
 \centering
 \includegraphics[width=\linewidth]{Figure1.pdf}
-\caption{Transcriptomic and therapeutic landscape of post-LITT glioblastoma recurrence. \textbf{(A)} Volcano plot of differentially expressed genes (DESeq2; FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$) between primary and recurrent tumors, paired with Garofano and Neftel subtype-enrichment scores showing the shift toward the Garofano Mitochondrial state and away from Neftel AC/NPC programs. \textbf{(B)} In-silico drug-repurposing network linking DSigDB-prioritized agents to enriched transcriptional programs, highlighting convergence on the HIF/iron axis (ciclopirox, DMOG) and PI3K/mTOR (LY-294002).\label{fig1}}
-\end{figure}
+\caption{Transcriptomic and therapeutic landscape of post-LITT glioblastoma recurrence. \textbf{(A)} Volcano plot of differentially expressed genes (DESeq2; FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$) between primary and recurrent tumors, with Garofano and Neftel subtype scores showing the shift toward the Garofano Mitochondrial state and away from Neftel AC/NPC programs. \textbf{(B)} Top-ranked DSigDB repurposing candidates by integrated score ($|\mathrm{NES}|^{1.5}\times$ predicted blood--brain-barrier permeability; fill\,$=$\,BBB score), converging on the HIF/iron axis (ciclopirox, dimethyloxalylglycine) and PI3K/mTOR (LY-294002).\label{fig1}}
+\end{figure*}
 
 %% =========================================================================
 %% Journal-required declarations  (not part of the < 600 word body)
@@ -75,7 +77,7 @@ Dr. Lee has consulting agreements with Medtronic, Inc. (Minneapolis, MN) and Mon
 [Supported by a Henry Ford Health System Physician Scientist Award A20050 (IYL)]
 
 \section*{Data availability}
-Raw sequencing data have been deposited in the NCBI Gene Expression Omnibus under accession GSE338105. Analysis code is available at \url{https://github.com/Gregory-Schwing-MD-PhD/u251-xenograft-murine-RNASeq-study}.
+Raw sequencing data have been deposited in the NCBI Gene Expression Omnibus under accession GSE338105. Analysis code is available at \url{https://github.com/Gregory-Schwing-MD-PhD/u251-xenograft-rat-RNASeq-study}.
 
 \section*{Author contributions}
 I.L.\ conceived the study, obtained funding, and supervised all experimental work. G.J.S.\ performed the bioinformatic and pharmacogenomic analyses and drafted the manuscript. I.D.\ contributed to RNASeq analysis, statistical interpretation, and manuscript revision. T. N. N.\ performed the MRI-guided LITT procedures, tissue collection, and manuscript revision. All authors reviewed and approved the final version. *these authors contributed equally.
@@ -87,11 +89,14 @@ I.L.\ conceived the study, obtained funding, and supervised all experimental wor
 %% =========================================================================
 \begin{thebibliography}{6}
 
-\bibitem{LITT_review}
-Chen C, Lee I, Tatsui C, Elder T, Sloan AE. Laser interstitial thermotherapy (LITT) for the treatment of tumors of the brain and spine: a brief review. J Neurooncol. 2021; 151(3): 429--442.
+\bibitem{Cleary}
+Cleary RT, Fu Y, Giles D, et al. Laser interstitial thermal therapy enhances bidirectional blood-brain barrier permeability in glioblastoma. Neuro Oncol. 2026; 28(7): 1649--1661.
 
-\bibitem{NagarajaLITT}
-Nagaraja TN, Bartlett S, Farmer KG, et al. Adaptation of laser interstitial thermal therapy for tumor ablation under MRI monitoring in a rat orthotopic model of glioblastoma. Acta Neurochir (Wien). 2021; 163: 3455--3463.
+\bibitem{Tao}
+Tao R, Guo Y, Zhang Y, et al. A comprehensive single-cell analysis reveals the impact of laser interstitial thermal therapy on the tumor microenvironment in glioblastoma. J Immunol. 2026; 215(2): vkaf327.
+
+\bibitem{NagarajaJNS}
+Nagaraja TN, Bartlett S, Cabral G, et al. Imaging, histological, and molecular characterization of a preclinical, orthotopic model of recurrent glioblastoma following image-guided laser ablation of the primary tumor. J Neurosurg. 2026: 1--14.
 
 \bibitem{xengsort}
 Zentgraf J, Rahmann S. Fast lightweight accurate xenograft sorting. Algorithms Mol Biol. 2021; 16(1): 2.
@@ -101,9 +106,6 @@ Garofano L, Migliozzi S, Oh YT, et al. Pathway-based classification of glioblast
 
 \bibitem{Neftel}
 Neftel C, Laffy J, Filbin MG, et al. An integrative model of cellular states, plasticity, and genetics for glioblastoma. Cell. 2019; 178(4): 835--849.e21.
-
-\bibitem{DSigDB}
-Yoo M, Shin J, Kim J, et al. DSigDB: drug signatures database for gene set analysis. Bioinformatics. 2015; 31(18): 3069--3071.
 
 \end{thebibliography}
 
