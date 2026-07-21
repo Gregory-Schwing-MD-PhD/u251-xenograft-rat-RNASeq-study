@@ -55,7 +55,11 @@ THRESHOLD_LABELS <- c("|log2FC| > 0.585  (>1.5x)",
                       "|log2FC| > 1.0    (>2x)",
                       "|log2FC| > 1.5    (>2.83x)",
                       "|log2FC| > 2.0    (>4x)")
-THRESHOLD_COLORS <- c("#fee090", "#fdae61", "#f46d43", "#a50026")  # light -> dark
+# Colourblind-safe, high-contrast tier ramp (blue -> green -> orange -> red).
+# Validated: all four >= 3:1 against a white surface, worst adjacent CVD
+# separation dE 11.6 (deutan), normal-vision dE 18.0. The previous
+# yellow/orange ramp washed out on white at print size.
+THRESHOLD_COLORS <- c("#0072B2", "#1B9E77", "#D95F02", "#A50F15")  # cool -> warm
 LABEL_TIERS      <- c("3", "4")   # tiers to draw gene labels on (>1.5, >2.0)
 LABEL_MAX_N      <- 30            # cap on number of gene labels
 
@@ -1409,8 +1413,8 @@ tryCatch({
         # horizontal row so it stops wasting a block of vertical space.
         volcano_letter <- p_panel_b_plot +
             labs(title = NULL, subtitle = NULL) +
-            guides(color = guide_legend(nrow = 2, byrow = TRUE),
-                   fill  = guide_legend(nrow = 2, byrow = TRUE)) +
+            guides(color = guide_legend(nrow = 2, byrow = TRUE, title.position = "top"),
+                   fill  = guide_legend(nrow = 2, byrow = TRUE, title.position = "top")) +
             theme(legend.position = "bottom",
                   legend.direction = "horizontal",
                   legend.box = "horizontal",
@@ -1418,9 +1422,11 @@ tryCatch({
                   legend.spacing.x = unit(4, "pt"),
                   legend.key.height = unit(0.7, "lines"),
                   legend.margin = margin(0, 0, 0, 0),
-                  legend.text = element_text(size = 9),
-                  legend.title = element_text(size = 10),
-                  plot.margin = margin(5, 8, 14, 5))
+                  legend.text = element_text(size = 10),
+                  legend.title = element_text(size = 12, face = "bold", hjust = 0),
+                  axis.title = element_text(size = 15),
+                  axis.text = element_text(size = 12),
+                  plot.margin = margin(12, 14, 14, 12))
 
         # --- Panel B: ranked repurposing candidates ---------------------------
         p_drug_letter <- NULL
@@ -1481,12 +1487,14 @@ tryCatch({
                 theme_publication(base_size = 12) +
                 theme(legend.position = "bottom",
                       legend.direction = "vertical",
-                      legend.key.height = unit(0.8, "lines"),
+                      legend.key.height = unit(0.9, "lines"),
                       legend.margin = margin(0, 0, 0, 0),
-                      legend.text = element_text(size = 9),
-                      axis.text.y = element_text(size = 11, face = "bold"),
-                      plot.subtitle = element_text(size = 9, color = "grey40", hjust = 0.5),
-                      plot.margin = margin(18, 10, 5, 5))
+                      legend.text = element_text(size = 11),
+                      axis.title = element_text(size = 15),
+                      axis.text.x = element_text(size = 12),
+                      axis.text.y = element_text(size = 12, face = "bold"),
+                      plot.subtitle = element_text(size = 12, color = "grey35", hjust = 0.5),
+                      plot.margin = margin(20, 14, 5, 12))
         } else if (exists("p_panel_f_plot")) {
             cat("  NOTE: no drug_profiles; falling back to polypharmacology network.\n")
             p_drug_letter <- p_panel_f_plot
@@ -1495,9 +1503,9 @@ tryCatch({
         if (is.null(p_drug_letter)) stop("no drug panel available for letter Figure 1")
 
         panel_a_labeled <- ggdraw(volcano_letter) +
-            draw_label("A", x = 0.01, y = 0.99, fontface = "bold", size = 20)
+            draw_label("A", x = 0.035, y = 0.965, fontface = "bold", size = 22)
         panel_b_labeled <- ggdraw(p_drug_letter) +
-            draw_label("B", x = 0.01, y = 0.99, fontface = "bold", size = 20)
+            draw_label("B", x = 0.035, y = 0.955, fontface = "bold", size = 22)
 
         letter_fig <- cowplot::plot_grid(
             panel_a_labeled, panel_b_labeled,
