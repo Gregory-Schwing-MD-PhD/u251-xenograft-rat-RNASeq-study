@@ -45,18 +45,21 @@
 \maketitle
 
 %% =========================================================================
-%% LETTER BODY -- target < 600 words, no section headings.
+%% RESEARCH LETTER BODY -- target <= 1000 words, up to 10 references,
+%% 1 figure, supplementary data permitted.
 %% =========================================================================
 
-\noindent To the Editor --- Laser interstitial thermal therapy (LITT) is increasingly deployed for deep-seated and recurrent glioblastoma, and profiling of the ablation margin has begun: single-cell studies have characterized the surrounding blood vessels, which transiently open the blood--brain barrier after ablation~\cite{Cleary}, and the immune microenvironment of the sublethal zone in a rodent model~\cite{Tao}. What the surviving tumor cells themselves do --- the transcriptional program of cells that persist in this zone and seed recurrence --- remains undefined.
+\noindent Laser interstitial thermal therapy (LITT) is increasingly used for deep-seated and recurrent glioblastoma, where open resection carries high morbidity~\cite{LITT_review}. LITT ablates the tumor core thermally, but the cells that seed recurrence are those that survive at the sublethal margin, where the temperature falls below the ablative threshold. Recent work has begun to profile this margin: single-cell studies have characterized the surrounding blood vessels, which transiently open the blood--brain barrier after ablation~\cite{Cleary}, and the immune microenvironment of the sublethal zone in a rodent model~\cite{Tao}. What the surviving tumor cells themselves do --- the transcriptional program of the cells that persist and regrow --- remains undefined, yet it is precisely this program that any adjuvant given in the post-LITT window would have to engage.
 
-We previously characterized a rat orthotopic U251N xenograft model of post-LITT recurrence --- MRI-guided ablation in athymic RNU/RNU rats --- by imaging, histology, and bulk RNA-seq of matched primary (pre-LITT) and recurrent (post-LITT) tumors~\cite{NagarajaJNS}. Here we reanalyze that dataset ($n=3$ per arm) using differential-expression and enrichment settings configured for small samples, extend it to in-silico drug repurposing, and release the underlying sequencing data publicly (GSE338105). Human tumor reads were resolved from rat host signal by xengsort cross-species read-sorting~\cite{xengsort}.
+We previously established a rat orthotopic U251N xenograft model of MRI-guided LITT in athymic RNU/RNU rats~\cite{NagarajaLITT} and characterized post-ablation recurrence in it by imaging, histology, and bulk RNA-seq of matched primary (pre-LITT) and recurrent (post-LITT) tumors~\cite{NagarajaJNS}. Here we reanalyze that sequencing dataset ($n=3$ per arm) with a workflow chosen for its small size, add an in-silico drug-repurposing analysis, and release the raw data publicly (GSE338105). Because the graft is human and the host is rat, we first resolved human tumor reads from rat host reads with xengsort cross-species read-sorting~\cite{xengsort}. Differential expression used DESeq2; gene-set enrichment permuted gene-set membership rather than samples --- the appropriate choice at $n=3$, where too few sample permutations exist to estimate significance and gene-set permutation is substantially more reproducible~\cite{Maleki}.
 
-Primary and recurrent tumors separated clearly (PCA PC1 41.8\%, PC2 26.2\%), and the 35 differentially expressed genes (Figure~\ref{fig1}A; DESeq2; FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$; 23 up, 12 down) pointed to one dominant theme: the recurrent tumors had broadly shut down protein synthesis. Gene-set analysis configured for small samples ($n=3$ per arm) placed translation elongation (NES\,$=-1.96$), the EIF2AK4 (GCN2) response to amino-acid shortage (NES\,$=-1.95$), the ribosome (NES\,$=-1.94$), and the response to starvation (NES\,$=-1.93$) among the most reduced gene sets in recurrence (nominal $p<0.001$; FDR $q\approx0.15$--$0.25$) --- the pattern expected when the integrated stress response (ISR) suppresses translation. Subtype scores shifted in parallel: toward the Garofano Mitochondrial state ($z$ $-0.32\!\rightarrow\!+0.32$)~\cite{Garofano} and away from Neftel astrocyte-like ($+0.63\!\rightarrow\!-0.63$) and neural-progenitor-like ($+0.44\!\rightarrow\!-0.44$) programs~\cite{Neftel}, consistent with a stressed, metabolically rewired population of surviving cells. The most highly connected of these genes (\textit{BGN}, \textit{COL1A1}, \textit{IGFBP3}, \textit{CALB1}) further suggest remodeling of the extracellular matrix and of calcium signaling around them.
+Primary and recurrent tumors separated clearly (PCA PC1 41.8\%, PC2 26.2\%), and 35 genes were differentially expressed (Figure~\ref{fig1}A; FDR\,$<$\,0.05, $|\log_{2}\mathrm{FC}|>1$; 23 up, 12 down). Enrichment pointed to one dominant theme --- a coordinated shutdown of protein synthesis in the recurrent tumors. Translation elongation (NES\,$=-1.96$), the EIF2AK4 (GCN2) response to amino-acid shortage (NES\,$=-1.95$), the ribosome (NES\,$=-1.94$), and the response to starvation (NES\,$=-1.93$) were among the most reduced gene sets (nominal $p<0.001$; FDR $q\approx0.15$--$0.25$), the pattern expected when the integrated stress response (ISR) represses translation. This depletion was strikingly one-sided: across roughly 8{,}800 gene sets tested, the down-regulated side formed a single coherent translation/ISR block, whereas no positively enriched set approached significance (best nominal $p=0.08$) or formed an interpretable group. The recurrent state is thus defined by what it switches off, not by a new program it switches on.
 
-We then asked which existing drugs might oppose this state, screening the DSigDB drug-signature database and ranking candidates by a combined score: how strongly each drug's signature countered the tumor signature ($|\mathrm{NES}|^{1.5}$), weighted by its predicted ability to cross the blood--brain barrier. The leading candidates clustered on two mechanisms that fit a cell shutting down protein synthesis under metabolic stress (Figure~\ref{fig1}B): the HIF/iron axis --- the iron chelator and HIF-$1\alpha$ stabilizer ciclopirox (rank 1; score 3.4) and the prolyl-hydroxylase inhibitor dimethyloxalylglycine (rank 3; 3.0) --- and PI3K/mTOR, where the inhibitor LY-294002 ranked seventh (score 2.4). This is a roadmap, not a result: these are candidates for future preclinical testing alongside LITT, not validated treatments.
+Molecular subtype scores, computed independently on the full expression matrix rather than on the 35 differential genes, shifted in the same direction: toward the Garofano Mitochondrial state ($z$ $-0.32\!\rightarrow\!+0.32$; limma $p<0.05$)~\cite{Garofano} and away from the Neftel astrocyte-like ($+0.63\!\rightarrow\!-0.63$) and neural-progenitor-like ($+0.44\!\rightarrow\!-0.44$) programs~\cite{Neftel}. A translational shutdown paired with a shift toward a mitochondrial, oxidative-metabolism subtype is the signature of a stress-adapted, slow-cycling persister population --- cells that survive an acute insult by lowering biosynthetic demand and leaning on mitochondrial metabolism. The most highly connected genes in the differential set (\textit{BGN}, \textit{COL1A1}, \textit{IGFBP3}, \textit{CALB1}) point additionally to remodeling of the extracellular matrix and of calcium signaling around these cells.
 
-This study has clear limits. The sample is small ($n=3$ per arm), it uses a single cell line in one xenograft model, and we present no laboratory validation; the work is hypothesis-generating. Even so, we think the data merit early reporting: the size of the translation/ISR effect, the matching subtype shift, and the shared mechanisms among the nominated drugs are unlikely to be coincidental. As LITT moves further into first-line and salvage glioblastoma care, understanding what the surviving tumor cells are doing --- and designing drug combinations against them --- will be key to getting more from a procedure that is otherwise minimally invasive.
+We then asked which existing drugs might oppose this state, screening the DSigDB drug-signature database~\cite{DSigDB} and ranking candidates by how strongly each drug's own signature countered the tumor signature ($|\mathrm{NES}|^{1.5}$), weighted by predicted blood--brain-barrier permeability so that central-nervous-system--accessible agents rose to the top. The leading candidates fell on two axes that fit a cell under metabolic stress (Figure~\ref{fig1}B): the HIF/iron axis --- the iron chelator and HIF-$1\alpha$ stabilizer ciclopirox (rank 1; score 3.4) and the prolyl-hydroxylase inhibitor dimethyloxalylglycine (rank 3; 3.0) --- and PI3K/mTOR, where the inhibitor LY-294002 ranked seventh (score 2.4). Not every high-scoring agent is mechanistically interpretable; we therefore treat the ranking as a hypothesis-generating roadmap rather than a result --- candidates for preclinical testing alongside LITT, not validated treatments.
+
+The study's limits are real. The sample is small ($n=3$ per arm) and drawn from a single cell line in one xenograft model; at this size, gene-set results are inherently less reproducible and should be read as directional rather than definitive~\cite{Maleki}, which is why we report nominal $p$ alongside FDR and frame the enrichment as a coherent leading-edge signature. We present no functional or pharmacological validation, and the nominated agents are computational predictions only. Even so, the convergence of three independent readings --- a large translational/ISR effect, a matching subtype shift, and a mechanistically coherent set of nominated drugs --- is unlikely to be coincidental, and public release of the data (with the full differential-expression, enrichment, and drug-ranking tables provided as Supplementary Data) lets others test it directly. As LITT moves further into first-line and salvage glioblastoma care, defining what the surviving tumor cells are doing --- and designing combinations that target that state --- will be central to extending the benefit of an otherwise minimally invasive procedure.
 
 %% =========================================================================
 %% FIGURE  (single figure, two panels; legend < 75 words)
@@ -76,6 +79,9 @@ Dr. Lee has consulting agreements with Medtronic, Inc. (Minneapolis, MN) and Mon
 \section*{Funding}
 [Supported by a Henry Ford Health System Physician Scientist Award A20050 (IYL)]
 
+\section*{Supplementary material}
+Supplementary Data (the full DESeq2 differential-expression table, the gene-set enrichment results, and the ranked drug-repurposing table) are available at \emph{Neuro-Oncology} online.
+
 \section*{Data availability}
 Raw sequencing data have been deposited in the NCBI Gene Expression Omnibus under accession GSE338105. Analysis code is available at \url{https://github.com/Gregory-Schwing-MD-PhD/u251-xenograft-rat-RNASeq-study}.
 
@@ -83,11 +89,14 @@ Raw sequencing data have been deposited in the NCBI Gene Expression Omnibus unde
 I.L.\ conceived the study, obtained funding, and supervised all experimental work. G.J.S.\ performed the bioinformatic and pharmacogenomic analyses and drafted the manuscript. I.D.\ contributed to RNASeq analysis, statistical interpretation, and manuscript revision. T. N. N.\ performed the MRI-guided LITT procedures, tissue collection, and manuscript revision. All authors reviewed and approved the final version. *these authors contributed equally.
 
 %% =========================================================================
-%% References (6)  -- Neuro-Oncology numbered (Vancouver) style, listed in
+%% References (10)  -- Neuro-Oncology numbered (Vancouver) style, listed in
 %% order of first citation.  Plain \bibitem{} => numbered; do NOT add the
 %% [Author(Year)] optional label (that switches natbib to author-year).
 %% =========================================================================
-\begin{thebibliography}{6}
+\begin{thebibliography}{10}
+
+\bibitem{LITT_review}
+Chen C, Lee I, Tatsui C, Elder T, Sloan AE. Laser interstitial thermotherapy (LITT) for the treatment of tumors of the brain and spine: a brief review. J Neurooncol. 2021; 151(3): 429--442.
 
 \bibitem{Cleary}
 Cleary RT, Fu Y, Giles D, et al. Laser interstitial thermal therapy enhances bidirectional blood-brain barrier permeability in glioblastoma. Neuro Oncol. 2026; 28(7): 1649--1661.
@@ -95,17 +104,26 @@ Cleary RT, Fu Y, Giles D, et al. Laser interstitial thermal therapy enhances bid
 \bibitem{Tao}
 Tao R, Guo Y, Zhang Y, et al. A comprehensive single-cell analysis reveals the impact of laser interstitial thermal therapy on the tumor microenvironment in glioblastoma. J Immunol. 2026; 215(2): vkaf327.
 
+\bibitem{NagarajaLITT}
+Nagaraja TN, Bartlett S, Farmer KG, et al. Adaptation of laser interstitial thermal therapy for tumor ablation under MRI monitoring in a rat orthotopic model of glioblastoma. Acta Neurochir (Wien). 2021; 163: 3455--3463.
+
 \bibitem{NagarajaJNS}
 Nagaraja TN, Bartlett S, Cabral G, et al. Imaging, histological, and molecular characterization of a preclinical, orthotopic model of recurrent glioblastoma following image-guided laser ablation of the primary tumor. J Neurosurg. 2026: 1--14.
 
 \bibitem{xengsort}
 Zentgraf J, Rahmann S. Fast lightweight accurate xenograft sorting. Algorithms Mol Biol. 2021; 16(1): 2.
 
+\bibitem{Maleki}
+Maleki F, Ovens K, McQuillan I, Kusalik AJ. Size matters: how sample size affects the reproducibility and specificity of gene set analysis. Hum Genomics. 2019; 13(Suppl 1): 42.
+
 \bibitem{Garofano}
 Garofano L, Migliozzi S, Oh YT, et al. Pathway-based classification of glioblastoma uncovers a mitochondrial subtype with therapeutic vulnerabilities. Nat Cancer. 2021; 2(2): 141--156.
 
 \bibitem{Neftel}
 Neftel C, Laffy J, Filbin MG, et al. An integrative model of cellular states, plasticity, and genetics for glioblastoma. Cell. 2019; 178(4): 835--849.e21.
+
+\bibitem{DSigDB}
+Yoo M, Shin J, Kim J, et al. DSigDB: drug signatures database for gene set analysis. Bioinformatics. 2015; 31(18): 3069--3071.
 
 \end{thebibliography}
 
