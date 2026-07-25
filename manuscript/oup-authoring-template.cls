@@ -1192,6 +1192,7 @@
 \def\accepted#1#2#3{\g@addto@macro\@history{\refstepcounter{myhistorycount} \textbf{Accepted:} #1\ \myswitch{#2}\ #3\historycommasep}}
 
 \def\abstract#1{\let\subheading\abstsubheading\global\def\@abstract{#1}}
+\def\@abstract{}% default empty so the \ifx\@abstract\@empty guards work when no \abstract is given (e.g. Research Letter)
 \def\subheading#1{#1}
 
 \def\abstsubheading#1{%
