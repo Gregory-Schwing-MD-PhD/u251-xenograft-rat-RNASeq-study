@@ -12,6 +12,12 @@
 
 \graphicspath{{./}{Fig/}}
 
+%% Append the standalone Supplementary_Figures.pdf to the compiled document so
+%% co-authors can review everything in one PDF. For the final journal submission
+%% the supplement is uploaded separately, so comment out the \includepdf block at
+%% the end of this file (and this package line) before submitting.
+\usepackage{pdfpages}
+
 \begin{document}
 
 \journaltitle{Neuro-Oncology}
@@ -126,5 +132,13 @@ Neftel C, Laffy J, Filbin MG, et al. An integrative model of cellular states, pl
 Bartlett S, Nagaraja TN, Griffith B, et al. Persistent peri-ablation blood-brain barrier opening after laser interstitial thermal therapy for brain tumors. Cureus. 2023; 15(4): e37397.
 
 \end{thebibliography}
+
+%% =========================================================================
+%% SUPPLEMENTARY FIGURES (for co-author review only; remove before submission).
+%% Appends the multi-page Supplementary_Figures.pdf (S1-S10, each with its own
+%% caption). Upload Supplementary_Figures.pdf to the Overleaf project root.
+%% =========================================================================
+\clearpage
+\includepdf[pages=-,fitpaper=true]{Supplementary_Figures.pdf}
 
 \end{document}
