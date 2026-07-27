@@ -1417,6 +1417,12 @@ tryCatch({
         tier_shapes <- c("ns" = 16, "1" = 1, "2" = 18, "3" = 17, "4" = 15)
         tier_grays  <- c("ns" = "grey70", "1" = "grey15", "2" = "grey15",
                          "3" = "black", "4" = "black")
+        # Grayscale can't colour-code the count rows, so prepend each tier's
+        # plotting glyph (open circle / diamond / triangle / square) to its count.
+        tier_glyph <- c("○", "◆", "▲", "■")  # >0.585 >1.0 >1.5 >2.0
+        count_gray <- count_annotations_b
+        count_gray$label <- paste0(rep(tier_glyph, length.out = nrow(count_gray)),
+                                   "  ", count_gray$label)
         volcano_letter <- ggplot(res_b, aes(x = log2FoldChange, y = neglog10p)) +
             geom_point(aes(shape = tier, color = tier, alpha = tier), size = 1.7) +
             scale_shape_manual(values = tier_shapes, labels = label_map,
@@ -1426,9 +1432,6 @@ tryCatch({
             scale_alpha_manual(values = alpha_map, guide = "none") +
             geom_hline(yintercept = -log10(PADJ_CUTOFF),
                        linetype = "dashed", color = "grey30", linewidth = 0.6) +
-            geom_segment(data = vline_df, aes(x = xintercept, xend = xintercept),
-                         y = -Inf, yend = Inf, color = "grey55",
-                         linetype = "dotted", linewidth = 0.7, inherit.aes = FALSE) +
             annotate("text", x = fdr_label_x, y = fdr_label_y,
                      label = paste0("FDR = ", PADJ_CUTOFF), size = 4,
                      color = "grey30", fontface = "bold", hjust = 1, vjust = -0.6) +
@@ -1436,7 +1439,7 @@ tryCatch({
                       aes(x = x, y = y, label = label, hjust = hjust),
                       inherit.aes = FALSE, color = "grey30", size = 4.2,
                       fontface = "bold", vjust = 1, show.legend = FALSE) +
-            geom_text(data = count_annotations_b,
+            geom_text(data = count_gray,
                       aes(x = x, y = y, label = label, hjust = hjust),
                       inherit.aes = FALSE, color = "grey25", size = 3.8,
                       fontface = "bold", vjust = 0.5, show.legend = FALSE) +
@@ -1630,6 +1633,174 @@ cat("\n✅ Publication figure complete!\n")
 cat(sprintf("   PNG: %s/Publication_Figure_9Panel_VOLCANO_COMPLETE.png\n", OUT_DIR))
 cat(sprintf("   PDF: %s/Publication_Figure_9Panel_VOLCANO_COMPLETE.pdf\n", OUT_DIR))
 cat(sprintf("   Caption: %s/Figure_Caption.txt\n", OUT_DIR))
+
+# ==============================================================================
+# SUPPLEMENTARY DATA  (Excel workbook of tables + multi-page captioned PDF)
+# Everything below derives from the SAME res_df DESeq2 table that drives the
+# main figure, so the supplementary tables and figures are mutually consistent.
+# In particular the PPI network is built from sig_genes (padj<PADJ_CUTOFF,
+# |log2FC|>LOG2FC_CUTOFF) -- the identical set exported as the DE-significant
+# sheet -- and the gene->STRING mapping is exported so any genes absent from
+# STRING (the previous source of confusion) are explicit. Each item is wrapped
+# in tryCatch so one failure never blocks the rest.
+# ==============================================================================
+cat("Generating supplementary data (tables + figures)...\n")
+
+supp_wrap <- function(txt, width = 130) paste(strwrap(txt, width = width), collapse = "\n")
+
+supp_tables <- list()
+
+# S1/S2: full + significant DESeq2 differential-expression table
+tryCatch({
+    de_all <- data.frame(
+        gene_id        = rownames(res_df),
+        symbol         = res_df$symbol,
+        baseMean       = res_df$baseMean,
+        log2FoldChange = res_df$log2FoldChange,
+        lfcSE          = if ("lfcSE"  %in% colnames(res_df)) res_df$lfcSE  else NA,
+        pvalue         = if ("pvalue" %in% colnames(res_df)) res_df$pvalue else NA,
+        padj           = res_df$padj,
+        stringsAsFactors = FALSE)
+    de_all$significant <- with(de_all,
+        !is.na(padj) & padj < PADJ_CUTOFF & abs(log2FoldChange) > LOG2FC_CUTOFF)
+    de_all <- de_all[order(de_all$padj), ]
+    supp_tables[["S1_DE_all"]]         <- de_all
+    supp_tables[["S2_DE_significant"]] <- de_all[de_all$significant, ]
+    cat("  S1/S2 DE tables: ", nrow(de_all), " genes, ",
+        sum(de_all$significant), " significant\n", sep = "")
+}, error = function(e) cat("  WARN S1/S2:", conditionMessage(e), "\n"))
+
+# S3: gene-set enrichment -- the small-N pipeline GSEA reported in the paper
+tryCatch({
+    if (exists("pipe_gsea") && !is.null(pipe_gsea)) {
+        g3 <- pipe_gsea[order(pipe_gsea$padj), ]
+        colnames(g3) <- c("gene_set", "NES", "nominal_p", "FDR_q")
+        supp_tables[["S3_GSEA_pipeline"]] <- g3
+        cat("  S3 GSEA (pipeline): ", nrow(g3), " gene sets\n", sep = "")
+    }
+}, error = function(e) cat("  WARN S3:", conditionMessage(e), "\n"))
+
+# S4: molecular subtype scores (per-sample signature z-scores)
+tryCatch({
+    if (exists("z_res")) {
+        zt <- as.data.frame(t(z_res))
+        zt$Sample <- rownames(zt)
+        zt$Stage  <- meta$Classification
+        supp_tables[["S4_subtype_scores"]] <-
+            zt[, c("Sample", "Stage", setdiff(colnames(zt), c("Sample", "Stage")))]
+        cat("  S4 subtype scores: ", nrow(z_res), " signatures\n", sep = "")
+    }
+}, error = function(e) cat("  WARN S4:", conditionMessage(e), "\n"))
+
+# S5/S6: PPI network -- same sig_genes as the DE-significant sheet
+tryCatch({
+    if (exists("sig_genes") && length(sig_genes) > 0) {
+        mapped <- sym2string[sig_genes]
+        supp_tables[["S5_PPI_gene_mapping"]] <- data.frame(
+            symbol       = sig_genes,
+            string_id    = unname(mapped),
+            in_STRING_db = !is.na(mapped),
+            stringsAsFactors = FALSE)
+        cat("  S5 PPI mapping: ", sum(!is.na(mapped)), "/", length(sig_genes),
+            " DE genes in STRING\n", sep = "")
+    }
+    if (exists("sub_net") && nrow(sub_net) > 0) {
+        supp_tables[["S6_PPI_edges"]] <- data.frame(
+            gene1 = unname(string2sym[as.character(sub_net$protein1)]),
+            gene2 = unname(string2sym[as.character(sub_net$protein2)]),
+            STRING_combined_score = sub_net$combined_score,
+            stringsAsFactors = FALSE)
+    }
+}, error = function(e) cat("  WARN S5/S6:", conditionMessage(e), "\n"))
+
+# S7: full drug-repurposing ranking (NES, FDR, integrated score, BBB)
+tryCatch({
+    if (exists("drug_profiles") && length(drug_profiles) > 0) {
+        d7 <- do.call(rbind, lapply(drug_profiles, function(p) data.frame(
+            rank             = p$rank,
+            drug             = clean_drug_name(as.character(p$drug_name)),
+            drug_signature   = as.character(p$drug_name),
+            NES              = p$NES,
+            FDR              = p$p.adjust,
+            integrated_score = p$integrated_score,
+            BBB_score        = tryCatch(p$bbb$bbb_score, error = function(e) NA),
+            pathway_hits     = p$pathway_count,
+            clinical_trials  = p$clinical_trials,
+            stringsAsFactors = FALSE)))
+        supp_tables[["S7_drug_ranking"]] <- d7[order(d7$rank), ]
+        cat("  S7 drug ranking: ", nrow(d7), " agents\n", sep = "")
+    }
+}, error = function(e) cat("  WARN S7:", conditionMessage(e), "\n"))
+
+# write the workbook (openxlsx -> writexl -> per-sheet CSV fallback)
+tryCatch({
+    if (length(supp_tables) == 0) stop("no supplementary tables were assembled")
+    supp_xlsx <- file.path(OUT_DIR, "Supplementary_Data.xlsx")
+    if (requireNamespace("openxlsx", quietly = TRUE)) {
+        openxlsx::write.xlsx(supp_tables, file = supp_xlsx, overwrite = TRUE)
+        cat("  ✓ ", supp_xlsx, " (", length(supp_tables), " sheets)\n", sep = "")
+    } else if (requireNamespace("writexl", quietly = TRUE)) {
+        writexl::write_xlsx(supp_tables, path = supp_xlsx)
+        cat("  ✓ ", supp_xlsx, " (writexl)\n", sep = "")
+    } else {
+        for (nm in names(supp_tables))
+            write.csv(supp_tables[[nm]],
+                      file.path(OUT_DIR, paste0("Supplementary_", nm, ".csv")),
+                      row.names = FALSE)
+        cat("  no xlsx package available; wrote per-sheet CSVs\n")
+    }
+}, error = function(e) cat("  WARN workbook:", conditionMessage(e), "\n"))
+
+# Supplementary figures -> one multi-page PDF, each panel with a caption below
+supp_page <- function(fig, title, caption) {
+    ggdraw() +
+        draw_label(title, x = 0.03, y = 0.975, hjust = 0, vjust = 1,
+                   fontface = "bold", size = 13) +
+        draw_plot(fig, x = 0.03, y = 0.10, width = 0.94, height = 0.85) +
+        draw_label(supp_wrap(caption), x = 0.03, y = 0.075, hjust = 0, vjust = 1,
+                   size = 8.5, color = "grey25")
+}
+
+supp_figs <- list()
+add_fig <- function(key, obj_name, title, caption) {
+    if (exists(obj_name)) supp_figs[[key]] <<- list(get(obj_name), title, caption)
+}
+add_fig("S1", "p_pca",
+    "Supplementary Figure S1. Global transcriptomic structure.",
+    "Principal-component analysis of the most-variable genes; primary and recurrent tumours separate along PC1/PC2.")
+add_fig("S2", "p_panel_c_plot",
+    "Supplementary Figure S2. Molecular subtype trajectories.",
+    "Per-sample signature z-scores across all Verhaak, Neftel and Garofano subtypes from primary to recurrent tumours; significance by arrayWeights limma (*p<0.05, **p<0.01, ***p<0.001).")
+add_fig("S3", "p_panel_d_tree",
+    "Supplementary Figure S3. Enriched pathway clustering.",
+    "Semantic clustering of enriched gene sets; node statistics are the small-sample (gene-set permutation) GSEA reported in the main text.")
+add_fig("S4", "p_panel_e_plot",
+    "Supplementary Figure S4. Protein-protein interaction network.",
+    "STRING network among the differentially expressed genes (padj<0.05, |log2FC|>1) that map to STRING; hubs highlighted. Genes without a STRING entry are listed in Supplementary Data, sheet S5.")
+add_fig("S5", "p_panel_f_plot",
+    "Supplementary Figure S5. Polypharmacology network.",
+    "Drug-pathway gene-overlap network linking DSigDB candidates to the enriched transcriptional programmes.")
+add_fig("S6", "p_panel_g_plot",
+    "Supplementary Figure S6. Predicted blood-brain-barrier penetrance.",
+    "Predicted BBB permeability of the top-ranked repurposing candidates.")
+add_fig("S7", "p_panel_h_plot",
+    "Supplementary Figure S7. Integrated drug scoring.",
+    "Each candidate positioned by enrichment magnitude (|NES|) and predicted BBB permeability; point size is the integrated score.")
+add_fig("S8", "p_panel_i_plot",
+    "Supplementary Figure S8. Top repurposing candidates.",
+    "Ranked table of the leading DSigDB candidates with integrated score, NES, FDR and BBB score.")
+
+tryCatch({
+    supp_pdf <- file.path(OUT_DIR, "Supplementary_Figures.pdf")
+    pdf(supp_pdf, width = 8.5, height = 11)
+    for (nm in names(supp_figs)) {
+        it <- supp_figs[[nm]]
+        print(supp_page(it[[1]], it[[2]], it[[3]]))
+    }
+    dev.off()
+    cat("  ✓ ", supp_pdf, " (", length(supp_figs), " figures)\n", sep = "")
+}, error = function(e) { try(dev.off(), silent = TRUE)
+    cat("  WARN supp figures PDF:", conditionMessage(e), "\n") })
 
 # ==============================================================================
 # MACHINE-READABLE ALL-PANEL ANALYSIS REPORT  (CSV + LLM text + HTML)
