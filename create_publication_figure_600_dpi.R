@@ -1414,7 +1414,7 @@ tryCatch({
         # --- Grayscale volcano (Panel A): a distinct symbol per FDR/|log2FC|
         # tier so the panel reads in black-and-white and avoids the print
         # colour fee. (The colour version survives in the 9-panel composite.)
-        tier_shapes <- c("ns" = 16, "1" = 1, "2" = 16, "3" = 17, "4" = 15)
+        tier_shapes <- c("ns" = 16, "1" = 1, "2" = 18, "3" = 17, "4" = 15)
         tier_grays  <- c("ns" = "grey70", "1" = "grey15", "2" = "grey15",
                          "3" = "black", "4" = "black")
         volcano_letter <- ggplot(res_b, aes(x = log2FoldChange, y = neglog10p)) +
