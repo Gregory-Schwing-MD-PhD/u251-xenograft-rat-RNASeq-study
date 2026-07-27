@@ -1411,14 +1411,55 @@ tryCatch({
         # Drop the title/subtitle (the caption carries them, and the title was
         # being clipped) and lay the significance-tier legend out in a single
         # horizontal row so it stops wasting a block of vertical space.
-        volcano_letter <- p_panel_b_plot +
-            labs(title = NULL, subtitle = NULL) +
-            guides(color = guide_legend(nrow = 2, byrow = TRUE, title.position = "top"),
-                   fill  = guide_legend(nrow = 2, byrow = TRUE, title.position = "top")) +
+        # --- Grayscale volcano (Panel A): a distinct symbol per FDR/|log2FC|
+        # tier so the panel reads in black-and-white and avoids the print
+        # colour fee. (The colour version survives in the 9-panel composite.)
+        tier_shapes <- c("ns" = 16, "1" = 1, "2" = 16, "3" = 17, "4" = 15)
+        tier_grays  <- c("ns" = "grey70", "1" = "grey15", "2" = "grey15",
+                         "3" = "black", "4" = "black")
+        volcano_letter <- ggplot(res_b, aes(x = log2FoldChange, y = neglog10p)) +
+            geom_point(aes(shape = tier, color = tier, alpha = tier), size = 1.7) +
+            scale_shape_manual(values = tier_shapes, labels = label_map,
+                               name = "Significance tier", drop = FALSE) +
+            scale_color_manual(values = tier_grays, labels = label_map,
+                               name = "Significance tier", drop = FALSE) +
+            scale_alpha_manual(values = alpha_map, guide = "none") +
+            geom_hline(yintercept = -log10(PADJ_CUTOFF),
+                       linetype = "dashed", color = "grey30", linewidth = 0.6) +
+            geom_segment(data = vline_df, aes(x = xintercept, xend = xintercept),
+                         y = -Inf, yend = Inf, color = "grey55",
+                         linetype = "dotted", linewidth = 0.7, inherit.aes = FALSE) +
+            annotate("text", x = fdr_label_x, y = fdr_label_y,
+                     label = paste0("FDR = ", PADJ_CUTOFF), size = 4,
+                     color = "grey30", fontface = "bold", hjust = 1, vjust = -0.6) +
+            geom_text(data = header_annotations_b,
+                      aes(x = x, y = y, label = label, hjust = hjust),
+                      inherit.aes = FALSE, color = "grey30", size = 4.2,
+                      fontface = "bold", vjust = 1, show.legend = FALSE) +
+            geom_text(data = count_annotations_b,
+                      aes(x = x, y = y, label = label, hjust = hjust),
+                      inherit.aes = FALSE, color = "grey25", size = 3.8,
+                      fontface = "bold", vjust = 0.5, show.legend = FALSE) +
+            {if (nrow(label_genes) > 0)
+                geom_text_repel(data = label_genes,
+                                aes(x = log2FoldChange, y = neglog10p, label = symbol),
+                                inherit.aes = FALSE, size = 3.2, fontface = "italic",
+                                color = "black", box.padding = 0.4, point.padding = 0.3,
+                                segment.color = "grey50", segment.size = 0.3,
+                                segment.alpha = 0.7, max.overlaps = 25,
+                                min.segment.length = 0.1)
+             else NULL} +
+            coord_cartesian(xlim = x_lim, ylim = y_lim, clip = "off") +
+            labs(x = expression(log[2]~fold~change),
+                 y = expression(-log[10]~adjusted~italic(P)),
+                 title = NULL, subtitle = NULL) +
+            guides(shape = guide_legend(nrow = 2, byrow = TRUE, title.position = "top",
+                                        override.aes = list(alpha = 1, size = 2.6)),
+                   color = guide_legend(nrow = 2, byrow = TRUE, title.position = "top")) +
+            theme_publication(base_size = 12) +
             theme(legend.position = "bottom",
                   legend.direction = "horizontal",
                   legend.box = "horizontal",
-                  legend.spacing.y = unit(0, "pt"),
                   legend.spacing.x = unit(4, "pt"),
                   legend.key.height = unit(0.7, "lines"),
                   legend.margin = margin(0, 0, 0, 0),
@@ -1472,14 +1513,14 @@ tryCatch({
                                               "other top-ranked agent"))
 
             p_drug_letter <- ggplot(drug_df, aes(x = Score, y = Drug)) +
-                geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug, color = Mech),
-                             linewidth = 1) +
-                geom_point(aes(color = Mech), size = 5) +
+                geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug),
+                             color = "grey55", linewidth = 1) +
+                geom_point(aes(shape = Mech), color = "black", size = 4.5) +
                 geom_text(aes(label = sprintf("%.1f", Score)), hjust = -0.7, size = 3.8) +
-                scale_color_manual(
-                    values = c("HIF/iron axis" = "#c0392b",
-                               "PI3K/mTOR" = "#2471a3",
-                               "other top-ranked agent" = "grey60"),
+                scale_shape_manual(
+                    values = c("HIF/iron axis" = 17,
+                               "PI3K/mTOR" = 15,
+                               "other top-ranked agent" = 16),
                     name = NULL, drop = FALSE) +
                 scale_x_continuous(expand = expansion(mult = c(0.02, 0.20))) +
                 labs(subtitle = "integrated score = |NES|^1.5 x predicted BBB permeability",
