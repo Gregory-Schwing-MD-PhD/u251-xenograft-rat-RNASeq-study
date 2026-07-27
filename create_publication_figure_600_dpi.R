@@ -1732,16 +1732,20 @@ tryCatch({
     }
 }, error = function(e) cat("  WARN S7:", conditionMessage(e), "\n"))
 
-# write the workbook (openxlsx -> writexl -> per-sheet CSV fallback)
+# write the workbook (writexl -> openxlsx -> per-sheet CSV fallback)
+# NB: prefer writexl. openxlsx on this container emits sheet relationships that
+# point at drawing/vmlDrawing parts it never writes into the zip, so Excel flags
+# the file for "repair". writexl produces a minimal, clean workbook with none of
+# that. openxlsx is kept only as a secondary fallback.
 tryCatch({
     if (length(supp_tables) == 0) stop("no supplementary tables were assembled")
     supp_xlsx <- file.path(OUT_DIR, "Supplementary_Data.xlsx")
-    if (requireNamespace("openxlsx", quietly = TRUE)) {
-        openxlsx::write.xlsx(supp_tables, file = supp_xlsx, overwrite = TRUE)
-        cat("  ✓ ", supp_xlsx, " (", length(supp_tables), " sheets)\n", sep = "")
-    } else if (requireNamespace("writexl", quietly = TRUE)) {
+    if (requireNamespace("writexl", quietly = TRUE)) {
         writexl::write_xlsx(supp_tables, path = supp_xlsx)
-        cat("  ✓ ", supp_xlsx, " (writexl)\n", sep = "")
+        cat("  ✓ ", supp_xlsx, " (", length(supp_tables), " sheets, writexl)\n", sep = "")
+    } else if (requireNamespace("openxlsx", quietly = TRUE)) {
+        openxlsx::write.xlsx(supp_tables, file = supp_xlsx, overwrite = TRUE)
+        cat("  ✓ ", supp_xlsx, " (", length(supp_tables), " sheets, openxlsx)\n", sep = "")
     } else {
         for (nm in names(supp_tables))
             write.csv(supp_tables[[nm]],
