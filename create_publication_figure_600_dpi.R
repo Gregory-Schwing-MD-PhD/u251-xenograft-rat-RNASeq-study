@@ -1794,6 +1794,46 @@ add_fig("S8", "p_panel_i_plot",
     "Supplementary Figure S8. Top repurposing candidates.",
     "Ranked table of the leading DSigDB candidates with integrated score, NES, FDR and BBB score.")
 
+# --- Full-colour versions of the two main-text (grayscale) Figure 1 panels ----
+# The printed letter is grayscale to avoid the colour-figure charge; these are the
+# identical panels in colour for readers/reviewers. Same underlying data (res_b,
+# drug_df) as the main figure, so they cannot diverge from it.
+#   S9  = colour volcano  (reuse the pre-grayscale object p_panel_b_plot)
+#   S10 = colour drug ranking (colour twin of the grayscale p_drug_letter)
+if (exists("drug_df") && is.data.frame(drug_df) && nrow(drug_df) > 0 &&
+    "Mech" %in% names(drug_df)) {
+    mech_cols <- c("HIF/iron axis"          = "#D55E00",   # vermillion
+                   "PI3K/mTOR"              = "#0072B2",   # blue
+                   "other top-ranked agent" = "grey45")
+    p_maintext_drug_color <- ggplot(drug_df, aes(x = Score, y = Drug)) +
+        geom_segment(aes(x = 0, xend = Score, y = Drug, yend = Drug),
+                     color = "grey70", linewidth = 1) +
+        geom_point(aes(color = Mech, shape = Mech), size = 4.5) +
+        geom_text(aes(label = sprintf("%.1f", Score)), hjust = -0.7, size = 3.8) +
+        scale_color_manual(values = mech_cols, name = NULL, drop = FALSE) +
+        scale_shape_manual(values = c("HIF/iron axis" = 17, "PI3K/mTOR" = 15,
+                                      "other top-ranked agent" = 16),
+                           name = NULL, drop = FALSE) +
+        scale_x_continuous(expand = expansion(mult = c(0.02, 0.20))) +
+        labs(subtitle = "integrated score = |NES|^1.5 x predicted BBB permeability",
+             x = "Integrated score", y = NULL) +
+        theme_publication(base_size = 12) +
+        theme(legend.position = "bottom", legend.direction = "vertical",
+              legend.key.height = unit(0.9, "lines"),
+              legend.text = element_text(size = 11),
+              axis.title = element_text(size = 15),
+              axis.text.x = element_text(size = 12),
+              axis.text.y = element_text(size = 12, face = "bold"),
+              plot.subtitle = element_text(size = 12, color = "grey35", hjust = 0.5),
+              plot.margin = margin(20, 14, 5, 12))
+}
+add_fig("S9", "p_panel_b_plot",
+    "Supplementary Figure S9. Differential expression volcano (colour version of main-text Figure 1A).",
+    "Full-colour rendering of the main-text volcano. Points are coloured by significance tier (|log2FC| threshold, padj<0.05); up- and down-regulated counts per tier are annotated. The printed Figure 1A is the same plot in grayscale with tier symbols to avoid the colour-figure charge.")
+add_fig("S10", "p_maintext_drug_color",
+    "Supplementary Figure S10. Ranked repurposing candidates (colour version of main-text Figure 1B).",
+    "Full-colour rendering of the main-text drug ranking. Agents are coloured by mechanistic axis (orange, HIF/iron; blue, PI3K/mTOR; grey, other top-ranked agent); integrated score = |NES|^1.5 x predicted BBB permeability. The printed Figure 1B is the same plot in grayscale with distinct symbols per axis.")
+
 tryCatch({
     supp_pdf <- file.path(OUT_DIR, "Supplementary_Figures.pdf")
     pdf(supp_pdf, width = 8.5, height = 11)
