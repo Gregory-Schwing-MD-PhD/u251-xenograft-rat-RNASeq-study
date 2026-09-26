@@ -22,12 +22,20 @@ for arm in control holdout; do
   [ -s "$H/$arm/publication_figure/therapy_impact_Drug_Profiles_Comprehensive.csv" ] || { echo "step 2 output missing for $arm"; exit 3; }
 done
 
+MAMBA=$HOME/mambaforge/bin/mamba; [ -x "$MAMBA" ] || MAMBA=$HOME/mambaforge/bin/conda
 if [ ! -x "$ENV/bin/python" ]; then
-  MAMBA=$HOME/mambaforge/bin/mamba; [ -x "$MAMBA" ] || MAMBA=$HOME/mambaforge/bin/conda
   "$MAMBA" create -y -p "$ENV" -c conda-forge python=3.11 rdkit pandas numpy openpyxl scipy pip
   "$ENV/bin/pip" install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu
-  "$ENV/bin/pip" install --no-cache-dir admet-ai gseapy
 fi
+# The grid is glibc 2.17 with GCC 4.8/7.3: scikit-learn 1.9 has no wheel for it and will not compile here (job
+# 40467316 failed on exactly that), so the compiled stack comes from conda-forge, whose builds honour the old glibc,
+# before pip resolves ADMET-AI. The newest ADMET-AI is tried first (September's venv installed the then-current one).
+"$ENV/bin/python" -c "import sklearn" 2>/dev/null || "$MAMBA" install -y -p "$ENV" -c conda-forge scikit-learn
+if ! "$ENV/bin/python" -c "import admet_ai, gseapy" 2>/dev/null; then
+  "$ENV/bin/pip" install --no-cache-dir --prefer-binary "admet-ai>=2" gseapy \
+    || "$ENV/bin/pip" install --no-cache-dir --prefer-binary admet-ai gseapy
+fi
+"$ENV/bin/python" -c "import admet_ai, gseapy, sklearn; print('admet_ai ok, sklearn', sklearn.__version__)"
 "$ENV/bin/pip" freeze | grep -i -E "admet|chemprop|gseapy|rdkit|pandas|numpy|torch" || true
 PY=$ENV/bin/python
 

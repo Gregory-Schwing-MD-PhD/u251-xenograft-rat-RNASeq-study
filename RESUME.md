@@ -4,6 +4,21 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 08:20 EDT (grid clock): IL68B held out, full pipeline DONE (`ANALYSIS/holdout_IL68B/COMPARISON.md`)
+
+Jobs 40467314 (DE), 40467315 (R figure), 40467509 (drug chain; 40467316 failed building the Python environment:
+scikit-learn 1.9 has no wheel for the grid's glibc 2.17, so the compiled stack now comes from conda-forge).
+- Control arm reproduces the published run: DSigDB top 100 identical (Jaccard 1.00), ciclopirox NES -2.261 FDR 1.7e-5
+  rank 1, GSVA and STRING identical. The Python stage drifts slightly (rebuilt ADMET-AI environment): top-20
+  Jaccard 0.82, 13 against 15 compounds clear both barrier models. September's ADMET-AI version was never recorded.
+- Held out: DE 43 genes (33 up) against 35, 21 shared (Jaccard 0.37), log2FC Spearman 0.837. Broad GSEA: the six
+  translation sets all hold (NES -1.90 to -1.96), and 12 sets clear q < 0.05 against 1 published.
+- Drugs: ciclopirox stays rank 1 (NES -2.146, FDR 6.1e-4; score 3.02 against 3.14); DSigDB top 100 overlap 0.41 with
+  the control; final top 20 overlap 0.43. Pentetrazol, primidone, nilutamide, pyrantel, ifosfamide, magnesium,
+  diazepam, progesterone stay in the top 20; ozone, d-penicillamine, l-citrulline, paricalcitol, hypochlorous acid
+  and others enter (not audited against the prior-art table).
+- Subtypes: Neftel AC falls in recurrence with or without IL68B (-0.53, p 0.007; held out -0.57, p 0.044).
+
 ## 2026-09-26 06:00 EDT (grid clock): PENDING GRID JOBS: the full pipeline with IL68B held out
 
 Greg: "rerun the full drug discovery pipeline etc with that sample held out then and compare the differences" (taken as
