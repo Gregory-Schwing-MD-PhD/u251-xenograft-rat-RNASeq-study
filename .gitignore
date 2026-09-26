@@ -57,3 +57,7 @@ MBR/*.log
 # DepMap 24Q4 matrices (figshare 27993248), third-party, 429 MB
 depmap/CRISPRGeneEffect.csv
 depmap/Model.csv
+
+# ChEMBL REST cache of the exact-name resolver (regenerable)
+ANALYSIS/drug_rematch/chembl_exact_cache.json
+ANALYSIS/drug_rematch/runs/
