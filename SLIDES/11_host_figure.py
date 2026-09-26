@@ -85,6 +85,14 @@ facts = dict(
     il66b_weak_immune=nl_only,
     themes={t: {g: round(by[g]["lfc"], 2) for g in gs} for t, gs in THEMES.items()},
 )
+# leave-one-tumour-out on the same host counts (ANALYSIS/holdout_separation/loo_separation.R, job 40468363): DESeq2 fits
+# with one tumour removed; padj05 = genes at padj < 0.05. Human-side counterpart: loo_separation_human.tsv.
+loo = {r["held_out"]: int(r["padj05"]) for r in csv.DictReader(open(HD / "loo_separation_host.tsv"), delimiter="\t")}
+loo_h = {r["held_out"]: int(r["padj05"]) for r in csv.DictReader(
+    open(ROOT / "ANALYSIS" / "holdout_separation" / "loo_separation_human.tsv"), delimiter="\t")}
+facts["loo_host"] = loo
+facts["loo_human"] = loo_h
+assert loo["none"] == 38 and max(loo, key=loo.get) == "IL66B" and loo_h["none"] != loo["none"]
 assert facts["sig"] == 38 and facts["up"] == 15 and facts["down"] == 23 and facts["tested"] == 17345
 assert (facts["sig2"], facts["up2"], facts["down2"]) == (33, 14, 19) and facts["down_all_three"] == len(down)
 assert all(abs(by[g]["lfc"]) >= 1 for gs in THEMES.values() for g in gs)          # every named gene passes the two-fold rule

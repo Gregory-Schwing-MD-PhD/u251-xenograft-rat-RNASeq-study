@@ -526,16 +526,22 @@ def build(out: Path):
         "Up mostly in NL70B and NL71B, the only NL-prefixed tumors (IL66B barely): interferon-induced (Cxcl10, Batf2) and "
         "lymphocyte genes (Il2ra, Slamf6, Ighm), in an athymic host."],
         img_w=6400000, size=14, gap=8, text_top=20000)
-    refs(s, C.line(f"Preliminary: different rats per arm; LITT, time and the ablation wound cannot be separated; gene-set and "
-                   f"hold-out tests running. DESeq2{C('love')}. Tumor vs rat-brain control: {hs['tumour_vs_control_sig']:,} genes "
-                   f"differ (fewer neuronal, far more immune transcripts)."))
+    lh = hs["loo_host"]
+    others = [v for k, v in lh.items() if k not in ("none", "IL66B")]
+    refs(s, C.line(f"Preliminary: different rats per arm; LITT, time and the ablation wound cannot be separated. Leaving IL66B out "
+                   f"raises the count at FDR < 0.05 from {lh['none']} to {lh['IL66B']} (other hold-outs {min(others)}–{max(others)}): "
+                   f"the host difference is mostly NL70B and NL71B against the IL tumors. No gene-set test yet. DESeq2{C('love')}. "
+                   f"Tumor vs rat-brain control: {hs['tumour_vs_control_sig']:,} genes differ."))
     notes(s, ["Backup, preliminary; show only if asked about the host. Solid: every gene that falls, falls in all three recurrences "
               "(Mmp13 most, about 40-fold; red-cell transcripts; Fap, Lrrc15). Weak: the rise in interferon and lymphocyte genes comes "
               "from NL70B and NL71B; " + ", ".join(weak) + " barely move in IL66B, and NL70B/NL71B are the only NL-prefixed tumors, "
               "so a batch or cohort difference cannot be excluded. The host is the athymic RNU/RNU rat: do not describe a T-cell response. "
               f"At FDR < 0.05 alone there are {hs['sig']} genes ({hs['up']} up, {hs['down']} down), including an rRNA, 7SL and snoRNA loci. "
               "Rat reads are the xengsort host bin; nf-core/rnaseq 3.22.2 on mRatBN7.2 (Ensembl 110); nf-core/differentialabundance DESeq2 "
-              "(the run stopped after DESeq2, so no gene-set test yet; a single-contrast rerun with GSEA and a leave-one-out are on the grid)."])
+              "(the run stopped after DESeq2, so no gene-set test yet). Leave-one-tumour-out (loo_separation.R): without IL66B the host "
+              f"count rises to {hs['loo_host']['IL66B']}; the tumor side does the same ({hs['loo_human']['none']} to "
+              f"{hs['loo_human']['IL66B']}), so IL66B is the recurrence that looks most like a primary in both species (it is also the "
+              "library-QC outlier). What the IL/NL prefixes mark is not recorded in any document we have."])
     C.line()
 
 

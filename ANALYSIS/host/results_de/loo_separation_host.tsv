@@ -1,0 +1,8 @@
+reads	held_out	n	genes_tested	padj05	padj05_fc1.5	pc1_var	pc2_var	silhouette_pc12	pc1_splits_groups	ward_k2_recovers_groups
+host	none	6	16856	38	38	57.9	20	0.089	FALSE	FALSE
+host	IL67B	5	16777	33	33	53.6	24.2	0.045	FALSE	FALSE
+host	IL68B	5	16756	27	27	59.8	21.1	-0.114	FALSE	FALSE
+host	IL69B	5	16812	29	29	66.6	20.6	0.122	FALSE	FALSE
+host	IL66B	5	16632	424	424	56.2	22.8	0.45	TRUE	FALSE
+host	NL70B	5	16727	48	48	64	26	0.061	FALSE	FALSE
+host	NL71B	5	16490	25	25	65.8	23.2	0.032	FALSE	FALSE
