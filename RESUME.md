@@ -4,6 +4,23 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 12:25 EDT (grid clock): PENDING GRID JOBS: host reads, IL66B hold-out, stem-cell drug screen
+
+| job | what | ETA | output |
+|---|---|---|---|
+| 40467892 (array 2-10) | host-only reads: first N_host records of each `*_rat` file (checks: counts + first `both` read ID) | ~12:30 | `/rs/rs_grp_oschome/go2432/u251_host/fastq/` |
+| 40467893 | nf-core/rnaseq 3.22.2 star_salmon on rat (Ensembl 110), 9 in-vivo samples | ~16:00-17:00 | `/rs/.../u251_host/results_rnaseq/` |
+| 40467929 | nf-core/differentialabundance on rat: Recurrent vs Primary; Tumour vs Control | +1 h after rnaseq | `/rs/.../u251_host/results_de/` |
+| 40467930 | leave-one-tumour-out separation on host counts | +10 min after rnaseq | `ANALYSIS/holdout_separation/loo_separation_host.tsv` |
+| 40467923 / 24 / 25 | IL66B held out: DE -> R figure -> drug chain + compare.py (control arm copied from holdout_IL68B) | ~14:30 | `ANALYSIS/holdout_IL66B/COMPARISON.md` |
+| 40467921 | stem-cell (Varn) targeted drug screen, S1 ORA + S2 recurrence GSEA, ChEMBL + ADMET-AI | ~13:30 | `ANALYSIS/gsc_drugs/results/` |
+| 40467819_5 | CIBERSORT v1.04, Varn 12-class | ~13:00-14:30 | `ANALYSIS/cibersort/results/v104/` |
+
+Not yet submitted: host CIBERSORT (host_deconv_prep.py -> run_v104.sbatch with JOBS=results/v104_host_jobs.txt) waits
+for the rat TPM and for the reference-fetch workflow (Zhang 2014, Bowman 2016, seq-ImmuCC, rat/mouse->human 1:1).
+Human-read leave-one-out (done): IL66B out separates best (349 genes at padj < 0.05 vs 102; silhouette 0.43 vs 0.22);
+IL68B out loses the PC1 split. Post hoc.
+
 ## 2026-09-26 08:20 EDT (grid clock): IL68B held out, full pipeline DONE (`ANALYSIS/holdout_IL68B/COMPARISON.md`)
 
 Jobs 40467314 (DE), 40467315 (R figure), 40467509 (drug chain; 40467316 failed building the Python environment:
