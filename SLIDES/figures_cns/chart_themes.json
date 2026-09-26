@@ -1,0 +1,90 @@
+[
+ {
+  "group": "growth signalling",
+  "label": "ribosome biogenesis",
+  "set": "GOBP_RIBOSOME_BIOGENESIS",
+  "nes": -1.6189523,
+  "p": 0.053359684,
+  "q": 0.74530923
+ },
+ {
+  "group": "growth signalling",
+  "label": "MYC",
+  "set": "HALLMARK_MYC_TARGETS_V1",
+  "nes": -1.2891024,
+  "p": 0.14770459,
+  "q": 0.6169168
+ },
+ {
+  "group": "growth signalling",
+  "label": "mTORC1",
+  "set": "HALLMARK_MTORC1_SIGNALING",
+  "nes": -1.4551634,
+  "p": 0.06477733,
+  "q": 0.5999317
+ },
+ {
+  "group": "glycolysis",
+  "label": "Hallmark",
+  "set": "HALLMARK_GLYCOLYSIS",
+  "nes": -1.5695281,
+  "p": 0.054580897,
+  "q": 0.66631925
+ },
+ {
+  "group": "glycolysis",
+  "label": "Reactome",
+  "set": "REACTOME_GLYCOLYSIS",
+  "nes": -1.6082072,
+  "p": 0.028199567,
+  "q": 0.74195576
+ },
+ {
+  "group": "glycolysis",
+  "label": "KEGG",
+  "set": "KEGG_GLYCOLYSIS_GLUCONEOGENESIS",
+  "nes": -1.6673731,
+  "p": 0.025917927,
+  "q": 0.9205212
+ },
+ {
+  "group": "respiration",
+  "label": "Hallmark OXPHOS",
+  "set": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+  "nes": -1.4539582,
+  "p": 0.06396589,
+  "q": 0.6002231
+ },
+ {
+  "group": "respiration",
+  "label": "KEGG OXPHOS",
+  "set": "KEGG_OXIDATIVE_PHOSPHORYLATION",
+  "nes": 1.2019405,
+  "p": 0.1889313,
+  "q": 0.6551872
+ },
+ {
+  "group": "respiration",
+  "label": "Reactome ETC",
+  "set": "REACTOME_RESPIRATORY_ELECTRON_TRANSPORT",
+  "nes": 1.2716113,
+  "p": 0.123411976,
+  "q": 0.63925415
+ },
+ {
+  "group": "TCA",
+  "label": "TCA cycle",
+  "set": "REACTOME_CITRIC_ACID_CYCLE_TCA_CYCLE",
+  "nes": -0.6702042,
+  "p": 0.8706697,
+  "q": 0.9440135
+ },
+ {
+  "group": "sterols",
+  "label": "cholesterol synthesis",
+  "set": "REACTOME_CHOLESTEROL_BIOSYNTHESIS",
+  "nes": 1.5054753,
+  "p": 0.027777778,
+  "q": 0.73333913
+ }
+]

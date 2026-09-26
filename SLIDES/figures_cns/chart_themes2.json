@@ -1,0 +1,82 @@
+[
+ {
+  "group": "hypoxia",
+  "label": "HIF1 targets",
+  "set": "HIF1 targets",
+  "nes": -1.79,
+  "p": 0.01635514,
+  "q": 1.0
+ },
+ {
+  "group": "hypoxia",
+  "label": "Buffa metagene",
+  "set": "hypoxia metagene",
+  "nes": -1.79,
+  "p": 0.01146789,
+  "q": 1.0
+ },
+ {
+  "group": "hypoxia",
+  "label": "Hallmark hypoxia",
+  "set": "hypoxia",
+  "nes": -1.48,
+  "p": 0.060851928,
+  "q": 0.62
+ },
+ {
+  "group": "hypoxia",
+  "label": "angio- genesis",
+  "set": "angiogenesis",
+  "nes": -1.47,
+  "p": 0.08986175,
+  "q": 0.611
+ },
+ {
+  "group": "iron, stress",
+  "label": "iron uptake",
+  "set": "iron uptake and transport",
+  "nes": -1.55,
+  "p": 0.038812786,
+  "q": 0.656
+ },
+ {
+  "group": "iron, stress",
+  "label": "senes- cence",
+  "set": "senescence",
+  "nes": -1.62,
+  "p": 0.02536998,
+  "q": 0.755
+ },
+ {
+  "group": "iron, stress",
+  "label": "EMT",
+  "set": "EMT",
+  "nes": -1.4,
+  "p": 0.1030303,
+  "q": 0.613
+ },
+ {
+  "group": "cell cycle",
+  "label": "spindle",
+  "set": "mitotic spindle",
+  "nes": 1.76,
+  "p": 0.004016064,
+  "q": 1.0
+ },
+ {
+  "group": "cell cycle",
+  "label": "G2M",
+  "set": "G2M checkpoint",
+  "nes": 1.71,
+  "p": 0.007677543,
+  "q": 1.0
+ },
+ {
+  "group": "cell cycle",
+  "label": "E2F",
+  "set": "E2F targets",
+  "nes": 1.48,
+  "p": 0.025793651,
+  "q": 0.687
+ }
+]

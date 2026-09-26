@@ -1,0 +1,182 @@
+[
+ {
+  "rank": 1,
+  "rank_unweighted": 1,
+  "drug": "ciclopirox",
+  "score": 3.137234747325821,
+  "nes": -2.261,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 2,
+  "rank_unweighted": 6,
+  "drug": "pentetrazol",
+  "score": 2.705641110607081,
+  "nes": -1.946,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 3,
+  "rank_unweighted": 12,
+  "drug": "primidone",
+  "score": 2.465329859679025,
+  "nes": -1.866,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 4,
+  "rank_unweighted": 10,
+  "drug": "nilutamide",
+  "score": 2.36338947969716,
+  "nes": -1.884,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 5,
+  "rank_unweighted": 16,
+  "drug": "pyrantel",
+  "score": 2.343357660522997,
+  "nes": -1.792,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 6,
+  "rank_unweighted": 20,
+  "drug": "ifosfamide",
+  "score": 2.232182572667675,
+  "nes": -1.728,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 7,
+  "rank_unweighted": 23,
+  "drug": "magnesium",
+  "score": 2.17247030062128,
+  "nes": -1.688,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 8,
+  "rank_unweighted": 27,
+  "drug": "diazepam",
+  "score": 2.084522750056937,
+  "nes": -1.65,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 9,
+  "rank_unweighted": 19,
+  "drug": "dexverapamil",
+  "score": 2.073698055419155,
+  "nes": -1.778,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 10,
+  "rank_unweighted": 25,
+  "drug": "malathion",
+  "score": 2.047032267059309,
+  "nes": -1.662,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 11,
+  "rank_unweighted": 11,
+  "drug": "progesterone",
+  "score": 2.034124711059156,
+  "nes": -1.877,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 12,
+  "rank_unweighted": 36,
+  "drug": "thioridazine",
+  "score": 1.977919111238709,
+  "nes": -1.584,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 13,
+  "rank_unweighted": 43,
+  "drug": "oxygen",
+  "score": 1.92282316500316,
+  "nes": -1.558,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 14,
+  "rank_unweighted": 39,
+  "drug": "astemizole",
+  "score": 1.897105095905732,
+  "nes": -1.565,
+  "both_agree": true,
+  "egg": "in"
+ },
+ {
+  "rank": 15,
+  "rank_unweighted": 33,
+  "drug": "nitrofural",
+  "score": 1.891960810550293,
+  "nes": -1.602,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 16,
+  "rank_unweighted": 13,
+  "drug": "ganciclovir",
+  "score": 1.8824569891598,
+  "nes": -1.848,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 17,
+  "rank_unweighted": 37,
+  "drug": "paroxetine",
+  "score": 1.873027124923308,
+  "nes": -1.581,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 18,
+  "rank_unweighted": 49,
+  "drug": "ozone",
+  "score": 1.856425748755874,
+  "nes": -1.518,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 19,
+  "rank_unweighted": 28,
+  "drug": "trimipramine",
+  "score": 1.790725948592537,
+  "nes": -1.645,
+  "both_agree": false,
+  "egg": "out"
+ },
+ {
+  "rank": 20,
+  "rank_unweighted": 50,
+  "drug": "amiodarone",
+  "score": 1.771017798871587,
+  "nes": -1.51,
+  "both_agree": false,
+  "egg": "out"
+ }
+]

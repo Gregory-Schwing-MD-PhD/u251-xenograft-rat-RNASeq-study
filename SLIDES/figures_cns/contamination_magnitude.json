@@ -1,0 +1,97 @@
+{
+ "m_upper_bound": {
+  "IL67B": 0.1474,
+  "IL68B": 0.1444,
+  "IL69B": 0.1087,
+  "IL66B": 0.2459,
+  "NL70B": 0.1459,
+  "NL71B": 0.166
+ },
+ "median_ratio_tested": 0.27585733920570044,
+ "sets": {
+  "initiation": {
+   "n": 80,
+   "median_ratio": 0.18226806913671456,
+   "observed_mean_lfc": -0.39963440417309026,
+   "mixture_bound_mean_lfc": -0.00933078570483849,
+   "matched_background_mean_lfc": -0.1348235430611908,
+   "excess_over_matched": -0.26481086111189944
+  },
+  "elongation": {
+   "n": 91,
+   "median_ratio": 0.18642562944077826,
+   "observed_mean_lfc": -0.38488095148729434,
+   "mixture_bound_mean_lfc": -0.008529903435987463,
+   "matched_background_mean_lfc": -0.12375142096148121,
+   "excess_over_matched": -0.2611295305258131
+  },
+  "ribosome": {
+   "n": 85,
+   "median_ratio": 0.185840660282087,
+   "observed_mean_lfc": -0.3949451613967529,
+   "mixture_bound_mean_lfc": -0.008973500493398337,
+   "matched_background_mean_lfc": -0.12757120195071975,
+   "excess_over_matched": -0.26737395944603315
+  }
+ },
+ "leave_one_out": {
+  "size_factors": {
+   "IL67B": 1.003572387635222,
+   "IL68B": 0.9072715674478641,
+   "IL69B": 1.5689928912618036,
+   "IL66B": 0.7658156831830096,
+   "NL70B": 1.0066287482333787,
+   "NL71B": 0.9558342129752475
+  },
+  "sets": {
+   "initiation": {
+    "all_six": -0.3982546810695172,
+    "without_IL67B": -0.5280953877495236,
+    "without_IL68B": -0.10560031365193909,
+    "without_IL69B": -0.5194637230253886,
+    "without_IL66B": -0.3883885793035744,
+    "without_NL70B": -0.4044660785779234,
+    "without_NL71B": -0.4042458024857501,
+    "highest_tumour_counts": {
+     "IL68B": 80
+    },
+    "n": 80,
+    "matched_all_six": -0.13364766846286807,
+    "matched_without_IL68B": -0.02898235315967277
+   },
+   "elongation": {
+    "all_six": -0.38352880038591863,
+    "without_IL67B": -0.5091850311797566,
+    "without_IL68B": -0.10432082680796922,
+    "without_IL69B": -0.4978046348806979,
+    "without_IL66B": -0.37398770712826274,
+    "without_NL70B": -0.39215800883134977,
+    "without_NL71B": -0.38718279685655127,
+    "highest_tumour_counts": {
+     "IL68B": 89,
+     "IL69B": 1,
+     "IL66B": 1
+    },
+    "n": 91,
+    "matched_all_six": -0.12256380010032802,
+    "matched_without_IL68B": -0.025839194570417605
+   },
+   "ribosome": {
+    "all_six": -0.39361977168908463,
+    "without_IL67B": -0.5237976632629836,
+    "without_IL68B": -0.10352296880644374,
+    "without_IL69B": -0.512494009672344,
+    "without_IL66B": -0.381398115283962,
+    "without_NL70B": -0.40310919693545877,
+    "without_NL71B": -0.39907021696346817,
+    "highest_tumour_counts": {
+     "IL68B": 85
+    },
+    "n": 85,
+    "matched_all_six": -0.1264015339290752,
+    "matched_without_IL68B": -0.026377469779171957
+   }
+  },
+  "all_tested_without_IL68B": 0.017451181318601454
+ }
+}

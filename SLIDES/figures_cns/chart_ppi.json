@@ -1,0 +1,22 @@
+{
+ "degree": {
+  "COL1A1": 4,
+  "IGFBP3": 4,
+  "COL17A1": 3,
+  "PRELP": 2,
+  "BGN": 5,
+  "LRP1": 2,
+  "GPC3": 2,
+  "CALB1": 1,
+  "RYR2": 3,
+  "HMCN1": 2,
+  "PCLO": 2
+ },
+ "hubs_degree_ge3": [
+  "BGN",
+  "COL17A1",
+  "COL1A1",
+  "IGFBP3",
+  "RYR2"
+ ]
+}

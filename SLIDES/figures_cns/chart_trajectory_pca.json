@@ -1,0 +1,11 @@
+{
+ "n_genes_cpm_ge1": 14110,
+ "pc1": 41.488946437382914,
+ "pc2": 18.13384044818644,
+ "dist_culture_to_tumour_centroid": 45.48325243477073,
+ "dist_primary_to_recurrent_centroid": 21.707479620842058,
+ "ratio": 2.0952802089055416,
+ "pc1_culture": -38.70809912553852,
+ "pc1_primary_mean": 8.719021861498831,
+ "pc1_recurrent_mean": 4.183677847014005
+}

@@ -1,0 +1,313 @@
+{
+ "definition": "detected in rat brain = CPM >= 1 in >= 2 of 3 controls (contamination_bias_per_gene.csv ctrl_detected)",
+ "sets": {
+  "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION": {
+   "n_members": 80,
+   "n_tested": 80,
+   "n_detected": 80,
+   "share_detected": 1.0,
+   "mean_lfc_detected": -0.3996344041730902,
+   "mean_lfc_undetected": null,
+   "baseline": {
+    "mean_lfc": -0.3996344041730902,
+    "median_lfc": -0.3960292119944205,
+    "share_negative": 1.0,
+    "n": 80
+   },
+   "k1": {
+    "mean_lfc": -0.11367556295419065,
+    "median_lfc": -0.10428960265144,
+    "share_negative": 0.8375,
+    "n": 80
+   },
+   "k2": {
+    "mean_lfc": -0.28977428259460625,
+    "median_lfc": -0.309643455237612,
+    "share_negative": 0.95,
+    "n": 80
+   },
+   "manuscript_s2": {
+    "n": 80,
+    "share_negative": 1.0,
+    "mean_lfc": -0.12488839425
+   }
+  },
+  "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION": {
+   "n_members": 91,
+   "n_tested": 91,
+   "n_detected": 91,
+   "share_detected": 1.0,
+   "mean_lfc_detected": -0.3848809514872944,
+   "mean_lfc_undetected": null,
+   "baseline": {
+    "mean_lfc": -0.3848809514872944,
+    "median_lfc": -0.390888004503323,
+    "share_negative": 1.0,
+    "n": 91
+   },
+   "k1": {
+    "mean_lfc": -0.10952141885806095,
+    "median_lfc": -0.1017523351631,
+    "share_negative": 0.8021978021978022,
+    "n": 91
+   },
+   "k2": {
+    "mean_lfc": -0.2849443120224548,
+    "median_lfc": -0.306617081727312,
+    "share_negative": 0.9340659340659341,
+    "n": 91
+   },
+   "manuscript_s2": {
+    "n": 91,
+    "share_negative": 0.989010989010989,
+    "mean_lfc": -0.11890858483516482
+   }
+  },
+  "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY": {
+   "n_members": 99,
+   "n_tested": 99,
+   "n_detected": 99,
+   "share_detected": 1.0,
+   "mean_lfc_detected": -0.3515172925907282,
+   "mean_lfc_undetected": null,
+   "baseline": {
+    "mean_lfc": -0.3515172925907282,
+    "median_lfc": -0.367431635675864,
+    "share_negative": 0.9595959595959596,
+    "n": 99
+   },
+   "k1": {
+    "mean_lfc": -0.10476886828433433,
+    "median_lfc": -0.0948826831228648,
+    "share_negative": 0.7575757575757576,
+    "n": 99
+   },
+   "k2": {
+    "mean_lfc": -0.26465419996126616,
+    "median_lfc": -0.273504788711189,
+    "share_negative": 0.8787878787878788,
+    "n": 99
+   },
+   "manuscript_s2": {
+    "n": 99,
+    "share_negative": 0.9393939393939394,
+    "mean_lfc": -0.1058972608060606
+   }
+  },
+  "KEGG_RIBOSOME": {
+   "n_members": 85,
+   "n_tested": 85,
+   "n_detected": 85,
+   "share_detected": 1.0,
+   "mean_lfc_detected": -0.3949451613967528,
+   "mean_lfc_undetected": null,
+   "baseline": {
+    "mean_lfc": -0.3949451613967528,
+    "median_lfc": -0.395899632240185,
+    "share_negative": 1.0,
+    "n": 85
+   },
+   "k1": {
+    "mean_lfc": -0.11453935982480101,
+    "median_lfc": -0.1017523351631,
+    "share_negative": 0.8235294117647058,
+    "n": 85
+   },
+   "k2": {
+    "mean_lfc": -0.29509855230862203,
+    "median_lfc": -0.312669828747912,
+    "share_negative": 0.9411764705882353,
+    "n": 85
+   },
+   "manuscript_s2": {
+    "n": 85,
+    "share_negative": 1.0,
+    "mean_lfc": -0.12176660482352941
+   }
+  },
+  "REACTOME_SELENOAMINO_ACID_METABOLISM": {
+   "n_members": 112,
+   "n_tested": 103,
+   "n_detected": 96,
+   "share_detected": 0.9320388349514563,
+   "mean_lfc_detected": -0.361309049763326,
+   "mean_lfc_undetected": -0.05401368791887819,
+   "baseline": {
+    "mean_lfc": -0.34042489895836353,
+    "median_lfc": -0.355828082015618,
+    "share_negative": 0.9320388349514563,
+    "n": 103
+   },
+   "k1": {
+    "mean_lfc": -0.09836614871498411,
+    "median_lfc": -0.0948826831228648,
+    "share_negative": 0.7572815533980582,
+    "n": 103
+   },
+   "k2": {
+    "mean_lfc": -0.25523094391977075,
+    "median_lfc": -0.273504788711189,
+    "share_negative": 0.8640776699029126,
+    "n": 103
+   },
+   "manuscript_s2": {
+    "n": 103,
+    "share_negative": 0.941747572815534,
+    "mean_lfc": -0.1053160848524272
+   }
+  },
+  "REACTOME_CELLULAR_RESPONSE_TO_STARVATION": {
+   "n_members": 150,
+   "n_tested": 146,
+   "n_detected": 140,
+   "share_detected": 0.958904109589041,
+   "mean_lfc_detected": -0.2703672223155295,
+   "mean_lfc_undetected": -0.048545718343015354,
+   "baseline": {
+    "mean_lfc": -0.26125127009748095,
+    "median_lfc": -0.326393520646555,
+    "share_negative": 0.8493150684931506,
+    "n": 146
+   },
+   "k1": {
+    "mean_lfc": -0.06158128579555089,
+    "median_lfc": -0.0633021233918866,
+    "share_negative": 0.6643835616438356,
+    "n": 146
+   },
+   "k2": {
+    "mean_lfc": -0.1661843519928753,
+    "median_lfc": -0.2210944616875825,
+    "share_negative": 0.7465753424657534,
+    "n": 146
+   },
+   "manuscript_s2": {
+    "n": 147,
+    "share_negative": 0.8231292517006803,
+    "mean_lfc": -0.07575390735238094
+   }
+  }
+ },
+ "transcriptome": {
+  "n_tested": 14849,
+  "n_detected": 8884,
+  "share_detected": 0.5982894471008149,
+  "mean_lfc_detected": 0.020960119609716936,
+  "mean_lfc_clean": -0.023930223637365185,
+  "median_lfc_detected": 0.01765250691265455,
+  "median_lfc_clean": -0.0556001084694288
+ },
+ "all_genes_mean_lfc": {
+  "baseline": 0.0029271950040973813,
+  "k1": 0.02985650282936063,
+  "k2": 0.01685693276070852
+ },
+ "manuscript_de35": {
+  "n": 35,
+  "n_in_tested": 33,
+  "n_detected": 15
+ },
+ "concordance": [
+  {
+   "setting": "baseline",
+   "n_genes_tested": 14849,
+   "n_sig": 63,
+   "n_sig_up": 37,
+   "n_sig_down": 26,
+   "spearman_lfc_vs_baseline": 1.0,
+   "jaccard_sig_vs_baseline": 1.0,
+   "top20_overlap_vs_baseline": 20,
+   "pri_rec_silhouette": 0.4966,
+   "recommended": NaN
+  },
+  {
+   "setting": "k1",
+   "n_genes_tested": 19385,
+   "n_sig": 384,
+   "n_sig_up": 113,
+   "n_sig_down": 271,
+   "spearman_lfc_vs_baseline": 0.8441,
+   "jaccard_sig_vs_baseline": 0.0068,
+   "top20_overlap_vs_baseline": 3,
+   "pri_rec_silhouette": -0.0891,
+   "recommended": NaN
+  },
+  {
+   "setting": "k2",
+   "n_genes_tested": 19385,
+   "n_sig": 270,
+   "n_sig_up": 101,
+   "n_sig_down": 169,
+   "spearman_lfc_vs_baseline": 0.6963,
+   "jaccard_sig_vs_baseline": 0.0152,
+   "top20_overlap_vs_baseline": 1,
+   "pri_rec_silhouette": 0.1982,
+   "recommended": "*"
+  }
+ ],
+ "graft_pct": [
+  {
+   "sample": "IL64B",
+   "Classification": "Control",
+   "graft_pct": 0.33,
+   "host_pct": 93.59,
+   "both_pct": 4.73
+  },
+  {
+   "sample": "N168B",
+   "Classification": "Control",
+   "graft_pct": 0.55,
+   "host_pct": 93.57,
+   "both_pct": 5.14
+  },
+  {
+   "sample": "N269B",
+   "Classification": "Control",
+   "graft_pct": 4.9,
+   "host_pct": 86.95,
+   "both_pct": 5.67
+  },
+  {
+   "sample": "IL67B",
+   "Classification": "Primary",
+   "graft_pct": 42.52,
+   "host_pct": 48.4,
+   "both_pct": 7.35
+  },
+  {
+   "sample": "IL68B",
+   "Classification": "Primary",
+   "graft_pct": 45.38,
+   "host_pct": 45.37,
+   "both_pct": 7.66
+  },
+  {
+   "sample": "IL69B",
+   "Classification": "Primary",
+   "graft_pct": 64.4,
+   "host_pct": 25.64,
+   "both_pct": 7.85
+  },
+  {
+   "sample": "IL66B",
+   "Classification": "Recurrent",
+   "graft_pct": 29.44,
+   "host_pct": 59.17,
+   "both_pct": 9.6
+  },
+  {
+   "sample": "NL70B",
+   "Classification": "Recurrent",
+   "graft_pct": 42.67,
+   "host_pct": 48.25,
+   "both_pct": 7.29
+  },
+  {
+   "sample": "NL71B",
+   "Classification": "Recurrent",
+   "graft_pct": 33.05,
+   "host_pct": 59.23,
+   "both_pct": 6.58
+  }
+ ]
+}

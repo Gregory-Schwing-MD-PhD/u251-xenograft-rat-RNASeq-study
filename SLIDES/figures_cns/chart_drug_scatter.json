@@ -1,0 +1,42 @@
+{
+ "n_with_phase": 54,
+ "top": "ciclopirox",
+ "strongest_overall": [
+  {
+   "drug": "dimethyloxalylglycine",
+   "absnes": 2.388,
+   "clinic": false,
+   "phase": null
+  },
+  {
+   "drug": "deferoxamine",
+   "absnes": 2.387,
+   "clinic": false,
+   "phase": null
+  },
+  {
+   "drug": "ciclopirox",
+   "absnes": 2.261,
+   "clinic": true,
+   "phase": 4.0
+  },
+  {
+   "drug": "Metformin",
+   "absnes": 2.058,
+   "clinic": true,
+   "phase": 4.0
+  },
+  {
+   "drug": "5109870",
+   "absnes": 2.04,
+   "clinic": false,
+   "phase": null
+  },
+  {
+   "drug": "LY-294002",
+   "absnes": 2.039,
+   "clinic": false,
+   "phase": -1.0
+  }
+ ]
+}
