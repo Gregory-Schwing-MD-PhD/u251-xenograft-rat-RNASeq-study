@@ -92,6 +92,30 @@ loo_h = {r["held_out"]: int(r["padj05"]) for r in csv.DictReader(
     open(ROOT / "ANALYSIS" / "holdout_separation" / "loo_separation_human.tsv"), delimiter="\t")}
 facts["loo_host"] = loo
 facts["loo_human"] = loo_h
+# The pipeline's own Broad GSEA for host_therapy (it finished before the plotting crash; rescued from the work dir)
+BG = ROOT / "ANALYSIS" / "host" / "verify" / "broad_gsea_existing"
+gs = {}
+for side, f in (("up", "host_therapy.combined_rat.gsea_report_for_Recurrent_U2.tsv"),
+                ("down", "host_therapy.combined_rat.gsea_report_for_Primary_U2.tsv")):
+    rows = list(csv.DictReader(open(BG / f), delimiter="\t"))
+    qs = [float(r["FDR q-val"]) for r in rows if r["FDR q-val"] not in ("", "---")]
+    gs[side] = dict(n=len(rows), min_fdr=min(qs), n_fdr25=sum(q < 0.25 for q in qs),
+                    top=[(r["NAME"], float(r["NES"]), float(r["NOM p-val"])) for r in rows[:3]])
+facts["broad_gsea"] = gs
+# Local rerun of the same DESeq2 fits (DESeq2 1.50.2; reproduces the pipeline's 38 genes exactly), ANALYSIS/host/verify/prelim_local
+PL = ROOT / "ANALYSIS" / "host" / "verify" / "prelim_local"
+splits = list(csv.DictReader(open(PL / "r2_relabel_splits.tsv"), delimiter="\t"))
+cnt = sorted(((int(r["padj05"]), r["target"], r["true_split"] == "TRUE") for r in splits), reverse=True)
+true_n = [n for n, _, t in cnt if t][0]
+others = sorted(n for n, _, t in cnt if not t)
+facts["relabel"] = dict(n_splits=len(cnt), true_n=true_n, true_rank=[t for _, _, t in cnt].index(True) + 1,
+                        largest_n=cnt[0][0], largest_target=cnt[0][1], median_others=others[len(others) // 2])
+lg = list(csv.DictReader(open(PL / "r1_loo_genes.tsv"), delimiter="\t"))
+facts["loo_all_six"] = [(r["gene_name"], r["direction"]) for r in lg if r["n_loo_kept"] == "6"]
+lc = list(csv.DictReader(open(PL / "r1_loo_counts.tsv"), delimiter="\t"))
+kept = {r["held_out"]: int(r["of_pipeline_genes_kept_same_sign"]) for r in lc if r["held_out"] != "none"}
+facts["loo_kept_of_38"] = kept
+assert facts["relabel"]["true_n"] == 38 and gs["up"]["n_fdr25"] == 0 and gs["down"]["n_fdr25"] == 0
 assert loo["none"] == 38 and max(loo, key=loo.get) == "IL66B" and loo_h["none"] != loo["none"]
 assert facts["sig"] == 38 and facts["up"] == 15 and facts["down"] == 23 and facts["tested"] == 17345
 assert (facts["sig2"], facts["up2"], facts["down2"]) == (33, 14, 19) and facts["down_all_three"] == len(down)

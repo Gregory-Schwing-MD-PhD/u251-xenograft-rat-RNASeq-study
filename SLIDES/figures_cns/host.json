@@ -64,5 +64,85 @@
   "IL66B": 349,
   "NL70B": 85,
   "NL71B": 58
+ },
+ "broad_gsea": {
+  "up": {
+   "n": 3615,
+   "min_fdr": 0.3321693,
+   "n_fdr25": 0,
+   "top": [
+    [
+     "BEIER_GLIOMA_STEM_CELL_DN",
+     1.9191737,
+     0.004511278
+    ],
+    [
+     "KEGG_ANTIGEN_PROCESSING_AND_PRESENTATION",
+     1.8952149,
+     0.004470939
+    ],
+    [
+     "GOBP_DEFENSE_RESPONSE_TO_GRAM_POSITIVE_BACTERIUM",
+     1.8775728,
+     0.007440476
+    ]
+   ]
+  },
+  "down": {
+   "n": 1228,
+   "min_fdr": 0.8420519,
+   "n_fdr25": 0,
+   "top": [
+    [
+     "KEGG_RIBOSOME",
+     -2.0358887,
+     0.042402826
+    ],
+    [
+     "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION",
+     -2.0292754,
+     0.039215688
+    ],
+    [
+     "GOBP_NEGATIVE_REGULATION_OF_SYNCYTIUM_FORMATION_BY_PLASMA_MEMBRANE_FUSION",
+     -2.0236,
+     0.022364218
+    ]
+   ]
+  }
+ },
+ "relabel": {
+  "n_splits": 10,
+  "true_n": 38,
+  "true_rank": 2,
+  "largest_n": 2752,
+  "largest_target": "IL69B,NL70B,NL71B",
+  "median_others": 9
+ },
+ "loo_all_six": [
+  [
+   "Mmp13",
+   "down"
+  ],
+  [
+   "Ceacam4",
+   "down"
+  ],
+  [
+   "Hbb",
+   "down"
+  ],
+  [
+   "Ocstamp",
+   "up"
+  ]
+ ],
+ "loo_kept_of_38": {
+  "IL67B": 19,
+  "IL68B": 8,
+  "IL69B": 14,
+  "IL66B": 37,
+  "NL70B": 17,
+  "NL71B": 15
  }
 }

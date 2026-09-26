@@ -4,6 +4,47 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 18:44 EDT (grid clock): PENDING host verification for deck backup B7 (rat host DE, Recurrent vs Primary)
+
+| job | what | ETA | output |
+|---|---|---|---|
+| 40475691 | `run_host_verify.sbatch` (reqp/requeue, 4 cpu, 24G, 6h). Step A in the pipeline's own DESeq2 1.34.0 + ashr container: R0 reproduce the 38-gene table; R1 leave one tumour out (6 fits, the 38 genes per fit, Mmp13); R2 all 10 balanced 3-v-3 relabellings; R3 NL70B+NL71B vs the other four, IL66B alone vs primaries, host marker panel; R5 human counts beside rat counts for the 38. Step B: fgsea on every fit's Wald stat (10,000 perms, 15-500, hallmark/KEGG/GO BP/brain separately), relabelling null, fgsea vs the Broad run | ~20:15 | `/rs/rs_grp_oschome/go2432/u251_host/verify/results/` (`summary.json`, `r0_*`..`r5_*`, `r4_gsea_*`), log `verify/logs/verify_40475691.out` |
+| 40475693 | `run_de_therapy.sbatch`: nf-core/differentialabundance 1.5.0, host_therapy only, GSEA on; six-tumour sheet + the original 17,451-gene universe so every input equals the crashed run's | ~19:45 | `/rs/rs_grp_oschome/go2432/u251_host/results_de_therapy/`, `verify/de_therapy_compare.txt` (byte-compare with results_de and the unpublished GSEA) |
+
+- Scripts: local copies in `ANALYSIS/host/verify/` (uncommitted), run from `/rs/.../u251_host/verify/`; grid clone untouched.
+- Found while building: the two-contrast run's Broad GSEA for host_therapy DID finish (exit 0, never published because
+  PLOT_EXPLORATORY crashed): `work_de/9a/6e148a...`, copied to `verify/broad_gsea_existing/`. 4,843 sets, **none at
+  FDR < 0.25 either way** (min FDR 0.33); top nominal: immune/antigen-presentation up, ribosome/translation down.
+- Pipeline lfc column is ashr-shrunk (lfcShrink type ashr, DESeq2 1.34.0); p-values are the unshrunk Wald test's. Model
+  `~ 0 + Classification` with salmon lengths as avgTxLength; filter on all nine samples before the subset.
+- Local dry run (DESeq2 1.50.2, no ashr; grid numbers will differ slightly): same 38 genes (Jaccard 1). Leave-one-out
+  keeps 8-19 of the 38 when a primary or an NL tumour is dropped (37 without IL66B, which gives 398 genes). Relabelling
+  null: the true split ranks 2nd of 10 (38 genes); IL69B+NL70B+NL71B vs the rest gives 2,752, along a myeloid-infiltrate
+  (Ptprc, Cd68, Aif1 high) vs white-matter/neuron axis. NL70B+NL71B vs the other four: 502. The 23 down genes move in
+  all three recurrences (IL66B ~100 % of the NL shift); the 15 up genes are NL-specific (IL66B median ~29 %). fgsea
+  gene sets: every relabelling gives as many or more sets at padj < 0.05 as the true labels.
+- When they finish: read `verify/results/summary.json` and `verify/de_therapy_compare.txt`; B7's footer and notes then
+  need the gene-set line and the relabelling-null line.
+
+## 2026-09-26 evening: host deconvolution (DONE 18:33, nothing pending)
+
+- Jobs: 40473363 tasks 1 (LM22, requeued after preemption) and 2 (Zhang 2014) COMPLETED; task 3 (Bowman 2016) FAILED.
+  Rerun 40475433 (prep) + array 40475461_1-4 all COMPLETED 18:33. Grid work dir
+  `/rs/rs_grp_oschome/go2432/u251_host/deconv_fix/` (scripts/, results/, logs/); grid clone untouched.
+- Bowman failure: permutation draw 169 (seed 42) had no positive weight at any nu, so CoreAlg divided 0 by 0,
+  which.min() of three NaN RMSEs was empty and out[[mn]] stopped the run. About 1 draw in 1,000-1,500 with 4 columns.
+  The signature itself is sound (no NA, no zero-variance rows, kappa 11.6); the deeper problem is that four myeloid
+  columns cannot describe whole brain: real samples fit at r 0.01-0.08 (P 0.21-0.42), controls below 0.
+- Fix (CIBERSORT.R untouched): `ANALYSIS/cibersort/run_v104_guarded.R` + `.sbatch` draws the same null outside
+  CIBERSORT() and records degenerate draws instead of stopping. Reproduces 40473363_1/_2 exactly (fractions, r, RMSE
+  and P, max diff 0). Plus `ANALYSIS/host/build_combined_signature.py`: Zhang non-myeloid (6) + Bowman myeloid (4),
+  1,510 genes, kappa 102.
+- Results: `ANALYSIS/cibersort/results/v104/fractions_v104_host_*.tsv` (4 signatures), 3 v 3 tables in
+  `ANALYSIS/host/host_deconv_summary.tsv` (`summarise_host_deconv.py`). Primaries v recurrences: nothing reaches
+  BH q < 0.1 in any signature. Combined signature: TAM_BMDM 0.16 v 0.33 (Welch p 0.32), driven by NL70B/NL71B (0.43,
+  0.50; IL66B 0.07). Not interpretable: Bowman alone (r <= 0.08), and LM22, which fits the controls at r < 0 (P > 0.9)
+  and puts 7-20 % T cells into tumours in athymic nude rats.
+
 ## 2026-09-26 ~15:45 EDT: drug rematch DONE (40468316), deck slide 9 + B2 updated
 
 `ANALYSIS/drug_rematch/REMATCH.md`: clinical compounds 54 -> 62, both barrier models 13 -> 22 (salt records had inflated TPSA:

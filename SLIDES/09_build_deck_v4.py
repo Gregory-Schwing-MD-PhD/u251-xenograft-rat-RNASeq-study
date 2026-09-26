@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""The CNS 2026 Abstract 418 talk, version 4 (2026-09-26): 13 slides and 4 backups, one story, figures in the forms this
+"""The CNS 2026 Abstract 418 talk, version 4 (2026-09-26): 14 slides and 7 backups, one story, figures in the forms this
 literature uses (Broad GSEA enrichment plot, leading-edge and GSVA heatmaps, PCA, volcano, correlation with a fitted
 line and 95 % band, CIBERSORT stacked fractions, DepMap distributions), 16-18 pt slide text with the detail in the notes.
 
@@ -154,7 +154,7 @@ def build(out: Path):
         "conflicts of interest. Supported by a Henry Ford Health Physician Scientist Award A20050 (I.Y.L.). No commercial support was "
         "received for this analysis. Drug candidates discussed here are computational predictions. None is approved for glioblastoma "
         "and none has been tested in this model.",
-        "Timing: 13 slides in six minutes, about 27 s each; seven backups follow the acknowledgments (B7, the rat host, is preliminary). If running long, shorten slide 4 "
+        "Timing: 14 slides in six minutes, about 25 s each (slide 3, the design, adds 20 s: everything after it runs 10 s later, taken back on slide 5); seven backups follow the acknowledgments (B7, the rat host, is preliminary). If running long, shorten slide 5 "
         "(PCA and volcano) to one sentence."])
     C.line()
 
@@ -209,7 +209,25 @@ def build(out: Path):
               "libraries (Nagaraja 2026, next slide) found cell-cycle, motility and inflammatory genes up in recurrence. What is new here: the reads "
               "are sorted from the host, read gene-set-wide, stress-tested, and taken to a drug. End on the question."])
 
-    # ---- 3 the model and the read sorting
+    # ---- 3 the design (SLIDES/12_design_figure.py; lab sample key and array sheet, ANALYSIS/SAMPLE_KEY.md)
+    s = content_slide(prs, "The design: eight rats, ten RNA libraries")
+    img = FIG / "fig_design.png"
+    w, h = fit(img, R - L, 3700000)
+    picture(s, img, L + (R - L - w) // 2, TOP, w, h)
+    add_text(s, L, TOP + h + 100000, R - L, BOTTOM - (TOP + h + 100000), [
+        "Three primaries (rats 67, 68, 69) are compared with three recurrences (66, 70, 71). Rat 64's sample held almost no "
+        "tumor and rat 65 has no library.",
+        "The two brain controls are the opposite hemispheres of rats 68 and 69, not separate animals."], size=16, gap=6)
+    refs(s, C.line("Nagaraja lab sample key (2023) and methylation-array sample sheet. The sequencing files call rats 70 and 71 "
+                   "NL70B and NL71B; the lab records call them IL-70 and IL-71."))
+    notes(s, ["0:35–0:55  The design, because it is easy to misread. Eight rats, all implanted. Four primaries, never ablated; four "
+              "ablated with LITT and allowed to regrow. We compare three against three: rat 64's primary sample had almost no tumor in it, "
+              "and there is no library for rat 65. The two brain controls come from the other side of the brain of two primary rats, "
+              "68 and 69, so they are not independent animals. The culture is a reference only.",
+              "Why 3 v 3 when Nagaraja 2026 reports 4 v 4: rat 64 (no tumor in the sample) and rat 65 (no library). "
+              "Harvest time after LITT (2 or 4 weeks) for each recurrence is not in the records we have."])
+
+    # ---- 4 the model and the read sorting
     s = content_slide(prs, "A human tumor in a rat brain, so the tumor can be read on its own")
     vs = 3000000
     s.shapes.add_movie(str(FIG / "ablation_512.mp4"), Emu(L), Emu(TOP), Emu(vs), Emu(vs),
@@ -223,21 +241,23 @@ def build(out: Path):
     add_text(s, x2, TOP + h + 150000, R - x2, BOTTOM - (TOP + h + 150000), [
         f"Reads sorted by species{C('xengsort')}: {min(assigned):.0f}–{max(assigned):.0f} % go to one species, {min(both_):.0f}–{max(both_):.0f} % are shared by both "
         f"and kept with the human reads, under {max(unres):.1f} % are unresolved.",
-        [(f"Recurrent tumors are less human on average ({sum(rec) / 3:.0f} % against {sum(pri) / 3:.0f} %; ranges overlap): a confound, tested on slide 7.", BLUE)]],
+        [(f"Recurrent tumors are less human on average ({sum(rec) / 3:.0f} % against {sum(pri) / 3:.0f} %; ranges overlap): a confound, tested on slide 8.", BLUE)]],
         size=16, gap=10)
     C.only("nag26")
     refs(s, C.line(DESIGN))
-    notes(s, ["0:35–1:00  The model the Henry Ford group built (Nagaraja 2026): U251N in the athymic rat, MRI-guided LITT. The design is unpaired: "
-              "primary tumors come from animals that were not ablated, recurrent tumors from other animals after ablation and regrowth, three per arm. "
+    notes(s, ["0:55–1:10  The model the Henry Ford group built (Nagaraja 2026): U251N in the athymic rat, MRI-guided LITT (design on the previous slide). "
               "The graft is human and the host is rat, so xengsort sorts every read by species before anything is counted; human reads plus the "
               "shared reads enter the analysis.",
               "If asked why three per arm when Nagaraja 2026 describes four and four: the libraries come from animals numbered 64 to 71; IL64B's "
-              "graft failed (it is used only as a control) and there is no library for animal 65 in the data.",
+              "sample holds almost no tumor (it is used only as a control) and there is no library for animal 65 (a recurrence in the lab's key).",
               "Numbers to reconcile before the talk: the J Neurosurg paper reports four per arm for RNA-seq; this analysis has three per arm plus "
-              "IL64B, a primary that did not engraft and serves as a control. Ask Dr. Nagaraja what happened to the fourth recurrent library.",
-              "The rat-brain controls went through the same pipeline; one (N269B) carries human Y-linked reads, so it holds some tumor cells."])
+              "IL64B, recorded by the lab as a primary but with almost no tumor in its sample (0.3 % human reads), used as a control. The lab's "
+              "sample key lists IL-65 as the fourth recurrence; no library for it exists in the data.",
+              "The two other controls are the contralateral hemispheres of tumor-bearing rats 68 and 69 (lab key: 'Contralateral'; array "
+              "sheet: '69B control N2'), not separate animals. N269B, from rat 69, the most tumor-rich animal, carries human Y-linked reads, "
+              "so it holds some tumor cells."])
 
-    # ---- 4 PCA + volcano
+    # ---- 5 PCA + volcano
     s = content_slide(prs, "The arms separate modestly, and few single genes move")
     a, b = FIG / "fig_pca.png", FIG / "chart_volcano.png"
     H = 3700000
@@ -250,12 +270,13 @@ def build(out: Path):
         f"DESeq2{C('love')}: {F['de_total']} genes at FDR < 0.05 and two-fold. So we read whole programs."], size=16, gap=0)
     refs(s, C.line(f"PCA of the 500 most variable rlog genes (DESeq2 plotPCA); PERMANOVA on all genes R² {pvn['r2']:.2f}, p = {pvn['p']:.2f}, the smallest 3 v 3 allows; "
                    "Wald test with ashr shrinkage. " + DESIGN))
-    notes(s, ["1:00–1:25  Global structure in one breath. PC1 carries " + f"{100 * pca['var_pc1']:.0f} % of the variance in the 500 genes; the recurrent tumors sit to the right, "
+    notes(s, ["Printed abstract: PC1 41.8 % / PC2 26.2 % came from the May figure script (vst); this plot uses rlog (35 % / 25 %). PERMANOVA R2 0.278 and 35 genes (23 up, 12 down) are unchanged; the abstract omits p = 0.10. Its hubs (BGN, COL1A1, IGFBP3, CALB1): only 11 of the 35 genes connect, and CALB1 has one interaction (SLIDES/ABSTRACT_VS_TALK.md).",
+              "1:00–1:25  Global structure in one breath. PC1 carries " + f"{100 * pca['var_pc1']:.0f} % of the variance in the 500 genes; the recurrent tumors sit to the right, "
               f"the closest (IL66B) {pca['margin_pc1']:.1f} units past the nearest primary on a {pca['pc1_range']:.0f}-unit axis. PC1 also splits the NL animals from the IL "
               f"animals (R² {pca['r2_pc1_prefix']:.2f} against {pca['r2_pc1_arm']:.2f} for arm): find out what the prefix denotes before the talk. With three per arm, ten "
               "splits exist, so PERMANOVA cannot go below 0.10. Only 35 genes pass, mostly readthrough and non-coding loci, most of them zero in one arm."])
 
-    # ---- 5 GSEA + leading edge
+    # ---- 6 GSEA + leading edge
     s = content_slide(prs, "After LITT, the regrown tumor turns its ribosomal-protein genes down")
     a, b = FIG / "fig_gsea_ti.png", FIG / "fig_le_heatmap.png"
     H = 3900000
@@ -273,17 +294,18 @@ def build(out: Path):
                    "leading edge = core-enrichment genes, rlog row z-scores; n = 3 per arm."))
     assert g["ti_all_ribosomal_protein"] and all(v[0] >= 83 for v in g["rp_in_other_leading_sets"].values())
     ls_ = g["log_scale"]
-    notes(s, ["1:25–2:05  The core result. Say 'ribosomal-protein genes', not 'translation initiation': the KEGG MEDICUS set of that name is 80 of 80 "
+    notes(s, ["Printed abstract: elongation NES -3.17, FDR 1.6e-26 came from a first-pass gene-permutation test (clusterProfiler/fgsea, 25 May report). The pipeline's Broad GSEA (gene-set permutation) gives the same direction, NES near -2, and one set at q = 0.022. Its 'integrated stress' sets are the same ribosomal-protein genes (85 of 99 in GCN2). If asked: 'the abstract's FDR came from a first-pass test that treats genes as independent; the permutation test gives the same direction'.",
+              "1:25–2:05  The core result. Say 'ribosomal-protein genes', not 'translation initiation': the KEGG MEDICUS set of that name is 80 of 80 "
               "cytosolic ribosomal-protein genes (RPL, RPS, FAU, UBA52) with no initiation factor; the other five sets are the same block counted again "
               f"(their leading edges share {g['leading_edges']['shared_by_all_six']} genes, union {g['leading_edges']['union']});. "
-              "Whether translation itself falls is the puromycin / polysome experiment on slide 12.",
+              "Whether translation itself falls is the puromycin / polysome experiment on slide 13.",
               "Left, the standard GSEA plot: genes ranked from higher in recurrent (left) to higher in primary (right); the 80 genes are the ticks, "
               f"NES {m(g['NES'])}. The ranking is a difference of means on counts, which weights abundant genes; on a log-scale ranking all 80 are "
               f"still in the lower half and {100 * ls_['share_in_last_6_6pct']:.0f} % in the last 6.6 %, so the direction does not depend on the metric.",
               "Right, the leading edge per tumor. Say it plainly: IL68B is high on every gene, the other two primaries sit near the middle, and the "
               "three recurrences sit below them on average. The direction is shared; the size leans on one tumor. Next slide asks whether it survives without it."])
 
-    # ---- 6 leave one out
+    # ---- 7 leave one out
     s = content_slide(prs, "Leave any tumor out: the direction holds, the FDR does not")
     nq = int((filt.fdr_q < 0.05).sum())
     fig_and_text(s, FIG / "fig_loo_heatmap.png", [
@@ -294,12 +316,13 @@ def build(out: Path):
         img_w=6500000, size=16, gap=12, text_top=60000)
     refs(s, C.line("ANALYSIS/gsea_leave_one_out: the published command, gene filter re-applied after each drop; seed 1234 reproduces the published "
                    "report exactly; blue cells q < 0.05; NES range over the five seeds."))
-    notes(s, ["2:05–2:35  Robustness, stated honestly. The direction (NES) never moves. FDR is fragile: with gene-set permutation and six tumors, q "
+    notes(s, ["Printed abstract: its FDR is not a Broad GSEA q; here q runs 0.022-0.31 with all six tumors, depending on the seed alone.",
+              "2:05–2:35  Robustness, stated honestly. The direction (NES) never moves. FDR is fragile: with gene-set permutation and six tumors, q "
               "depends on the random seed. With the filter re-applied, q never clears 0.05 without IL67B, IL69B or IL66B, and always does without "
               f"IL68B or NL70B. Six further runs skip the re-filtering (seed 1234): q < 0.05 in {int((nof.fdr_q < 0.05).sum())} of 6, including without IL66B "
               f"(q = {q66_nof:.3f}). Without IL68B the set is no longer the top-ranked one; a stromal set leads."])
 
-    # ---- 7 purity
+    # ---- 8 purity
     s = content_slide(prs, "Recurrence after LITT, or less tumor in the sample?")
     fig_top(s, FIG / "fig_graft_corr.png", [
         f"Both scores rise with the human share (r = {gc[TIK]['r']:.2f} and {gc['Neftel_AC']['r']:.2f}; P = {gc[TIK]['p']:.2f}, {gc['Neftel_AC']['p']:.2f}), and arm and "
@@ -320,7 +343,7 @@ def build(out: Path):
               "tumor cells) about +0.001 (graft_relation/SUMMARY.md), so under 0.01 log2 either way. A second estimate from the controls' shared-read "
               "ratio puts the worst case near 0.05 (ANALYSIS/human_cohorts/PLAN.md), an eighth of the fall. Backup B1."])
 
-    # ---- 8 subtypes
+    # ---- 9 subtypes
     s = content_slide(prs, "Of ten published subtype signatures, only the astrocyte-like score separates the arms")
     fig_and_text(s, FIG / "fig_subtype_heatmap.png", [
         f"Neftel{C('neftel')} and Garofano{C('garofano')} signatures, scored per tumor by GSVA{C('hanzelmann')}.",
@@ -330,7 +353,8 @@ def build(out: Path):
         f"CIBERSORT{C('newman')} with the Neftel reference fits these cells poorly (r {min(fitr):.2f}–{max(fitr):.2f}; backup B3)."],
         img_w=6600000, size=15, gap=10, text_top=40000)
     refs(s, C.line("GSVA on variance-stabilised counts; two-sample t per signature, Benjamini–Hochberg across the ten. " + DESIGN))
-    notes(s, ["3:10–3:40  One state transition: the astrocyte-like program score falls, and every recurrent tumor is below every primary. Call it the "
+    notes(s, ["Printed abstract: 'toward Garofano mitochondrial, away from AC/NPC' came from May mean z-scores of hand-picked 5-6-gene lists (mitochondrial = CS, ACO2, IDH2, IDH3A, OGDH, SDHA), not GSVA. With the published signatures the mitochondrial score falls (not significant); AC-like agrees; NPC does not move. If asked: 'the mitochondrial shift did not survive the published signatures; the astrocyte-like fall did'.",
+              "3:10–3:40  One state transition: the astrocyte-like program score falls, and every recurrent tumor is below every primary. Call it the "
               "strongest group difference and exploratory: 3 v 3 cannot give an exact permutation p below 0.10.",
               f"Adjusted for human share, P = {ac['p_adj_graft']:.3f} on these counts; across other normalised inputs 0.024 to 0.12, and the adjustment leans on "
               "IL69B (graft_relation/SUMMARY.md). The manuscript's run scored TPM (p = 0.007, q = 0.075); 7SK/7SL/Y RNA and rRNA take 40 to 65 % of TPM and "
@@ -338,7 +362,7 @@ def build(out: Path):
               f"CIBERSORT puts AC slightly higher in recurrence ({rb['deconv']['AC_primary']:.2f} to {rb['deconv']['AC_recurrent']:.2f}), the opposite direction; at this fit neither is a composition.",
               f"Whole pipeline without IL68B or IL66B (TPM run, from {ho['all_six']['AC_p']:.3f} with all six): AC p = {ho['IL68B']['AC_p']:.3f} and {ho['IL66B']['AC_p']:.3f} (backup B2)."])
 
-    # ---- 9 the drug (exact-name ChEMBL matching, ANALYSIS/drug_rematch; supersedes the first-search-hit ranking of S12)
+    # ---- 10 the drug (exact-name ChEMBL matching, ANALYSIS/drug_rematch; supersedes the first-search-hit ranking of S12)
     RM = ROOT / "ANALYSIS" / "drug_rematch"
     rmj = json.load(open(RM / "rematch.json", encoding="utf-8"))
     ex, oldm = rmj["published"]["exact matching"], rmj["published"]["old matching"]
@@ -358,14 +382,14 @@ def build(out: Path):
     table(s, L, TOP + 50000, widths, rows, size=17, bold_rows=(1,), row_h=470000)
     tx = L + sum(widths) + GAP
     add_text(s, tx, TOP + 50000, R - tx, BOTTOM - TOP, [
-        f"DSigDB drug signatures{C('yoo')} against the recurrence ranking: the 100 most opposing name {fun['n_compounds']} compounds ({n_fdr05} at FDR < 0.05); "
+        f"DSigDB drug signatures{C('yoo')} against the recurrence ranking, used as a ranking: the 100 most opposing name {fun['n_compounds']} compounds; "
         f"{ex['n_clinical']} have a clinical-phase ChEMBL record; {ex['n_both_agree']} pass both barrier models{C('swanson', 'daina')}.",
         f"Ciclopirox ranks first with the barrier weight (second without it); first without IL68B, third without IL66B. Another group's reversal screen also nominated it.{C('sun')}",
         f"Approved as a topical antifungal; an oral form completed phase 1 in hematologic cancer.{C('minden')}"],
         size=15, gap=12)
     add_text(s, L, TOP + 50000 + 470000 * len(rows) + 150000, sum(widths), 1200000, [
         f"Without the barrier weight, deferoxamine, another approved iron chelator, leads (NES {m(dw['NES'])}); the barrier models disagree on it "
-        f"(ADMET-AI {dw['BBB_Martins']:.2f}, borderline; BOILED-Egg, no).",
+        f"(ADMET-AI {dw['BBB_Martins']:.2f}, borderline; BOILED-Egg, no). Ranks 2–5 share one ribosomal-protein gene set: one signal, not four candidates.",
         [("Computational predictions: nothing here has been dosed in this model.", BLUE)]], size=15, gap=8)
     refs(s, C.line(f"Rank among the {ex['n_clinical']} compounds with a clinical-phase ChEMBL record (exact-name matching, audited) by |NES|^1.5 × ADMET-AI BBB "
                    "probability; BBB models ADMET-AI and BOILED-Egg; supersedes Online Resource 1, S12."))
@@ -383,9 +407,19 @@ def build(out: Path):
               f"New entries to the top twenty since the prior-art audit (backup B4): {', '.join(entered20) if entered20 else 'none'}.",
               "Caveats if asked: scored per tumor by GSVA, the ciclopirox gene set does not separate the arms (P = 0.89), so the rank rests on the "
               "whole-list ordering; its DSigDB sets hold at most one ribosomal-protein gene, so the rank is not the ribosomal block again. Brain "
-              "pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction."])
+              "pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction.",
+              "What carries ciclopirox's rank: its induced genes are HIF/hypoxia targets (21 of 36 leading-edge genes are hallmark hypoxia; "
+              "without them NES -1.57, p 0.005). Ranks 2-5 (pentetrazol, nilutamide, primidone, pyrantel) share one leading edge of "
+              "ribosomal-protein genes plus PGK1 and ENO1 (pairwise Jaccard 0.55-0.86): the ribosomal block counted four times "
+              "(ANALYSIS/gsc_drugs/REVIEW_2026-09-26.md).",
+              "Stem-cell programs: restricted to six published glioma stem-cell gene sets, ciclopirox's induced genes fall in recurrence only "
+              "within the radial-glia-like program (Bhaduri 2020; first of 2,212 drug sets, NES -2.08), and those genes are hypoxia targets, "
+              "not stem-cell genes. No drug opposed recurrence inside the stem-specific sets. Consistent with this slide, not independent of it.",
+              "The printed abstract: its 3.40 for ciclopirox is this enrichment with a rule-of-thumb barrier score capped at 1.0; with ADMET-AI "
+              "it is 3.27 and still first. DMOG and LY-294002, named in the abstract, have no clinical-phase record and drop out. The drug NES "
+              "come from gene-permutation GSEA, so they are quoted as a ranking, not with FDRs (SLIDES/ABSTRACT_VS_TALK.md)."])
 
-    # ---- 10 why ciclopirox
+    # ---- 11 why ciclopirox
     s = content_slide(prs, "Why ciclopirox: U-251 is past the threshold on the axis it inhibits")
     dd_ = dg["DOHH"]
     fig_top(s, FIG / "fig_depmap.png", [
@@ -404,7 +438,7 @@ def build(out: Path):
               "Barrier window, from Cleary 2026 in SB28 mouse glioma: tight junctions open for 7 days up to 100 µm from the ablation; transcytosis "
               "peaks at day 14 and is back to baseline by day 21. No human post-LITT time course exists."])
 
-    # ---- 11 what this means
+    # ---- 12 what this means
     s = content_slide(prs, "What this means")
     add_text(s, L, TOP + 100000, R - L, 3000000, [
         "After LITT, the regrown tumor carries a program of its own: lower ribosomal-protein genes and a lower astrocyte-like score.",
@@ -414,9 +448,10 @@ def build(out: Path):
     navy_bar(s, L, TOP + 3350000, R - L, BOTTOM - (TOP + 3350000),
              "A hypothesis with a mechanism and a window, from six tumors: worth the experiments on the next slide.", size=19)
     refs(s, C.line("Evidence status: one cell line (U251N) in one rat xenograft model, n = 3 per arm; drug candidates are computational predictions; GEO GSE338105."))
-    notes(s, ["4:45–5:15  Three sentences, then the bar. Do not add numbers here."])
+    notes(s, ["Say, if time allows: 'Three things differ from the printed abstract: lower ribosomal-protein genes rather than translational shutdown; the mitochondrial shift did not survive the published signatures; and of its three drugs only ciclopirox is clinically available.'",
+              "4:45–5:15  Three sentences, then the bar. Do not add numbers here."])
 
-    # ---- 12 limitations -> experiments
+    # ---- 13 limitations -> experiments
     s = content_slide(prs, "Limitations, and the experiments that answer them")
     half = (R - L - GAP) // 2
     left = ["Limitations",
@@ -433,12 +468,13 @@ def build(out: Path):
         head_box(s, x, TOP, half, 460000, block[0], [], size=22)
         add_text(s, x, TOP + 620000, half, BOTTOM - TOP - 620000, block[1:], size=17, gap=12)
     refs(s, C.line(DESIGN))
-    notes(s, ["5:15–5:45  Say the limitations as the reason for each experiment. GLASS recurrences follow standard therapy, not LITT, so it tests "
+    notes(s, ["Printed abstract: its 'translational shutdown' is what the puromycin / polysome experiment tests; it has not been shown.",
+              "5:15–5:45  Say the limitations as the reason for each experiment. GLASS recurrences follow standard therapy, not LITT, so it tests "
               "whether the signature accompanies recurrence in general. Bulk RNA: the margin is inferred, not isolated. Methylation on the same six "
               "tumors (EPIC, 866,238 probes) found no probe past FDR; with purity and arm confounded it cannot separate the two. If asked: host (rat) "
               "reads are being analysed separately for the microenvironment; not in this talk."])
 
-    # ---- 13 acknowledgments
+    # ---- 14 acknowledgments
     s = content_slide(prs, "Acknowledgments and data availability")
     add_text(s, L, TOP, 6300000, BOTTOM - TOP, [
         "Co-authors Tavarekere N. Nagaraja, PhD, Indrani Datta, DHI, and Ian Y. Lee, MD, Hermelin Brain Tumor Center, Henry Ford Health: the model, the ablations, the tissue and the study design.",
@@ -457,7 +493,8 @@ def build(out: Path):
         f"Without IL68B the fall is {m(mag['leave_one_out']['sets']['initiation']['without_IL68B'])}."],
         img_w=6600000, size=16, gap=12, text_top=60000)
     refs(s, C.line(f"RUVSeq{C('risso')} factors from the rat-brain controls (k = 2) also separate the arms, so the adjustment removes part of the arm difference."))
-    notes(s, ["Backup. Mean log2 fold change (recurrent vs primary) of each set under each analysis; the bound is a model ceiling, not an observed change."])
+    notes(s, ["If the printed abstract is the docx version: its claim that contamination 'would bias ribosomal genes upward' does not match this bound. The size argument holds (about 0.01 log2); the sign is set by N269B, the contralateral hemisphere of rat 69 that holds tumor cells (-0.01 with all three controls, +0.001 without it).",
+              "Backup. Mean log2 fold change (recurrent vs primary) of each set under each analysis; the bound is a model ceiling, not an observed change."])
 
     s = content_slide(prs, "Backup B2. The whole pipeline re-run without one tumor")
     rows = [["", "DE genes", "Ribosomal-protein set q", "Ciclopirox rank (weighted / not)", "AC-like change", "AC-like p"]]
@@ -493,7 +530,7 @@ def build(out: Path):
     picture(s, img, L + (R - L - w) // 2, TOP, w, h)
     refs(s, C.line(f"Tier A: in vivo or clinical glioma evidence (ciclopirox{C('su')}); B: in vitro or contested; C: none, failed or not a therapy. PubMed per compound."))
     notes(s, ["Backup. Prior-art audit of the top twenty of the 54 in the September ranking (S15); the exact-name rerun changes the top twenty "
-              "(see slide 9 notes), so new entrants have no audit yet. Known inconsistency to fix in the manuscript: "
+              "(see slide 10 notes), so new entrants have no audit yet. Known inconsistency to fix in the manuscript: "
               "paroxetine and amiodarone have in vivo evidence but sit in B; diazepam's evidence is contested but sits in C."])
 
     s = content_slide(prs, "Backup B5. Sample-to-sample distances")
@@ -513,37 +550,51 @@ def build(out: Path):
     notes(s, ["Backup. The standard GSEA summary: eight strongest sets each way."])
     C.line()
 
-    hs = J("host.json")                                     # SLIDES/11_host_figure.py, from ANALYSIS/host/results_de
+    hs = J("host.json")                                     # SLIDES/11_host_figure.py, from ANALYSIS/host/results_de + verify/
     assert hs["sig2"] == hs["up2"] + hs["down2"] and hs["down_all_three"] == hs["down"]
     assert hs["human_MMP13_tumour_max"] < hs["rat_Mmp13_primary_min"]          # raw reads on both sides
     weak = hs["il66b_weak_immune"]
+    rl, bg, lh = hs["relabel"], hs["broad_gsea"], hs["loo_host"]
+    robust = hs["loo_all_six"]
+    rob_dn = [g for g, d in robust if d == "down"]; rob_up = [g for g, d in robust if d == "up"]
+    kept = [v for k, v in hs["loo_kept_of_38"].items() if k != "IL66B"]
+    n_sets = bg["up"]["n"] + bg["down"]["n"]
+    min_q = min(bg["up"]["min_fdr"], bg["down"]["min_fdr"])
+    big = rl["largest_target"].replace("IL69B", "69").replace("NL70B", "70").replace("NL71B", "71").replace(",", ", ")
     s = content_slide(prs, "Backup B7. The rat host tissue in recurrence (preliminary)")
     fig_and_text(s, FIG / "fig_host_volcano.png", [
-        f"Rat reads only, same alignment and DESeq2 as the tumor: {hs['pc_m_min']:.0f}–{hs['pc_m_max']:.0f} million protein-coding "
-        f"counts per tumor; {hs['tested']:,} genes tested.",
-        f"Recurrent vs primary, 3 v 3, the tumor's rule (FDR < 0.05 and two-fold): {hs['sig2']} genes, {hs['down2']} down and {hs['up2']} up.",
-        f"Down in all three recurrences: red-cell transcripts (Hbb, Hba-a1, Alas2) and fibroblast/matrix genes (Mmp13 "
-        f"{hs['mmp13_fold']:.0f}-fold, Fap, Lrrc15). Not human reads: human MMP13 at most {hs['human_MMP13_tumour_max']} reads "
-        f"per tumor, rat Mmp13 at least {hs['rat_Mmp13_primary_min']} in each primary.",
-        "Up mostly in NL70B and NL71B, the only NL-prefixed tumors (IL66B barely): interferon-induced (Cxcl10, Batf2) and "
-        "lymphocyte genes (Il2ra, Slamf6, Ighm), in an athymic host."],
+        f"Rat reads only, 3 v 3, the tumor's rule (FDR < 0.05 and two-fold): {hs['sig2']} genes, {hs['down2']} down and {hs['up2']} up.",
+        f"Holds when any tumor is left out: {', '.join(rob_dn)} down (Mmp13 about {hs['mmp13_fold']:.0f}-fold), {', '.join(rob_up)} up. "
+        f"Not human reads: human MMP13 at most {hs['human_MMP13_tumour_max']} reads per tumor.",
+        f"The rest is unstable: leaving out one tumor keeps {min(kept)}–{max(kept)} of the {hs['sig']}; no gene set passes FDR 0.25 "
+        f"({n_sets:,} sets, lowest {min_q:.2f}).",
+        f"The true grouping ranks {rl['true_rank']} of the {rl['n_splits']} possible 3 v 3 splits; the largest (rats {big} against the rest, "
+        f"{rl['largest_n']:,} genes) follows immune infiltration, not treatment. The interferon/lymphocyte rise comes from rats 70 and 71."],
         img_w=6400000, size=14, gap=8, text_top=20000)
-    lh = hs["loo_host"]
-    others = [v for k, v in lh.items() if k not in ("none", "IL66B")]
-    refs(s, C.line(f"Preliminary: different rats per arm; LITT, time and the ablation wound cannot be separated. Leaving IL66B out "
-                   f"raises the count at FDR < 0.05 from {lh['none']} to {lh['IL66B']} (other hold-outs {min(others)}–{max(others)}): "
-                   f"the host difference is mostly NL70B and NL71B against the IL tumors. No gene-set test yet. DESeq2{C('love')}. "
-                   f"Tumor vs rat-brain control: {hs['tumour_vs_control_sig']:,} genes differ."))
-    notes(s, ["Backup, preliminary; show only if asked about the host. Solid: every gene that falls, falls in all three recurrences "
-              "(Mmp13 most, about 40-fold; red-cell transcripts; Fap, Lrrc15). Weak: the rise in interferon and lymphocyte genes comes "
-              "from NL70B and NL71B; " + ", ".join(weak) + " barely move in IL66B, and NL70B/NL71B are the only NL-prefixed tumors, "
-              "so a batch or cohort difference cannot be excluded. The host is the athymic RNU/RNU rat: do not describe a T-cell response. "
-              f"At FDR < 0.05 alone there are {hs['sig']} genes ({hs['up']} up, {hs['down']} down), including an rRNA, 7SL and snoRNA loci. "
-              "Rat reads are the xengsort host bin; nf-core/rnaseq 3.22.2 on mRatBN7.2 (Ensembl 110); nf-core/differentialabundance DESeq2 "
-              "(the run stopped after DESeq2, so no gene-set test yet). Leave-one-tumour-out (loo_separation.R): without IL66B the host "
-              f"count rises to {hs['loo_host']['IL66B']}; the tumor side does the same ({hs['loo_human']['none']} to "
-              f"{hs['loo_human']['IL66B']}), so IL66B is the recurrence that looks most like a primary in both species (it is also the "
-              "library-QC outlier). What the IL/NL prefixes mark is not recorded in any document we have."])
+    refs(s, C.line(f"Preliminary: different rats per arm; LITT, time and the ablation wound cannot be separated. Broad GSEA from the pipeline; "
+                   f"leave-one-out and relabelling from a rerun that reproduces the pipeline's {hs['sig']} genes. DESeq2{C('love')}."))
+    notes(s, ["Backup, preliminary; show only if asked about the host. What holds: " + ", ".join(rob_dn) + " lower in every recurrence and "
+              "in every leave-one-out fit (Mmp13 is also not human-read leakage: human MMP13 at most "
+              f"{hs['human_MMP13_tumour_max']} reads per tumor against at least {hs['rat_Mmp13_primary_min']} rat reads per primary). "
+              f"What does not: the {hs['sig']}-gene list (FDR < 0.05) shrinks to {min(kept)}–{max(kept)} when a primary or rat 70 or 71 is left out; "
+              f"leaving IL66B out raises it to {lh['IL66B']} (the tumor side does the same, {hs['loo_human']['none']} to {hs['loo_human']['IL66B']}), "
+              "so IL66B is the recurrence most like a primary in both species. "
+              f"The true grouping gives {rl['true_n']} genes; the other nine splits give a median of {rl['median_others']}; the largest, "
+              f"rats {big} against the rest ({rl['largest_n']:,} genes), is an immune-infiltration (Ptprc, Cd68, Aif1) against "
+              "white-matter/neuron (Mbp, Plp1, Pcp4) axis that cuts across treatment. " + ", ".join(weak) + " barely move in IL66B.",
+              f"Broad GSEA (the pipeline's run, gene-set permutation): {n_sets:,} sets, none at FDR < 0.25. By nominal p, up: antigen "
+              "presentation, allograft rejection, interferon gamma; down: KEGG ribosome and translation initiation (NES about -2.0, "
+              "nominal p about 0.04). The rat host's ribosomal-protein genes point the same way as the tumor's; their share tracks the "
+              "human read share (Spearman 0.83 over six tumors), which fits read leakage but does not prove it.",
+              "Host cell-type deconvolution (CIBERSORT; LM22, Zhang 2014, Bowman 2016 myeloid, and a combined signature): no cell type "
+              "differs between primaries and recurrences. Tumor-associated bone-marrow macrophages are high in rats 70 and 71 (0.43, 0.50) "
+              "and not in 66 (0.07): the same rats-70-71 pattern, found after looking, exploratory only.",
+              "The 'NL' in the file names of rats 70 and 71 is not a group: the lab's sample key calls them IL-70 and IL-71 and its "
+              "methylation-array sheet IL70B and IL71B; all ten RNA libraries ran on one lane. Why 70 and 71 differ from 66 (for example "
+              "time after LITT) is not recorded. The host is the athymic RNU/RNU rat: do not describe a T-cell response. "
+              "Rat reads are the xengsort host bin; nf-core/rnaseq 3.22.2 on mRatBN7.2 (Ensembl 110); nf-core/differentialabundance DESeq2. "
+              "Tumor vs control brain (contralateral hemispheres of rats 68 and 69, and IL64B): "
+              f"{hs['tumour_vs_control_sig']:,} genes differ."])
     C.line()
 
 

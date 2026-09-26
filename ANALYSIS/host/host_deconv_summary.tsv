@@ -1,0 +1,44 @@
+signature	cell	primary_mean	recurrence_mean	difference	welch_p	mann_whitney_p	control_mean	nonzero_tumours	welch_q_bh
+host_bowman2016_myeloid_mean4	TAM_MG	0.2945	0.6085	0.314	0.03581	0.1	0.2463	6	0.1074
+host_bowman2016_myeloid_mean4	TAM_BMDM	0.1862	0.2394	0.05322	0.7351	0.7	0	5	0.7351
+host_bowman2016_myeloid_mean4	normal_MG	0.5193	0.1521	-0.3672	0.09592	0.2	0.7354	5	0.1439
+host_bowman2016_myeloid_mean4	blood_Ly6Chi_monocyte	0	0	0		1	0.01832	0	
+host_zhang6_bowman4	astrocyte	0.1211	0.125	0.00389	0.9205	1	0.1729	6	0.9219
+host_zhang6_bowman4	neuron	0.1413	0.1324	-0.008927	0.8637	0.7	0.3906	6	0.9219
+host_zhang6_bowman4	OPC	0.1433	0.1152	-0.02813	0.2641	0.2	0.1496	6	0.5829
+host_zhang6_bowman4	newly_formed_oligodendrocyte	0.1522	0.1029	-0.04936	0.4625	0.7	0.1877	6	0.6937
+host_zhang6_bowman4	myelinating_oligodendrocyte	0	0	0		1	0	0	
+host_zhang6_bowman4	endothelial	0.101	0.07827	-0.0227	0.07562	0.1	0.06646	6	0.5829
+host_zhang6_bowman4	TAM_MG	0.08822	0.04283	-0.04539	0.1535	0.2	0.01006	6	0.5829
+host_zhang6_bowman4	TAM_BMDM	0.1559	0.3321	0.1762	0.3238	0.7	0.01148	6	0.5829
+host_zhang6_bowman4	normal_MG	0.04252	0.01838	-0.02414	0.2782	0.4	0.009493	5	0.5829
+host_zhang6_bowman4	blood_Ly6Chi_monocyte	0.05433	0.05285	-0.001485	0.9219	1	0.001651	6	0.9219
+host_zhang2014_brain_mean7_tpm	astrocyte	0.08503	0.1021	0.01711	0.4468	1	0.1715	6	0.935
+host_zhang2014_brain_mean7_tpm	neuron	0.1547	0.1429	-0.01187	0.7789	1	0.2827	6	0.935
+host_zhang2014_brain_mean7_tpm	OPC	0.1674	0.1676	0.0002476	0.9901	0.7	0.1741	6	0.9901
+host_zhang2014_brain_mean7_tpm	newly_formed_oligodendrocyte	0.1593	0.1352	-0.0241	0.6267	0.7	0.2505	6	0.935
+host_zhang2014_brain_mean7_tpm	myelinating_oligodendrocyte	0.004402	0	-0.004402	0.4226	0.7	0	1	0.935
+host_zhang2014_brain_mean7_tpm	microglia	0.2793	0.3064	0.02707	0.8014	0.7	0.04467	6	0.935
+host_zhang2014_brain_mean7_tpm	endothelial	0.1499	0.1458	-0.004055	0.6428	0.7	0.07659	6	0.935
+host_lm22	B cells naive	0	0.01655	0.01655	0.1631	0.1	0.004789	3	0.6375
+host_lm22	B cells memory	0.001531	0	-0.001531	0.2979	0.4	0	2	0.6375
+host_lm22	Plasma cells	0	0.04432	0.04432	0.4194	0.4	0	2	0.6375
+host_lm22	T cells CD8	0.03609	0.05843	0.02235	0.51	0.7	0.009018	6	0.6375
+host_lm22	T cells CD4 naive	0	0	0		1	0	0	
+host_lm22	T cells CD4 memory resting	0.03403	0.05868	0.02464	0.2552	0.4	0.2854	6	0.6375
+host_lm22	T cells CD4 memory activated	0	0	0		1	0	0	
+host_lm22	T cells follicular helper	0.02797	0.0362	0.008231	0.6616	1	0.03428	6	0.7089
+host_lm22	T cells regulatory (Tregs)	0	0	0		1	0.005987	0	
+host_lm22	T cells gamma delta	0	0	0		1	0	0	
+host_lm22	NK cells resting	0.005133	0	-0.005133	0.3551	0.4	0.04408	2	0.6375
+host_lm22	NK cells activated	0.01901	0.03717	0.01816	0.3603	0.4	0.03988	6	0.6375
+host_lm22	Monocytes	0.3578	0.3945	0.03669	0.6272	0.7	0.0991	6	0.7089
+host_lm22	Macrophages M0	0	0	0		1	0.04002	0	
+host_lm22	Macrophages M1	0.005528	0.005579	5.1e-05	0.994	1	0.02809	3	0.994
+host_lm22	Macrophages M2	0.3468	0.1823	-0.1645	0.1283	0.4	0.1438	6	0.6375
+host_lm22	Dendritic cells resting	0.1461	0.1023	-0.04378	0.4845	0.7	0.08825	6	0.6375
+host_lm22	Dendritic cells activated	0.003255	0.0364	0.03315	0.2685	0.2	0	5	0.6375
+host_lm22	Mast cells resting	0	0	0		1	0.1341	0	
+host_lm22	Mast cells activated	0.01441	0.02262	0.008211	0.4842	0.4	0.02566	6	0.6375
+host_lm22	Eosinophils	0.002369	0.004947	0.002578	0.4954	0.7	0.01629	3	0.6375
+host_lm22	Neutrophils	0	0	0		1	0.001364	0	

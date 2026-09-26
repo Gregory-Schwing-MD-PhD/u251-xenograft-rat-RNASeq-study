@@ -1,0 +1,3 @@
+fit	genes_with_padj	padj05	padj05_up	padj05_down	padj05_absLFC1_ashr	padj05_absLFC1_mle	padj05_fc1.5_mle
+batch_NL_vs_IL	17053	502	410	92	NA	422	501
+IL66B_vs_primaries	15572	67	7	60	NA	67	67

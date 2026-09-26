@@ -1,0 +1,49 @@
+{
+ "G": 200,
+ "kappa": 102.34055344932118,
+ "genes": 1510,
+ "candidates": {
+  "astrocyte": 668,
+  "neuron": 1063,
+  "OPC": 233,
+  "newly_formed_oligodendrocyte": 87,
+  "myelinating_oligodendrocyte": 63,
+  "endothelial": 538,
+  "TAM_MG": 53,
+  "TAM_BMDM": 107,
+  "normal_MG": 230,
+  "blood_Ly6Chi_monocyte": 428
+ },
+ "zhang_genes_human": 16040,
+ "bowman_genes_human": 16038,
+ "shared_genes": 16007,
+ "columns": [
+  "astrocyte",
+  "neuron",
+  "OPC",
+  "newly_formed_oligodendrocyte",
+  "myelinating_oligodendrocyte",
+  "endothelial",
+  "TAM_MG",
+  "TAM_BMDM",
+  "normal_MG",
+  "blood_Ly6Chi_monocyte"
+ ],
+ "genes_in_mixture": 1456,
+ "genes_per_column": {
+  "astrocyte": 200,
+  "OPC": 200,
+  "normal_MG": 200,
+  "endothelial": 200,
+  "neuron": 200,
+  "blood_Ly6Chi_monocyte": 200,
+  "TAM_BMDM": 107,
+  "newly_formed_oligodendrocyte": 87,
+  "myelinating_oligodendrocyte": 63,
+  "TAM_MG": 53
+ },
+ "carried_transcripts_still_in_signature": [
+  "MLC1",
+  "COL3A1"
+ ]
+}

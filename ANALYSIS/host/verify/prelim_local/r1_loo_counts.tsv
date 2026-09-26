@@ -1,0 +1,8 @@
+fit	held_out	genes_with_padj	padj05	padj05_up	padj05_down	padj05_absLFC1_ashr	padj05_absLFC1_mle	padj05_fc1.5_mle	of_pipeline_genes_kept_same_sign
+full	none	17345	38	15	23	NA	36	38	38
+loo_IL67B	IL67B	17035	33	18	15	NA	33	33	19
+loo_IL68B	IL68B	17366	21	15	6	NA	21	21	8
+loo_IL69B	IL69B	16364	32	25	7	NA	32	32	14
+loo_IL66B	IL66B	17006	398	340	58	NA	348	398	37
+loo_NL70B	NL70B	16708	50	29	21	NA	48	50	17
+loo_NL71B	NL71B	17300	23	3	20	NA	23	23	15
