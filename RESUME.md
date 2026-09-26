@@ -4,6 +4,24 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 ~15:00 EDT (grid clock): PENDING GRID JOBS: drug rematch, host chain (Greg: "Yes" to the rerun; "add the host stuff")
+
+| job | what | ETA | output |
+|---|---|---|---|
+| 40468316 | drug chain with exact-name ChEMBL matching, published + IL68B + IL66B, then compare | ~15:20 | `ANALYSIS/drug_rematch/REMATCH.md`, `rematch.json`, `runs/<arm>/subtypes/drug_ranking_final.csv` |
+| 40468361 | host nf-core/rnaseq, resumed (N269B TrimGalore task deleted: it had exited 0 with empty output) | ~16:30 | `/rs/.../u251_host/results_rnaseq/star_salmon/` |
+| 40468362 | host DE (afterok) | +40 min | `/rs/.../u251_host/results_de/` |
+| 40468363 | host leave-one-out separation (afterok) | +10 min | `ANALYSIS/holdout_separation/loo_separation_host.tsv` |
+| 40468364 | host deconvolution prep, then queues CIBERSORT v1.04 per signature (LM22, Zhang 2014, Bowman 2016) | +1 h | `ANALYSIS/host/results/`, `ANALYSIS/cibersort/results/v104/fractions_v104_host_*.tsv` |
+| 40468077 | stem-cell drug screen on published GSC sets (running since ~13:10) | ? | `ANALYSIS/gsc_drugs/results_published/` |
+
+- Host failures so far: 40468032 FastQC N269B could not write node-local /tmp (fix: host.config binds a CephFS dir as /tmp);
+  40468266 FQ_SUBSAMPLE N269B got 0 records because the cached TRIMGALORE N269B task had empty outputs with exit 0.
+- Grid clone: untracked copies that collided with the pull were moved to ~/u251_pull_backup_20260926 (only diff: a comment).
+- Published arm of the rematch done: weighted top = ciclopirox, pentetrazol, nilutamide, primidone, pyrantel;
+  unweighted top = deferoxamine, ciclopirox, metformin. When the job ends: update slide 9 table + text, B2, notes.
+- ChEMBL audit (wf_f591d5b1-c19): 71 names, 2 tie-breaks, 33 overrides; `ANALYSIS/drug_rematch/audit_decisions.json`.
+
 ## 2026-09-26 afternoon: talk v4 built (SLIDES/CNS2026_Schwing_Abstract418_CNStemplate_v4.pptx)
 
 - Greg: "synthesize all of these results into a compelling story and update the presentation", then "make sure these
