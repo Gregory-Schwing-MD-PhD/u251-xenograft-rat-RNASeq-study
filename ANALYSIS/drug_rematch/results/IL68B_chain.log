@@ -1,0 +1,326 @@
+compounds: 96 | SMILES resolved: 87 | unresolved: 9
+   unresolved: COBALT
+   unresolved: FERROUS
+   unresolved: VANADIUM PENTOXIDE
+   unresolved: IRON
+   unresolved: Sodium dichromate
+   unresolved: VANADIUM
+   unresolved: 0297417-0002B
+   unresolved: Healon
+   unresolved: 4-Oxoretinol
+/rs/rs_grp_oschome/go2432/envs/u251_drug/lib/python3.11/site-packages/torch/cuda/__init__.py:716: UserWarning: Can't initialize NVML
+  warnings.warn("Can't initialize NVML")
+/rs/rs_grp_oschome/go2432/envs/u251_drug/lib/python3.11/site-packages/chemprop/utils.py:473: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  vars(torch.load(path, map_location=lambda storage, loc: storage)["args"]),
+/rs/rs_grp_oschome/go2432/envs/u251_drug/lib/python3.11/site-packages/chemprop/utils.py:112: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(path, map_location=lambda storage, loc: storage)
+/rs/rs_grp_oschome/go2432/envs/u251_drug/lib/python3.11/site-packages/chemprop/utils.py:418: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state = torch.load(path, map_location=lambda storage, loc: storage)
+compounds with structures: 87
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+Loading pretrained parameter "encoder.encoder.0.cached_zero_vector".
+Loading pretrained parameter "encoder.encoder.0.W_i.weight".
+Loading pretrained parameter "encoder.encoder.0.W_h.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.weight".
+Loading pretrained parameter "encoder.encoder.0.W_o.bias".
+Loading pretrained parameter "readout.1.weight".
+Loading pretrained parameter "readout.1.bias".
+Loading pretrained parameter "readout.4.weight".
+Loading pretrained parameter "readout.4.bias".
+SMILES to Mol:   0%|          | 0/87 [00:00<?, ?it/s]SMILES to Mol: 100%|██████████| 87/87 [00:00<00:00, 6503.96it/s]
+Computing physchem properties:   0%|          | 0/87 [00:00<?, ?it/s]Computing physchem properties:  63%|██████▎   | 55/87 [00:00<00:00, 545.76it/s]Computing physchem properties: 100%|██████████| 87/87 [00:00<00:00, 516.32it/s]
+RDKit fingerprints:   0%|          | 0/87 [00:00<?, ?it/s]RDKit fingerprints:   2%|▏         | 2/87 [00:00<00:04, 19.29it/s]RDKit fingerprints:   5%|▍         | 4/87 [00:00<00:04, 18.90it/s]RDKit fingerprints:   7%|▋         | 6/87 [00:00<00:04, 19.26it/s]RDKit fingerprints:   9%|▉         | 8/87 [00:00<00:04, 19.03it/s]RDKit fingerprints:  13%|█▎        | 11/87 [00:00<00:03, 19.67it/s]RDKit fingerprints:  15%|█▍        | 13/87 [00:00<00:03, 19.53it/s]RDKit fingerprints:  17%|█▋        | 15/87 [00:00<00:03, 19.31it/s]RDKit fingerprints:  20%|█▉        | 17/87 [00:00<00:03, 18.89it/s]RDKit fingerprints:  22%|██▏       | 19/87 [00:00<00:03, 18.88it/s]RDKit fingerprints:  25%|██▌       | 22/87 [00:01<00:03, 19.53it/s]RDKit fingerprints:  28%|██▊       | 24/87 [00:01<00:03, 19.64it/s]RDKit fingerprints:  30%|██▉       | 26/87 [00:01<00:03, 19.29it/s]RDKit fingerprints:  32%|███▏      | 28/87 [00:01<00:03, 18.91it/s]RDKit fingerprints:  34%|███▍      | 30/87 [00:01<00:03, 18.83it/s]RDKit fingerprints:  38%|███▊      | 33/87 [00:01<00:02, 19.23it/s]RDKit fingerprints:  40%|████      | 35/87 [00:01<00:02, 18.88it/s]RDKit fingerprints:  43%|████▎     | 37/87 [00:01<00:02, 18.92it/s]RDKit fingerprints:  45%|████▍     | 39/87 [00:02<00:02, 19.19it/s]RDKit fingerprints:  47%|████▋     | 41/87 [00:02<00:02, 18.97it/s]RDKit fingerprints:  49%|████▉     | 43/87 [00:02<00:02, 18.56it/s]RDKit fingerprints:  52%|█████▏    | 45/87 [00:02<00:02, 18.36it/s]RDKit fingerprints:  54%|█████▍    | 47/87 [00:02<00:02, 18.02it/s]RDKit fingerprints:  56%|█████▋    | 49/87 [00:02<00:02, 17.79it/s]RDKit fingerprints:  59%|█████▊    | 51/87 [00:02<00:02, 17.77it/s]RDKit fingerprints:  61%|██████    | 53/87 [00:02<00:01, 18.16it/s]RDKit fingerprints:  64%|██████▍   | 56/87 [00:02<00:01, 18.51it/s]RDKit fingerprints:  67%|██████▋   | 58/87 [00:03<00:01, 18.33it/s]RDKit fingerprints:  69%|██████▉   | 60/87 [00:03<00:01, 18.36it/s]RDKit fingerprints:  71%|███████▏  | 62/87 [00:03<00:01, 17.90it/s]RDKit fingerprints:  74%|███████▎  | 64/87 [00:03<00:01, 18.22it/s]RDKit fingerprints:  77%|███████▋  | 67/87 [00:03<00:01, 18.28it/s]RDKit fingerprints:  80%|████████  | 70/87 [00:03<00:00, 19.31it/s]RDKit fingerprints:  83%|████████▎ | 72/87 [00:03<00:00, 18.68it/s]RDKit fingerprints:  85%|████████▌ | 74/87 [00:03<00:00, 18.33it/s]RDKit fingerprints:  87%|████████▋ | 76/87 [00:04<00:00, 17.83it/s]RDKit fingerprints:  90%|████████▉ | 78/87 [00:04<00:00, 17.32it/s]RDKit fingerprints:  92%|█████████▏| 80/87 [00:04<00:00, 15.58it/s]RDKit fingerprints:  94%|█████████▍| 82/87 [00:04<00:00, 15.33it/s]RDKit fingerprints:  97%|█████████▋| 84/87 [00:04<00:00, 16.44it/s]RDKit fingerprints:  99%|█████████▉| 86/87 [00:04<00:00, 17.13it/s]RDKit fingerprints: 100%|██████████| 87/87 [00:04<00:00, 18.30it/s]
+model ensembles:   0%|          | 0/2 [00:00<?, ?it/s]
+individual models:   0%|          | 0/5 [00:00<?, ?it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+ 50%|█████     | 1/2 [00:00<00:00,  3.98it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00,  6.09it/s][A[A
+
+                                             [A[A
+individual models:  20%|██        | 1/5 [00:00<00:01,  2.81it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.53it/s][A[A
+
+                                             [A[A
+individual models:  40%|████      | 2/5 [00:00<00:00,  4.49it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.75it/s][A[A
+
+                                             [A[A
+individual models:  60%|██████    | 3/5 [00:00<00:00,  5.57it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.46it/s][A[A
+
+                                             [A[A
+individual models:  80%|████████  | 4/5 [00:00<00:00,  6.25it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.70it/s][A[A
+
+                                             [A[A
+individual models: 100%|██████████| 5/5 [00:00<00:00,  6.73it/s][Aindividual models: 100%|██████████| 5/5 [00:00<00:00,  5.73it/s]
+model ensembles:  50%|█████     | 1/2 [00:00<00:00,  1.15it/s]
+individual models:   0%|          | 0/5 [00:00<?, ?it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.79it/s][A[A
+
+                                             [A[A
+individual models:  20%|██        | 1/5 [00:00<00:00,  7.85it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.72it/s][A[A
+
+                                             [A[A
+individual models:  40%|████      | 2/5 [00:00<00:00,  7.82it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.81it/s][A[A
+
+                                             [A[A
+individual models:  60%|██████    | 3/5 [00:00<00:00,  7.84it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.55it/s][A[A
+
+                                             [A[A
+individual models:  80%|████████  | 4/5 [00:00<00:00,  7.79it/s][A
+
+  0%|          | 0/2 [00:00<?, ?it/s][A[A
+
+100%|██████████| 2/2 [00:00<00:00, 15.79it/s][A[A
+
+                                             [A[A
+individual models: 100%|██████████| 5/5 [00:00<00:00,  7.81it/s][Aindividual models: 100%|██████████| 5/5 [00:00<00:00,  7.81it/s]
+model ensembles: 100%|██████████| 2/2 [00:01<00:00,  1.36it/s]model ensembles: 100%|██████████| 2/2 [00:01<00:00,  1.32it/s]
+
+=== TOP 12 BY ADMET-AI INTEGRATED SCORE (unique compounds) ===
+                 Drug   NES BBB_Score BBB_Martins BBB_Martins_drugbank_approved_percentile IntegratedScore IntegratedScore_ADMETAI
+dimethyloxalylglycine -2.27      0.82       0.968                                       81            2.82                    3.31
+           ciclopirox -2.15      1.00       0.961                                       79            3.14                    3.02
+                OZONE -2.00      0.82       0.999                                       99            2.33                    2.82
+      Electrocorundum -1.94      0.00       0.986                                       89            0.00                    2.67
+            PHOSPHINE -1.88      0.82       0.995                                       96            2.12                    2.56
+      D-Penicillamine -2.02      0.70       0.805                                       56            2.01                    2.31
+            MAGNESIUM -1.90      0.25       0.878                                       65            0.66                    2.31
+          pentetrazol -1.71      0.82       0.993                                       94            1.84                    2.21
+             diazepam -1.70      0.82       0.998                                       98            1.83                    2.21
+          hyoscyamine -1.84      1.00       0.877                                       65            2.50                    2.20
+             pyrantel -1.71      1.00       0.980                                       86            2.23                    2.18
+                  H-7 -1.82      0.88       0.871                                       64            2.15                    2.14
+
+=== THE THREE COMPOUNDS NAMED IN THE PAPER ===
+                 Drug   NES BBB_Score BBB_Martins IntegratedScore IntegratedScore_ADMETAI  Rank_ADMETAI
+dimethyloxalylglycine -2.27      0.82       0.968            2.82                    3.31             1
+           ciclopirox -2.15      1.00       0.961            3.14                    3.02             2
+            LY-294002 -1.47      0.82       0.981            1.47                    1.74            29
+
+wrote /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/drug_rematch/runs/IL68B/subtypes/drug_ranking_admetai.csv
+BOILED-Egg yolk polygon: 101 vertices, bounds verified
+B3DB entries indexed by name: 11028
+
+=== CONCORDANCE: ADMET-AI (>=0.5) vs BOILED-Egg ===
+BOILED_Egg   in  out
+ADMETAI_BBB         
+False         2   20
+True         25   40
+  agreement: 45/87 (52%)
+
+=== WHERE MEASURED DATA EXISTS (B3DB) ===
+               Drug  ADMETAI_BBB BOILED_Egg  B3DB_logBB  B3DB_class  old_heuristic
+        doxorubicin     0.063719        out       -0.83         NaN          0.075
+      bromocriptine     0.401077        out       -0.59         NaN          0.200
+       ketoconazole     0.478828         in       -0.28         NaN          0.450
+          ribavirin     0.571849        out       -0.67         NaN          0.325
+         metoprolol     0.602729         in        1.15         NaN          0.750
+       dexverapamil     0.673544         in       -0.70       -0.70          0.575
+        Vincristine     0.812219        out       -1.03         NaN          0.075
+         amiodarone     0.812447        out       -1.08       -1.08          0.575
+        vinblastine     0.815748        out       -0.10         NaN          0.075
+       progesterone     0.848275         in       -0.10       -0.10          0.825
+          primidone     0.959076        out       -0.07         NaN          0.825
+            ethanol     0.971831        out       -0.20       -0.20          0.825
+         olanzapine     0.993991         in        0.80         NaN          0.575
+           diazepam     0.998417         in        0.50         NaN          0.825
+TETRACHLOROETHYLENE     0.999508         in        0.37        0.37          0.825
+
+=== DISAGREEMENTS BETWEEN THE TWO PREDICTORS ===
+                        Drug  ADMETAI_BBB BOILED_Egg  TPSA  WLOGP  B3DB_logBB  B3DB_class
+                       OZONE     0.998749        out  51.4  -1.12         NaN         NaN
+                   PHOSPHINE     0.995241        out   0.0   0.06         NaN         NaN
+           HYPOCHLOROUS ACID     0.993797        out  20.2   0.13         NaN         NaN
+                 pentetrazol     0.993243        out  43.6   0.40         NaN         NaN
+                  heptachlor     0.988709        out   0.0   5.24         NaN         NaN
+             Electrocorundum     0.985752        out  43.4  -1.07         NaN         NaN
+                     ethanol     0.971831        out  20.2  -0.00       -0.20       -0.20
+       dimethyloxalylglycine     0.967808        out  81.7  -1.55         NaN         NaN
+                   primidone     0.959076        out  58.2   0.54       -0.07         NaN
+                  nilutamide     0.952480        out  92.6   2.45         NaN         NaN
+                  nitrofural     0.951405        out 123.8   0.19         NaN         NaN
+     Decabromodiphenyl oxide     0.943029        out   9.2  11.10         NaN         NaN
+                ZINC SULFIDE     0.932572        out  28.5  -0.12         NaN         NaN
+              alsterpaullone     0.931092        out  88.0   3.24         NaN         NaN
+                        IBMX     0.931088        out  72.7   0.08         NaN         NaN
+            SODIUM HYDROXIDE     0.915593        out  30.0  -3.17         NaN         NaN
+                L-citrulline     0.905200        out 118.4  -1.15         NaN         NaN
+                   MAGNESIUM     0.877780        out   0.0  -0.38         NaN         NaN
+            MALEIC HYDRAZIDE     0.864162        out 110.2  -2.48         NaN         NaN
+            Chlorophenothane     0.859853        out   0.0   6.50         NaN         NaN
+      bisindolylmaleimide IX     0.817223        out 105.9   3.72         NaN         NaN
+                 vinblastine     0.815748        out 154.1   3.99       -0.10         NaN
+                  amiodarone     0.812447        out  42.7   6.94       -1.08       -1.08
+                 Vincristine     0.812219        out 171.2   3.52       -1.03         NaN
+             D-Penicillamine     0.804695        out  63.3   0.11         NaN         NaN
+                Paricalcitol     0.796506        out  60.7   5.56         NaN         NaN
+                  cytarabine     0.776817        out 130.8  -2.56         NaN         NaN
+Geranylgeranyl pyrophosphate     0.698921        out 113.3   6.36         NaN         NaN
+             chloramphenicol     0.681162        out 112.7   0.91         NaN         NaN
+                   tamoxifen     0.673581        out  12.5   6.00         NaN         NaN
+                 ganciclovir     0.594613        out 139.3  -1.97         NaN         NaN
+                 pamidronate     0.588021        out 161.3  -1.66         NaN         NaN
+                  folic acid     0.577275        out 213.3  -0.04         NaN         NaN
+                   ribavirin     0.571849        out 143.7  -3.01       -0.67         NaN
+                 estropipate     0.569568        out  80.7   3.29         NaN         NaN
+                Ademetionine     0.552869        out 185.5  -3.26         NaN         NaN
+      3-amino-1,2,4-triazole     0.533830        out  67.6  -0.61         NaN         NaN
+                deferoxamine     0.529000        out 205.8   0.92         NaN         NaN
+                   docetaxel     0.506716        out 224.4   3.26         NaN         NaN
+               oxolinic acid     0.504311        out  77.8   1.45         NaN         NaN
+                ketoconazole     0.478828         in  69.1   4.21       -0.28         NaN
+                   letrozole     0.375654         in  78.3   2.66         NaN         NaN
+
+wrote /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/drug_rematch/runs/IL68B/subtypes/bbb_consensus.csv
+compounds: 96  ->  reached the clinic and have a structure: 53
+
+=== TIER A - clinical compound, BOTH predictors say brain-permeant (n=12) ===
+          Drug phase   NES BBB_Martins BOILED_Egg B3DB_logBB score_bbb  rank_nobbb
+    ciclopirox     4 -2.15       0.961         in        NaN      3.02           2
+      diazepam     4 -1.70       0.998         in      +0.50      2.21          18
+      pyrantel     4 -1.71       0.980         in        NaN      2.18          15
+    Vandetanib     4 -1.69       0.967         in        NaN      2.13          20
+  progesterone     4 -1.70       0.848         in      -0.10      1.88          17
+    olanzapine     4 -1.49       0.994         in      +0.80      1.80          43
+     amprolium     2 -1.55       0.899         in        NaN      1.73          35
+    ifosfamide     4 -1.44       0.980         in        NaN      1.68          52
+    metoprolol     4 -1.66       0.603         in      +1.15      1.29          21
+nicotinic acid     4 -1.60       0.582         in        NaN      1.17          30
+  dexverapamil     2 -1.43       0.674         in      -0.70      1.16          53
+   gemfibrozil     4 -1.47       0.610         in        NaN      1.09          47
+
+=== TIER B - clinical, but the two predictors disagree (n=41) ===
+             Drug phase   NES BBB_Martins BOILED_Egg B3DB_logBB score_bbb  rank_nobbb
+            OZONE     3 -2.00       0.999        out        NaN      2.82           4
+  D-Penicillamine     4 -2.02       0.805        out        NaN      2.31           3
+        MAGNESIUM     3 -1.90       0.878        out        NaN      2.31           8
+      pentetrazol     2 -1.71       0.993        out        NaN      2.21          15
+     L-citrulline     3 -1.73       0.905        out        NaN      2.06          14
+     Paricalcitol     4 -1.87       0.797        out        NaN      2.04          10
+HYPOCHLOROUS ACID     4 -1.61       0.994        out        NaN      2.03          27
+        primidone     4 -1.64       0.959        out      -0.07      2.02          23
+
+=== does the BBB weight actually change the order? ===
+  with BBB   : ciclopirox, OZONE, D-Penicillamine, MAGNESIUM, pentetrazol, diazepam, pyrantel, Vandetanib, L-citrulline, Paricalcitol
+  without BBB: deferoxamine, ciclopirox, D-Penicillamine, OZONE, CHLOROGENIC ACID, sisomicin, Ademetionine, MAGNESIUM, doxorubicin, Paricalcitol
+  overlap: 5/10
+
+=== the three compounds the paper names ===
+                 Drug  phase   NES BBB_Martins BOILED_Egg
+dimethyloxalylglycine    NaN -2.27       0.968        out
+           ciclopirox    4.0 -2.15       0.961         in
+            LY-294002   -1.0 -1.47       0.981         in
+
+wrote /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/drug_rematch/runs/IL68B/subtypes/drug_ranking_final.csv

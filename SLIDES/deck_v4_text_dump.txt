@@ -5,7 +5,6 @@
 [notes] 0:00–0:10  Title. Name, institutions, a rat model of MRI-guided LITT. Do not read the title. ||  || Disclosures, read aloud (CNS displays the list; no disclosure slide per the ACCME speaker guidelines): I.Y.L. has consulting agreements with Medtronic, Inc. (Minneapolis, MN) and Monteris Medical, Inc. (Plymouth, MN). All other authors declare no conflicts of interest. Supported by a Henry Ford Health Physician Scientist Award A20050 (I.Y.L.). No commercial support was received for this analysis. Drug candidates discussed here are computational predictions. None is approved for glioblastoma and none has been tested in this model. ||  || Timing: 13 slides in six minutes, about 27 s each; six backups follow the acknowledgments. If running long, shorten slide 4 (PCA and volcano) to one sentence.
 ===== SLIDE 2
 [text] LITT kills the core; glioblastoma returns from the margin
-[picture] Picture 2
 [text] LITT is increasingly used for deep and recurrent glioblastoma.¹ | Past the ablative threshold lies a sublethal margin. | Recurrence is thought to grow from the cells that survive there.
 [text] Does the tumor that regrows after LITT carry its own program, and does that program point to a drug?
 [text] 1. Chen C, et al. J Neurooncol 2021;151:429–442.   Diagram: thermal dose falls with distance from the fiber; schematic, not to scale.
@@ -13,57 +12,48 @@
 ===== SLIDE 3
 [text] A human tumor in a rat brain, so the tumor can be read on its own
 [text] MRI-guided LITT in this model, diffusion-weighted MRI (from Nagaraja 2021²); click to play.
-[picture] Picture 4
 [text] Reads sorted by species³: 89–92 % go to one species, 7–10 % are shared by both and kept with the human reads, under 2.1 % are unresolved. | Recurrent tumors are less human on average (35 % against 51 %; ranges overlap): a confound, tested on slide 7.
 [text] 2. Nagaraja TN, et al. Acta Neurochir 2021;163:3455–3463.   3. Zentgraf J, Rahmann S. Algorithms Mol Biol 2021;16:2.   4. Nagaraja TN, et al. J Neurosurg 2026;145:364–377.   Orthotopic U251N glioblastoma xenograft in the athymic rat, MRI-guided LITT; bulk RNA-seq of primary and recurrent tumors, n = 3 per arm; GEO GSE338105.
 [notes] 0:35–1:00  The model the Henry Ford group built (Nagaraja 2026): U251N in the athymic rat, MRI-guided LITT. The design is unpaired: primary tumors come from animals that were not ablated, recurrent tumors from other animals after ablation and regrowth, three per arm. The graft is human and the host is rat, so xengsort sorts every read by species before anything is counted; human reads plus the shared reads enter the analysis. ||  || Numbers to reconcile before the talk: the J Neurosurg paper reports four per arm for RNA-seq; this analysis has three per arm plus IL64B, a primary that did not engraft and serves as a control. Ask Dr. Nagaraja what happened to the fourth recurrent library. ||  || The rat-brain controls went through the same pipeline; one (N269B) carries human Y-linked reads, so it holds some tumor cells.
 ===== SLIDE 4
 [text] The arms separate modestly, and few single genes move
-[picture] Picture 2
-[picture] Picture 3
 [text] The recurrent tumors lie to the right on PC1, IL66B only just; clustering does not separate the arms (backup B5). DESeq2⁵: 35 genes at FDR < 0.05 and two-fold. So we read whole programs.
 [text] 5. Love MI, et al. Genome Biol 2014;15:550.   PCA of the 500 most variable rlog genes (DESeq2 plotPCA); PERMANOVA on all genes R² 0.28, p = 0.10, the smallest 3 v 3 allows; Wald test with ashr shrinkage. Orthotopic U251N glioblastoma xenograft in the athymic rat, MRI-guided LITT; bulk RNA-seq of primary and recurrent tumors, n = 3 per arm; GEO GSE338105.
 [notes] 1:00–1:25  Global structure in one breath. PC1 carries 35 % of the variance in the 500 genes; the recurrent tumors sit to the right, the closest (IL66B) 1.1 units past the nearest primary on a 16-unit axis. PC1 also splits the NL animals from the IL animals (R² 0.83 against 0.71 for arm): find out what the prefix denotes before the talk. With three per arm, ten splits exist, so PERMANOVA cannot go below 0.10. Only 35 genes pass, mostly readthrough and non-coding loci, most of them zero in one arm.
 ===== SLIDE 5
 [text] After LITT, the regrown tumor turns its ribosomal-protein genes down
-[picture] Picture 2
-[picture] Picture 3
 [text] Of 8,869 gene sets⁶, six reach q < 0.25, all down in recurrence and all built on the same 76 ribosomal-protein genes; only this set is below 0.05 (q = 0.022). No up-regulated set gets below q = 0.61. | The heatmap shows the catch: one primary, IL68B, is the highest of the six on all 77 leading-edge genes.
 [text] 6. Subramanian A, et al. Proc Natl Acad Sci USA 2005;102:15545–15550.   Broad GSEA, gene-set permutation; metric Diff_of_Classes on normalised counts (lower panel clipped at the 99.5th percentile); leading edge = core-enrichment genes, rlog row z-scores; n = 3 per arm.
 [notes] 1:25–2:05  The core result. Say 'ribosomal-protein genes', not 'translation initiation': the KEGG MEDICUS set of that name is 80 of 80 cytosolic ribosomal-protein genes (RPL, RPS, FAU, UBA52) with no initiation factor; the other five sets are the same block counted again (their leading edges share 76 genes, union 86);. Whether translation itself falls is the puromycin / polysome experiment on slide 12. ||  || Left, the standard GSEA plot: genes ranked from higher in recurrent (left) to higher in primary (right); the 80 genes are the ticks, NES −1.99. The ranking is a difference of means on counts, which weights abundant genes; on a log-scale ranking all 80 are still in the lower half and 74 % in the last 6.6 %, so the direction does not depend on the metric. ||  || Right, the leading edge per tumor. Say it plainly: IL68B is high on every gene, the other two primaries sit near the middle, and the three recurrences sit below them on average. The direction is shared; the size leans on one tumor. Next slide asks whether it survives without it.
 ===== SLIDE 6
 [text] Leave any tumor out: the direction holds, the FDR does not
-[picture] Picture 2
 [text] The published GSEA re-run 35 times: each tumor left out, five permutation seeds. | Every run: NES −1.88 to −2.02, nominal p < 0.002. | FDR q < 0.05 in 15 of 35; with all six it moves with the seed alone (0.022–0.31). | Dropping IL68B keeps q < 0.05 at every seed: it carries the size of the fall, not its direction.
 [text] ANALYSIS/gsea_leave_one_out: the published command, gene filter re-applied after each drop; seed 1234 reproduces the published report exactly; blue cells q < 0.05; NES range over the five seeds.
 [notes] 2:05–2:35  Robustness, stated honestly. The direction (NES) never moves. FDR is fragile: with gene-set permutation and six tumors, q depends on the random seed. With the filter re-applied, q never clears 0.05 without IL67B, IL69B or IL66B, and always does without IL68B or NL70B. Six further runs skip the re-filtering (seed 1234): q < 0.05 in 4 of 6, including without IL66B (q = 0.029). Without IL68B the set is no longer the top-ranked one; a stromal set leads.
 ===== SLIDE 7
 [text] Recurrence after LITT, or less tumor in the sample?
-[picture] Picture 2
 [text] Both scores rise with the human share (r = 0.51 and 0.70; P = 0.31, 0.12), and arm and share are correlated (r = −0.70): six tumors cannot fully separate the two. | IL67B and NL70B have the same share (42.5 and 42.7 %) yet differ on the astrocyte-like score (+0.25 against −0.42). Rat reads could shift the ribosomal-protein genes by about 0.01 log2; they fall 0.40.
 [text] GSVA on DESeq2 variance-stabilised counts; OLS fit with 95 % confidence band; human share from xengsort; contamination bound: every shared read treated as rat. Orthotopic U251N glioblastoma xenograft in the athymic rat, MRI-guided LITT; bulk RNA-seq of primary and recurrent tumors, n = 3 per arm; GEO GSE338105.
 [notes] 2:35–3:10  The confound, head on. Adjusting for human share leaves the ribosomal-protein score's arm difference at p = 0.18 (from 0.06); the gene-level estimate does not shrink (−0.40 to −0.57 log2), though at n = 6 the adjusted estimate is unstable (it leans on IL69B; without IL68B it reverses). ||  || The matched pair: IL67B (primary) and NL70B (recurrent) are both 43 % human. On the astrocyte-like score they differ by 0.66, far beyond the spread within either arm. On the ribosomal-protein score the gap (−0.33) is within the spread among the primaries, so the pair says nothing there. One pair, not a test. ||  || Contamination: counting every shared read as rat, with all three controls, gives −0.01; without N269B (which holds tumor cells) about +0.001 (graft_relation/SUMMARY.md), so under 0.01 log2 either way. A second estimate from the controls' shared-read ratio puts the worst case near 0.05 (ANALYSIS/human_cohorts/PLAN.md), an eighth of the fall. Backup B1.
 ===== SLIDE 8
 [text] Of ten published subtype signatures, only the astrocyte-like score separates the arms
-[picture] Picture 2
 [text] Neftel⁷ and Garofano⁸ signatures, scored per tumor by GSVA⁹. | AC-like: +0.28 → −0.29, every recurrent below every primary (t-test P = 0.002, q = 0.021; exact floor 0.10); direction kept after adjusting for human share. | MES1 is lower in recurrence (P = 0.09) but tracks human share as closely (r = 0.77, P = 0.08). | CIBERSORT¹⁰ with the Neftel reference fits these cells poorly (r 0.19–0.26; backup B3).
 [text] 7. Neftel C, et al. Cell 2019;178:835–849.   8. Garofano L, et al. Nat Cancer 2021;2:141–156.   9. Hänzelmann S, et al. BMC Bioinformatics 2013;14:7.   10. Newman AM, et al. Nat Methods 2015;12:453–457.   GSVA on variance-stabilised counts; two-sample t per signature, Benjamini–Hochberg across the ten. Orthotopic U251N glioblastoma xenograft in the athymic rat, MRI-guided LITT; bulk RNA-seq of primary and recurrent tumors, n = 3 per arm; GEO GSE338105.
 [notes] 3:10–3:40  One state transition: the astrocyte-like program score falls, and every recurrent tumor is below every primary. Call it the strongest group difference and exploratory: 3 v 3 cannot give an exact permutation p below 0.10. ||  || Adjusted for human share, P = 0.024 on these counts; across other normalised inputs 0.024 to 0.12, and the adjustment leans on IL69B (graft_relation/SUMMARY.md). The manuscript's run scored TPM (p = 0.007, q = 0.075); 7SK/7SL/Y RNA and rRNA take 40 to 65 % of TPM and the share varies by library, which variance-stabilised counts remove. ||  || CIBERSORT puts AC slightly higher in recurrence (0.22 to 0.27), the opposite direction; at this fit neither is a composition. ||  || Whole pipeline without IL68B or IL66B (TPM run, from 0.007 with all six): AC p = 0.044 and 0.066 (backup B2).
 ===== SLIDE 9
 [text] A candidate drug against the recurrent state: ciclopirox
 [table] Rank | Compound | NES | BBB probability | Both BBB models
-[table] 1 | ciclopirox | −2.26 | 0.92 | yes
-[table] 2 | pentetrazol | −1.95 | 1.00 | no
-[table] 3 | primidone | −1.87 | 0.97 | no
-[table] 4 | nilutamide | −1.88 | 0.91 | no
+[table] 1 | ciclopirox | −2.26 | 0.96 | yes
+[table] 2 | pentetrazol | −1.95 | 0.99 | no
+[table] 3 | nilutamide | −1.88 | 0.95 | no
+[table] 4 | primidone | −1.87 | 0.96 | no
 [table] 5 | pyrantel | −1.79 | 0.98 | yes
-[text] DSigDB drug signatures¹¹ against the recurrence ranking: the 100 most opposing name 92 compounds (36 signatures at FDR < 0.05); 54 matched a clinical-phase record; 15 pass both barrier models¹²˒¹³. | Ciclopirox ranks first with the barrier weight; first without IL68B, third without IL66B. Another group's reversal screen also nominated it.¹⁴ | Approved as a topical antifungal; an oral form completed phase 1 in hematologic cancer.¹⁵
-[text] Deferoxamine, another approved iron chelator (NES −2.39), was dropped by a database mismatch; unweighted it would rank first. | Computational predictions: nothing here has been dosed in this model.
-[text] 11. Yoo M, et al. Bioinformatics 2015;31:3069–3071.   12. Swanson K, et al. Bioinformatics 2024;40:btae416.   13. Daina A, Zoete V. ChemMedChem 2016;11:1117–1121.   14. Sun S, et al. J Transl Med 2025;23:25.   15. Minden MD, et al. Am J Hematol 2014;89:363–368.   Rank among the matched compounds by |NES|^1.5 × ADMET-AI BBB probability; BBB models ADMET-AI and BOILED-Egg; Online Resource 1, S12.
-[notes] 3:40–4:15  The drug. Each compound's DSigDB gene set is tested for sitting among the genes that fall in recurrence, then weighted by predicted barrier penetration. Ciclopirox scores 3.14 against 2.34 for pyrantel, the next compound both barrier models pass. Without IL66B it is third, fourteenth without the barrier weight: say so if asked. ||  || Deferoxamine: the ChEMBL lookup matched a different record (CHEMBL4635234, no phase), so the clinical filter dropped it; its unweighted score 3.69 beats ciclopirox's 3.40. Its weighted rank needs its real structure scored (the rerun is pending); deferoxamine is not expected to cross the barrier well. Two iron chelators at the top of the list is itself worth saying. The same name matching also dropped vandetanib, mefloquine and bromocriptine, so '54' is a floor; the rerun will recount. ||  || Caveats if asked: scored per tumor by GSVA, the ciclopirox gene set does not separate the arms (P = 0.89), so the rank rests on the whole-list ordering; its DSigDB sets hold at most one ribosomal-protein gene, so the rank is not the ribosomal block again. Brain pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction. Prior-art audit: backup B4.
+[text] DSigDB drug signatures¹¹ against the recurrence ranking: the 100 most opposing name 92 compounds (36 at FDR < 0.05); 62 have a clinical-phase ChEMBL record; 22 pass both barrier models¹²˒¹³. | Ciclopirox ranks first with the barrier weight (second without it); first without IL68B, third without IL66B. Another group's reversal screen also nominated it.¹⁴ | Approved as a topical antifungal; an oral form completed phase 1 in hematologic cancer.¹⁵
+[text] Without the barrier weight, deferoxamine, another approved iron chelator, leads (NES −2.39); the barrier models disagree on it (ADMET-AI 0.53, borderline; BOILED-Egg, no). | Computational predictions: nothing here has been dosed in this model.
+[text] 11. Yoo M, et al. Bioinformatics 2015;31:3069–3071.   12. Swanson K, et al. Bioinformatics 2024;40:btae416.   13. Daina A, Zoete V. ChemMedChem 2016;11:1117–1121.   14. Sun S, et al. J Transl Med 2025;23:25.   15. Minden MD, et al. Am J Hematol 2014;89:363–368.   Rank among the 62 compounds with a clinical-phase ChEMBL record (exact-name matching, audited) by |NES|^1.5 × ADMET-AI BBB probability; BBB models ADMET-AI and BOILED-Egg; supersedes Online Resource 1, S12.
+[notes] 3:40–4:15  The drug. Each compound's DSigDB gene set is tested for sitting among the genes that fall in recurrence, then weighted by predicted barrier penetration. Ciclopirox scores 3.27 against 2.35 for pyrantel, the next compound both barrier models pass. Without IL66B it is third, 16th without the barrier weight: say so if asked. ||  || What changed since the manuscript's S12: compound names are now matched to ChEMBL by exact name or synonym and mapped to the parent molecule, with every changed or unresolved name audited (ANALYSIS/drug_rematch). The old pipeline took the first free-text search hit, which dropped approved drugs (deferoxamine, vandetanib, mefloquine, bromocriptine) and used salt records whose counterions made escitalopram, paroxetine, metoprolol, trimipramine and propantheline look barrier-impermeable. Clinical compounds 54 -> 62; both barrier models 13 -> 22 (same software, same day). Ciclopirox's rank with the barrier weight did not move in any of the three runs. The manuscript's S12 and prior-art table need the same update. ||  || Deferoxamine: first without the barrier weight (score 3.69 against ciclopirox's 3.40), 13th with it; ADMET-AI 0.53 (just over the 0.5 cut) and BOILED-Egg 'out', so the models disagree. Two approved iron chelators at the top of the unweighted list is itself worth saying. ||  || New entries to the top twenty since the prior-art audit (backup B4): deferoxamine, L-citrulline, Lysergide, Toluidine Blue O. ||  || Caveats if asked: scored per tumor by GSVA, the ciclopirox gene set does not separate the arms (P = 0.89), so the rank rests on the whole-list ordering; its DSigDB sets hold at most one ribosomal-protein gene, so the rank is not the ribosomal block again. Brain pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction.
 ===== SLIDE 10
 [text] Why ciclopirox: U-251 is past the threshold on the axis it inhibits
-[picture] Picture 2
 [text] Ciclopirox chelates iron and inhibits DOHH, which activates eIF5A for translation elongation. In DepMap¹⁶, U-251 MG is past the dependency threshold for DOHH (−0.58), more dependent than 69 % of 90 CNS lines (median −0.46). | In mice, LITT opens the barrier around the ablation for one to three weeks¹⁷: a possible delivery window.
 [text] 16. DepMap 24Q4 (depmap.org), Chronos gene effect, U-251 MG (ACH-000232); Dempster JM, et al. Genome Biol 2021;22:343.   17. Cleary RT, et al. Neuro Oncol 2026;28:1649–1661.   Violins: all screened lines (n per gene 1,043–1,178); dots, CNS/brain lines; bar, interquartile range; white dot, median; dashed, −0.5; dotted, −1 (median common-essential gene).
 [notes] 4:15–4:45  The mechanism argument, kept modest. DHPS and EIF5A are needed by most lines (85 % and 91 % below −0.5), so they are not selective; DOHH is the step most lines can do without (35 % below −0.5), and U-251 needs it more than the typical glioma line, by a modest margin. U-251 is broadly dependent, so a percentile like this is ordinary for it. Ribonucleotide reductase (RRM1 −3.14, RRM2 −2.25) is needed by nearly every line. HIF1A is not a dependency (+0.15). A public screen of the line in culture, not our data. ||  || Barrier window, from Cleary 2026 in SB28 mouse glioma: tight junctions open for 7 days up to 100 µm from the ablation; transcytosis peaks at day 14 and is back to baseline by day 21. No human post-LITT time course exists.
@@ -88,39 +78,34 @@
 [notes] 5:45–6:00  Thanks. Leave the GEO accession on screen during questions. Confirm Indrani Datta's credential (DHI, PhD or MS) before the talk.
 ===== SLIDE 14
 [text] Backup B1. Is the fall rat contamination?
-[picture] Picture 2
 [text] Counting every shared read as rat shifts the ribosomal-protein sets by about 0.01 log2 (sign set by one control). | They fall −0.40; background genes matched on abundance and control/tumor ratio fall −0.13. | Without IL68B the fall is −0.11.
 [text] 19. Risso D, et al. Nat Biotechnol 2014;32:896–902.   RUVSeq¹⁹ factors from the rat-brain controls (k = 2) also separate the arms, so the adjustment removes part of the arm difference.
 [notes] Backup. Mean log2 fold change (recurrent vs primary) of each set under each analysis; the bound is a model ceiling, not an observed change.
 ===== SLIDE 15
 [text] Backup B2. The whole pipeline re-run without one tumor
 [table]  | DE genes | Ribosomal-protein set q | Ciclopirox rank (weighted / not) | AC-like change | AC-like p
-[table] All six | 35 | 0.022 | 1 / 1 | −0.53 | 0.007
-[table] Without IL68B | 43 | 0.027 | 1 / 1 | −0.57 | 0.044
-[table] Without IL66B | 140 | 0.309 | 3 / 14 | −0.50 | 0.066
+[table] All six | 35 | 0.022 | 1 / 2 | −0.53 | 0.007
+[table] Without IL68B | 43 | 0.027 | 1 / 2 | −0.57 | 0.044
+[table] Without IL66B | 140 | 0.309 | 3 / 16 | −0.50 | 0.066
 [text] Every step re-run from counts: differential expression, GSEA (seed 1234), subtype scoring, drug ranking. IL68B was chosen because it carries the ribosomal-protein fall; IL66B because it is the library-QC outlier. Both choices were made after seeing the data.
-[text] ANALYSIS/holdout_IL68B and holdout_IL66B, comparison.json. Subtype p here is the published TPM-based GSVA run.
+[text] ANALYSIS/holdout_IL68B and holdout_IL66B, comparison.json; ciclopirox ranks from the exact-name ChEMBL rerun (ANALYSIS/drug_rematch). Subtype p here is the published TPM-based GSVA run.
 [notes] Backup. Post hoc holdouts: say so.
 ===== SLIDE 16
 [text] Backup B3. CIBERSORT deconvolution of the Neftel states
-[picture] Picture 2
 [text] CIBERSORT v1.04¹⁰, signature built from Neftel⁷ single-cell profiles. P < 0.05 in every library, but fit r 0.19–0.26 in the tumors and the culture: significant against random mixtures, poor as a description. | The rat-brain controls, almost no human reads, get fractions too (fit r 0.10–0.17). | AC-like 0.22 → 0.27, opposite to the GSVA score; MES-like 0.51 → 0.39. | Across the five runs with tumor-state columns (three Neftel builds, two GLASS), no state differs at P < 0.05; GLASS proliferating stem-like is higher in all three recurrences (P 0.06–0.08).
 [text] 7. Neftel C, et al. Cell 2019;178:835–849.   10. Newman AM, et al. Nat Methods 2015;12:453–457.   Relative mode, 1,000 permutations, no quantile normalisation; Ivy GAP, glioma atlas, LM22 and BayesPrism references have no tumor-state columns; ANALYSIS/cibersort.
 [notes] Backup. CIBERSORT estimates the share of each state in a bulk sample; it does not sort reads.
 ===== SLIDE 17
 [text] Backup B4. What is already known about the top twenty
-[picture] Picture 2
 [text] 20. Su Z, et al. Cell Death Dis 2021;12:251.   Tier A: in vivo or clinical glioma evidence (ciclopirox²⁰); B: in vitro or contested; C: none, failed or not a therapy. PubMed per compound.
-[notes] Backup. Prior-art audit of the top twenty of the 54, from the supplement (S15). Known inconsistency to fix in the manuscript: paroxetine and amiodarone have in vivo evidence but sit in B; diazepam's evidence is contested but sits in C.
+[notes] Backup. Prior-art audit of the top twenty of the 54 in the September ranking (S15); the exact-name rerun changes the top twenty (see slide 9 notes), so new entrants have no audit yet. Known inconsistency to fix in the manuscript: paroxetine and amiodarone have in vivo evidence but sit in B; diazepam's evidence is contested but sits in C.
 ===== SLIDE 18
 [text] Backup B5. Sample-to-sample distances
-[picture] Picture 2
 [text] Euclidean distance on rlog expression, all genes, hierarchical clustering (the DESeq2 quality-control view). | The two NL recurrences pair; IL68B stands apart from everything; IL66B joins the other two primaries. | Unsupervised clustering does not recover the arms: whatever separates them is a few coordinated programs, not the whole transcriptome.
 [text] Orthotopic U251N glioblastoma xenograft in the athymic rat, MRI-guided LITT; bulk RNA-seq of primary and recurrent tumors, n = 3 per arm; GEO GSE338105.
 [notes] Backup. Show if asked whether the arms separate globally.
 ===== SLIDE 19
 [text] Backup B6. The strongest gene sets in each direction
-[picture] Picture 2
 [text] Down in recurrence: the ribosomal-protein block (six sets at q < 0.25). Up: mitotic and cell-cycle sets lead, none below q = 0.61.
 [text] 6. Subramanian A, et al. Proc Natl Acad Sci USA 2005;102:15545–15550.   Broad GSEA⁶, 8,869 sets; point size, set size; colour, FDR q.
 [notes] Backup. The standard GSEA summary: eight strongest sets each way.

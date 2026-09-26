@@ -4,6 +4,14 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 ~15:45 EDT: drug rematch DONE (40468316), deck slide 9 + B2 updated
+
+`ANALYSIS/drug_rematch/REMATCH.md`: clinical compounds 54 -> 62, both barrier models 13 -> 22 (salt records had inflated TPSA:
+escitalopram, paroxetine, metoprolol, trimipramine, propantheline now pass; lysergide, mefloquine, tolonium, vandetanib enter).
+Ciclopirox weighted rank unchanged in all three arms (1 / 1 / 3); unweighted 2 / 2 / 16 behind deferoxamine (ADMET-AI 0.53,
+BOILED-Egg out). Top 5 weighted unchanged. S12 and the prior-art table (S15) of the manuscript need the same update.
+Host rnaseq 40468361 aligning at 15:35 (N269B trimmed this time); DE / LOO / deconv chained afterok. GSC 40468077 still running.
+
 ## 2026-09-26 ~15:00 EDT (grid clock): PENDING GRID JOBS: drug rematch, host chain (Greg: "Yes" to the rerun; "add the host stuff")
 
 | job | what | ETA | output |

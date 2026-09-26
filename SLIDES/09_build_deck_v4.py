@@ -336,36 +336,52 @@ def build(out: Path):
               f"CIBERSORT puts AC slightly higher in recurrence ({rb['deconv']['AC_primary']:.2f} to {rb['deconv']['AC_recurrent']:.2f}), the opposite direction; at this fit neither is a composition.",
               f"Whole pipeline without IL68B or IL66B (TPM run, from {ho['all_six']['AC_p']:.3f} with all six): AC p = {ho['IL68B']['AC_p']:.3f} and {ho['IL66B']['AC_p']:.3f} (backup B2)."])
 
-    # ---- 9 the drug
+    # ---- 9 the drug (exact-name ChEMBL matching, ANALYSIS/drug_rematch; supersedes the first-search-hit ranking of S12)
+    RM = ROOT / "ANALYSIS" / "drug_rematch"
+    rmj = json.load(open(RM / "rematch.json", encoding="utf-8"))
+    ex, oldm = rmj["published"]["exact matching"], rmj["published"]["old matching"]
+    cw, dw = ex["watch"]["ciclopirox"], ex["watch"]["deferoxamine"]
+    c68, c66 = rmj["IL68B"]["exact matching"]["watch"]["ciclopirox"], rmj["IL66B"]["exact matching"]["watch"]["ciclopirox"]
+    assert cw["rank_bbb"] == 1 and c68["rank_bbb"] == 1 and c66["rank_bbb"] == 3 and dw["rank_nobbb"] == 1
+    rk = pd.read_csv(RM / "results" / "published_drug_ranking_final.csv").sort_values("rank_bbb").reset_index(drop=True)
+    assert rk.Drug.iloc[0] == "ciclopirox" and len(rk) == ex["n_clinical"]
+    nxt2 = rk[rk.both_agree.astype(bool) & (rk.Drug != "ciclopirox")].iloc[0]
+    sep20 = set(esm.head(20).Drug.str.lower()); new20 = list(rk.head(20).Drug)
+    entered20 = [d for d in new20 if d.lower() not in sep20]
     s = content_slide(prs, "A candidate drug against the recurrent state: ciclopirox")
-    top = esm.head(5)
     rows = [["Rank", "Compound", "NES", "BBB probability", "Both BBB models"]]
-    for i, r in top.iterrows():
-        rows.append([str(i + 1), str(r.Drug), m(float(r.NES)), f"{float(r['ADMET-AI BBB probability']):.2f}",
-                     "yes" if str(r["Both BBB models agree"]).lower() == "yes" else "no"])
+    for _, r in rk.head(5).iterrows():
+        rows.append([str(int(r.rank_bbb)), str(r.Drug), m(float(r.NES)), f"{float(r.BBB_Martins):.2f}", "yes" if bool(r.both_agree) else "no"])
     widths = [680000, 1900000, 950000, 1400000, 1450000]
     table(s, L, TOP + 50000, widths, rows, size=17, bold_rows=(1,), row_h=470000)
     tx = L + sum(widths) + GAP
     add_text(s, tx, TOP + 50000, R - tx, BOTTOM - TOP, [
-        f"DSigDB drug signatures{C('yoo')} against the recurrence ranking: the 100 most opposing name {fun['n_compounds']} compounds ({n_fdr05} signatures at FDR < 0.05); "
-        f"{fun['n_clinical']} matched a clinical-phase record; {fun['n_both_bbb']} pass both barrier models{C('swanson', 'daina')}.",
-        f"Ciclopirox ranks first with the barrier weight; first without IL68B, third without IL66B. Another group's reversal screen also nominated it.{C('sun')}",
+        f"DSigDB drug signatures{C('yoo')} against the recurrence ranking: the 100 most opposing name {fun['n_compounds']} compounds ({n_fdr05} at FDR < 0.05); "
+        f"{ex['n_clinical']} have a clinical-phase ChEMBL record; {ex['n_both_agree']} pass both barrier models{C('swanson', 'daina')}.",
+        f"Ciclopirox ranks first with the barrier weight (second without it); first without IL68B, third without IL66B. Another group's reversal screen also nominated it.{C('sun')}",
         f"Approved as a topical antifungal; an oral form completed phase 1 in hematologic cancer.{C('minden')}"],
         size=15, gap=12)
     add_text(s, L, TOP + 50000 + 470000 * len(rows) + 150000, sum(widths), 1200000, [
-        f"Deferoxamine, another approved iron chelator (NES {m(dfo_nes)}), was dropped by a database mismatch; unweighted it would rank first.",
+        f"Without the barrier weight, deferoxamine, another approved iron chelator, leads (NES {m(dw['NES'])}); the barrier models disagree on it "
+        f"(ADMET-AI {dw['BBB_Martins']:.2f}, borderline; BOILED-Egg, no).",
         [("Computational predictions: nothing here has been dosed in this model.", BLUE)]], size=15, gap=8)
-    refs(s, C.line("Rank among the matched compounds by |NES|^1.5 × ADMET-AI BBB probability; BBB models ADMET-AI and BOILED-Egg; Online Resource 1, S12."))
+    refs(s, C.line(f"Rank among the {ex['n_clinical']} compounds with a clinical-phase ChEMBL record (exact-name matching, audited) by |NES|^1.5 × ADMET-AI BBB "
+                   "probability; BBB models ADMET-AI and BOILED-Egg; supersedes Online Resource 1, S12."))
     notes(s, ["3:40–4:15  The drug. Each compound's DSigDB gene set is tested for sitting among the genes that fall in recurrence, then weighted by "
-              f"predicted barrier penetration. Ciclopirox scores {cpx['score']:.2f} against {nxt['score']:.2f} for {nxt['drug']}, the next compound both barrier models "
-              "pass. Without IL66B it is third, fourteenth without the barrier weight: say so if asked.",
-              f"Deferoxamine: the ChEMBL lookup matched a different record (CHEMBL4635234, no phase), so the clinical filter dropped it; its unweighted score "
-              f"{dfo_unw:.2f} beats ciclopirox's {cpx_unw:.2f}. Its weighted rank needs its real structure scored (the rerun is pending); deferoxamine is not "
-              "expected to cross the barrier well. Two iron chelators at the top of the list is itself worth saying. The same name matching also dropped "
-              "vandetanib, mefloquine and bromocriptine, so '54' is a floor; the rerun will recount.",
+              f"predicted barrier penetration. Ciclopirox scores {cw['score_bbb']:.2f} against {float(nxt2.score_bbb):.2f} for {nxt2.Drug}, the next compound both "
+              f"barrier models pass. Without IL66B it is third, {c66['rank_nobbb']}th without the barrier weight: say so if asked.",
+              "What changed since the manuscript's S12: compound names are now matched to ChEMBL by exact name or synonym and mapped to the parent "
+              "molecule, with every changed or unresolved name audited (ANALYSIS/drug_rematch). The old pipeline took the first free-text search "
+              f"hit, which dropped approved drugs (deferoxamine, vandetanib, mefloquine, bromocriptine) and used salt records whose counterions made "
+              f"escitalopram, paroxetine, metoprolol, trimipramine and propantheline look barrier-impermeable. Clinical compounds {oldm['n_clinical']} -> "
+              f"{ex['n_clinical']}; both barrier models {oldm['n_both_agree']} -> {ex['n_both_agree']} (same software, same day). Ciclopirox's rank with the "
+              "barrier weight did not move in any of the three runs. The manuscript's S12 and prior-art table need the same update.",
+              f"Deferoxamine: first without the barrier weight (score {dw['score_nobbb']:.2f} against ciclopirox's {cw['score_nobbb']:.2f}), {dw['rank_bbb']}th with it; "
+              f"ADMET-AI {dw['BBB_Martins']:.2f} (just over the 0.5 cut) and BOILED-Egg 'out', so the models disagree. Two approved iron chelators at the top of the unweighted list is itself worth saying.",
+              f"New entries to the top twenty since the prior-art audit (backup B4): {', '.join(entered20) if entered20 else 'none'}.",
               "Caveats if asked: scored per tumor by GSVA, the ciclopirox gene set does not separate the arms (P = 0.89), so the rank rests on the "
               "whole-list ordering; its DSigDB sets hold at most one ribosomal-protein gene, so the rank is not the ribosomal block again. Brain "
-              "pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction. Prior-art audit: backup B4."])
+              "pharmacokinetics of ciclopirox have not been measured; the barrier call is a model prediction."])
 
     # ---- 10 why ciclopirox
     s = content_slide(prs, "Why ciclopirox: U-251 is past the threshold on the axis it inhibits")
@@ -445,12 +461,13 @@ def build(out: Path):
     rows = [["", "DE genes", "Ribosomal-protein set q", "Ciclopirox rank (weighted / not)", "AC-like change", "AC-like p"]]
     for lab, k in (("All six", "all_six"), ("Without IL68B", "IL68B"), ("Without IL66B", "IL66B")):
         r = ho[k]
-        rows.append([lab, str(r["de_n"]), f"{r['q_TI']:.3f}", f"{r['cic_rank']} / {r['cic_rank_nobbb']}", m(r["AC_change"]), f"{r['AC_p']:.3f}"])
+        cr_ = {"all_six": cw, "IL68B": c68, "IL66B": c66}[k]            # ciclopirox ranks from the exact-name rerun
+        rows.append([lab, str(r["de_n"]), f"{r['q_TI']:.3f}", f"{cr_['rank_bbb']} / {cr_['rank_nobbb']}", m(r["AC_change"]), f"{r['AC_p']:.3f}"])
     table(s, L, TOP + 100000, [1900000, 1200000, 2000000, 2350000, 1400000, 1200000], rows, size=16, row_h=520000)
     add_text(s, L, TOP + 100000 + 520000 * 4 + 250000, R - L, 1200000, [
         "Every step re-run from counts: differential expression, GSEA (seed 1234), subtype scoring, drug ranking. IL68B was chosen because it carries the "
         "ribosomal-protein fall; IL66B because it is the library-QC outlier. Both choices were made after seeing the data."], size=15, gap=0)
-    refs(s, C.line("ANALYSIS/holdout_IL68B and holdout_IL66B, comparison.json. Subtype p here is the published TPM-based GSVA run."))
+    refs(s, C.line("ANALYSIS/holdout_IL68B and holdout_IL66B, comparison.json; ciclopirox ranks from the exact-name ChEMBL rerun (ANALYSIS/drug_rematch). Subtype p here is the published TPM-based GSVA run."))
     notes(s, ["Backup. Post hoc holdouts: say so."])
 
     ctl_r = [cs[k]["Correlation"] for k in ("IL64B", "N168B", "N269B")]
@@ -473,7 +490,8 @@ def build(out: Path):
     w, h = fit(img, R - L, BOTTOM - TOP)
     picture(s, img, L + (R - L - w) // 2, TOP, w, h)
     refs(s, C.line(f"Tier A: in vivo or clinical glioma evidence (ciclopirox{C('su')}); B: in vitro or contested; C: none, failed or not a therapy. PubMed per compound."))
-    notes(s, ["Backup. Prior-art audit of the top twenty of the 54, from the supplement (S15). Known inconsistency to fix in the manuscript: "
+    notes(s, ["Backup. Prior-art audit of the top twenty of the 54 in the September ranking (S15); the exact-name rerun changes the top twenty "
+              "(see slide 9 notes), so new entrants have no audit yet. Known inconsistency to fix in the manuscript: "
               "paroxetine and amiodarone have in vivo evidence but sit in B; diazepam's evidence is contested but sits in C."])
 
     s = content_slide(prs, "Backup B5. Sample-to-sample distances")
