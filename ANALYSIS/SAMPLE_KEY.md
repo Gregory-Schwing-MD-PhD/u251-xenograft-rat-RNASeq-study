@@ -18,25 +18,45 @@ culture of the same cells was sequenced as well. Ten RNA libraries exist; our di
 ## Per library
 
 Human % is the xengsort graft fraction (reads assigned to human only), from `ANALYSIS/metadata_full.csv` and the
-xengsort logs. S number is the Illumina sample number in the FASTQ file name.
+xengsort logs. S number is the Illumina sample number in the FASTQ file name. RIN is the RNA integrity number the sequencing core reported (see Library and sequencing).
 
-| Library | S# | Rat | Lab label | Treatment | Tissue | Human % | Role in our analysis |
-| ------- | -- | --- | --------- | --------- | ------ | ------: | -------------------- |
-| IL67B | S23 | 67 | IL-67, Primary | U251N implanted, not ablated | tumor | 42.52 | primary arm, DE |
-| IL68B | S24 | 68 | IL-68, Primary | U251N implanted, not ablated | tumor | 45.38 | primary arm, DE |
-| IL69B | S25 | 69 | IL-69, Primary | U251N implanted, not ablated | tumor | 64.40 | primary arm, DE |
-| IL64B | S21 | 64 | IL-64, Primary | U251N implanted, not ablated | implanted hemisphere; the sampled tissue held almost no tumor | 0.33 | excluded from DE; control sample |
-| IL66B | S22 | 66 | IL-66, Recurrent | U251N implanted, LITT, regrowth | recurrent tumor | 29.44 | recurrent arm, DE |
-| NL70B | S26 | 70 | IL-70, Recurrent (IL70B on the DNA sheet) | U251N implanted, LITT, regrowth | recurrent tumor | 42.67 | recurrent arm, DE |
-| NL71B | S27 | 71 | IL-71, Recurrent (IL71B on the DNA sheet) | U251N implanted, LITT, regrowth | recurrent tumor | 33.05 | recurrent arm, DE |
-| N168B | S30 | 68 (inferred) | N1, Control, "Contralateral" | U251N implanted in the other hemisphere, not ablated | contralateral hemisphere | 0.55 | excluded from DE; control sample; same animal as IL68B |
-| N269B | S28 | 69 | N2, Control, "Contralateral" (DNA sheet: "69B control N2") | U251N implanted in the other hemisphere, not ablated | contralateral hemisphere; holds some tumor cells | 4.90 | excluded from DE; control sample; same animal as IL69B |
-| C2B | S29 | none | C2, Culture U251, "Isolated from culture" | U251N in vitro | cultured cells | 86.19 | outside every test; exploratory PCA only |
+| Library | S# | Rat | Lab label | Treatment | Tissue | RIN | Human % | Role in our analysis |
+| ------- | -- | --- | --------- | --------- | ------ | --: | ------: | -------------------- |
+| IL67B | S23 | 67 | IL-67, Primary | U251N implanted, not ablated | tumor | 8.9 | 42.52 | primary arm, DE |
+| IL68B | S24 | 68 | IL-68, Primary | U251N implanted, not ablated | tumor | 7.8 | 45.38 | primary arm, DE |
+| IL69B | S25 | 69 | IL-69, Primary | U251N implanted, not ablated | tumor | 8.9 | 64.40 | primary arm, DE |
+| IL64B | S21 | 64 | IL-64, Primary | U251N implanted, not ablated | implanted hemisphere; the sampled tissue held almost no tumor | 8.7 | 0.33 | excluded from DE; control sample |
+| IL66B | S22 | 66 | IL-66, Recurrent | U251N implanted, LITT, regrowth | recurrent tumor | 8.8 | 29.44 | recurrent arm, DE |
+| NL70B | S26 | 70 | IL-70, Recurrent (IL70B on the DNA sheet) | U251N implanted, LITT, regrowth | recurrent tumor | 8.6 | 42.67 | recurrent arm, DE |
+| NL71B | S27 | 71 | IL-71, Recurrent (IL71B on the DNA sheet) | U251N implanted, LITT, regrowth | recurrent tumor | 8.1 | 33.05 | recurrent arm, DE |
+| N168B | S30 | 68 (inferred) | N1, Control, "Contralateral" | U251N implanted in the other hemisphere, not ablated | contralateral hemisphere | 6.1 | 0.55 | excluded from DE; control sample; same animal as IL68B |
+| N269B | S28 | 69 | N2, Control, "Contralateral" (DNA sheet: "69B control N2") | U251N implanted in the other hemisphere, not ablated | contralateral hemisphere; holds some tumor cells | 8.9 | 4.90 | excluded from DE; control sample; same animal as IL69B |
+| C2B | S29 | none | C2, Culture U251, "Isolated from culture" | U251N in vitro | cultured cells | 9.2 | 86.19 | outside every test; exploratory PCA only |
 
 In the lab key but with no library in our data: **IL-65** (Recurrent) and **C1** (Culture).
 
 Counted by animal: eight rats, nine in vivo libraries. Rats 68 and 69 each contribute two libraries (tumor and
 contralateral hemisphere).
+
+## Library and sequencing
+
+From the sequencing core's notes, relayed by Greg on 2026-09-26, and the run configuration he confirmed. The core
+**received the RNA already extracted**: the Nagaraja lab extracted it with the Qiagen RNeasy kit and QIAzol lysis,
+with no separate DNase digestion (the lab's method as it supplied it; the GEO extract protocol carries the same
+wording). RIN was 6.1 to 9.2 (column above); the six compared libraries were 7.8 to 8.9, and the lowest was N168B
+(6.1), a control that is not in the comparison. Libraries: **SMARTer Stranded Total RNA-Seq Kit v2 - Pico Input
+Mammalian** (Takara Bio, cat. 634411), which removes ribosomal RNA by **depletion** from total RNA (no poly(A)
+selection) and is **stranded, reverse**: read 1 is antisense to the transcript (Salmon library type ISR). Run:
+**Illumina NextSeq 2000, paired-end 2x100**, all ten libraries together (see Sources, item 4).
+
+Our pipeline agrees on strandedness. nf-core/rnaseq ran with strandedness `auto` for the human run
+(`ANALYSIS/results_human_final`) and the rat host run (`/rs/rs_grp_oschome/go2432/u251_host/results_rnaseq`), and
+its inference chose reverse (ISR) for every library in both (`star_salmon/<sample>/cmd_info.json` and
+`aux_info/meta_info.json`). Human run: the MultiQC strand check passes all ten as reverse, and RSeQC
+`infer_experiment` puts 98.1-98.4 % of strand-assignable reads antisense in the six compared libraries (C2B 97.4 %,
+N269B 98.2 %, and lower in IL64B, 88.0 %, and N168B, 93.3 %, the two with almost no human reads). Rat run: in each
+library's inference subsample 99.5-99.7 % of concordant pairs were ISR (`lib_format_counts.json` in the Nextflow
+work directories; the human run's work directories have since been cleaned).
 
 ## Sources
 
@@ -60,6 +80,7 @@ Nothing below is copied into this repository (it is public). The lab holds the o
    id is a NextSeq 1000/2000 (NextSeq 500 ids begin "NB"), which agrees with the GEO record (NextSeq 2000) and the
    sequencing core, and not with the JNS 2026 methods ("Nextseq500") or a NovaSeq 6000, 150 bp description.
 5. **The xengsort classification logs** for the human % column.
+6. **The sequencing core's notes** (relayed 2026-09-26): RNA received already extracted, RIN per library, library kit and chemistry, strandedness.
 
 ## What is not known
 
