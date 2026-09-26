@@ -1,0 +1,159 @@
+{
+ "fold": [
+  [
+   "Largest fold changes",
+   "log₂FC",
+   "what the locus is"
+  ],
+  [
+   "TMEM189-UBE2V1",
+   "−9.9",
+   "readthrough transcript"
+  ],
+  [
+   "RNU6-9",
+   "+9.9",
+   "small nuclear RNA"
+  ],
+  [
+   "RP11-577H5.5",
+   "+8.1",
+   "readthrough transcript"
+  ],
+  [
+   "RP5-874C20.8",
+   "+5.6",
+   "unclassified locus"
+  ],
+  [
+   "DYX1C1-CCPG1",
+   "+4.8",
+   "readthrough transcript"
+  ],
+  [
+   "ENSG00000289697",
+   "+3.6",
+   "unclassified locus"
+  ]
+ ],
+ "hubs": [
+  [
+   "Hub gene",
+   "log₂FC",
+   "what it is"
+  ],
+  [
+   "HMCN1",
+   "−2.01",
+   "hemicentin 1"
+  ],
+  [
+   "PRELP",
+   "−1.66",
+   "prolargin"
+  ],
+  [
+   "BGN",
+   "−1.54",
+   "biglycan"
+  ],
+  [
+   "LRP1",
+   "−1.22",
+   "LDL-receptor–related protein 1"
+  ],
+  [
+   "IGFBP3",
+   "−1.18",
+   "IGF-binding protein 3"
+  ],
+  [
+   "COL1A1",
+   "−1.16",
+   "collagen type I α1"
+  ],
+  [
+   "GPC3",
+   "+2.17",
+   "glypican 3"
+  ],
+  [
+   "COL17A1",
+   "+1.45",
+   "collagen type XVII α1"
+  ],
+  [
+   "CALB1",
+   "+1.22",
+   "calbindin 1"
+  ],
+  [
+   "PCLO",
+   "+1.17",
+   "presynaptic cytomatrix protein"
+  ],
+  [
+   "RYR2",
+   "+1.03",
+   "ryanodine receptor 2"
+  ]
+ ],
+ "drugs": [
+  [
+   "#",
+   "Compound",
+   "Phase",
+   "|NES|",
+   "BBB",
+   "Score"
+  ],
+  [
+   "1",
+   "ciclopirox",
+   "4",
+   "2.26",
+   "0.92",
+   "3.14"
+  ],
+  [
+   "2",
+   "pyrantel",
+   "2",
+   "1.79",
+   "0.98",
+   "2.34"
+  ],
+  [
+   "3",
+   "ifosfamide",
+   "4",
+   "1.73",
+   "0.98",
+   "2.23"
+  ],
+  [
+   "4",
+   "diazepam",
+   "4",
+   "1.65",
+   "0.98",
+   "2.08"
+  ],
+  [
+   "5",
+   "dexverapamil",
+   "2",
+   "1.78",
+   "0.87",
+   "2.07"
+  ],
+  [
+   "6",
+   "malathion",
+   "4",
+   "1.66",
+   "0.96",
+   "2.05"
+  ]
+ ]
+}

@@ -1,0 +1,725 @@
+[
+ {
+  "n": 1,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Detroit Medical Center / Wayne State University  ·  Henry Ford Health"
+   },
+   {
+    "name": "TextBox 1030",
+    "text": "Characterizing the Transcriptomic Recurrence Signature of Glioblastoma Following Laser Interstitial Thermal Therapy"
+   },
+   {
+    "name": "TextBox 1031",
+    "text": "Gregory J. Schwing, MD, PhD¹   ·   Tavarekere N. Nagaraja, PhD²   ·   Indrani Datta, DHI²   ·   Ian Y. Lee, MD²"
+   },
+   {
+    "name": "TextBox 1032",
+    "text": "¹ Department of General Surgery, Detroit Medical Center / Wayne State University, Detroit, MI\n² Department of Neurosurgery, Hermelin Brain Tumor Center, Henry Ford Health, Detroit, MI"
+   },
+   {
+    "name": "TextBox 1033",
+    "text": "Abstract 418   ·   Sunrise Science Session – Tumor 2\nMonday, November 2, 2026   ·   7:00 AM"
+   },
+   {
+    "name": "TextBox 1034",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   }
+  ],
+  "tables": [],
+  "notes": "0:00-0:12  Title. Name, institutions, and that this is a rat model of MRI-guided LITT. Do not read the title aloud."
+ },
+ {
+  "n": 2,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Disclosures"
+   },
+   {
+    "name": "Title 11",
+    "text": "Disclosures"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "I.Y.L. has consulting agreements with Medtronic, Inc. (Minneapolis, MN) and Monteris Medical, Inc. (Plymouth, MN).\nAll other authors declare no conflicts of interest.\nSupported by a Henry Ford Health Physician Scientist Award A20050 (I.Y.L.). No commercial support was received for this analysis.\nDrug candidates discussed here are computational predictions. No agent named in this talk is approved or under study for this indication."
+   }
+  ],
+  "tables": [],
+  "notes": "0:12-0:22  Disclosures. Read Dr Lee's Medtronic and Monteris agreements out loud - Monteris makes the LITT system, so the room will want to hear it named."
+ },
+ {
+  "n": 3,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Overview"
+   },
+   {
+    "name": "Title 11",
+    "text": "Where this is going"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "Rectangle 24",
+    "text": "1"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "The problem — LITT kills the core; the cells that come back sat in the sublethal margin"
+   },
+   {
+    "name": "Rectangle 26",
+    "text": "2"
+   },
+   {
+    "name": "TextBox 27",
+    "text": "The model — MRI-guided LITT in an orthotopic rat xenograft, primary and recurrent tumors matched"
+   },
+   {
+    "name": "Rectangle 28",
+    "text": "3"
+   },
+   {
+    "name": "TextBox 29",
+    "text": "The finding — the recurrent transcriptome switches protein synthesis off"
+   },
+   {
+    "name": "Rectangle 30",
+    "text": "4"
+   },
+   {
+    "name": "TextBox 31",
+    "text": "The convergence — subtype scores and network hubs point the same way"
+   },
+   {
+    "name": "Rectangle 32",
+    "text": "5"
+   },
+   {
+    "name": "TextBox 33",
+    "text": "The opening — which existing, brain-penetrant drugs oppose that state"
+   }
+  ],
+  "tables": [],
+  "notes": "0:22-0:40  Roadmap. Five beats, ten seconds. Do not linger."
+ },
+ {
+  "n": 4,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Background"
+   },
+   {
+    "name": "Title 11",
+    "text": "LITT ablates the core; recurrence starts at the margin"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "LITT is increasingly used for deep-seated and recurrent glioblastoma, where open resection carries high morbidity.¹\nThermal dose falls off with distance from the fiber. Beyond the ablative threshold lies a sublethal margin.\nThe cells that seed recurrence are the ones that survive there."
+   },
+   {
+    "name": "TextBox 28",
+    "text": "ablation core"
+   },
+   {
+    "name": "TextBox 29",
+    "text": "sublethal margin"
+   },
+   {
+    "name": "TextBox 30",
+    "text": "peritumoral brain"
+   },
+   {
+    "name": "TextBox 31",
+    "text": "1. Chen C, et al. J Neurooncol 2021;151:429–442."
+   }
+  ],
+  "tables": [],
+  "notes": "0:40-1:10  Background. The one idea to land: LITT kills the core, but the cells that come back sat in the sublethal margin. Point at the diagram once."
+ },
+ {
+  "n": 5,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Background"
+   },
+   {
+    "name": "Title 11",
+    "text": "What that margin is known to do — and what it is not"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "Rounded Rectangle 24",
+    "text": "Already described"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "Peri-ablation vessels transiently open the blood–brain barrier after ablation.²\nThe immune microenvironment of the sublethal zone has been profiled in a rodent model.³"
+   },
+   {
+    "name": "Rounded Rectangle 26",
+    "text": "Not described"
+   },
+   {
+    "name": "TextBox 27",
+    "text": "The cell-intrinsic transcriptional state of the residual tumor cells that survive ablation and repopulate the lesion.\nThat is the gap this analysis addresses."
+   },
+   {
+    "name": "Rounded Rectangle 28",
+    "text": "Does post-LITT recurrence carry its own transcriptional program — and does that program point to a drug?"
+   },
+   {
+    "name": "TextBox 29",
+    "text": "2. Cleary RT, et al. Neuro Oncol 2026;28:1649–1661.    3. Tao R, et al. J Immunol 2026;215:vkaf327."
+   }
+  ],
+  "tables": [],
+  "notes": "1:10-1:35  The gap. The vessels and the immune side of that margin have been described; the tumor cells' own state has not. End on the question and pause."
+ },
+ {
+  "n": 6,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Methods"
+   },
+   {
+    "name": "Title 11",
+    "text": "The model"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "An orthotopic U251N glioblastoma xenograft in the athymic RNU/RNU rat, ablated under MRI guidance — a model our group established and characterized previously.⁴˒⁵"
+   },
+   {
+    "name": "Rounded Rectangle 25",
+    "text": "Orthotopic\nU251N xenograft"
+   },
+   {
+    "name": "TextBox 26",
+    "text": "human glioblastoma line\nin the athymic RNU/RNU rat"
+   },
+   {
+    "name": "Rounded Rectangle 28",
+    "text": "MRI-guided\nLITT"
+   },
+   {
+    "name": "TextBox 29",
+    "text": "thermal ablation of the\nprimary tumor under\nreal-time MR thermometry"
+   },
+   {
+    "name": "Rounded Rectangle 31",
+    "text": "Matched tumors\nre-harvested"
+   },
+   {
+    "name": "TextBox 32",
+    "text": "primary (pre-LITT) and\nrecurrent (post-LITT)\nn = 3 per arm"
+   },
+   {
+    "name": "TextBox 33",
+    "text": "The graft is human and the host is rat, which is the point: every read can be assigned to a species, so the tumor compartment can be read on its own."
+   },
+   {
+    "name": "TextBox 34",
+    "text": "4. Nagaraja TN, et al. Acta Neurochir 2021;163:3455–3463.    5. Nagaraja TN, et al. J Neurosurg 2026:1–14."
+   }
+  ],
+  "tables": [],
+  "notes": "1:35-2:00  The model. Move fast. The one thing to stress is that the graft is human and the host is rat, which is what makes the tumor compartment separable."
+ },
+ {
+  "n": 7,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Methods"
+   },
+   {
+    "name": "Title 11",
+    "text": "The analysis"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "Rounded Rectangle 24",
+    "text": "xengsort"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "human graft reads sorted\nfrom rat host reads, k = 25"
+   },
+   {
+    "name": "Rounded Rectangle 27",
+    "text": "DESeq2"
+   },
+   {
+    "name": "TextBox 28",
+    "text": "Wald test, ashr shrinkage\nFDR < 0.05, |log₂FC| > 1"
+   },
+   {
+    "name": "Rounded Rectangle 30",
+    "text": "Broad GSEA · subtypes\nSTRING · DSigDB"
+   },
+   {
+    "name": "TextBox 31",
+    "text": "enrichment, subtypes,\nnetwork and drug ranking"
+   },
+   {
+    "name": "TextBox 32",
+    "text": "Enrichment was permuted on gene-set membership, not on samples. At n = 3 per arm there are too few sample permutations to estimate significance, and gene-set permutation is substantially more reproducible at this size.⁶\nRepurposing screened DSigDB, ranking each compound by how strongly its own signature countered the tumor signature (|NES|¹˙⁵), weighted by predicted blood–brain barrier permeability.\nRaw sequencing data are public: GEO accession GSE338105."
+   },
+   {
+    "name": "TextBox 33",
+    "text": "6. Maleki F, et al. Hum Genomics 2019;13(Suppl 1):42."
+   }
+  ],
+  "tables": [],
+  "notes": "2:00-2:25  The analysis. Enrichment was permuted on gene-set membership, not on samples, because n = 3. If someone challenges the statistics later, this slide is the answer. Mention the GEO accession is already public."
+ },
+ {
+  "n": 8,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "Primary and recurrent tumors separate globally"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "The two arms sit on opposite sides of PC1. 41.8% of the variance is on that axis and 26.2% on PC2.\nPERMANOVA attributes R² = 0.278 of transcriptome-wide variance to recurrence (F = 1.54, p = 0.10).\nA large effect that three animals per arm cannot make formally significant. Worth saying out loud rather than leaving in the supplement."
+   }
+  ],
+  "tables": [],
+  "notes": "2:25-2:50  Global structure. The arms separate on PC1. Say the PERMANOVA p = 0.10 out loud - do not let someone find it in the supplement. Frame it as: the effect is large, the sample is small."
+ },
+ {
+  "n": 9,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "Only 35 genes move"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "35 genes clear FDR < 0.05 with |log₂FC| > 1 — 23 up, 12 down; 27 are protein coding."
+   },
+   {
+    "name": "TextBox 27",
+    "text": "Every one of the six is a readthrough transcript, a small nuclear RNA or an unannotated locus, on 14–111 mean counts against a median of 232 — where a handful of reads makes a large ratio.\nA list this short does not carry the biology. The rest of the talk asks what the whole transcriptome is doing."
+   }
+  ],
+  "tables": [
+   [
+    [
+     "Largest fold changes",
+     "log₂FC",
+     "what the locus is"
+    ],
+    [
+     "TMEM189-UBE2V1",
+     "−9.9",
+     "readthrough transcript"
+    ],
+    [
+     "RNU6-9",
+     "+9.9",
+     "small nuclear RNA"
+    ],
+    [
+     "RP11-577H5.5",
+     "+8.1",
+     "readthrough transcript"
+    ],
+    [
+     "RP5-874C20.8",
+     "+5.6",
+     "unclassified locus"
+    ],
+    [
+     "DYX1C1-CCPG1",
+     "+4.8",
+     "readthrough transcript"
+    ],
+    [
+     "ENSG00000289697",
+     "+3.6",
+     "unclassified locus"
+    ]
+   ]
+  ],
+  "notes": "2:50-3:10  Differential expression. Only 35 genes. Walk the table once, do not read it: the six biggest fold changes are readthrough transcripts, a U6 snRNA and two unannotated loci, all on double-digit counts. That is what justifies the pivot to gene sets, and it pre-empts the reviewer who asks why you did not chase the top hit. Do not dwell on individual genes."
+ },
+ {
+  "n": 10,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "One dominant theme: translation is switched off"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "Every leading down-regulated set is a translation or amino-acid-stress set.\nThe same direction runs across the whole anabolic programme: mTORC1 −1.46, MYC −1.29, ribosome biogenesis −1.62, glycolysis −1.57, OXPHOS −1.45.\nThe TCA cycle is unchanged (−0.67) — this is the biosynthetic machinery, not core carbon flux."
+   },
+   {
+    "name": "TextBox 26",
+    "text": "Broad GSEA, gene-set permutation, 1000 permutations, Diff_of_Classes. Nominal p is reported alongside FDR q because n = 3 per arm."
+   }
+  ],
+  "tables": [],
+  "notes": "3:10-3:45  The core result. Every leading down-regulated set is translation or amino-acid stress. The top set clears FDR; the next five are nominally significant and directionally identical. Say both halves. Then the right-hand panel: the same direction runs across mTORC1, MYC, ribosome biogenesis, glycolysis and OXPHOS, while the TCA cycle does not move. The point to land is that this is the biosynthetic machinery being switched off, not core carbon flux - a cell that has stopped building, not one that has stopped burning."
+ },
+ {
+  "n": 11,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "The effect is strikingly one-sided"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "Across 8,869 gene sets, six reach q < 0.25. All six are down-regulated, and all six are translation or stress sets.\nNothing on the up-regulated side survives correction (best q = 0.61) or forms an interpretable group.\nThe recurrent state is defined by what it switches off, not by a new program it switches on."
+   }
+  ],
+  "tables": [],
+  "notes": "3:45-4:10  The one-sidedness. This is the strongest slide - 8,869 sets tested, six clear q < 0.25, all six on the same side and all six the same theme. Nothing on the up side is interpretable."
+ },
+ {
+  "n": 12,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "Scored against the published classifiers"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 25",
+    "text": "Ten published Neftel and Garofano signatures, scored by GSVA — 39 to 50 genes each.\nOne transition reaches significance: loss of the astrocyte-like state (+0.26 → −0.27, p = 0.007).\nThe mitochondrial signature moves with them (−0.58) — the same direction as the fall in OXPHOS and mitochondrial translation, and 34 of its 35 measurable genes are lower in recurrence."
+   },
+   {
+    "name": "TextBox 26",
+    "text": "7. Garofano L, et al. Nat Cancer 2021;2:141–156.    8. Neftel C, et al. Cell 2019;178:835–849."
+   }
+  ],
+  "tables": [],
+  "notes": "4:10-4:35  Subtypes. These are the ten published Neftel and Garofano signatures, scored per sample by GSVA over the full 39-to-50-gene sets - say that, because using the published definitions rather than a hand-picked panel is the defence. One transition is significant: loss of the astrocyte-like state, p = 0.007. The mitochondrial signature moves the same way as the OXPHOS and mitochondrial-translation sets on the enrichment slide - point back to that slide, because two independent computations agreeing is the argument. If pressed on the mitochondrial call: 34 of its 35 measurable genes are lower in recurrence, and the result is stable across three levels of symbol mapping, 35/50 up to 49/50."
+ },
+ {
+  "n": 13,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "The hubs: matrix genes down, calcium genes up"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 26",
+    "text": "Down: the structural matrix. Up: neuronal calcium handling and the presynaptic scaffold.\nWhether that echoes the neuron–glioma synapse described in high-grade glioma⁹˒¹⁰ — or only reflects which cells survived — six animals cannot tell us."
+   },
+   {
+    "name": "TextBox 27",
+    "text": "9. Venkatesh HS, et al. Nature 2019;573:539–545.    10. Venkataramani V, et al. Nature 2019;573:532–538."
+   }
+  ],
+  "tables": [
+   [
+    [
+     "Hub gene",
+     "log₂FC",
+     "what it is"
+    ],
+    [
+     "HMCN1",
+     "−2.01",
+     "hemicentin 1"
+    ],
+    [
+     "PRELP",
+     "−1.66",
+     "prolargin"
+    ],
+    [
+     "BGN",
+     "−1.54",
+     "biglycan"
+    ],
+    [
+     "LRP1",
+     "−1.22",
+     "LDL-receptor–related protein 1"
+    ],
+    [
+     "IGFBP3",
+     "−1.18",
+     "IGF-binding protein 3"
+    ],
+    [
+     "COL1A1",
+     "−1.16",
+     "collagen type I α1"
+    ],
+    [
+     "GPC3",
+     "+2.17",
+     "glypican 3"
+    ],
+    [
+     "COL17A1",
+     "+1.45",
+     "collagen type XVII α1"
+    ],
+    [
+     "CALB1",
+     "+1.22",
+     "calbindin 1"
+    ],
+    [
+     "PCLO",
+     "+1.17",
+     "presynaptic cytomatrix protein"
+    ],
+    [
+     "RYR2",
+     "+1.03",
+     "ryanodine receptor 2"
+    ]
+   ]
+  ],
+  "notes": "4:35-4:55  Hubs. Do not read the table - point at the sign column. Everything structural in the matrix goes down; the calcium and presynaptic genes (CALB1, RYR2, PCLO) go up. Offer the neuron-glioma synapse as a question, not a claim, and say plainly that six animals cannot separate it from a change in which cells survived. This is the slide most likely to draw a question, so know the two Nature 2019 papers. CUT THIS SLIDE FIRST if you are running long."
+ },
+ {
+  "n": 14,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Results"
+   },
+   {
+    "name": "Title 11",
+    "text": "One candidate survives every filter"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 26",
+    "text": "Only 54 of 93 DSigDB hits carry a clinical phase — the rest include phosphine, tributyltin and a flame retardant.\nCiclopirox ranks first with or without the permeability weight, is approved, has completed phase 1 in cancer patients, and both BBB models agree.\nPrior art was audited for every hit. Seven have no glioma literature; pentetrazol induces seizures. Amiodarone and diazepam carry published evidence of harm."
+   },
+   {
+    "name": "TextBox 27",
+    "text": "11. Swanson K, et al. Bioinformatics 2024;40:btae416.   12. Daina A, Zoete V. ChemMedChem 2016;11:1117–1121.   13. Boursi B, et al. Pharmacoepidemiol Drug Saf 2016;25:1179–1185."
+   }
+  ],
+  "tables": [
+   [
+    [
+     "#",
+     "Compound",
+     "Phase",
+     "|NES|",
+     "BBB",
+     "Score"
+    ],
+    [
+     "1",
+     "ciclopirox",
+     "4",
+     "2.26",
+     "0.92",
+     "3.14"
+    ],
+    [
+     "2",
+     "pyrantel",
+     "2",
+     "1.79",
+     "0.98",
+     "2.34"
+    ],
+    [
+     "3",
+     "ifosfamide",
+     "4",
+     "1.73",
+     "0.98",
+     "2.23"
+    ],
+    [
+     "4",
+     "diazepam",
+     "4",
+     "1.65",
+     "0.98",
+     "2.08"
+    ],
+    [
+     "5",
+     "dexverapamil",
+     "2",
+     "1.78",
+     "0.87",
+     "2.07"
+    ],
+    [
+     "6",
+     "malathion",
+     "4",
+     "1.66",
+     "0.96",
+     "2.05"
+    ]
+   ]
+  ],
+  "notes": "4:55-5:25  Therapeutics. Explain the score in one sentence: how strongly the drug signature reverses the tumor signature, weighted by predicted BBB penetration from ADMET-AI. Lead with the filter, because it is the honest part: only 54 of 93 DSigDB hits carry a clinical phase - the rest include phosphine, tributyltin and a flame retardant. Then own its limits before anyone asks: it keeps things that are not systemic therapies (oxygen, ozone, magnesium) and it drops approved drugs ChEMBL has no phase for, including deferoxamine. Ciclopirox is what survives: approved, ranked first with and without the permeability weight, both BBB models agree, and it chelates iron. If asked why it should work on a cell that has stopped building: the hypusination targets DOHH, DHPS and EIF5A are selective CRISPR dependencies in U251 in DepMap - that is independent of our signature. Then the delivery point: LITT opens the barrier at the margin for weeks. Deliver the caveat sentence exactly as written; this is where a reviewer will push."
+ },
+ {
+  "n": 15,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Conclusions"
+   },
+   {
+    "name": "Title 11",
+    "text": "Conclusions"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "Post-LITT recurrence carries a coordinated shutdown of biosynthesis — translation initiation, elongation, the ribosome and the GCN2 stress arm, with ribosome biogenesis, mTORC1 and MYC output falling alongside them.\nIt extends to energy metabolism on both arms — glycolysis and OXPHOS, and mitochondrial translation — while the TCA cycle is untouched.\nHypoxic signalling collapses (HIF targets, hypoxia metagene both −1.79). Ablation removes the hypoxic core; what regrows is better perfused.\nOf the ten published subtype signatures, only loss of the astrocyte-like state reaches significance. Ciclopirox survives every filter — approved, phase 1 complete in cancer, and independently nominated by another group's screen."
+   },
+   {
+    "name": "Rounded Rectangle 25",
+    "text": "This is the phenotype you would predict of a thermally stressed, reperfused margin — recovering it from an unbiased transcriptome is a positive control, and it is why the drug output of the same pipeline is worth acting on."
+   }
+  ],
+  "tables": [],
+  "notes": "5:25-5:45  Conclusions. Four beats, then the convergence line. No new material. The closing argument is the internal consistency - translational, anabolic, respiratory and hypoxic arms all moving together - not any single q value. Say that sentence and stop."
+ },
+ {
+  "n": 16,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Limitations"
+   },
+   {
+    "name": "Title 11",
+    "text": "Limitations and next steps"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "Limitations\nn = 3 per arm. Gene-set results are best read as directional, which is why nominal p is reported alongside FDR q.\nA single cell line (U251N) in a single xenograft model — no patient tissue and no immune compartment.\nBulk RNA-seq averages the ablation margin with whatever else was harvested; the persister state is inferred, not isolated.\nEvery drug candidate is a computational prediction. None has been tested in this model."
+   },
+   {
+    "name": "TextBox 25",
+    "text": "Next steps\nSpatial or single-cell profiling of the sublethal margin, to test whether the persister state sits where we think it does.\nPuromycin incorporation and polysome profiling, to confirm that translation is genuinely suppressed and not only transcriptionally down.\nCiclopirox and LY-294002 dosed into the post-ablation barrier window, with survival as the endpoint.\nValidation in an immunocompetent model, and in patient tissue from the peri-ablation zone."
+   }
+  ],
+  "tables": [],
+  "notes": "5:45-5:55  Limitations and next steps. SECOND SLIDE TO CUT - the limitations are already stated on the results slides. Anticipated questions: why not more animals; why gene-set permutation; has any drug been tested (no)."
+ },
+ {
+  "n": 17,
+  "texts": [
+   {
+    "name": "Text Placeholder 12",
+    "text": "Thank you"
+   },
+   {
+    "name": "Title 11",
+    "text": "Acknowledgments and data availability"
+   },
+   {
+    "name": "TextBox 23",
+    "text": "CNS 2026  ·  Washington, DC  ·  Abstract 418"
+   },
+   {
+    "name": "TextBox 24",
+    "text": "Tavarekere N. Nagaraja, PhD, Indrani Datta, DHI, and Ian Y. Lee, MD — Hermelin Brain Tumor Center, Henry Ford Health, who built and characterized the model this analysis rests on.\nSupported by a Henry Ford Health Physician Scientist Award A20050 (I.Y.L.).\nAnimal procedures were approved by the Henry Ford Health IACUC (protocol #1509) and conducted in accordance with the ARRIVE guidelines.\nSequencing data: GEO GSE338105. Differential-expression, enrichment and drug-ranking tables are released as Supplementary Data."
+   },
+   {
+    "name": "Rounded Rectangle 25",
+    "text": "Questions\ngo2432@wayne.edu"
+   }
+  ],
+  "tables": [],
+  "notes": "5:55-6:00  Thanks. Name the Henry Ford group. Leave the GEO accession on screen during questions."
+ }
+]
