@@ -4,7 +4,7 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
-## 2026-09-26 06:40 EDT: PENDING GRID JOBS: the full pipeline with IL68B held out
+## 2026-09-26 06:00 EDT (grid clock): PENDING GRID JOBS: the full pipeline with IL68B held out
 
 Greg: "rerun the full drug discovery pipeline etc with that sample held out then and compare the differences" (taken as
 IL68B). `ANALYSIS/holdout_IL68B/` (README there): nf-core DE → R figure script (DSigDB drug GSEA, ChEMBL, STRING) →
@@ -13,9 +13,12 @@ six-tumour inputs through the R and Python stages today, to separate container /
 
 | job | what | submitted | ETA | output |
 |---|---|---|---|---|
-| 40467314 | nf-core differentialabundance 1.5.0, five tumours (qos secondary head; tasks on slurm -q primary) | 06:40 | 30–90 min (containers re-pulled to the CephFS cache) | `results_therapy_v3_noIL68B/` |
+| 40467314 | nf-core differentialabundance 1.5.0, five tumours (qos secondary head; tasks on slurm -q primary) | 06:00 | 30–90 min (containers re-pulled to the CephFS cache) | `results_therapy_v3_noIL68B/` |
 | 40467315 | R figure script, control + holdout arms | afterany | ~20–60 min | `{control,holdout}/publication_figure/` |
 | 40467316 | Python env build (CephFS), drug chain + GSVA both arms, compare.py | afterany | ~20–40 min | `COMPARISON.md`, `comparison.json` |
+
+Status 06:25 EDT (grid clock): 40467314 RUNNING, DESeq2 finished for the five tumours (GSEA, plots and report still to
+run); 40467315 and 40467316 PENDING on it. Expected finish of the chain: about 08:00–09:00 EDT.
 
 **On "check again":** read `COMPARISON.md`; first check the control arm reproduces the published drug profiles and ranking.
 
