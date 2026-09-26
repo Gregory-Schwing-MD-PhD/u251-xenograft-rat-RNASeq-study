@@ -1,0 +1,10 @@
+sample,Classification,Group
+IL67B,Primary_U2,Tumour
+IL68B,Primary_U2,Tumour
+IL69B,Primary_U2,Tumour
+IL66B,Recurrent_U2,Tumour
+NL70B,Recurrent_U2,Tumour
+NL71B,Recurrent_U2,Tumour
+IL64B,Control,Control
+N168B,Control,Control
+N269B,Control,Control

@@ -1,0 +1,8 @@
+reads	held_out	n	genes_tested	padj05	padj05_fc1.5	pc1_var	pc2_var	silhouette_pc12	pc1_splits_groups	ward_k2_recovers_groups
+human	none	6	19385	102	98	36.1	24.8	0.217	TRUE	FALSE
+human	IL67B	5	19095	117	116	41.1	27.4	0.288	TRUE	FALSE
+human	IL68B	5	18979	123	95	46.4	24.6	0.056	FALSE	FALSE
+human	IL69B	5	18875	61	61	41.1	29.8	0.132	TRUE	FALSE
+human	IL66B	5	19204	349	327	44.6	25.4	0.426	TRUE	FALSE
+human	NL70B	5	18953	85	84	40.2	30.2	0.065	TRUE	FALSE
+human	NL71B	5	19030	58	58	37.1	30.9	0.098	TRUE	FALSE

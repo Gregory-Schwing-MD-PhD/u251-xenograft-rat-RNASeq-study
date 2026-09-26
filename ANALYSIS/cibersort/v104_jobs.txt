@@ -1,0 +1,9 @@
+neftel4_confident	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/results/signature_neftel4_confident.txt	1000
+neftel4_allcells	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/results/signature_neftel4_allcells.txt	1000
+neftel4_confident_plus_nonmalignant	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/results/signature_neftel4_confident_plus_nonmalignant.txt	1000
+varn2022_glass_tumor3_noRMRP	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/varn2022_glass_tumor3_noRMRP.txt	100
+varn2022_glass_sc12_noRMRP	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/varn2022_glass_sc12_noRMRP.txt	100
+ivygap2018_anatomic4	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/ivygap2018_anatomic4.txt	1000
+mehani2022_glioma_sc8	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/mehani2022_glioma_sc8.txt	1000
+lm22_newman2015	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/lm22_newman2015.txt	1000
+bayesprism_gbm_ct6	/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/bayesprism_gbm_ct6.txt	0

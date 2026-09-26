@@ -1,0 +1,10 @@
+sample,fastq_1,fastq_2,strandedness
+IL64B,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL64B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL64B_host_R2.fq.gz,auto
+IL66B,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL66B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL66B_host_R2.fq.gz,auto
+IL67B,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL67B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL67B_host_R2.fq.gz,auto
+IL68B,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL68B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL68B_host_R2.fq.gz,auto
+IL69B,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL69B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/IL69B_host_R2.fq.gz,auto
+N168B,/rs/rs_grp_oschome/go2432/u251_host/fastq/N168B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/N168B_host_R2.fq.gz,auto
+N269B,/rs/rs_grp_oschome/go2432/u251_host/fastq/N269B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/N269B_host_R2.fq.gz,auto
+NL70B,/rs/rs_grp_oschome/go2432/u251_host/fastq/NL70B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/NL70B_host_R2.fq.gz,auto
+NL71B,/rs/rs_grp_oschome/go2432/u251_host/fastq/NL71B_host_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_host/fastq/NL71B_host_R2.fq.gz,auto
