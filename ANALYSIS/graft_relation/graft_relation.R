@@ -1,7 +1,7 @@
 # Does the xengsort graft/host fraction relate to the results?  Six tumours (human reads).
 #   Rscript graft_relation.R <U> <outdir>
 # Per sample: graft %, host %, both %, m = both / (graft + both) (the share of the human stream that is xengsort's
-# conserved 'both' bin), DESeq2 size factor, rlog PC1/PC2, GSVA scores (Gaussian kernel on log2 TPM + 1) of the six
+# conserved 'both' bin), DESeq2 size factor, rlog PC1/PC2, GSVA scores (Gaussian kernel on DESeq2 vst counts) of the six
 # leading translation sets, the Neftel/Garofano signatures and the DSigDB ciclopirox set, and the CIBERSORT v1.04
 # fractions.
 # Tests (all with n = 6; graft % and group are partly collinear, so read the adjusted estimates as descriptive):
@@ -74,8 +74,13 @@ tr_lfc <- do.call(rbind, lapply(TR[TR %in% names(hs)], function(s) {
 }))
 write.table(tr_lfc, file.path(out, "translation_sets_lfc_by_model.tsv"), sep = "\t", quote = FALSE, row.names = FALSE)
 
-x <- as.matrix(tpm[, TUM]); rownames(x) <- tpm$gene_name
-x <- rowsum(x, rownames(x)); x <- log2(x[rowSums(x >= 1) >= 1, ] + 1)
+# GSVA input: DESeq2 variance-stabilised counts (median-of-ratios), not TPM. The adversarial review (SUMMARY.md, C2/C4)
+# found that un-normalised log2 TPM carries a per-sample composition constant (7SK/7SL/Y RNA and rRNA take 40-65 % of
+# TPM) that correlates with graft %; count-based input removes it. Symbols summed after back-transforming.
+vs <- assay(vst(d_g, blind = TRUE))
+x <- 2^vs; rownames(x) <- sym[rownames(vs)]
+x <- x[!is.na(rownames(x)) & rownames(x) != "", ]
+x <- log2(rowsum(x, rownames(x)))
 gs <- tryCatch(gsva(gsvaParam(x, sets, kcdf = "Gaussian"), verbose = FALSE),
                error = function(e) gsva(x, sets, method = "gsva", kcdf = "Gaussian", verbose = FALSE))
 

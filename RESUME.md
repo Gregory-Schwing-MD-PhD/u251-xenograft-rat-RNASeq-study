@@ -4,6 +4,22 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 afternoon: talk v4 built (SLIDES/CNS2026_Schwing_Abstract418_CNStemplate_v4.pptx)
+
+- Greg: "synthesize all of these results into a compelling story and update the presentation", then "make sure these
+  plots are styled like typical plots in this field ... not just inventing random ways to portray data".
+- 13 slides + 4 backups, `SLIDES/09_build_deck_v4.py` (plan: `SLIDES/STORY_v4.md`). Figures in the field's standard
+  forms from `SLIDES/10_standard_figures.py`: Broad GSEA enrichment plot (running ES recomputed from the ranked list,
+  matches the pipeline's column to 5e-8), leading-edge heatmap (rlog z-scores; IL68B highest on all 77 genes), leave-
+  one-out FDR table, score vs human share with OLS fit and 95 % band, GSVA subtype heatmap (vst counts; AC P 0.002,
+  q 0.021, adjusted 0.024), CIBERSORT stacked fractions, DepMap 24Q4 violins (U-251 more DOHH-dependent than 78 % of
+  1,178 lines). Drug ranking and whole-pipeline hold-outs are plain tables. v3 (`04_build_cns_template_deck.py`) kept.
+- DepMap 24Q4 `CRISPRGeneEffect.csv` + `Model.csv` downloaded to `depmap/` (figshare 27993248; gitignored, 429 MB).
+- Still to fold in when Greg asks: host rnaseq/DE/LOO (40468032/33/34), host CIBERSORT, GSC drug screens
+  (40467921, 40468077), human-cohort plan. Open questions for Greg: what the IL/NL prefixes denote; MRI tumour volumes
+  or tissue weights; the printed abstract's numbers (NES -3.17, ciclopirox 3.40, "mitochondrial", DMOG/LY-294002)
+  disagree with the pipeline.
+
 ## 2026-09-26 13:10 EDT (grid clock): status
 
 - Host rnaseq resubmitted as 40468032 (the first, 40467893, died on a Nextflow resume lock: it was launched from the

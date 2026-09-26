@@ -127,8 +127,8 @@ LOO = out["leave_one_out"]["sets"]
 bars = [("observed", mk.NAVY, lambda nm: out["sets"][nm]["observed_mean_lfc"]),
         ("without one primary\ntumor (IL68B)", mk.RED, lambda nm: LOO[nm]["without_IL68B"]),
         ("adjusted for control-\nderived factors (k = 2)", mk.BLUE, lambda nm: cc[SETS[nm]]["k2"]["mean_lfc"]),
-        ("genes matched on abundance\nand control/tumor ratio", "#A9B4CC", lambda nm: out["sets"][nm]["matched_background_mean_lfc"]),
-        ("the most rat reads\ncould produce", mk.GOLD, lambda nm: out["sets"][nm]["mixture_bound_mean_lfc"])]
+        ("matched background genes\n(not in the set)", "#A9B4CC", lambda nm: out["sets"][nm]["matched_background_mean_lfc"]),
+        ("bound: every shared\nread counted as rat", mk.GOLD, lambda nm: out["sets"][nm]["mixture_bound_mean_lfc"])]
 names = [("initiation", "translation\ninitiation"), ("elongation", "translation\nelongation"), ("ribosome", "ribosome")]
 fig, ax = plt.subplots(figsize=(9.6, 5.0))
 wbar, pitch = 0.8, 6.0
@@ -142,7 +142,7 @@ for gi, (nm, lab) in enumerate(names):
 ax.axhline(0, color=mk.INK, lw=1.2, zorder=4)
 ax.set_xticks([]); ax.set_xlim(-0.7, 2 * pitch + 4.7); ax.set_ylim(-0.5, 0.17)
 ax.set_yticks([0, -0.1, -0.2, -0.3, -0.4]); ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: mk.MINUS(f"{v:.1f}")))
-ax.set_ylabel("mean log$_2$ fold change of the set", fontsize=14, color=mk.INK)
+ax.set_ylabel("mean log$_2$ fold change (recurrent vs primary)", fontsize=14, color=mk.INK)
 for sd in ("top", "right", "bottom"):
     ax.spines[sd].set_visible(False)
 ax.grid(axis="y", color=mk.GRID, lw=0.8, zorder=0); ax.set_axisbelow(True); ax.tick_params(axis="y", labelsize=13, length=0)

@@ -1,0 +1,93 @@
+{
+  "all6": {
+    "tag": "all6",
+    "n_genes": 15928,
+    "lib_sizes_M": [25.35, 25.29, 39.67, 20.3, 25.27, 24.91],
+    "common_disp": 0.072472,
+    "common_BCV": 0.269205,
+    "tagwise_BCV_quantiles": {
+      "10%": 0.141367,
+      "25%": 0.157571,
+      "50%": 0.199564,
+      "75%": 0.365728,
+      "90%": 0.528967
+    },
+    "trended_BCV_median": 0.200321,
+    "QL_df_prior_median": 7.105143,
+    "deseq2_final_disp_median": 0.037617,
+    "deseq2_final_BCV_median": 0.193951,
+    "deseq2_genewise_disp_median": 0.030851,
+    "mean_norm_count_median": 463.383821,
+    "mean_norm_count_quantiles": {
+      "10%": 22.132393,
+      "25%": 87.3995,
+      "50%": 463.383821,
+      "75%": 1380.253975,
+      "90%": 3244.506983
+    }
+  },
+  "no_IL68B": {
+    "tag": "no_IL68B",
+    "n_genes": 16575,
+    "lib_sizes_M": [25.36, 39.68, 20.3, 25.27, 24.92],
+    "common_disp": 0.073273,
+    "common_BCV": 0.270689,
+    "tagwise_BCV_quantiles": {
+      "10%": 0.11439,
+      "25%": 0.12928,
+      "50%": 0.184034,
+      "75%": 0.409382,
+      "90%": 0.609515
+    },
+    "trended_BCV_median": 0.192938,
+    "QL_df_prior_median": 5.410368,
+    "deseq2_final_disp_median": 0.029964,
+    "deseq2_final_BCV_median": 0.173102,
+    "deseq2_genewise_disp_median": 0.019222,
+    "mean_norm_count_median": 430.130274,
+    "mean_norm_count_quantiles": {
+      "10%": 17.18577,
+      "25%": 67.082352,
+      "50%": 430.130274,
+      "75%": 1364.921934,
+      "90%": 3225.474005
+    }
+  },
+  "no_IL66B": {
+    "tag": "no_IL66B",
+    "n_genes": 16614,
+    "lib_sizes_M": [25.36, 25.29, 39.68, 25.28, 24.92],
+    "common_disp": 0.078187,
+    "common_BCV": 0.279619,
+    "tagwise_BCV_quantiles": {
+      "10%": 0.142741,
+      "25%": 0.15907,
+      "50%": 0.201749,
+      "75%": 0.404761,
+      "90%": 0.594912
+    },
+    "trended_BCV_median": 0.204143,
+    "QL_df_prior_median": 7.846398,
+    "deseq2_final_disp_median": 0.039003,
+    "deseq2_final_BCV_median": 0.197492,
+    "deseq2_genewise_disp_median": 0.029297,
+    "mean_norm_count_median": 441.870135,
+    "mean_norm_count_quantiles": {
+      "10%": 17.203831,
+      "25%": 68.897167,
+      "50%": 441.870135,
+      "75%": 1392.394009,
+      "90%": 3285.128823
+    }
+  },
+  "pri_only": {
+    "common_BCV": 0.221675,
+    "tagwise_BCV_median": 0.194579,
+    "n_genes": 14577
+  },
+  "rec_only": {
+    "common_BCV": 0.215684,
+    "tagwise_BCV_median": 0.17523,
+    "n_genes": 14270
+  }
+}

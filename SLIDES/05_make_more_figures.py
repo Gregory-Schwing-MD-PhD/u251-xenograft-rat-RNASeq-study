@@ -62,7 +62,7 @@ def fig_sorting():
     d = sample_table()
     order = {"In vitro Culture": 0, "Primary (Pre-LITT)": 1, "Recurrent (Post-LITT)": 2, "Control (failed graft)": 3, "Control (procedural)": 3}
     d["g"] = d.cohort.map(order); d = d.sort_values(["g", "sample"]).reset_index(drop=True)
-    heads = {0: ("culture", GOLD), 1: ("primary", NAVY), 2: ("recurrent", BLUE), 3: ("rat brain controls", GREY)}
+    heads = {0: ("culture", "#7F7F7F"), 1: ("primary", NAVY), 2: ("recurrent", "#E08214"), 3: ("rat brain controls", GREY)}   # v4 arm colours
     fig, ax = plt.subplots(figsize=(10.6, 4.6))
     xs, x, last = [], 0.0, None
     for _, r in d.iterrows():
@@ -72,8 +72,8 @@ def fig_sorting():
     d["x"] = xs
     both = 100 - d.graft - d.host        # reads shared by both genomes (analysed with the human reads) or unresolved
     ax.bar(d.x, d.graft, width=0.78, color=[heads[g][1] for g in d.g], zorder=3, label="human")
-    ax.bar(d.x, d.host, bottom=d.graft, width=0.78, color="#D9D9D9", zorder=3, label="rat")
-    ax.bar(d.x, both, bottom=d.graft + d.host, width=0.78, color="#F2F2F2", edgecolor="#D9D9D9", lw=0.6, zorder=3, label="shared by both, or unresolved")
+    ax.bar(d.x, d.host, bottom=d.graft, width=0.78, color="#B5B5B5", zorder=3, label="rat")
+    ax.bar(d.x, both, bottom=d.graft + d.host, width=0.78, color="#F2F2F2", edgecolor="#B5B5B5", lw=0.6, zorder=3, label="shared by both, or unresolved")
     for _, r in d.iterrows():
         if r.graft > 20:
             ax.text(r.x, r.graft - 2, f"{r.graft:.0f} %", ha="center", va="top", fontsize=13, fontweight="bold", color="white", zorder=5)
@@ -86,7 +86,7 @@ def fig_sorting():
     ax.set_ylim(0, 116); ax.set_yticks([0, 25, 50, 75, 100]); ax.set_ylabel("share of reads, %", fontsize=15, color=INK)
     bare(ax, grid="y"); ax.tick_params(axis="x", length=0)
     from matplotlib.patches import Patch
-    ax.legend([Patch(color=NAVY), Patch(color="#D9D9D9"), Patch(facecolor="#F2F2F2", edgecolor="#D9D9D9")],
+    ax.legend([Patch(color=NAVY), Patch(color="#B5B5B5"), Patch(facecolor="#F2F2F2", edgecolor="#B5B5B5")],
               ["human (coloured by group)", "rat", "shared by both, or unresolved"],
               loc="upper left", bbox_to_anchor=(0.0, -0.12), ncol=3, fontsize=12.5, frameon=False)
     fig.subplots_adjust(bottom=0.2)
@@ -312,7 +312,39 @@ def fig_running_sum():
     json.dump(out, open(OUT / "chart_running_sum.json", "w"), indent=1)
 
 
+def fig_running_sum_ti():
+    """v4: the translation-initiation running sum alone, at slide size, labelled with the nominal p (stable across the 41
+    leave-one-tumour-out runs) instead of the seed-dependent FDR q."""
+    rep = pd.read_csv(gsea_file("gsea_report_for_Primary_U2.tsv"), sep="\t")
+    ranked = pd.read_csv(gsea_file("ranked_gene_list_Recurrent_U2_versus_Primary_U2.tsv"), sep="\t")
+    n_ranked = int(len(ranked))
+    key = "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION"
+    t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t").sort_values("RANK IN GENE LIST")
+    r = t["RANK IN GENE LIST"].to_numpy(); es = t["RUNNING ES"].to_numpy()
+    xs = np.concatenate([[0], r, [n_ranked]]); ys = np.concatenate([[0], es, [0]])
+    row = rep[rep.NAME == key].iloc[0]
+    p = float(row["NOM p-val"])
+    fig, ax = plt.subplots(figsize=(8.6, 4.4))
+    ax.fill_between(xs, ys, 0, color=PALE, alpha=0.7, zorder=1)
+    ax.plot(xs, ys, color=NAVY, lw=2.8, zorder=3)
+    ax.vlines(r, -1.28, -1.08, color=INK, lw=0.9, zorder=2)
+    ax.axhline(0, color=GRIDC, lw=1)
+    ptxt = "nominal p < 0.001" if p < 0.001 else f"nominal p = {p:.3f}"
+    ax.text(0.03, 0.30, f"NES {MINUS(f'{row.NES:.2f}')}  ·  {ptxt}  ·  {int(row.SIZE)} genes", transform=ax.transAxes,
+            fontsize=16, color=INK, fontweight="bold", ha="left", va="bottom",
+            bbox=dict(boxstyle="square,pad=0.2", fc="white", ec="none", alpha=0.9), zorder=6)
+    for sd in ("top", "right"):
+        ax.spines[sd].set_visible(False)
+    ax.set_xlabel("rank in the list, up in recurrence → down", fontsize=15, color=INK)
+    ax.set_ylabel("running enrichment score", fontsize=15, color=INK)
+    ax.set_xticks([0, 5000, 10000, 15000, n_ranked - 1]); ax.set_xticklabels(["1", "5,000", "10,000", "15,000", f"{n_ranked:,}"])
+    ax.tick_params(labelsize=13)
+    ax.set_ylim(-1.3, 0.15)
+    fig.tight_layout()
+    save(fig, "chart_running_sum_ti.png")
+
+
 if __name__ == "__main__":
     print("figures ->", OUT)
-    fig_sorting(); fig_trajectory(); fig_threshold(); fig_drug_scatter(); table_prior_art(); enplot_composite(); fig_running_sum()
+    fig_sorting(); fig_trajectory(); fig_threshold(); fig_drug_scatter(); table_prior_art(); enplot_composite(); fig_running_sum(); fig_running_sum_ti()
     print("done")

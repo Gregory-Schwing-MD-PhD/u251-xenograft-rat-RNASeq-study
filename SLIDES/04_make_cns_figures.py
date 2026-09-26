@@ -199,6 +199,7 @@ def fig_pca():
     ax.set_xlabel("PC1  (%.1f %% of variance)" % F["pc1"], fontsize=16, color=INK, labelpad=6)
     ax.set_ylabel("PC2  (%.1f %%)" % F["pc2"], fontsize=16, color=INK, labelpad=4)
     ax.set_xlim(-11.5, 11.5); ax.set_ylim(-10.5, 10.5)
+    ax.set_xticks([-10, -5, 0, 5, 10]); ax.set_yticks([-10, -5, 0, 5, 10])      # v4: even ticks (2.5 steps printed as 8, 5, 2)
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: MINUS(f"{v:.0f}")))
     ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: MINUS(f"{v:.0f}")))
     save(fig, "chart_pca.png")
@@ -213,7 +214,7 @@ def fig_volcano():
     fig, ax = plt.subplots(figsize=(6.6, 4.4))
     bare(ax)
     ax.scatter(ns.log2FoldChange, ns.y, s=8, color=FAINT, lw=0, zorder=2)
-    ax.scatter(sig.log2FoldChange, sig.y, s=70, color=NAVY, lw=0.8, edgecolor="white", zorder=4)
+    ax.scatter(sig.log2FoldChange, sig.y, s=70, color=np.where(sig.log2FoldChange > 0, "#E08214", NAVY), lw=0.8, edgecolor="white", zorder=4)   # v4: up orange, down navy
     for v in (-1, 1):
         ax.axvline(v, color=GREY, lw=0.9, ls=(0, (4, 4)), zorder=1)
     ax.axhline(-np.log10(0.05), color=GREY, lw=0.9, ls=(0, (4, 4)), zorder=1)
@@ -223,7 +224,7 @@ def fig_volcano():
     ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: MINUS(f"{v:.0f}")))
     top = ax.get_ylim()[1]
     ax.text(-11.2, top * 0.955, "%d down" % F["de_down"], color=NAVY, fontsize=19, fontweight="bold", ha="left", va="top")
-    ax.text(11.2, top * 0.955, "%d up" % F["de_up"], color=NAVY, fontsize=19, fontweight="bold", ha="right", va="top")
+    ax.text(11.2, top * 0.955, "%d up" % F["de_up"], color="#E08214", fontsize=19, fontweight="bold", ha="right", va="top")
     ax.text(-11.2, -np.log10(0.05) + top * 0.02, "FDR 0.05", color=GREY, fontsize=13, ha="left", va="bottom")
     # the six largest movers (the table beside the chart) and the network hubs, largest change placed first
     big6 = sig.reindex(sig.log2FoldChange.abs().sort_values(ascending=False).index).head(6)
@@ -399,7 +400,7 @@ def fig_subtypes():
     ax.plot([-0.13, 1.0], [0, 0], color=GRID, lw=1.0, zorder=1)
     ends = []
     for r in rows:
-        on = r["p"] < 0.05; mtc = r["name"] == "Garofano_MTC"
+        on = r["p"] < 0.05; mtc = False   # v4: only the nominally significant signature is highlighted
         col = NAVY if on else GOLD if mtc else "#C4CBC9"
         a, b = r["primary"], r["recurrent"]
         ax.plot([0, 1], [a, b], color=col, lw=3.2 if (on or mtc) else 1.5, zorder=4 if (on or mtc) else 2, solid_capstyle="round")

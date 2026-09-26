@@ -47,3 +47,13 @@ work/
 # Copyrighted reference PDFs the user grabs via library access for drafting
 # - keep the README so the repo records which papers to fetch
 manuscript/references/*.pdf
+
+# portable LaTeX engine fetched by MBR/build.sh
+MBR/.build/
+MBR/*.aux
+MBR/*.out
+MBR/*.log
+
+# DepMap 24Q4 matrices (figshare 27993248), third-party, 429 MB
+depmap/CRISPRGeneEffect.csv
+depmap/Model.csv

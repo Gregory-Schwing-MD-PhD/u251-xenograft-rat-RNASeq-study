@@ -1,0 +1,18 @@
+sample,group,graft_pct,host_pct,both_pct,both_share_of_human_stream,human_stream_library_M_reads_edgeR,ruvseq_k1_W1,CIBERSORT MES fraction (neftel4_confident),CIBERSORT AC fraction (neftel4_confident),CIBERSORT fit correlation (neftel4_confident),GSVA Neftel_AC,GSVA Neftel_MES1,"Translation initiation set score, all 80 members (mean centred rlog)","Translation initiation set score, 77 core-enrichment genes (mean centred rlog)"
+IL67B,Primary,42.52,48.4,7.35,0.1474,25.4,1.01678,0.52674,0.18603,0.18861,0.21408,-0.04425,-0.05939,-0.05958
+IL68B,Primary,45.38,45.37,7.66,0.1444,25.3,1.01921,0.56166,0.24022,0.23148,0.17146,0.45738,0.45001,0.45374
+IL69B,Primary,64.4,25.64,7.85,0.1087,39.7,1.01386,0.45425,0.23561,0.20219,0.39731,0.30539,-0.00687,-0.00589
+IL66B,Recurrent,29.44,59.17,9.6,0.2459,20.3,1.00967,0.29461,0.28389,0.21729,-0.26505,-0.49247,-0.16185,-0.16709
+NL70B,Recurrent,42.67,48.25,7.29,0.1459,25.3,1.00304,0.49762,0.22144,0.24103,-0.4102,0.03605,-0.1092,-0.10588
+NL71B,Recurrent,33.05,59.23,6.58,0.166,24.9,1.00917,0.37731,0.30702,0.2582,-0.13235,-0.25125,-0.1127,-0.11528
+
+metric,pearson_r_vs_graft,pearson_p,spearman_rho_vs_graft,spearman_p,within_group_r_vs_graft (group means removed)
+CIBERSORT MES fraction (neftel4_confident),0.513,0.298,0.6,0.208,0.064
+CIBERSORT AC fraction (neftel4_confident),-0.496,0.317,-0.429,0.397,-0.094
+CIBERSORT fit correlation (neftel4_confident),-0.439,0.384,-0.2,0.704,0.064
+GSVA Neftel_AC,0.725,0.103,0.543,0.266,0.269
+GSVA Neftel_MES1,0.787,0.063,0.943,0.005,0.554
+"Translation initiation set score, all 80 members (mean centred rlog)",0.311,0.549,0.886,0.019,-0.223
+"Translation initiation set score, 77 core-enrichment genes (mean centred rlog)",0.317,0.541,0.886,0.019,-0.214
+
+graft_pct primary mean/sd,50.77,11.89,recurrent mean/sd,35.05,6.84,welch p,0.136,exact Mann-Whitney p,0.2
