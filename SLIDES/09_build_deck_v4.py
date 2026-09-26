@@ -444,7 +444,7 @@ def build(out: Path):
         "Henry Ford Health IACUC protocol #1509; ARRIVE guidelines.",
         "Sequencing data: GEO GSE338105."], size=17, gap=12)
     navy_bar(s, R - 3600000, TOP + 300000, 3600000, 1300000, ["Questions", "go2432@wayne.edu"], size=20)
-    notes(s, ["5:45–6:00  Thanks. Leave the GEO accession on screen during questions. Confirm Indrani Datta's credential (DHI, PhD or MS) before the talk."])
+    notes(s, ["5:45–6:00  Thanks. Leave the GEO accession on screen during questions. Indrani Datta's credential is DHI (confirmed by Greg, 2026-09-26). The JNS 2026 author list prints PhD; do not copy it."])
     assert C.line() == ""
 
     # ---- backups
