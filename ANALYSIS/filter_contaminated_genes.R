@@ -3,9 +3,11 @@
 # HARD CONTAMINATION FILTER (control-detected genes)
 # ==============================================================================
 # Cross-species (PDX) RNA-seq: xengsort + Salmon leave residual rat reads on
-# conserved human orthologs. The rat-brain Control samples (IL64B, N168B,
-# N269B; negligible graft) went through the identical pipeline, so any human-
-# gene signal they carry IS contamination.
+# conserved human orthologs. The Control samples (IL64B, rat 64's sample with
+# almost no tumour; N168B, N269B, the contralateral hemispheres of rats 68 and 69;
+# 0.3-4.9% graft; see ANALYSIS/SAMPLE_KEY.md) went through the identical pipeline,
+# so human-gene signal they carry is mostly contamination (N269B also holds some
+# tumour cells).
 #
 # Rule: drop a gene if its CPM >= CPM_CUTOFF in at least MIN_CONTROLS of the
 #       Control samples. Defaults CPM_CUTOFF=1, MIN_CONTROLS=2 (>=2 of 3).

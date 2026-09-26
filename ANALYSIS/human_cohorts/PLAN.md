@@ -102,7 +102,7 @@ Assumptions:
 - Two-sided α 0.05, 80 % power, equal groups.
 - Exact Welch noncentral t, with each group keeping its own observed SD.
 - The SDs come from 3 animals each (95 % CI 0.52–6.3×), so **every n below could be off by 0.27× to 39.5×**.
-- No allowance for graft failure. IL64B failed to graft; the failure rate is unknown.
+- No allowance for a primary that yields no tumor. IL64B, recorded as a primary, held almost no tumor in its sample (0.33 % human reads); whether the graft did not take or the sample missed the tumor is not recorded, and the rate is unknown.
 - About 25 M human reads per library.
 
 Sources: `../power/power_table.csv`, `effects.json`, `dispersion.json`, `power_rnaseq.json`, `proper_quick.json`.

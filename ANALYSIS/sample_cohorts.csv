@@ -1,11 +1,11 @@
 sample,cohort,environment,role
 C2B,In vitro Culture,In vitro,Out-of-experiment reference (PCA / clustering)
-IL67B,Primary (Pre-LITT),In vivo,DE cohort
-IL68B,Primary (Pre-LITT),In vivo,DE cohort
-IL69B,Primary (Pre-LITT),In vivo,DE cohort
-IL66B,Recurrent (Post-LITT),In vivo,DE cohort
-NL70B,Recurrent (Post-LITT),In vivo,DE cohort
-NL71B,Recurrent (Post-LITT),In vivo,DE cohort
-IL64B,Control (failed graft),In vivo,RUVSeq contamination anchor (excluded from DE)
-N168B,Control (procedural),In vivo,RUVSeq contamination anchor (excluded from DE)
-N269B,Control (procedural),In vivo,RUVSeq contamination anchor (excluded from DE)
+IL67B,Primary (Pre-LITT),In vivo,DE cohort (rat 67)
+IL68B,Primary (Pre-LITT),In vivo,DE cohort (rat 68)
+IL69B,Primary (Pre-LITT),In vivo,DE cohort (rat 69)
+IL66B,Recurrent (Post-LITT),In vivo,DE cohort (rat 66)
+NL70B,Recurrent (Post-LITT),In vivo,DE cohort (rat 70)
+NL71B,Recurrent (Post-LITT),In vivo,DE cohort (rat 71)
+IL64B,Control (no tumour in sample),In vivo,"Primary (rat 64) whose sample held almost no tumour; contamination anchor, excluded from DE"
+N168B,Control (contralateral hemisphere),In vivo,"Contralateral hemisphere of rat 68 (same rat as IL68B); contamination anchor, excluded from DE"
+N269B,Control (contralateral hemisphere),In vivo,"Contralateral hemisphere of rat 69 (same rat as IL69B), holds some tumour cells; contamination anchor, excluded from DE"

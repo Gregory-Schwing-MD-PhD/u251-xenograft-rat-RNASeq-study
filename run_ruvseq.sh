@@ -52,8 +52,9 @@ XENGSORT_DIR="ANALYSIS/xengsort_out"
 METADATA="ANALYSIS/metadata_full.csv"
 
 # Optional positional args (to compare control sets):
-#   $1 = comma-separated RUV anchor control IDs (e.g. "N168B,N269B" to drop the
-#        failed-graft IL64B). Empty -> all Classification==Control samples.
+#   $1 = comma-separated RUV anchor control IDs (e.g. "IL64B,N168B" to drop
+#        N269B, which holds tumour cells; see ANALYSIS/SAMPLE_KEY.md).
+#        Empty -> all Classification==Control samples.
 #   $2 = output dir (use a new one to keep both runs, e.g. ANALYSIS/results_ruvseq_2ctrl)
 RUV_CONTROLS="${1:-}"
 OUT_DIR="${2:-ANALYSIS/results_ruvseq}"

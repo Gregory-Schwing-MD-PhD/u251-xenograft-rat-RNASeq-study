@@ -5,10 +5,12 @@ run via [`run_decontaminate.sh`](../../run_decontaminate.sh).
 
 ## What it does
 
-Removes human genes that pick up appreciable signal in the rat-brain **Control**
-samples (`IL64B`, `N168B`, `N269B`; negligible graft). Because those samples
-passed through the identical xengsort + Salmon pipeline, any human-gene counts
-they carry are residual cross-species contamination — so a gene "expressed" in
+Removes human genes that pick up appreciable signal in the **Control**
+samples (`IL64B`, rat 64's sample with almost no tumour; `N168B`, `N269B`, the
+contralateral hemispheres of rats 68 and 69; 0.3–4.9% graft; see
+[`../SAMPLE_KEY.md`](../SAMPLE_KEY.md)). Because those samples passed through the
+identical xengsort + Salmon pipeline, human-gene counts they carry are mostly
+residual cross-species contamination (`N269B` also holds some tumour cells) — so a gene "expressed" in
 them is a contamination sink and is dropped from the count matrix before
 differential expression.
 

@@ -15,9 +15,11 @@ fraction) and **Primary** (higher graft fraction) tumours — so a naive
 Primary-vs-Recurrent contrast can manufacture artifactual DE in conserved gene
 families (e.g. a spurious "translation/ribosome downregulation in recurrence").
 
-The three **Control** samples (`IL64B`, `N168B`, `N269B`; rat brain only,
-~0.3–4.9% graft) went through the identical pipeline, so any human-gene signal
-they carry **is** contamination. `RUVSeq::RUVs` (Risso et al., *Nat Biotechnol*
+The three **Control** samples (~0.3–4.9% graft) went through the identical
+pipeline: `IL64B`, rat 64's sample with almost no tumour, and `N168B` / `N269B`,
+the contralateral hemispheres of rats 68 and 69 (the same animals as the primaries
+`IL68B` / `IL69B`; see [`../SAMPLE_KEY.md`](../SAMPLE_KEY.md)). Human-gene signal
+they carry is mostly contamination; `N269B` also holds some tumour cells. `RUVSeq::RUVs` (Risso et al., *Nat Biotechnol*
 2014) estimates factors of unwanted variation **W** from these Control
 replicates; **W** is then added as covariate(s) to the DESeq2 model for the
 Primary-vs-Recurrent contrast. Controls anchor **W** but are excluded from the

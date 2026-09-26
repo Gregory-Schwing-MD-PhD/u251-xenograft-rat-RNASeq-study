@@ -60,7 +60,7 @@ def sample_table():
 
 def fig_sorting():
     d = sample_table()
-    order = {"In vitro Culture": 0, "Primary (Pre-LITT)": 1, "Recurrent (Post-LITT)": 2, "Control (failed graft)": 3, "Control (procedural)": 3}
+    order = {"In vitro Culture": 0, "Primary (Pre-LITT)": 1, "Recurrent (Post-LITT)": 2, "Control (no tumour in sample)": 3, "Control (contralateral hemisphere)": 3}
     d["g"] = d.cohort.map(order); d = d.sort_values(["g", "sample"]).reset_index(drop=True)
     heads = {0: ("culture", "#7F7F7F"), 1: ("primary", NAVY), 2: ("recurrent", "#E08214"), 3: ("rat brain controls", GREY)}   # v4 arm colours
     fig, ax = plt.subplots(figsize=(10.6, 4.6))

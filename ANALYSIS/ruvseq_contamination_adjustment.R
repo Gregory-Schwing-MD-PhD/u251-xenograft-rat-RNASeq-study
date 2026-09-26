@@ -19,9 +19,14 @@
 #   signal in conserved gene families.
 #
 # SOLUTION
-#   The three Control samples (rat brain only, ~0.3-4.9% graft) went through the
-#   identical library prep, sequencing, xengsort and Salmon pipeline. Any reads
-#   they place on human genes ARE contamination, sample- and pipeline-matched.
+#   The three Control samples (~0.3-4.9% graft) went through the identical
+#   library prep, sequencing, xengsort and Salmon pipeline: IL64B, rat 64's
+#   implanted-hemisphere sample with almost no tumour, and N168B / N269B, the
+#   contralateral hemispheres of rats 68 and 69 (the same animals as the primaries
+#   IL68B / IL69B; see ANALYSIS/SAMPLE_KEY.md). Reads they place on human genes are
+#   mostly contamination, sample- and pipeline-matched; N269B also holds some
+#   tumour cells (human Y-linked reads), and two of the three controls share an
+#   animal with a primary tumour, so W can carry rat-68/69-specific signal.
 #   We use RUVSeq::RUVs (Risso et al., Nat Biotechnol 2014) to estimate factors
 #   of unwanted variation from these Control replicates, then add those factors
 #   as covariates in the DESeq2 model for the Primary-vs-Recurrent contrast.
@@ -68,7 +73,8 @@ META_CSV   <- if (length(args) >= 2) args[2] else "ANALYSIS/metadata_full.csv"
 OUT_DIR    <- if (length(args) >= 3) args[3] else "ANALYSIS/results_ruvseq"
 # Optional 4th arg: comma/semicolon-separated control sample IDs to use as the
 # RUVs anchor (scIdx). Default = all samples with Classification == "Control".
-# Use this to drop an outlier control (e.g. the failed-graft IL64B).
+# Use this to drop a control (e.g. N269B, which holds tumour cells, or IL64B,
+# the implanted-hemisphere sample).
 RUV_CONTROLS <- if (length(args) >= 4 && nzchar(args[4]))
     trimws(strsplit(args[4], "[,;]")[[1]]) else NULL
 
@@ -279,8 +285,9 @@ set <- newSeqExpressionSet(
 set <- betweenLaneNormalization(set, which = "upper")
 
 # Diagnostic: how similar are the Control samples to each other? A control that
-# correlates poorly with the others (e.g. the failed-graft IL64B, which has seen
-# needle insertion / gliosis the procedural controls have not) would dominate the
+# correlates poorly with the others (e.g. IL64B, from the implanted hemisphere,
+# which has seen needle insertion / gliosis the contralateral hemispheres N168B and
+# N269B have not; or N269B, which holds some tumour cells) would dominate the
 # within-group variance and bias W away from the true contamination axis.
 if (length(ctrl_samples) >= 2) {
     lc <- log2(counts_ruv[, ctrl_samples, drop = FALSE] + 1)
