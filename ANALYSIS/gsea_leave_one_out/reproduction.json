@@ -1,0 +1,11 @@
+{
+ "available": true,
+ "n_sets_orig": 8869,
+ "n_sets_rerun": 8869,
+ "n_unmatched": 0,
+ "max_abs_diff_NES": 0.0,
+ "max_abs_diff_nom_p": 0.0,
+ "max_abs_diff_fdr_q": 0.0,
+ "max_abs_diff_fwer_p": 0.0,
+ "exact": true
+}

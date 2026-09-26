@@ -43,6 +43,7 @@ from pptx.util import Emu, Pt
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 sys.path.insert(0, str(HERE))
+from u251_paths import GSEA_LOO  # noqa: E402
 from cns_template import (BLUE, BOTTOM, CAP, GAP, GREY, L, NAVY, R, REF, REFS_TOP, TEMPLATE, TOP, WHITE,  # noqa: E402
                           add_text, arrow, content_slide, fit, navy_bar, notes, picture, refs)
 
@@ -193,6 +194,25 @@ def build(out: Path):
     rs = J("chart_running_sum.json")
     cc = J("contamination_check.json")
     mag = J("contamination_magnitude.json")
+    # leave-one-tumour-out GSEA (ANALYSIS/gsea_leave_one_out, 41 runs of the published command; the full seed-1234 run
+    # reproduces the published report exactly)
+    assert json.load(open(GSEA_LOO / "reproduction.json"))["exact"] is True
+    loo = list(csv.DictReader(open(GSEA_LOO / "loo_sets.tsv", encoding="utf-8"), delimiter="\t"))
+    loo_scr = list(csv.DictReader(open(GSEA_LOO / "loo_screen.tsv", encoding="utf-8"), delimiter="\t"))
+    assert len({(r["condition"], r["seed"]) for r in loo}) == 41
+    TIK = "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION"
+    ti_loo = [r for r in loo if r["set"] == TIK and not r["condition"].endswith("_nofilter")]
+    qs = lambda cond: [float(r["fdr_q"]) for r in ti_loo if r["condition"] == cond]  # noqa: E731
+    q_full, q_68 = qs("full"), qs("drop_IL68B")
+    assert len(q_full) == len(q_68) == 5
+    never = [c.replace("drop_", "") for c in dict.fromkeys(r["condition"] for r in ti_loo) if c != "full" and min(qs(c)) >= 0.05]
+    ti_all = [r for r in loo if r["set"] == TIK]
+    ti_pmax = max(float(r["nom_p"]) for r in ti_all)
+    ti_nes = [float(r["NES"]) for r in ti_all]
+    lead_pmax = max(float(r["nom_p"]) for r in loo if r["lead"] == "True")
+    n_full_ok = sum(q < 0.05 for q in q_full)
+    full_up25 = max(int(r["up_q25"]) for r in loo_scr if r["condition"] == "full")
+    assert ti_pmax < 0.001 and full_up25 == 0
     sets_p = J("chart_gsea_sets.json")
     thr = J("chart_threshold_sweep.json")
     themes = {r["set"]: r for r in J("chart_themes.json")}
@@ -414,12 +434,12 @@ def build(out: Path):
     b10 = lambda k: f"{100 * rs[K[k]]['share_in_bottom_tenth']:.0f} %"  # noqa: E731
     s2m = cc["sets"][K["init"]]["manuscript_s2"]["mean_lfc"]
     fig_top(s, FIG / "chart_running_sum.png", [
-        f"Of {F['gsea_n_sets']:,} gene sets, the six most depleted in recurrence are all translation or amino-acid stress. Translation initiation (NES {m(top[0]['nes'])}) is the only set that clears FDR 0.05 (q = {top[0]['q']:.3f}); the next five reach GSEA's exploratory q < 0.25, are nominally significant (p ≤ {sets_p['p_max']:.3f}) and point the same way.",
+        f"Of {F['gsea_n_sets']:,} gene sets, the six most depleted in recurrence are all translation or amino-acid stress. They are nominally significant (p ≤ {sets_p['p_max']:.3f}) and point the same way. Translation initiation leads (NES {m(top[0]['nes'])}, q = {top[0]['q']:.3f} in the published run), but its FDR q moves with the permutation seed: {min(q_full):.3f} to {max(q_full):.2f} over five seeds of the same analysis.",
         f"All {ti['n']} translation-initiation genes sit in the bottom {100 * ti['bottom_share']:.1f} % of the {ti['n_ranked']:,} ranked genes, each lower in recurrence (on average by about {100 * (1 - 2 ** s2m):.0f} %). In the bottom tenth sit {b10('elong')} of elongation and {b10('rib')} of ribosome members."],
         reserve=1150000, size=13, gap=5)
     refs(s, C.line(DESIGN + " GSEA running score (Diff_of_Classes ranking, gene-set permutation) from the pipeline's tables; fold changes, Online Resource 1, S2."))
     notes(s, ["2:18–2:43  The core result. Explain the plot in one breath: genes ranked from most up in recurrence to most down; walking down the list the score falls a little at every gene outside the set and jumps at every member, so a set whose members crowd the bottom drives the score to its floor just before the end. Then point at the ticks of translation initiation: all 80 at the far right.",
-              "The top set clears FDR; the next five are nominally significant and directionally identical. Say both halves. The other sets have a few members elsewhere: say 'crowd', not 'all'. None of these genes is significant alone; it is the coordinated shift that matters. If asked how robust it is: most of the fall comes from one primary tumor, IL68B (slide 15).",
+              f"Say it this way: all six are nominally significant and point the same way; which one clears FDR is not stable (translation initiation's q is below 0.05 at {n_full_ok} of 5 permutation seeds with all six tumors)." + " The other sets have a few members elsewhere: say 'crowd', not 'all'. None of these genes is significant alone; it is the coordinated shift that matters. If asked how robust it is: " + f"with any one tumor left out, translation initiation keeps nominal p < 0.001 and NES {m(max(ti_nes))} to {m(min(ti_nes))} in all 41 runs; without IL68B its q stays below 0.05 at every seed; without {', '.join(never)} it is above 0.05 at every seed (slide 15).",
               "If asked about the ranking metric: Diff_of_Classes is a linear difference of means, so abundant genes sit at the ends of the list; the manuscript's ashr-shrunk DESeq2 fold changes, on the log scale, agree in direction for every translation-initiation and ribosome gene."])
 
     # ---- 12 beyond translation
@@ -441,7 +461,7 @@ def build(out: Path):
     s = content_slide(prs, "The effect is one-sided at q < 0.25")
     fig_and_text(s, FIG / "chart_gsea_landscape.png", [
         f"Every one of the {F['gsea_n_sets']:,} gene sets is a dot: its enrichment score against how far it clears FDR.",
-        "Six reach GSEA's exploratory q < 0.25, one of them q < 0.05. All six are down-regulated translation or stress sets.",
+        "In the published run six reach GSEA's exploratory q < 0.25, one of them q < 0.05; all six are down-regulated translation or stress sets. Those counts move with the permutation seed (slide 11).",
         f"Nothing on the up-regulated side survives correction (best q = {F['gsea_up_best_q']}); at nominal p the up side is led by proliferation (next slide).",
         "Past that threshold, the recurrent state is defined by what it turns down."],
         img_w=6500000, size=15, gap=10, text_top=80000)
@@ -480,13 +500,13 @@ def build(out: Path):
     fig_and_text(s, FIG / "chart_contamination_magnitude.png", [
         f"Recurrent tumors are {h_rec:.0f} % human against {h_pri:.0f} % for the primaries. Rat reads pull each gene toward its level in rat brain; across the transcriptome that pull is small (the {tw['n_detected']:,} genes detected in rat brain average {m(tw['mean_lfc_detected'], True)}, the rest {m(tw['mean_lfc_clean'], True)}).",
         f"Relative to their level in the tumors, translation genes are no more abundant in rat brain than a typical gene (control/tumor ratio {min(ratio_t):.2f} against {mag['median_ratio_tested']:.2f}). Counting every shared read as rat, contamination could move them by {m(min(mix))} at most; they fall {rng(obs)}, against {rng(mat)} for matched genes.",
-        f"Most of the fall comes from one primary tumor: IL68B is the highest of the six on every translation-initiation and ribosome gene. Without it the sets fall {rng(w68)} (matched genes {rng(m68)}); dropping any other tumor leaves {m(max(others))} to {m(min(others))}.",
+        f"Most of the fall comes from one primary tumor: IL68B is the highest of the six on every translation-initiation and ribosome gene. Without it the sets fall {rng(w68)} (matched genes {rng(m68)}); dropping any other tumor leaves {m(max(others))} to {m(min(others))}. The enrichment does not depend on it: without IL68B, translation initiation stays at q < 0.05 at all five permutation seeds.",
         [(f"Adjusting for factors estimated from the controls{C('risso')} leaves {rng(k2)} (k = 2), but those factors also separate the arms. Purity, one tumor and arm cannot be pulled apart in six animals.", BLUE)]],
         img_w=5900000, size=12, gap=6, text_top=20000)
     refs(s, C.line("Repository analysis, not in the manuscript. Bound: every shared read treated as rat, with the controls' profile. Matched: 25 nearest non-translation genes in abundance and control/tumor ratio. Without IL68B: median-of-ratios fold changes of the other five."))
     notes(s, ["3:20–3:42  About 22 s: the most important caveat of the talk, and the slide most likely to draw a question. Two questions, two answers.",
               "Contamination: every translation gene is detected in the rat-brain controls, as most abundant conserved genes are, but relative to their tumor level they are no more abundant in rat brain than a typical gene, so contamination predicts a shift of about zero for them. They fall 0.40 on the log2 scale; genes matched on abundance and that ratio fall about a third as much.",
-              f"One tumor: IL68B, a primary, is the highest of the six on every translation-initiation and ribosome gene while genome-wide it is average. Without it the sets fall {rng(w68)}, a quarter of the size, still more than matched genes ({rng(m68)}); dropping any other tumor makes the fall larger. The gene-set tests were not re-run without it. Say this plainly.",
+              f"One tumor: IL68B, a primary, is the highest of the six on every translation-initiation and ribosome gene while genome-wide it is average. Without it the sets fall {rng(w68)}, a quarter of the size, still more than matched genes ({rng(m68)}); dropping any other tumor makes the fall larger. The gene-set test was re-run with each tumor left out (41 runs of the published command, five seeds): " + f"without IL68B translation initiation stays at q {min(q_68):.3f} to {max(q_68):.3f}; it is leaving out {', '.join(never)} that pushes q above 0.05. Nominal p stays below 0.001 in every run. Say plainly: IL68B carries the size of the fall, not its rank.",
               f"Adjustment: the RUVSeq factors estimated from the controls are higher in every primary than in every recurrent tumor, so adjusting removes part of the arm difference itself; at k = 1 the separation between arms collapses (silhouette {m(conc['k1']['pri_rec_silhouette'])}). That is collinearity, not a refutation. This analysis is not in the manuscript.",
               "The unadjusted run here is the RUVSeq script's own DESeq2 without shrinkage, so its fold changes are larger than the manuscript's ashr-shrunk ones; the adjusted runs test 19,385 genes and the means are taken over the unadjusted run's 14,849."])
 
@@ -604,7 +624,7 @@ def build(out: Path):
     x2 = L + w + GAP
     hy, mg = TH["HIF1 targets"], TH["hypoxia metagene"]
     add_text(s, x2, TOP, R - x2, h, [
-        f"Post-LITT recurrence turns its translation machinery down: initiation (FDR q = {top[0]['q']:.3f}), elongation and the ribosome, with the GCN2 amino-acid set (mostly ribosomal proteins) and growth signalling lower alongside, nominally. One primary tumor carries most of the difference.",
+        f"Post-LITT recurrence turns its translation machinery down: initiation (nominal p < 0.001 whichever tumor is left out; FDR q {min(q_full):.2f} to {max(q_full):.2f} across permutation seeds), elongation and the ribosome, with the GCN2 amino-acid set (mostly ribosomal proteins) and growth signalling lower alongside, nominally. One primary tumor carries most of the size of the difference, not its rank.",
         "Glycolysis falls in every collection; respiration does not agree across collections, and the TCA cycle is untouched.",
         f"Hypoxic signalling falls, nominally (HIF1 targets and hypoxia metagene both {m(hy['nes'])}; q = {hy['q']:.1f}): the simplest reading is that ablation removed the hypoxic core.",
         f"Of ten published subtype signatures, only the astrocyte-like score falls at nominal significance (p = {ac['p']:.3f}; q = {ac['q_bh']:.3f}). Ciclopirox ranks first with and without the permeability weight, is approved as a topical antifungal, completed phase 1 in cancer{C('minden')}, and was nominated independently by another group's signature-reversal screen.{C('sun')}"],
@@ -621,7 +641,7 @@ def build(out: Path):
             "n = 3 per arm. Gene-set results are best read as directional, which is why nominal p is reported alongside FDR q.",
             "A single cell line (U251N) in a single xenograft model: no patient tissue, and no T-cell immunity in the athymic rat.",
             f"Bulk RNA-seq averages the margin with whatever else was harvested, and purity differs by arm ({h_pri:.0f} % against {h_rec:.0f} % human); the persister state is inferred, not isolated.",
-            "The translational fall leans on one primary tumor; without it the sets still fall, by about a quarter as much.",
+            f"The size of the translational fall leans on one primary tumor (without it, a quarter as large); its FDR q moves with the permutation seed ({min(q_full):.2f} to {max(q_full):.2f}) and with which tumor is left out.",
             "A methylation array on the same six tumors (866,238 probes) found no probe past FDR (smallest q = 0.09); with purity and arm confounded it cannot separate the two.",
             "Every drug candidate is a computational prediction; none has been tested in this model."]
     right = ["Next steps",

@@ -13,6 +13,7 @@ RLOG = A / "results_therapy_v3" / "tables" / "processed_abundance" / "all.rlog.t
 RUVSEQ_DIR = A / "results_ruvseq"                    # ANALYSIS/ruvseq_contamination_adjustment.R
 DECONTAM_DIR = A / "results_decontamination"         # ANALYSIS/filter_contaminated_genes.R, test_contamination_bias.R
 METADATA = A / "metadata_full.csv"                   # ANALYSIS/build_metadata_from_xengsort.py
+GSEA_LOO = A / "gsea_leave_one_out"                  # leave-one-tumour-out GSEA results (committed: loo_sets.tsv, loo_screen.tsv, SUMMARY.md)
 
 
 def gsea_file(name):

@@ -4,7 +4,20 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
-## 2026-09-26 05:30 EDT: leave-one-tumour-out GSEA running on the grid
+## 2026-09-26 06:00 EDT: leave-one-tumour-out GSEA DONE (jobs 40464722/23/24, all COMPLETED)
+
+Results committed in `ANALYSIS/gsea_leave_one_out/` (SUMMARY.md, loo_sets.tsv, loo_screen.tsv, reproduction.json).
+The full six-tumour run at seed 1234 reproduces the published report exactly (8,869 sets, every NES, p and q).
+
+- Robust in all 41 runs: translation initiation NES −1.88 to −2.02, nominal p < 0.001; all six leading sets p ≤ 0.012.
+- NOT robust: its FDR q. All six tumours, five seeds: 0.022, 0.026, 0.067, 0.139, 0.312 (q < 0.05 at 2 of 5).
+  Without IL68B: 0.001–0.032 (q < 0.05 at 5 of 5; 12 sets at q < 0.05). Without NL70B: 0.001–0.015. Without NL71B:
+  0.007–0.335. Without IL67B, IL69B or IL66B: above 0.05 at every seed (IL66B: no set at q < 0.25 at any seed).
+- So IL68B carries the SIZE of the gene-level fall (−0.40 → −0.10) but not the enrichment's rank; the fragile claim is
+  "the one set that clears FDR (q = 0.022)", which the manuscript and the old deck make. The deck now says this
+  (slides 11, 13, 15, 23, 24 and notes), reading every number from these files.
+
+## 2026-09-26 05:30 EDT: leave-one-tumour-out GSEA running on the grid (superseded above)
 
 Question: does the GSEA result survive when any one tumour is left out? Translation initiation (NES −1.99, FDR
 q = 0.022) is the only set at q < 0.05; one primary, IL68B, is the highest of the six tumours on every
