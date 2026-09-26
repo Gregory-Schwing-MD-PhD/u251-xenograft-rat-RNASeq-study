@@ -21,6 +21,7 @@ unset JAVA_HOME LD_LIBRARY_PATH PYTHONPATH R_LIBS R_LIBS_USER R_LIBS_SITE
 export XDG_RUNTIME_DIR="${HOME}/xdr"
 export NXF_SINGULARITY_CACHEDIR=/rs/rs_grp_oschome/go2432/singularity_cache
 export NXF_SINGULARITY_HOME_MOUNT=true
+mkdir -p /rs/rs_grp_oschome/go2432/u251_host/tmp
 L=/rs/rs_grp_oschome/go2432/u251_host/launch_de; mkdir -p "$L"; cd "$L"   # own launch directory (see run_host_rnaseq)
 nextflow run nf-core/differentialabundance -r 1.5.0 -profile singularity \
   -c "$U/nextflow.config" -c "$U/ANALYSIS/host/host.config" \

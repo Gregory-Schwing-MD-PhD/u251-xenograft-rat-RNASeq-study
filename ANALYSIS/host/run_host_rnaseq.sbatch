@@ -19,6 +19,7 @@ export XDG_RUNTIME_DIR="${HOME}/xdr"
 export NXF_SINGULARITY_CACHEDIR=/rs/rs_grp_oschome/go2432/singularity_cache
 export NXF_SINGULARITY_HOME_MOUNT=true
 mkdir -p "$XDG_RUNTIME_DIR"
+mkdir -p /rs/rs_grp_oschome/go2432/u251_host/tmp            # bound as /tmp in every container (host.config)
 # own launch directory: from the repository root, -resume picked up (and could not lock) a concurrent Nextflow run
 L=/rs/rs_grp_oschome/go2432/u251_host/launch_rnaseq; mkdir -p "$L"; cd "$L"
 nextflow run nf-core/rnaseq -r 3.22.2 -profile singularity \
