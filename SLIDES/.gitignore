@@ -1,0 +1,6 @@
+# Python caches of the slide scripts
+__pycache__/
+# The CNS speaker template is the CNS's file; this repository is public (see templates/README.md)
+templates/*.pptx
+# a scratch check image
+figures/_chk.png

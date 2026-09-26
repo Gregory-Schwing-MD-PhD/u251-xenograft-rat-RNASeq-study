@@ -1,0 +1,282 @@
+{
+ "TMEM189-UBE2V1": {
+  "lfc": -9.92,
+  "padj": 2.173104e-11,
+  "name": "PEDS1-UBE2V1 readthrough",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "RNU6-9": {
+  "lfc": 9.86,
+  "padj": 1.829197e-09,
+  "name": "RNA, U6 small nuclear 9",
+  "kind": "snRNA",
+  "kind_label": "small nuclear RNA",
+  "coding": false
+ },
+ "SORL1": {
+  "lfc": 1.03,
+  "padj": 2.528907e-05,
+  "name": "sortilin related receptor 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "BGN": {
+  "lfc": -1.54,
+  "padj": 2.528907e-05,
+  "name": "biglycan",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "DYX1C1-CCPG1": {
+  "lfc": 4.75,
+  "padj": 2.528907e-05,
+  "name": "DNAAF4-CCPG1 readthrough (NMD candidate)",
+  "kind": "ncRNA",
+  "kind_label": "long non-coding RNA",
+  "coding": false
+ },
+ "PRSS12": {
+  "lfc": 1.07,
+  "padj": 2.823656e-05,
+  "name": "serine protease 12",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "RP11-577H5.5": {
+  "lfc": 8.08,
+  "padj": 2.823656e-05,
+  "name": "POLR2J2-UPK3BL1 readthrough",
+  "kind": "ncRNA",
+  "kind_label": "long non-coding RNA",
+  "coding": false
+ },
+ "ICA1L": {
+  "lfc": -1.3,
+  "padj": 0.0001215924,
+  "name": "islet cell autoantigen 1 like",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "ESPL1": {
+  "lfc": 1.19,
+  "padj": 0.0001822581,
+  "name": "extra spindle pole bodies like 1, separase",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "HMCN1": {
+  "lfc": -2.01,
+  "padj": 0.0001870174,
+  "name": "hemicentin 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "COL1A1": {
+  "lfc": -1.16,
+  "padj": 0.0001996328,
+  "name": "collagen type I alpha 1 chain",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "SYBU": {
+  "lfc": 1.56,
+  "padj": 0.0001996328,
+  "name": "syntabulin",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "RNA5SP370": {
+  "lfc": 1.53,
+  "padj": 0.000224707,
+  "name": "RNA, 5S ribosomal pseudogene 370",
+  "kind": "unknown",
+  "kind_label": "unclassified locus",
+  "coding": false
+ },
+ "LRP1": {
+  "lfc": -1.22,
+  "padj": 0.0003458941,
+  "name": "LDL receptor related protein 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "GDAP1": {
+  "lfc": 1.1,
+  "padj": 0.0004568568,
+  "name": "ganglioside induced differentiation associated protein 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "TMCC3": {
+  "lfc": 1.28,
+  "padj": 0.0004769667,
+  "name": "transmembrane and coiled-coil domain family 3",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "IGFBP3": {
+  "lfc": -1.18,
+  "padj": 0.0007685748,
+  "name": "insulin like growth factor binding protein 3",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "PIK3AP1": {
+  "lfc": 1.48,
+  "padj": 0.001014637,
+  "name": "phosphoinositide-3-kinase adaptor protein 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "HTR2A": {
+  "lfc": -2.73,
+  "padj": 0.001089462,
+  "name": "5-hydroxytryptamine receptor 2A",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "PRELP": {
+  "lfc": -1.66,
+  "padj": 0.001215712,
+  "name": "proline and arginine rich end leucine rich repeat protein",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "COL17A1": {
+  "lfc": 1.45,
+  "padj": 0.001286153,
+  "name": "collagen type XVII alpha 1 chain",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "PCLO": {
+  "lfc": 1.17,
+  "padj": 0.001286153,
+  "name": "piccolo presynaptic cytomatrix protein",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "MRAP2": {
+  "lfc": -1.29,
+  "padj": 0.001390262,
+  "name": "melanocortin 2 receptor accessory protein 2",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "RP11-252A24.2": {
+  "lfc": 1.42,
+  "padj": 0.001741177,
+  "name": "pyruvate dehydrogenase phosphatase regulatory subunit 2, pseudogene",
+  "kind": "unknown",
+  "kind_label": "unclassified locus",
+  "coding": false
+ },
+ "KCCAT333": {
+  "lfc": -1.17,
+  "padj": 0.001824358,
+  "name": "long intergenic non-protein coding RNA 2888",
+  "kind": "unknown",
+  "kind_label": "unclassified locus",
+  "coding": false
+ },
+ "RP5-874C20.8": {
+  "lfc": 5.56,
+  "padj": 0.001824358,
+  "name": "",
+  "kind": "unknown",
+  "kind_label": "unclassified locus",
+  "coding": false
+ },
+ "NRG1": {
+  "lfc": 1.12,
+  "padj": 0.002118419,
+  "name": "neuregulin 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "NAALADL2": {
+  "lfc": -1.08,
+  "padj": 0.002910341,
+  "name": "N-acetylated alpha-linked acidic dipeptidase like 2",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "GPC3": {
+  "lfc": 2.17,
+  "padj": 0.003109144,
+  "name": "glypican 3",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "ALG10B": {
+  "lfc": 1.07,
+  "padj": 0.004026425,
+  "name": "ALG10 alpha-1,2-glucosyltransferase B",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "CALB1": {
+  "lfc": 1.22,
+  "padj": 0.005293151,
+  "name": "calbindin 1",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "ENSG00000289697": {
+  "lfc": 3.65,
+  "padj": 0.005713393,
+  "name": "",
+  "kind": "unknown",
+  "kind_label": "unclassified locus",
+  "coding": false
+ },
+ "RASL11A": {
+  "lfc": 1.05,
+  "padj": 0.01139315,
+  "name": "RAS like family 11 member A",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "RYR2": {
+  "lfc": 1.03,
+  "padj": 0.01416504,
+  "name": "ryanodine receptor 2",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ },
+ "MOB3B": {
+  "lfc": 1.01,
+  "padj": 0.01634532,
+  "name": "MOB kinase activator 3B",
+  "kind": "protein-coding",
+  "kind_label": "protein coding",
+  "coding": true
+ }
+}

@@ -25,6 +25,7 @@ Writes figures_cns/chart_contamination.png and figures_cns/contamination_check.j
 """
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 import matplotlib
@@ -37,7 +38,9 @@ from matplotlib.ticker import FuncFormatter  # noqa: E402
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 OUT = HERE / "figures_cns"
-GRID = Path(r"C:\Users\grego\AppData\Local\Temp\claude\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\scratchpad\u251_grid")
+sys.path.insert(0, str(HERE))
+from u251_paths import COUNTS, DECONTAM_DIR, GSEA_DIR, METADATA, RUVSEQ_DIR, check, gsea_file  # noqa: E402,F401
+check()
 spec = importlib.util.spec_from_file_location("mk04", HERE / "04_make_cns_figures.py")
 mk = importlib.util.module_from_spec(spec); spec.loader.exec_module(mk)
 save = mk.save
@@ -47,9 +50,9 @@ MINUS = mk.MINUS
 SETS = [("KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "translation\ninitiation"), ("REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "translation\nelongation"),
         ("REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY", "GCN2 amino-\nacid stress"), ("KEGG_RIBOSOME", "ribosome"),
         ("REACTOME_SELENOAMINO_ACID_METABOLISM", "selenoamino-\nacid metabolism"), ("REACTOME_CELLULAR_RESPONSE_TO_STARVATION", "starvation\nresponse")]
-TAB = {name: pd.read_csv(GRID / "ruvseq" / f, sep="\t").set_index("gene_id")
+TAB = {name: pd.read_csv(RUVSEQ_DIR / f, sep="\t").set_index("gene_id")
        for name, f in (("baseline", "ruvseq_baseline_de.tsv"), ("k1", "ruvseq_adjusted_de_k1.tsv"), ("k2", "ruvseq_adjusted_de_k2.tsv"))}
-bias = pd.read_csv(GRID / "decontam" / "contamination_bias_per_gene.csv").set_index("gene_id")
+bias = pd.read_csv(DECONTAM_DIR / "contamination_bias_per_gene.csv").set_index("gene_id")
 det = bias["ctrl_detected"].astype(str).str.upper() == "TRUE"
 sym2id = TAB["baseline"].reset_index()[["gene_id", "symbol"]].dropna()
 sym2id = sym2id[sym2id.gene_id.isin(bias.index)]          # the tested genes only: one id per symbol there
@@ -71,7 +74,7 @@ print("transcriptome:", {k: round(v, 3) if isinstance(v, float) else v for k, v 
 
 res = {}
 for key, lab in SETS:
-    t = pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t")
+    t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t")
     syms = t["SYMBOL"].astype(str).tolist()
     ids = [sym2id[s] for s in syms if s in sym2id.index]
     d_ids = [i for i in ids if det.get(i, False)]; c_ids = [i for i in ids if not det.get(i, False)]
@@ -103,19 +106,19 @@ symcol = [c for c in s2.columns if c.lower() in ("symbol", "gene symbol", "gene_
 lfccol = [c for c in s2.columns if "log2" in c.lower()][0]
 s2 = s2.dropna(subset=[lfccol]).drop_duplicates(symcol).set_index(symcol)
 for key, _ in SETS:
-    t = pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t")
+    t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t")
     v = s2.reindex(t["SYMBOL"].astype(str))[lfccol].dropna()
     res[key]["manuscript_s2"] = {"n": int(len(v)), "share_negative": float((v < 0).mean()), "mean_lfc": float(v.mean())}
     print(f"  manuscript S2 {key[:40]:40s} n {len(v):3d}  share negative {100 * (v < 0).mean():5.1f} %  mean {v.mean():+.3f}")
-conc = pd.read_csv(GRID / "ruvseq" / "ruvseq_concordance_summary.csv").to_dict(orient="records")
-graft = pd.read_csv(GRID / "metadata_full.csv").to_dict(orient="records")
+conc = pd.read_csv(RUVSEQ_DIR / "ruvseq_concordance_summary.csv").to_dict(orient="records")
+graft = pd.read_csv(METADATA).to_dict(orient="records")
 
 # ---- chart: per set, detected vs undetected members (left pair), then the adjusted means
 fig, ax = plt.subplots(figsize=(10.0, 5.6))
 xs = []
 for i, (key, lab) in enumerate(SETS):
     r = res[key]; x0 = i * 4.2
-    t = pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t")
+    t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t")
     ids = [sym2id[s] for s in t["SYMBOL"].astype(str) if s in sym2id.index]
     for j, (name, col, lab2) in enumerate((("baseline", NAVY, "unadjusted"), ("k1", BLUE, "adjusted, k = 1"), ("k2", "#9CB3DC", "adjusted, k = 2"))):
         x = x0 + j

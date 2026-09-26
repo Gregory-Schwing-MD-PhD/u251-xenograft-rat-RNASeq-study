@@ -16,40 +16,43 @@ translation-initiation, elongation and ribosome sets, written to figures_cns/con
     python SLIDES/07_contamination_magnitude.py
 """
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-GRID = Path(r"C:\Users\grego\AppData\Local\Temp\claude\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\scratchpad\u251_grid")
+sys.path.insert(0, str(HERE))
+from u251_paths import COUNTS, DECONTAM_DIR, GSEA_DIR, METADATA, RUVSEQ_DIR, check, gsea_file  # noqa: E402,F401
+check()
 CTRL = ["IL64B", "N168B", "N269B"]; PRI = ["IL67B", "IL68B", "IL69B"]; REC = ["IL66B", "NL70B", "NL71B"]
 SETS = {"initiation": "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "elongation": "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "ribosome": "KEGG_RIBOSOME"}
 ALLTRANS = ["KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "KEGG_RIBOSOME",
             "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY", "REACTOME_SELENOAMINO_ACID_METABOLISM", "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
             "REACTOME_EUKARYOTIC_TRANSLATION_INITIATION"]
 
-cnt = pd.read_csv(GRID / "salmon.merged.gene_counts.tsv", sep="\t").set_index("gene_id")
+cnt = pd.read_csv(COUNTS, sep="\t").set_index("gene_id")
 X = cnt[CTRL + PRI + REC].astype(float)
 cpm = X / X.sum(0) * 1e6
 T = cpm[PRI + REC].mean(1); C = cpm[CTRL].mean(1)
-bias = pd.read_csv(GRID / "decontam" / "contamination_bias_per_gene.csv").set_index("gene_id")
+bias = pd.read_csv(DECONTAM_DIR / "contamination_bias_per_gene.csv").set_index("gene_id")
 tested = bias.index
 lfc = bias["log2FoldChange"]
-base = pd.read_csv(GRID / "ruvseq" / "ruvseq_baseline_de.tsv", sep="\t").set_index("gene_id")
+base = pd.read_csv(RUVSEQ_DIR / "ruvseq_baseline_de.tsv", sep="\t").set_index("gene_id")
 sym = base["symbol"].astype(str)
-meta = pd.read_csv(GRID / "metadata_full.csv").set_index("sample")
+meta = pd.read_csv(METADATA).set_index("sample")
 m = (meta["both_pct"] / (meta["graft_pct"] + meta["both_pct"]))
 r = (C / T.replace(0, np.nan)).reindex(tested)
 r_med = float(r.median())
 
 
 def members(key):
-    s = set(pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t")["SYMBOL"].astype(str))
+    s = set(pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t")["SYMBOL"].astype(str))
     return [g for g in tested if sym.get(g) in s]
 
 
-trans_all = set().union(*[set(members(k)) for k in ALLTRANS if (GRID / "enplots" / f"therapy_impact.combined_human.{k}.tsv").exists()])
+trans_all = set().union(*[set(members(k)) for k in ALLTRANS if (gsea_file(f"{k}.tsv")).exists()])
 bg = [g for g in tested if g not in trans_all and np.isfinite(r.get(g, np.nan)) and T.get(g, 0) > 0]
 feat = lambda ids: np.column_stack([np.log10(T.reindex(ids).to_numpy() + 1), np.log10(r.reindex(ids).to_numpy() + 1e-3)])  # noqa: E731
 Fbg = feat(bg); lbg = lfc.reindex(bg).to_numpy()

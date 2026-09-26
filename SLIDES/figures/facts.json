@@ -1,0 +1,1305 @@
+{
+ "gsea_n_sets": 8869,
+ "gsea_down_top": [
+  {
+   "name": "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION",
+   "nes": -1.99,
+   "p": 0.0,
+   "q": 0.022,
+   "size": 80
+  },
+  {
+   "name": "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION",
+   "nes": -1.96,
+   "p": 0.0,
+   "q": 0.158,
+   "size": 91
+  },
+  {
+   "name": "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY",
+   "nes": -1.95,
+   "p": 0.0,
+   "q": 0.146,
+   "size": 99
+  },
+  {
+   "name": "KEGG_RIBOSOME",
+   "nes": -1.94,
+   "p": 0.0,
+   "q": 0.204,
+   "size": 85
+  },
+  {
+   "name": "REACTOME_SELENOAMINO_ACID_METABOLISM",
+   "nes": -1.94,
+   "p": 0.0020920502,
+   "q": 0.169,
+   "size": 112
+  },
+  {
+   "name": "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
+   "nes": -1.93,
+   "p": 0.0,
+   "q": 0.247,
+   "size": 150
+  },
+  {
+   "name": "WP_CYTOPLASMIC_RIBOSOMAL_PROTEINS",
+   "nes": -1.91,
+   "p": 0.0,
+   "q": 0.443,
+   "size": 86
+  },
+  {
+   "name": "REACTOME_METABOLISM_OF_AMINO_ACIDS_AND_DERIVATIVES",
+   "nes": -1.89,
+   "p": 0.0,
+   "q": 0.701,
+   "size": 310
+  },
+  {
+   "name": "REACTOME_SRP_DEPENDENT_COTRANSLATIONAL_PROTEIN_TARGETING_TO_MEMBRANE",
+   "nes": -1.89,
+   "p": 0.0,
+   "q": 0.737,
+   "size": 110
+  },
+  {
+   "name": "REACTOME_NONSENSE_MEDIATED_DECAY_NMD",
+   "nes": -1.88,
+   "p": 0.0,
+   "q": 0.8,
+   "size": 113
+  }
+ ],
+ "gsea_up_best_q": 0.61,
+ "gsea_up_best_nes": 1.85,
+ "de_up": 23,
+ "de_down": 12,
+ "de_total": 35,
+ "drug_top": {
+  "drug": "ciclopirox",
+  "phase": 4,
+  "nes": -2.261,
+  "bbb": 0.92277575,
+  "egg": "in",
+  "score": 3.14
+ },
+ "drug_by_name": {
+  "ciclopirox": {
+   "rank": 1,
+   "score": 3.4,
+   "nes": -2.261,
+   "bbb": 1.0
+  },
+  "dimethyloxalylglycine": {
+   "rank": 3,
+   "score": 3.044,
+   "nes": -2.388,
+   "bbb": 0.825
+  },
+  "hyoscyamine": {
+   "rank": 4,
+   "score": 2.74,
+   "nes": -1.958,
+   "bbb": 1.0
+  },
+  "3-METHOXYCATECHOL": {
+   "rank": 5,
+   "score": 2.68,
+   "nes": -1.929,
+   "bbb": 1.0
+  },
+  "oxolinic acid": {
+   "rank": 6,
+   "score": 2.616,
+   "nes": -1.898,
+   "bbb": 1.0
+  },
+  "LY-294002": {
+   "rank": 7,
+   "score": 2.402,
+   "nes": -2.039,
+   "bbb": 0.825
+  },
+  "pyrantel": {
+   "rank": 8,
+   "score": 2.399,
+   "nes": -1.792,
+   "bbb": 1.0
+  },
+  "GW-8510": {
+   "rank": 9,
+   "score": 2.351,
+   "nes": -2.01,
+   "bbb": 0.825
+  },
+  "ifosfamide": {
+   "rank": 10,
+   "score": 2.272,
+   "nes": -1.728,
+   "bbb": 1.0
+  },
+  "pentetrazol": {
+   "rank": 11,
+   "score": 2.24,
+   "nes": -1.946,
+   "bbb": 0.825
+  },
+  "Toluidine Blue O": {
+   "rank": 12,
+   "score": 2.238,
+   "nes": -1.711,
+   "bbb": 1.0
+  },
+  "progesterone": {
+   "rank": 13,
+   "score": 2.121,
+   "nes": -1.877,
+   "bbb": 0.825
+  },
+  "primidone": {
+   "rank": 14,
+   "score": 2.104,
+   "nes": -1.866,
+   "bbb": 0.825
+  },
+  "Metformin": {
+   "rank": 15,
+   "score": 2.066,
+   "nes": -2.058,
+   "bbb": 0.7
+  },
+  "CUMENE HYDROPEROXIDE": {
+   "rank": 16,
+   "score": 2.058,
+   "nes": -1.618,
+   "bbb": 1.0
+  },
+  "H-7": {
+   "rank": 17,
+   "score": 2.002,
+   "nes": -1.736,
+   "bbb": 0.875
+  },
+  "metoprolol": {
+   "rank": 18,
+   "score": 1.977,
+   "nes": -1.908,
+   "bbb": 0.75
+  },
+  "tolbutamide": {
+   "rank": 19,
+   "score": 1.97,
+   "nes": -1.572,
+   "bbb": 1.0
+  },
+  "Chloranil": {
+   "rank": 20,
+   "score": 1.953,
+   "nes": -1.563,
+   "bbb": 1.0
+  },
+  "mesalazine": {
+   "rank": 21,
+   "score": 1.942,
+   "nes": -1.975,
+   "bbb": 0.7
+  },
+  "nilutamide": {
+   "rank": 22,
+   "score": 1.94,
+   "nes": -1.884,
+   "bbb": 0.75
+  },
+  "Lysergide": {
+   "rank": 23,
+   "score": 1.907,
+   "nes": -1.538,
+   "bbb": 1.0
+  },
+  "Fenbuconazole": {
+   "rank": 24,
+   "score": 1.875,
+   "nes": -1.729,
+   "bbb": 0.825
+  },
+  "malathion": {
+   "rank": 25,
+   "score": 1.875,
+   "nes": -1.662,
+   "bbb": 0.875
+  },
+  "atovaquone": {
+   "rank": 26,
+   "score": 1.84,
+   "nes": -1.707,
+   "bbb": 0.825
+  },
+  "1,6,7,8,9,11a,12,13,14,14a-Decahydro-1,13-dihydroxy-6-methyl-4H-cyclopent [f]oxacyclotridecin-4-one": {
+   "rank": 27,
+   "score": 1.804,
+   "nes": -1.482,
+   "bbb": 1.0
+  },
+  "nicotinic acid": {
+   "rank": 28,
+   "score": 1.795,
+   "nes": -1.679,
+   "bbb": 0.825
+  },
+  "salbutamol": {
+   "rank": 29,
+   "score": 1.784,
+   "nes": -1.608,
+   "bbb": 0.875
+  },
+  "ethaverine": {
+   "rank": 30,
+   "score": 1.765,
+   "nes": -1.66,
+   "bbb": 0.825
+  },
+  "diazepam": {
+   "rank": 31,
+   "score": 1.749,
+   "nes": -1.65,
+   "bbb": 0.825
+  },
+  "3-amino-1,2,4-triazole": {
+   "rank": 32,
+   "score": 1.745,
+   "nes": -1.648,
+   "bbb": 0.825
+  },
+  "1-Naphthyl isothiocyanate": {
+   "rank": 34,
+   "score": 1.731,
+   "nes": -1.639,
+   "bbb": 0.825
+  },
+  "taurine": {
+   "rank": 35,
+   "score": 1.614,
+   "nes": -1.564,
+   "bbb": 0.825
+  },
+  "CP-690334-01": {
+   "rank": 36,
+   "score": 1.611,
+   "nes": -1.743,
+   "bbb": 0.7
+  },
+  "Axitinib": {
+   "rank": 37,
+   "score": 1.605,
+   "nes": -1.559,
+   "bbb": 0.825
+  },
+  "oxygen": {
+   "rank": 38,
+   "score": 1.605,
+   "nes": -1.558,
+   "bbb": 0.825
+  },
+  "PHOSPHINE": {
+   "rank": 39,
+   "score": 1.601,
+   "nes": -1.556,
+   "bbb": 0.825
+  },
+  "6-Thioguanine": {
+   "rank": 40,
+   "score": 1.545,
+   "nes": -1.695,
+   "bbb": 0.7
+  },
+  "OZONE": {
+   "rank": 41,
+   "score": 1.544,
+   "nes": -1.518,
+   "bbb": 0.825
+  },
+  "GNF-PF-3832": {
+   "rank": 42,
+   "score": 1.536,
+   "nes": -1.513,
+   "bbb": 0.825
+  },
+  "betulinic acid": {
+   "rank": 43,
+   "score": 1.532,
+   "nes": -1.922,
+   "bbb": 0.575
+  },
+  "heptachlor": {
+   "rank": 44,
+   "score": 1.521,
+   "nes": -1.503,
+   "bbb": 0.825
+  },
+  "7-DIETHYLAMINO-4-METHYLCOUMARIN": {
+   "rank": 45,
+   "score": 1.512,
+   "nes": -1.671,
+   "bbb": 0.7
+  },
+  "econazole": {
+   "rank": 46,
+   "score": 1.492,
+   "nes": -1.484,
+   "bbb": 0.825
+  },
+  "Osajin": {
+   "rank": 47,
+   "score": 1.492,
+   "nes": -1.656,
+   "bbb": 0.7
+  },
+  "mefloquine": {
+   "rank": 48,
+   "score": 1.491,
+   "nes": -1.483,
+   "bbb": 0.825
+  },
+  "trimipramine": {
+   "rank": 49,
+   "score": 1.477,
+   "nes": -1.645,
+   "bbb": 0.7
+  },
+  "propantheline bromide": {
+   "rank": 51,
+   "score": 1.455,
+   "nes": -1.629,
+   "bbb": 0.7
+  },
+  "benzethonium chloride": {
+   "rank": 52,
+   "score": 1.402,
+   "nes": -1.589,
+   "bbb": 0.7
+  },
+  "estropipate": {
+   "rank": 53,
+   "score": 1.401,
+   "nes": -1.588,
+   "bbb": 0.7
+  },
+  "thioridazine": {
+   "rank": 54,
+   "score": 1.395,
+   "nes": -1.584,
+   "bbb": 0.7
+  },
+  "dexverapamil": {
+   "rank": 55,
+   "score": 1.363,
+   "nes": -1.778,
+   "bbb": 0.575
+  },
+  "Escitalopram oxalate": {
+   "rank": 56,
+   "score": 1.323,
+   "nes": -1.528,
+   "bbb": 0.7
+  },
+  "pomiferin": {
+   "rank": 58,
+   "score": 1.248,
+   "nes": -1.677,
+   "bbb": 0.575
+  },
+  "7-aminocephalosporanic acid": {
+   "rank": 59,
+   "score": 1.242,
+   "nes": -1.671,
+   "bbb": 0.575
+  },
+  "nitrofural": {
+   "rank": 60,
+   "score": 1.166,
+   "nes": -1.602,
+   "bbb": 0.575
+  },
+  "paroxetine": {
+   "rank": 61,
+   "score": 1.143,
+   "nes": -1.581,
+   "bbb": 0.575
+  },
+  "succinylsulfathiazole": {
+   "rank": 62,
+   "score": 1.13,
+   "nes": -1.484,
+   "bbb": 0.625
+  },
+  "astemizole": {
+   "rank": 63,
+   "score": 1.126,
+   "nes": -1.565,
+   "bbb": 0.575
+  },
+  "Paricalcitol": {
+   "rank": 64,
+   "score": 1.121,
+   "nes": -1.561,
+   "bbb": 0.575
+  },
+  "ketoconazole": {
+   "rank": 65,
+   "score": 1.076,
+   "nes": -1.788,
+   "bbb": 0.45
+  },
+  "amiodarone": {
+   "rank": 66,
+   "score": 1.067,
+   "nes": -1.51,
+   "bbb": 0.575
+  },
+  "Vandetanib": {
+   "rank": 67,
+   "score": 1.055,
+   "nes": -1.499,
+   "bbb": 0.575
+  },
+  "dacarbazine": {
+   "rank": 68,
+   "score": 1.049,
+   "nes": -1.493,
+   "bbb": 0.575
+  },
+  "terfenadine": {
+   "rank": 69,
+   "score": 1.042,
+   "nes": -1.487,
+   "bbb": 0.575
+  },
+  "wortmannin": {
+   "rank": 70,
+   "score": 0.96,
+   "nes": -1.545,
+   "bbb": 0.5
+  },
+  "L-citrulline": {
+   "rank": 71,
+   "score": 0.94,
+   "nes": -1.634,
+   "bbb": 0.45
+  },
+  "benserazide": {
+   "rank": 72,
+   "score": 0.896,
+   "nes": -1.966,
+   "bbb": 0.325
+  },
+  "ganciclovir": {
+   "rank": 73,
+   "score": 0.816,
+   "nes": -1.848,
+   "bbb": 0.325
+  },
+  "635-65-4": {
+   "rank": 74,
+   "score": 0.81,
+   "nes": -1.671,
+   "bbb": 0.375
+  },
+  "CHLOROGENIC ACID": {
+   "rank": 75,
+   "score": 0.786,
+   "nes": -1.802,
+   "bbb": 0.325
+  },
+  "Carfilzomib": {
+   "rank": 76,
+   "score": 0.696,
+   "nes": -1.979,
+   "bbb": 0.25
+  },
+  "Ademetionine": {
+   "rank": 78,
+   "score": 0.615,
+   "nes": -1.529,
+   "bbb": 0.325
+  },
+  "Bortezomib": {
+   "rank": 79,
+   "score": 0.597,
+   "nes": -1.786,
+   "bbb": 0.25
+  },
+  "Decabromodiphenyl oxide": {
+   "rank": 81,
+   "score": 0.568,
+   "nes": -1.728,
+   "bbb": 0.25
+  },
+  "Cobalt": {
+   "rank": 82,
+   "score": 0.559,
+   "nes": -1.711,
+   "bbb": 0.25
+  },
+  "COBALT": {
+   "rank": 83,
+   "score": 0.555,
+   "nes": -1.702,
+   "bbb": 0.25
+  },
+  "MAGNESIUM": {
+   "rank": 84,
+   "score": 0.548,
+   "nes": -1.688,
+   "bbb": 0.25
+  },
+  "bromocriptine": {
+   "rank": 85,
+   "score": 0.489,
+   "nes": -1.816,
+   "bbb": 0.2
+  },
+  "FERRIC AMMONIUM": {
+   "rank": 86,
+   "score": 0.462,
+   "nes": -1.505,
+   "bbb": 0.25
+  },
+  "Cyperquat chloride": {
+   "rank": 87,
+   "score": 0.456,
+   "nes": -1.493,
+   "bbb": 0.25
+  },
+  "FERROUS": {
+   "rank": 88,
+   "score": 0.45,
+   "nes": -1.48,
+   "bbb": 0.25
+  },
+  "deferoxamine": {
+   "rank": 89,
+   "score": 0.277,
+   "nes": -2.387,
+   "bbb": 0.075
+  },
+  "sisomicin": {
+   "rank": 91,
+   "score": 0.192,
+   "nes": -1.869,
+   "bbb": 0.075
+  },
+  "cefotiam": {
+   "rank": 92,
+   "score": 0.185,
+   "nes": -1.826,
+   "bbb": 0.075
+  },
+  "doxorubicin": {
+   "rank": 93,
+   "score": 0.155,
+   "nes": -1.626,
+   "bbb": 0.075
+  },
+  "gossypol": {
+   "rank": 94,
+   "score": 0.146,
+   "nes": -1.557,
+   "bbb": 0.075
+  },
+  "Vincristine": {
+   "rank": 95,
+   "score": 0.144,
+   "nes": -1.542,
+   "bbb": 0.075
+  },
+  "amphotericin b": {
+   "rank": 96,
+   "score": 0.142,
+   "nes": -1.533,
+   "bbb": 0.075
+  },
+  "5109870": {
+   "rank": 97,
+   "score": 0.0,
+   "nes": -2.04,
+   "bbb": 0.0
+  },
+  "Tributyltin": {
+   "rank": 98,
+   "score": 0.0,
+   "nes": -1.733,
+   "bbb": 0.0
+  },
+  "Electrocorundum": {
+   "rank": 99,
+   "score": 0.0,
+   "nes": -1.719,
+   "bbb": 0.0
+  },
+  "0297417-0002B": {
+   "rank": 100,
+   "score": 0.0,
+   "nes": -1.483,
+   "bbb": 0.0
+  }
+ },
+ "pc1": 41.8,
+ "pc2": 26.2,
+ "permanova": {
+  "r2": 0.278,
+  "F": 1.54,
+  "p": 0.1
+ },
+ "subtypes": [
+  {
+   "name": "Garofano_GPM",
+   "primary": 0.2,
+   "recurrent": -0.2,
+   "sig": false
+  },
+  {
+   "name": "Garofano_MTC",
+   "primary": -0.32,
+   "recurrent": 0.32,
+   "sig": true
+  },
+  {
+   "name": "Garofano_NEU",
+   "primary": 0.19,
+   "recurrent": -0.19,
+   "sig": false
+  },
+  {
+   "name": "Neftel_AC",
+   "primary": 0.63,
+   "recurrent": -0.63,
+   "sig": true
+  },
+  {
+   "name": "Neftel_MES",
+   "primary": 0.11,
+   "recurrent": -0.11,
+   "sig": false
+  },
+  {
+   "name": "Neftel_NPC",
+   "primary": 0.44,
+   "recurrent": -0.44,
+   "sig": true
+  },
+  {
+   "name": "Neftel_OPC",
+   "primary": -0.34,
+   "recurrent": 0.34,
+   "sig": false
+  },
+  {
+   "name": "Verhaak_Classical",
+   "primary": -0.06,
+   "recurrent": 0.06,
+   "sig": false
+  },
+  {
+   "name": "Verhaak_Mesenchymal",
+   "primary": -0.12,
+   "recurrent": 0.12,
+   "sig": false
+  },
+  {
+   "name": "Verhaak_Proneural",
+   "primary": -0.06,
+   "recurrent": 0.06,
+   "sig": false
+  }
+ ],
+ "ppi_hubs": [
+  "BGN",
+  "COL1A1",
+  "IGFBP3",
+  "RYR2",
+  "COL17A1",
+  "LRP1",
+  "HMCN1",
+  "PCLO",
+  "PRELP",
+  "GPC3",
+  "CALB1"
+ ],
+ "ppi_nodes": {
+  "BGN": -1.54,
+  "CALB1": 1.22,
+  "COL17A1": 1.45,
+  "COL1A1": -1.16,
+  "GPC3": 2.17,
+  "HMCN1": -2.01,
+  "IGFBP3": -1.18,
+  "LRP1": -1.22,
+  "PCLO": 1.17,
+  "PRELP": -1.66,
+  "RYR2": 1.03
+ },
+ "ppi_nodes_down": [
+  "HMCN1",
+  "PRELP",
+  "BGN",
+  "LRP1",
+  "IGFBP3",
+  "COL1A1"
+ ],
+ "ppi_nodes_up": [
+  "GPC3",
+  "COL17A1",
+  "CALB1",
+  "PCLO",
+  "RYR2"
+ ],
+ "de_significant": [
+  {
+   "symbol": "TMEM189-UBE2V1",
+   "lfc": -9.92
+  },
+  {
+   "symbol": "HTR2A",
+   "lfc": -2.73
+  },
+  {
+   "symbol": "HMCN1",
+   "lfc": -2.01
+  },
+  {
+   "symbol": "PRELP",
+   "lfc": -1.66
+  },
+  {
+   "symbol": "BGN",
+   "lfc": -1.54
+  },
+  {
+   "symbol": "ICA1L",
+   "lfc": -1.3
+  },
+  {
+   "symbol": "MRAP2",
+   "lfc": -1.29
+  },
+  {
+   "symbol": "LRP1",
+   "lfc": -1.22
+  },
+  {
+   "symbol": "IGFBP3",
+   "lfc": -1.18
+  },
+  {
+   "symbol": "KCCAT333",
+   "lfc": -1.17
+  },
+  {
+   "symbol": "COL1A1",
+   "lfc": -1.16
+  },
+  {
+   "symbol": "NAALADL2",
+   "lfc": -1.08
+  },
+  {
+   "symbol": "MOB3B",
+   "lfc": 1.01
+  },
+  {
+   "symbol": "SORL1",
+   "lfc": 1.03
+  },
+  {
+   "symbol": "RYR2",
+   "lfc": 1.03
+  },
+  {
+   "symbol": "RASL11A",
+   "lfc": 1.05
+  },
+  {
+   "symbol": "PRSS12",
+   "lfc": 1.07
+  },
+  {
+   "symbol": "ALG10B",
+   "lfc": 1.07
+  },
+  {
+   "symbol": "GDAP1",
+   "lfc": 1.1
+  },
+  {
+   "symbol": "NRG1",
+   "lfc": 1.12
+  },
+  {
+   "symbol": "PCLO",
+   "lfc": 1.17
+  },
+  {
+   "symbol": "ESPL1",
+   "lfc": 1.19
+  },
+  {
+   "symbol": "CALB1",
+   "lfc": 1.22
+  },
+  {
+   "symbol": "TMCC3",
+   "lfc": 1.28
+  },
+  {
+   "symbol": "RP11-252A24.2",
+   "lfc": 1.42
+  },
+  {
+   "symbol": "COL17A1",
+   "lfc": 1.45
+  },
+  {
+   "symbol": "PIK3AP1",
+   "lfc": 1.48
+  },
+  {
+   "symbol": "RNA5SP370",
+   "lfc": 1.53
+  },
+  {
+   "symbol": "SYBU",
+   "lfc": 1.56
+  },
+  {
+   "symbol": "GPC3",
+   "lfc": 2.17
+  },
+  {
+   "symbol": "ENSG00000289697",
+   "lfc": 3.65
+  },
+  {
+   "symbol": "DYX1C1-CCPG1",
+   "lfc": 4.75
+  },
+  {
+   "symbol": "RP5-874C20.8",
+   "lfc": 5.56
+  },
+  {
+   "symbol": "RP11-577H5.5",
+   "lfc": 8.08
+  },
+  {
+   "symbol": "RNU6-9",
+   "lfc": 9.86
+  }
+ ],
+ "gsva": [
+  {
+   "name": "Garofano_MTC",
+   "primary": 0.248,
+   "recurrent": -0.333,
+   "change": -0.581,
+   "p": 0.14205948376454386,
+   "q": 0.0748467607475012
+  },
+  {
+   "name": "Neftel_AC",
+   "primary": 0.261,
+   "recurrent": -0.269,
+   "change": -0.53,
+   "p": 0.00748467607475012,
+   "q": 0.0748467607475012
+  },
+  {
+   "name": "Neftel_MES1",
+   "primary": 0.24,
+   "recurrent": -0.236,
+   "change": -0.475,
+   "p": 0.08947581463688366,
+   "q": 0.4473790731844183
+  },
+  {
+   "name": "Neftel_MES2",
+   "primary": 0.185,
+   "recurrent": -0.173,
+   "change": -0.358,
+   "p": 0.3447261148328936,
+   "q": 0.6388164776988161
+  },
+  {
+   "name": "Neftel_NPC2",
+   "primary": 0.084,
+   "recurrent": -0.067,
+   "change": -0.151,
+   "p": 0.4648488196063346,
+   "q": 0.6388164776988161
+  },
+  {
+   "name": "Neftel_NPC1",
+   "primary": 0.038,
+   "recurrent": 0.073,
+   "change": 0.035,
+   "p": 0.8760250979118179,
+   "q": 0.6388164776988161
+  },
+  {
+   "name": "Neftel_OPC",
+   "primary": -0.043,
+   "recurrent": 0.011,
+   "change": 0.055,
+   "p": 0.5110531821590529,
+   "q": 0.6388164776988161
+  },
+  {
+   "name": "Garofano_GPM",
+   "primary": -0.009,
+   "recurrent": 0.099,
+   "change": 0.108,
+   "p": 0.6982013348478918,
+   "q": 0.6678943503576236
+  },
+  {
+   "name": "Garofano_PPR",
+   "primary": -0.166,
+   "recurrent": 0.146,
+   "change": 0.312,
+   "p": 0.4186990971228447,
+   "q": 0.6678943503576236
+  },
+  {
+   "name": "Garofano_NEU",
+   "primary": -0.091,
+   "recurrent": 0.254,
+   "change": 0.344,
+   "p": 0.26715774014304944,
+   "q": 0.6678943503576236
+  }
+ ],
+ "gsva_by_name": {
+  "Garofano_MTC": {
+   "name": "Garofano_MTC",
+   "primary": 0.248,
+   "recurrent": -0.333,
+   "change": -0.581,
+   "p": 0.14205948376454386,
+   "q": 0.0748467607475012
+  },
+  "Neftel_AC": {
+   "name": "Neftel_AC",
+   "primary": 0.261,
+   "recurrent": -0.269,
+   "change": -0.53,
+   "p": 0.00748467607475012,
+   "q": 0.0748467607475012
+  },
+  "Neftel_MES1": {
+   "name": "Neftel_MES1",
+   "primary": 0.24,
+   "recurrent": -0.236,
+   "change": -0.475,
+   "p": 0.08947581463688366,
+   "q": 0.4473790731844183
+  },
+  "Neftel_MES2": {
+   "name": "Neftel_MES2",
+   "primary": 0.185,
+   "recurrent": -0.173,
+   "change": -0.358,
+   "p": 0.3447261148328936,
+   "q": 0.6388164776988161
+  },
+  "Neftel_NPC2": {
+   "name": "Neftel_NPC2",
+   "primary": 0.084,
+   "recurrent": -0.067,
+   "change": -0.151,
+   "p": 0.4648488196063346,
+   "q": 0.6388164776988161
+  },
+  "Neftel_NPC1": {
+   "name": "Neftel_NPC1",
+   "primary": 0.038,
+   "recurrent": 0.073,
+   "change": 0.035,
+   "p": 0.8760250979118179,
+   "q": 0.6388164776988161
+  },
+  "Neftel_OPC": {
+   "name": "Neftel_OPC",
+   "primary": -0.043,
+   "recurrent": 0.011,
+   "change": 0.055,
+   "p": 0.5110531821590529,
+   "q": 0.6388164776988161
+  },
+  "Garofano_GPM": {
+   "name": "Garofano_GPM",
+   "primary": -0.009,
+   "recurrent": 0.099,
+   "change": 0.108,
+   "p": 0.6982013348478918,
+   "q": 0.6678943503576236
+  },
+  "Garofano_PPR": {
+   "name": "Garofano_PPR",
+   "primary": -0.166,
+   "recurrent": 0.146,
+   "change": 0.312,
+   "p": 0.4186990971228447,
+   "q": 0.6678943503576236
+  },
+  "Garofano_NEU": {
+   "name": "Garofano_NEU",
+   "primary": -0.091,
+   "recurrent": 0.254,
+   "change": 0.344,
+   "p": 0.26715774014304944,
+   "q": 0.6678943503576236
+  }
+ },
+ "gsva_best": {
+  "name": "Neftel_AC",
+  "primary": 0.261,
+  "recurrent": -0.269,
+  "change": -0.53,
+  "p": 0.00748467607475012,
+  "q": 0.0748467607475012
+ },
+ "drug_clinical_n": 54,
+ "drug_tierA": [
+  {
+   "drug": "ciclopirox",
+   "phase": 4,
+   "nes": -2.261,
+   "bbb": 0.92277575,
+   "egg": "in",
+   "score": 3.14
+  },
+  {
+   "drug": "pyrantel",
+   "phase": 2,
+   "nes": -1.792,
+   "bbb": 0.9768583,
+   "egg": "in",
+   "score": 2.34
+  },
+  {
+   "drug": "ifosfamide",
+   "phase": 4,
+   "nes": -1.728,
+   "bbb": 0.9826845,
+   "egg": "in",
+   "score": 2.23
+  },
+  {
+   "drug": "diazepam",
+   "phase": 4,
+   "nes": -1.65,
+   "bbb": 0.9835144,
+   "egg": "in",
+   "score": 2.08
+  },
+  {
+   "drug": "dexverapamil",
+   "phase": 2,
+   "nes": -1.778,
+   "bbb": 0.87467736,
+   "egg": "in",
+   "score": 2.07
+  },
+  {
+   "drug": "malathion",
+   "phase": 4,
+   "nes": -1.662,
+   "bbb": 0.95538443,
+   "egg": "in",
+   "score": 2.05
+  },
+  {
+   "drug": "progesterone",
+   "phase": 4,
+   "nes": -1.877,
+   "bbb": 0.79100853,
+   "egg": "in",
+   "score": 2.03
+  },
+  {
+   "drug": "astemizole",
+   "phase": 4,
+   "nes": -1.565,
+   "bbb": 0.9689913,
+   "egg": "in",
+   "score": 1.9
+  },
+  {
+   "drug": "ethaverine",
+   "phase": 2,
+   "nes": -1.66,
+   "bbb": 0.7670957,
+   "egg": "in",
+   "score": 1.64
+  },
+  {
+   "drug": "propantheline bromide",
+   "phase": 4,
+   "nes": -1.629,
+   "bbb": 0.72171223,
+   "egg": "in",
+   "score": 1.5
+  },
+  {
+   "drug": "nicotinic acid",
+   "phase": 4,
+   "nes": -1.679,
+   "bbb": 0.6759783,
+   "egg": "in",
+   "score": 1.47
+  },
+  {
+   "drug": "atovaquone",
+   "phase": 4,
+   "nes": -1.707,
+   "bbb": 0.6584247,
+   "egg": "in",
+   "score": 1.47
+  },
+  {
+   "drug": "ketoconazole",
+   "phase": 4,
+   "nes": -1.788,
+   "bbb": 0.5942894,
+   "egg": "in",
+   "score": 1.42
+  },
+  {
+   "drug": "econazole",
+   "phase": 4,
+   "nes": -1.484,
+   "bbb": 0.740631,
+   "egg": "in",
+   "score": 1.34
+  },
+  {
+   "drug": "Axitinib",
+   "phase": 4,
+   "nes": -1.559,
+   "bbb": 0.56361926,
+   "egg": "in",
+   "score": 1.1
+  }
+ ],
+ "themes": {
+  "mTORC1 signalling": {
+   "set": "HALLMARK_MTORC1_SIGNALING",
+   "nes": -1.46,
+   "p": 0.06477733,
+   "q": 0.6
+  },
+  "MYC targets": {
+   "set": "HALLMARK_MYC_TARGETS_V1",
+   "nes": -1.29,
+   "p": 0.14770459,
+   "q": 0.617
+  },
+  "glycolysis": {
+   "set": "HALLMARK_GLYCOLYSIS",
+   "nes": -1.57,
+   "p": 0.054580897,
+   "q": 0.666
+  },
+  "oxidative phosphorylation": {
+   "set": "HALLMARK_OXIDATIVE_PHOSPHORYLATION",
+   "nes": -1.45,
+   "p": 0.06396589,
+   "q": 0.6
+  },
+  "mitochondrial translation": {
+   "set": "GOBP_MITOCHONDRIAL_TRANSLATION",
+   "nes": -1.43,
+   "p": 0.0955414,
+   "q": 0.603
+  },
+  "ribosome biogenesis": {
+   "set": "GOBP_RIBOSOME_BIOGENESIS",
+   "nes": -1.62,
+   "p": 0.053359684,
+   "q": 0.745
+  },
+  "rRNA processing": {
+   "set": "REACTOME_RRNA_PROCESSING",
+   "nes": -1.7,
+   "p": 0.03258656,
+   "q": 1.0
+  },
+  "hypoxia": {
+   "set": "HALLMARK_HYPOXIA",
+   "nes": -1.48,
+   "p": 0.060851928,
+   "q": 0.62
+  },
+  "hypoxia metagene": {
+   "set": "BUFFA_HYPOXIA_METAGENE",
+   "nes": -1.79,
+   "p": 0.01146789,
+   "q": 1.0
+  },
+  "HIF1 targets": {
+   "set": "SEMENZA_HIF1_TARGETS",
+   "nes": -1.79,
+   "p": 0.01635514,
+   "q": 1.0
+  },
+  "angiogenesis": {
+   "set": "HALLMARK_ANGIOGENESIS",
+   "nes": -1.47,
+   "p": 0.08986175,
+   "q": 0.611
+  },
+  "iron uptake and transport": {
+   "set": "REACTOME_IRON_UPTAKE_AND_TRANSPORT",
+   "nes": -1.55,
+   "p": 0.038812786,
+   "q": 0.656
+  },
+  "EMT": {
+   "set": "HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION",
+   "nes": -1.4,
+   "p": 0.1030303,
+   "q": 0.613
+  },
+  "senescence": {
+   "set": "FRIDMAN_SENESCENCE_UP",
+   "nes": -1.62,
+   "p": 0.02536998,
+   "q": 0.755
+  },
+  "mitotic spindle": {
+   "set": "HALLMARK_MITOTIC_SPINDLE",
+   "nes": 1.76,
+   "p": 0.004016064,
+   "q": 1.0
+  },
+  "G2M checkpoint": {
+   "set": "HALLMARK_G2M_CHECKPOINT",
+   "nes": 1.71,
+   "p": 0.007677543,
+   "q": 1.0
+  },
+  "E2F targets": {
+   "set": "HALLMARK_E2F_TARGETS",
+   "nes": 1.48,
+   "p": 0.025793651,
+   "q": 0.687
+  },
+  "TCA cycle": {
+   "set": "REACTOME_CITRIC_ACID_CYCLE_TCA_CYCLE",
+   "nes": -0.67,
+   "p": 0.8706697,
+   "q": 0.944
+  }
+ }
+}

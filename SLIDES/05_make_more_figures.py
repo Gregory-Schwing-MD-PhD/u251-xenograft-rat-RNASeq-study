@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """More results for the CNS 2026 Abstract 418 deck (Greg 2026-09-26: 19 slides is not enough), drawn only from material
 that survives the September re-analysis (Molecular Biology Reports manuscript, MBR/ESM_1.xlsx, the pipeline outputs on
-the grid mirrored into the scratchpad). The May nine-panel figure is NOT used: its subtype and pathway panels are the
+read from the repository result folders named in SLIDES/u251_paths.py). The May nine-panel figure is NOT used: its subtype and pathway panels are the
 superseded marker-panel scoring.
 
   chart_sorting.png        the ten libraries and what fraction of their reads is human graft, rat host or ambiguous
@@ -19,6 +19,7 @@ superseded marker-panel scoring.
 """
 import importlib.util
 import json
+import sys
 import re
 from pathlib import Path
 
@@ -33,7 +34,9 @@ from PIL import Image, ImageDraw, ImageFont  # noqa: E402
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 OUT = HERE / "figures_cns"
-GRID = Path(r"C:\Users\grego\AppData\Local\Temp\claude\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\scratchpad\u251_grid")
+sys.path.insert(0, str(HERE))
+from u251_paths import COUNTS, DECONTAM_DIR, GSEA_DIR, METADATA, RUVSEQ_DIR, check, gsea_file  # noqa: E402,F401
+check()
 spec = importlib.util.spec_from_file_location("mk04", HERE / "04_make_cns_figures.py")
 mk = importlib.util.module_from_spec(spec); spec.loader.exec_module(mk)
 save, table_image, bare = mk.save, mk.table_image, mk.bare
@@ -88,13 +91,13 @@ def fig_sorting():
               loc="upper left", bbox_to_anchor=(0.0, -0.12), ncol=3, fontsize=12.5, frameon=False)
     fig.subplots_adjust(bottom=0.2)
     save(fig, "chart_sorting.png")
-    meta = pd.read_csv(GRID / "metadata_full.csv")[["sample", "both_pct"]]          # the shared ('both') share, in-vivo libraries only
+    meta = pd.read_csv(METADATA)[["sample", "both_pct"]]          # the shared ('both') share, in-vivo libraries only
     d.merge(meta, on="sample", how="left").to_csv(OUT / "chart_sorting.csv", index=False)
 
 
 # ====================================================================== 2. trajectory PCA with the culture sample
 def fig_trajectory():
-    cnt = pd.read_csv(GRID / "salmon.merged.gene_counts.tsv", sep="\t")
+    cnt = pd.read_csv(COUNTS, sep="\t")
     samples = ["C2B", "IL67B", "IL68B", "IL69B", "IL66B", "NL70B", "NL71B"]
     X = cnt[samples].to_numpy(dtype=float)
     cpm = X / X.sum(0, keepdims=True) * 1e6
@@ -235,7 +238,7 @@ def enplot_composite():
              ("REACTOME_SELENOAMINO_ACID_METABOLISM", "selenoamino-acid metabolism"), ("REACTOME_CELLULAR_RESPONSE_TO_STARVATION", "response to starvation")]
     tiles = []
     for key, lab in names:
-        p = sorted((GRID / "enplots").glob(f"*enplot_{key}*.png"))
+        p = sorted(GSEA_DIR.glob(f"*enplot_{key}*.png"))
         if not p:
             print("  missing enplot", key); continue
         im = Image.open(p[0]).convert("RGB")
@@ -258,8 +261,8 @@ def enplot_composite():
 def fig_running_sum():
     """The GSEA running enrichment score for the six leading sets, from the pipeline's per-set tables (rank of every member
     gene in the ordered list and the running ES at that rank); the curve between hits is the linear miss penalty."""
-    rep = pd.read_csv(GRID / "enplots" / "therapy_impact.combined_human.gsea_report_for_Primary_U2.tsv", sep="\t")
-    ranked = pd.read_csv(GRID / "enplots" / "therapy_impact.combined_human.ranked_gene_list_Recurrent_U2_versus_Primary_U2.tsv", sep="\t")
+    rep = pd.read_csv(gsea_file("gsea_report_for_Primary_U2.tsv"), sep="\t")
+    ranked = pd.read_csv(gsea_file("ranked_gene_list_Recurrent_U2_versus_Primary_U2.tsv"), sep="\t")
     pos = {g: i for i, g in enumerate(ranked["NAME"].astype(str))}          # 0-based position in the ranked list
     N_RANKED = int(len(ranked))
     names = [("KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "translation initiation"), ("REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "translation elongation"),
@@ -268,7 +271,7 @@ def fig_running_sum():
     fig, axes = plt.subplots(2, 3, figsize=(11.0, 5.6), sharex=True, sharey=True)
     n_ranked = None
     for ax, (key, lab) in zip(axes.ravel(), names):
-        t = pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t").sort_values("RANK IN GENE LIST")
+        t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t").sort_values("RANK IN GENE LIST")
         r = t["RANK IN GENE LIST"].to_numpy(); es = t["RUNNING ES"].to_numpy()
         n_ranked = N_RANKED
         base0 = all(pos.get(s) == rk for s, rk in zip(t["SYMBOL"].astype(str), t["RANK IN GENE LIST"]) if s in pos)
@@ -297,7 +300,7 @@ def fig_running_sum():
     save(fig, "chart_running_sum.png")
     out = {}
     for key, lab in names:
-        t = pd.read_csv(GRID / "enplots" / f"therapy_impact.combined_human.{key}.tsv", sep="\t")
+        t = pd.read_csv(gsea_file(f"{key}.tsv"), sep="\t")
         row = rep[rep.NAME == key].iloc[0]
         first0 = int(t["RANK IN GENE LIST"].min())                    # 0-based, checked in the drawing loop
         rk = t["RANK IN GENE LIST"].to_numpy()

@@ -24,7 +24,7 @@ Every number on a slide is read from figures/facts.json, the figures_cns/*.json 
 scripts, or the DepMap table. Figures: 04_make_cns_figures.py, 05_make_more_figures.py, 06_contamination_check.py,
 07_contamination_magnitude.py.
 
-    python SLIDES/04_build_cns_template_deck.py [--out PATH]
+    python SLIDES/04_build_cns_template_deck.py [--out PATH]    (default SLIDES/CNS2026_Schwing_Abstract418_CNStemplate.pptx)
 """
 from __future__ import annotations
 
@@ -42,12 +42,9 @@ from pptx.util import Emu, Pt
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
-CNS = Path.home() / "OneDrive" / "Desktop" / "CTSpinoPelvic1K-1" / "paper" / "cns2026"
-sys.path.insert(0, str(CNS))
-from make_cns_deck_v2 import fit  # noqa: E402
-from make_cns_deck_v4 import (BLUE, BOTTOM, CAP, GAP, GREY, L, NAVY, R, REF, REFS_TOP, TEMPLATE, TOP, WHITE,  # noqa: E402
-                              add_text, arrow, content_slide, navy_bar, picture, refs)
-from make_cns_deck_v6 import notes  # noqa: E402
+sys.path.insert(0, str(HERE))
+from cns_template import (BLUE, BOTTOM, CAP, GAP, GREY, L, NAVY, R, REF, REFS_TOP, TEMPLATE, TOP, WHITE,  # noqa: E402
+                          add_text, arrow, content_slide, fit, navy_bar, notes, picture, refs)
 
 FIG = HERE / "figures_cns"
 DECK = {r["n"]: r for r in json.load(open(HERE / "deck_2026-09-08_text.json", encoding="utf-8"))}
@@ -669,14 +666,8 @@ def build(out: Path):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default=str(Path.home() / "OneDrive/Desktop/CTSpinoPelvic1K-1/CNS2026_Schwing_Abstract418.pptx"))
+    ap.add_argument("--out", default=str(HERE / "CNS2026_Schwing_Abstract418_CNStemplate.pptx"))
     a = ap.parse_args()
-    out = Path(a.out)
-    bak = HERE / "CNS2026_Schwing_Abstract418_2026-09-07_lab_template.pptx"
-    if out.exists() and not bak.exists():
-        shutil.copy2(out, bak)
-        print("backed up the previous file to", bak)
-    build(out)
-    keep = HERE / "CNS2026_Schwing_Abstract418_CNStemplate.pptx"
-    shutil.copy2(out, keep)
-    print("copy:", keep)
+    if not TEMPLATE.exists():
+        raise SystemExit(f"CNS speaker template missing: {TEMPLATE} (the CNS's file, gitignored; see SLIDES/templates/README.md)")
+    build(Path(a.out))
