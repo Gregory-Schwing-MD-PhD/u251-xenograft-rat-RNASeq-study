@@ -7,31 +7,31 @@
   "NL70B": 0.1459,
   "NL71B": 0.166
  },
- "median_ratio_tested": 0.03958388693496363,
+ "median_ratio_tested": 0.27585733920570044,
  "sets": {
   "initiation": {
    "n": 80,
-   "median_ratio": 0.04425720866767184,
+   "median_ratio": 0.18226806913671456,
    "observed_mean_lfc": -0.39963440417309026,
-   "mixture_bound_mean_lfc": 0.0007683787335689339,
-   "matched_background_mean_lfc": 0.010145013135236039,
-   "excess_over_matched": -0.4097794173083263
+   "mixture_bound_mean_lfc": -0.00933078570483849,
+   "matched_background_mean_lfc": -0.1348235430611908,
+   "excess_over_matched": -0.26481086111189944
   },
   "elongation": {
    "n": 91,
-   "median_ratio": 0.045769649784421045,
+   "median_ratio": 0.18642562944077826,
    "observed_mean_lfc": -0.38488095148729434,
-   "mixture_bound_mean_lfc": 0.0013998279851152183,
-   "matched_background_mean_lfc": 0.011200218554616299,
-   "excess_over_matched": -0.3960811700419106
+   "mixture_bound_mean_lfc": -0.008529903435987463,
+   "matched_background_mean_lfc": -0.12375142096148121,
+   "excess_over_matched": -0.2611295305258131
   },
   "ribosome": {
    "n": 85,
-   "median_ratio": 0.04566615647146276,
+   "median_ratio": 0.185840660282087,
    "observed_mean_lfc": -0.3949451613967529,
-   "mixture_bound_mean_lfc": 0.0009468620151451551,
-   "matched_background_mean_lfc": 0.012464910354694356,
-   "excess_over_matched": -0.4074100717514473
+   "mixture_bound_mean_lfc": -0.008973500493398337,
+   "matched_background_mean_lfc": -0.12757120195071975,
+   "excess_over_matched": -0.26737395944603315
   }
  },
  "leave_one_out": {
@@ -56,8 +56,8 @@
      "IL68B": 80
     },
     "n": 80,
-    "matched_all_six": 0.011324939859376375,
-    "matched_without_IL68B": -0.001238454554627138
+    "matched_all_six": -0.13364766846286807,
+    "matched_without_IL68B": -0.02898235315967277
    },
    "elongation": {
     "all_six": -0.38352880038591863,
@@ -73,8 +73,8 @@
      "IL66B": 1
     },
     "n": 91,
-    "matched_all_six": 0.012388108350450231,
-    "matched_without_IL68B": -0.0002054831286234382
+    "matched_all_six": -0.12256380010032802,
+    "matched_without_IL68B": -0.025839194570417605
    },
    "ribosome": {
     "all_six": -0.39361977168908463,
@@ -88,14 +88,15 @@
      "IL68B": 85
     },
     "n": 85,
-    "matched_all_six": 0.013652333928127555,
-    "matched_without_IL68B": -0.00024172362001006662
+    "matched_all_six": -0.1264015339290752,
+    "matched_without_IL68B": -0.026377469779171957
    }
   },
   "all_tested_without_IL68B": 0.017451181318601454
  },
  "controls": [
   "IL64B",
-  "N168B"
+  "N168B",
+  "N269B"
  ]
 }

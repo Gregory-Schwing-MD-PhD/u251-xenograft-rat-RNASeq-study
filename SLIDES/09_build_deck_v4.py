@@ -96,7 +96,7 @@ def build(out: Path):
     grp = lambda coh, col="graft": [float(r[col]) for r in srt if r["cohort"].startswith(coh)]  # noqa: E731
     pri, rec = grp("Primary"), grp("Recurrent")
     assigned = [float(r["graft"]) + float(r["host"]) for r in srt if r["cohort"].startswith(("Primary", "Recurrent"))]
-    st = J("standard.json"); rb = J("robustness.json"); mag = J("contamination_magnitude.json")
+    st = J("standard.json"); rb = J("robustness.json"); mag = J("contamination_magnitude.json"); mag3 = J("contamination_magnitude_ctrl3.json");
     fun = J("chart_funnel.json"); s13 = J("s13_top20.json"); sets_p = J("chart_gsea_sets.json")
     g, lo, gc, sub, cs, dm = st["gsea"], st["loo"], st["graft_corr"], st["subtypes"], st["cibersort"], st["depmap"]
     gr, ho = rb["graft"], rb["holdout"]
@@ -109,7 +109,8 @@ def build(out: Path):
     ac = sub["Neftel_AC"]; mes1 = sub["Neftel_MES1"]
     assert ac["p"] < 0.05 and all(v["p"] >= 0.05 for k, v in sub.items() if k != "Neftel_AC")
     pair = gr["pair"]
-    ini = mag["sets"]["initiation"]
+    ini = mag["sets"]["initiation"]; ini3 = mag3["sets"]["initiation"]
+    assert mag["controls"] == ["IL64B", "N168B"] and "N269B" in mag3["controls"]   # tumour-free controls (SAMPLE_KEY.md)
     fitr = [cs[k]["Correlation"] for k in ("IL67B", "IL68B", "IL69B", "IL66B", "NL70B", "NL71B")]
     cpx = s13[0]; nxt = [x for x in s13[1:] if x["both_agree"]][0]
     assert cpx["drug"] == "ciclopirox" and cpx["rank"] == 1 and cpx["rank_unweighted"] == 1
@@ -339,8 +340,8 @@ def build(out: Path):
               f"The matched pair: IL67B (primary) and NL70B (recurrent) are both {pair['IL67B']['graft']:.0f} % human. On the astrocyte-like score they "
               f"differ by {abs(pair['NL70B']['AC'] - pair['IL67B']['AC']):.2f}, far beyond the spread within either arm. On the ribosomal-protein score the gap "
               f"({m(pair['NL70B']['TI'] - pair['IL67B']['TI'])}) is within the spread among the primaries, so the pair says nothing there. One pair, not a test.",
-              f"Contamination: counting every shared read as rat, with all three controls, gives {m(ini['mixture_bound_mean_lfc'])}; without N269B (which holds "
-              "tumor cells) about +0.001 (graft_relation/SUMMARY.md), so under 0.01 log2 either way. A second estimate from the controls' shared-read "
+              f"Contamination: counting every shared read as rat, with the two tumor-free controls, gives {ini['mixture_bound_mean_lfc']:+.3f}; with N269B "
+              f"(the contralateral hemisphere of rat 69, which holds tumor cells) {ini3['mixture_bound_mean_lfc']:+.3f}, so under 0.01 log2 either way. A second estimate from the controls' shared-read "
               "ratio puts the worst case near 0.05 (ANALYSIS/human_cohorts/PLAN.md), an eighth of the fall. Backup B1."])
 
     # ---- 9 subtypes
@@ -488,12 +489,15 @@ def build(out: Path):
     # ---- backups
     s = content_slide(prs, "Backup B1. Is the fall rat contamination?")
     fig_and_text(s, FIG / "chart_contamination_magnitude.png", [
-        f"Counting every shared read as rat shifts the ribosomal-protein sets by about {abs(ini['mixture_bound_mean_lfc']):.2f} log2 (sign set by one control).",
-        f"They fall {m(ini['observed_mean_lfc'])}; background genes matched on abundance and control/tumor ratio fall {m(ini['matched_background_mean_lfc'])}.",
+        f"Counting every shared read as rat would move the ribosomal-protein sets by under 0.01 log2 ({ini['mixture_bound_mean_lfc']:+.3f}; the two tumor-free controls).",
+        f"They fall {m(ini['observed_mean_lfc'])}; background genes matched on abundance and control/tumor ratio move {ini['matched_background_mean_lfc']:+.2f}.",
         f"Without IL68B the fall is {m(mag['leave_one_out']['sets']['initiation']['without_IL68B'])}."],
         img_w=6600000, size=16, gap=12, text_top=60000)
-    refs(s, C.line(f"RUVSeq{C('risso')} factors from the rat-brain controls (k = 2) also separate the arms, so the adjustment removes part of the arm difference."))
-    notes(s, ["If the printed abstract is the docx version: its claim that contamination 'would bias ribosomal genes upward' does not match this bound. The size argument holds (about 0.01 log2); the sign is set by N269B, the contralateral hemisphere of rat 69 that holds tumor cells (-0.01 with all three controls, +0.001 without it).",
+    refs(s, C.line(f"Controls: IL64B (no tumor in its sample) and N168B (opposite hemisphere of rat 68); N269B holds tumor cells and is left out. RUVSeq{C('risso')} "
+                   "factors (k = 2, from the three control libraries; rerun on the two tumor-free ones pending) also separate the arms."))
+    notes(s, ["If the printed abstract is the docx version: its claim that contamination 'would bias ribosomal genes upward' does not match this bound. The size argument holds; the direction depends on N269B, the contralateral hemisphere of rat 69 that holds tumor cells.",
+              f"Sensitivity, N269B among the controls: bound {ini3['mixture_bound_mean_lfc']:+.3f}, matched background {ini3['matched_background_mean_lfc']:+.2f}, "
+              f"excess {ini3['excess_over_matched']:+.2f} (tumor-free controls: {ini['excess_over_matched']:+.2f}); contamination_magnitude_ctrl3.json.",
               "Backup. Mean log2 fold change (recurrent vs primary) of each set under each analysis; the bound is a model ceiling, not an observed change."])
 
     s = content_slide(prs, "Backup B2. The whole pipeline re-run without one tumor")

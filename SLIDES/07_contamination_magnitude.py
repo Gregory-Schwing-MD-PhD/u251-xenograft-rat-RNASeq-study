@@ -26,7 +26,12 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 from u251_paths import COUNTS, DECONTAM_DIR, GSEA_DIR, METADATA, RUVSEQ_DIR, check, gsea_file  # noqa: E402,F401
 check()
-CTRL = ["IL64B", "N168B", "N269B"]; PRI = ["IL67B", "IL68B", "IL69B"]; REC = ["IL66B", "NL70B", "NL71B"]
+# Controls = the tumour-free control libraries (ANALYSIS/SAMPLE_KEY.md): IL64B (no tumour in its sample) and N168B (contralateral
+# hemisphere of rat 68). N269B, the contralateral hemisphere of rat 69, holds tumour cells (4.9 % human reads, human Y-linked
+# reads) and alone sets the sign of the bound, so it is left out; U251_CTRL=IL64B,N168B,N269B reruns the old set as a sensitivity
+# check, written to contamination_magnitude_ctrl3.json.
+import os  # noqa: E402
+CTRL = os.environ.get("U251_CTRL", "IL64B,N168B").split(","); PRI = ["IL67B", "IL68B", "IL69B"]; REC = ["IL66B", "NL70B", "NL71B"]
 SETS = {"initiation": "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "elongation": "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "ribosome": "KEGG_RIBOSOME"}
 ALLTRANS = ["KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION", "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION", "KEGG_RIBOSOME",
             "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY", "REACTOME_SELENOAMINO_ACID_METABOLISM", "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
@@ -108,7 +113,11 @@ for name, key in SETS.items():
           f"without others {min(v for k, v in rec_.items() if k.startswith('without_') and k != 'without_IL68B'):+.3f} to "
           f"{max(v for k, v in rec_.items() if k.startswith('without_') and k != 'without_IL68B'):+.3f}  highest {rec_['highest_tumour_counts']}")
 out["leave_one_out"]["all_tested_without_IL68B"] = float(lfc6([q for q in PRI if q != "IL68B"], REC, t6).mean())
-json.dump(out, open(HERE / "figures_cns" / "contamination_magnitude.json", "w"), indent=1)
+out["controls"] = CTRL
+SUFFIX = "" if CTRL == ["IL64B", "N168B"] else f"_ctrl{len(CTRL)}"
+json.dump(out, open(HERE / "figures_cns" / f"contamination_magnitude{SUFFIX}.json", "w"), indent=1)
+if SUFFIX:
+    raise SystemExit(f"sensitivity run with {CTRL}: json written, chart not redrawn")
 print("wrote contamination_magnitude.json")
 
 
@@ -136,7 +145,12 @@ for gi, (nm, lab) in enumerate(names):
     for bi, (_, col, f) in enumerate(bars):
         v = f(nm); x = gi * pitch + bi
         ax.bar(x, v, width=wbar, color=col, zorder=3)
-        ax.text(x, v - 0.012, mk.MINUS(f"{v:+.2f}"), ha="center", va="top", fontsize=13, fontweight="bold" if bi == 0 else "normal", color=mk.INK)
+        if abs(v) < 0.03:        # near-zero bars side by side: stagger their labels below the axis so they do not collide
+            ax.text(x, -0.012 - (0.04 if bi == len(bars) - 1 else 0.0), mk.MINUS(f"{v:+.3f}"), ha="center", va="top", fontsize=11,
+                    color=mk.INK)
+        else:
+            ax.text(x, v - 0.012, mk.MINUS(f"{v:+.2f}"), ha="center", va="top", fontsize=13, fontweight="bold" if bi == 0 else "normal",
+                    color=mk.INK)
     ax.text(gi * pitch + 2.0, 0.025, f"{lab}\n{out['sets'][nm]['n']} genes", ha="center", va="bottom", fontsize=13.5,
             fontweight="bold", color=mk.INK, linespacing=1.15)
 ax.axhline(0, color=mk.INK, lw=1.2, zorder=4)
