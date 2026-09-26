@@ -1,0 +1,40 @@
+
+=== neftel4_allcells
+                        cohort    MES     AC  OPC    NPC      R   RMSE      P
+sample                                                                       
+C2B           In vitro Culture  0.161  0.457  0.0  0.382  0.193  1.097  0.023
+IL64B   Control (failed graft)  0.004  0.000  0.0  0.996  0.037  1.130  0.174
+IL66B    Recurrent (Post-LITT)  0.138  0.512  0.0  0.351  0.215  1.092  0.018
+IL67B       Primary (Pre-LITT)  0.350  0.319  0.0  0.331  0.194  1.137  0.023
+IL68B       Primary (Pre-LITT)  0.624  0.167  0.0  0.209  0.196  1.298  0.023
+IL69B       Primary (Pre-LITT)  0.384  0.398  0.0  0.217  0.215  1.165  0.018
+N168B     Control (procedural)  0.187  0.526  0.0  0.287  0.115  1.176  0.053
+N269B     Control (procedural)  0.164  0.387  0.0  0.449  0.159  1.100  0.032
+NL70B    Recurrent (Post-LITT)  0.455  0.306  0.0  0.239  0.212  1.186  0.018
+NL71B    Recurrent (Post-LITT)  0.354  0.314  0.0  0.332  0.226  1.116  0.017
+state   primary mean  recurrent mean  diff   Welch p   Spearman vs GSVA (6 tumours)
+MES            0.453           0.315  -0.137     0.342   +0.89
+AC             0.295           0.377  +0.083     0.437   +0.20
+OPC            0.000           0.000  +0.000       nan   +nan
+NPC            0.253           0.307  +0.055     0.355   +0.60
+without IL68B: MES -0.052, AC +0.019, OPC +0.000, NPC +0.033
+
+=== neftel4_confident
+                        cohort    MES     AC    OPC    NPC      R   RMSE      P
+sample                                                                         
+C2B           In vitro Culture  0.215  0.430  0.000  0.355  0.200  1.082  0.015
+IL64B   Control (failed graft)  0.055  0.158  0.018  0.769  0.158  1.056  0.020
+IL66B    Recurrent (Post-LITT)  0.295  0.284  0.069  0.353  0.217  1.079  0.013
+IL67B       Primary (Pre-LITT)  0.529  0.187  0.011  0.273  0.189  1.237  0.015
+IL68B       Primary (Pre-LITT)  0.562  0.240  0.001  0.197  0.232  1.243  0.013
+IL69B       Primary (Pre-LITT)  0.454  0.236  0.000  0.310  0.202  1.177  0.015
+N168B     Control (procedural)  0.451  0.312  0.075  0.162  0.097  1.265  0.047
+N269B     Control (procedural)  0.287  0.224  0.104  0.385  0.167  1.097  0.020
+NL70B    Recurrent (Post-LITT)  0.498  0.221  0.000  0.281  0.241  1.178  0.013
+NL71B    Recurrent (Post-LITT)  0.377  0.307  0.000  0.316  0.258  1.099  0.012
+state   primary mean  recurrent mean  diff   Welch p   Spearman vs GSVA (6 tumours)
+MES            0.515           0.390  -0.125     0.156   +0.77
+AC             0.221           0.271  +0.050     0.191   -0.26
+OPC            0.004           0.023  +0.019     0.493   +0.09
+NPC            0.260           0.316  +0.056     0.237   +0.49
+without IL68B: MES -0.102, AC +0.059, OPC +0.018, NPC +0.025
