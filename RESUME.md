@@ -17,8 +17,14 @@ six-tumour inputs through the R and Python stages today, to separate container /
 | 40467315 | R figure script, control + holdout arms | afterany | ~20–60 min | `{control,holdout}/publication_figure/` |
 | 40467316 | Python env build (CephFS), drug chain + GSVA both arms, compare.py | afterany | ~20–40 min | `COMPARISON.md`, `comparison.json` |
 
-Status 06:25 EDT (grid clock): 40467314 RUNNING, DESeq2 finished for the five tumours (GSEA, plots and report still to
-run); 40467315 and 40467316 PENDING on it. Expected finish of the chain: about 08:00–09:00 EDT.
+Status 06:53 EDT (grid clock): 40467314 on its last task (the HTML report); every other nf-core task COMPLETED exit 0.
+40467315 and 40467316 PENDING on it; expected finish of the chain about 08:00–09:00 EDT.
+Interim, read from the finished nf-core tables: DE 128 genes at padj < 0.05 (91 up, 37 down) of 18,948, against 107
+(74 up, 33 down) of 19,351 published; at the pipeline's filter (padj < 0.05, fold >= 1.5) 80 against 82, 48 shared.
+Broad GSEA (seed 1234): translation initiation NES -1.93, q 0.027 (published -1.99, 0.022); elongation q 0.009,
+ribosome 0.010, selenoamino acid 0.021, GCN2 0.034, starvation 0.065, so five of the six leading sets clear q < 0.05
+without IL68B. The leave-one-out run with IL68B dropped (six-tumour normalisation kept) gave -1.93 / 0.022: the two
+agree to within the size-factor change.
 
 **On "check again":** read `COMPARISON.md`; first check the control arm reproduces the published drug profiles and ranking.
 
