@@ -154,7 +154,7 @@ def build(out: Path):
         "conflicts of interest. Supported by a Henry Ford Health Physician Scientist Award A20050 (I.Y.L.). No commercial support was "
         "received for this analysis. Drug candidates discussed here are computational predictions. None is approved for glioblastoma "
         "and none has been tested in this model.",
-        "Timing: 13 slides in six minutes, about 27 s each; six backups follow the acknowledgments. If running long, shorten slide 4 "
+        "Timing: 13 slides in six minutes, about 27 s each; seven backups follow the acknowledgments (B7, the rat host, is preliminary). If running long, shorten slide 4 "
         "(PCA and volcano) to one sentence."])
     C.line()
 
@@ -509,6 +509,33 @@ def build(out: Path):
         reserve=650000, size=15, gap=4)
     refs(s, C.line(f"Broad GSEA{C('subramanian')}, {F['gsea_n_sets']:,} sets; point size, set size; colour, FDR q."))
     notes(s, ["Backup. The standard GSEA summary: eight strongest sets each way."])
+    C.line()
+
+    hs = J("host.json")                                     # SLIDES/11_host_figure.py, from ANALYSIS/host/results_de
+    assert hs["sig2"] == hs["up2"] + hs["down2"] and hs["down_all_three"] == hs["down"]
+    assert hs["human_MMP13_tumour_max"] < hs["rat_Mmp13_primary_min"]          # raw reads on both sides
+    weak = hs["il66b_weak_immune"]
+    s = content_slide(prs, "Backup B7. The rat host tissue in recurrence (preliminary)")
+    fig_and_text(s, FIG / "fig_host_volcano.png", [
+        f"Rat reads only, same alignment and DESeq2 as the tumor: {hs['pc_m_min']:.0f}–{hs['pc_m_max']:.0f} million protein-coding "
+        f"counts per tumor; {hs['tested']:,} genes tested.",
+        f"Recurrent vs primary, 3 v 3, the tumor's rule (FDR < 0.05 and two-fold): {hs['sig2']} genes, {hs['down2']} down and {hs['up2']} up.",
+        f"Down in all three recurrences: red-cell transcripts (Hbb, Hba-a1, Alas2) and fibroblast/matrix genes (Mmp13 "
+        f"{hs['mmp13_fold']:.0f}-fold, Fap, Lrrc15). Not human reads: human MMP13 at most {hs['human_MMP13_tumour_max']} reads "
+        f"per tumor, rat Mmp13 at least {hs['rat_Mmp13_primary_min']} in each primary.",
+        "Up mostly in NL70B and NL71B, the only NL-prefixed tumors (IL66B barely): interferon-induced (Cxcl10, Batf2) and "
+        "lymphocyte genes (Il2ra, Slamf6, Ighm), in an athymic host."],
+        img_w=6400000, size=14, gap=8, text_top=20000)
+    refs(s, C.line(f"Preliminary: different rats per arm; LITT, time and the ablation wound cannot be separated; gene-set and "
+                   f"hold-out tests running. DESeq2{C('love')}. Tumor vs rat-brain control: {hs['tumour_vs_control_sig']:,} genes "
+                   f"differ (fewer neuronal, far more immune transcripts)."))
+    notes(s, ["Backup, preliminary; show only if asked about the host. Solid: every gene that falls, falls in all three recurrences "
+              "(Mmp13 most, about 40-fold; red-cell transcripts; Fap, Lrrc15). Weak: the rise in interferon and lymphocyte genes comes "
+              "from NL70B and NL71B; " + ", ".join(weak) + " barely move in IL66B, and NL70B/NL71B are the only NL-prefixed tumors, "
+              "so a batch or cohort difference cannot be excluded. The host is the athymic RNU/RNU rat: do not describe a T-cell response. "
+              f"At FDR < 0.05 alone there are {hs['sig']} genes ({hs['up']} up, {hs['down']} down), including an rRNA, 7SL and snoRNA loci. "
+              "Rat reads are the xengsort host bin; nf-core/rnaseq 3.22.2 on mRatBN7.2 (Ensembl 110); nf-core/differentialabundance DESeq2 "
+              "(the run stopped after DESeq2, so no gene-set test yet; a single-contrast rerun with GSEA and a leave-one-out are on the grid)."])
     C.line()
 
 

@@ -1,0 +1,50 @@
+{
+ "tested": 17345,
+ "sig": 38,
+ "up": 15,
+ "down": 23,
+ "separating": 35,
+ "sig2": 33,
+ "up2": 14,
+ "down2": 19,
+ "down_all_three": 23,
+ "pc_m_min": 9.9,
+ "pc_m_max": 27.6,
+ "tumour_vs_control_sig": 9378,
+ "tumour_vs_control_tested": 17343,
+ "reads_m_min": 15.2,
+ "reads_m_max": 40.2,
+ "mmp13_fold": 41.2,
+ "mmp13_padj": 4.382937e-27,
+ "human_MMP13_tumour_max": 7,
+ "rat_Mmp13_primary_min": 180,
+ "rat_Mmp13_fold_range": [
+  29,
+  119
+ ],
+ "il66b_weak_immune": [
+  "Cxcl10",
+  "Batf2",
+  "Il2ra",
+  "Ighm"
+ ],
+ "themes": {
+  "blood": {
+   "Hbb": -1.48,
+   "Hba-a1": -1.4,
+   "Alas2": -2.62
+  },
+  "fibroblast / matrix": {
+   "Mmp13": -5.37,
+   "Fap": -1.27,
+   "Lrrc15": -1.18
+  },
+  "interferon / lymphocyte": {
+   "Cxcl10": 3.29,
+   "Batf2": 3.37,
+   "Il2ra": 3.12,
+   "Slamf6": 2.59,
+   "Ighm": 1.98
+  }
+ }
+}
