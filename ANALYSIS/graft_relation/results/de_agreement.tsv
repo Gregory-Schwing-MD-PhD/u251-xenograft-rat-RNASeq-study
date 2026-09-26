@@ -1,0 +1,3 @@
+comparison	jaccard	shared	spearman_lfc_all_genes
+group genes vs graft-% genes	0.0491803278688525	6	-0.658489408076032
+group genes vs group|graft genes	0.161290322580645	20	0.770733551217526

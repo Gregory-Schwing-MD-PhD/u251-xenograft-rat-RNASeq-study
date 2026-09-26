@@ -17,4 +17,4 @@ cd "$U/ANALYSIS/gsc_drugs"
   --de "$U/ANALYSIS/results_therapy_v3/tables/differential/therapy_impact.deseq2.results.tsv" \
   --tpm "$U/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_tpm.tsv" \
   --varn "$U/ANALYSIS/cibersort/signatures_online/varn2022_glass_sc12.txt" \
-  --extra ${EXTRA:-} --out results
+  --extra ${EXTRA:-} --out ${OUT:-results}

@@ -4,6 +4,21 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-26 13:10 EDT (grid clock): status
+
+- Host rnaseq resubmitted as 40468032 (the first, 40467893, died on a Nextflow resume lock: it was launched from the
+  repository root while the IL66B hold-out's Nextflow held the root's session; host runs now have their own launch
+  directories). Host DE 40468033 and host leave-one-out 40468034 chained (afterok). ETA ~16:30-17:30.
+- IL66B hold-out DONE (`ANALYSIS/holdout_IL66B/COMPARISON.md`): 140 DE genes vs 35, but translation initiation q 0.31
+  and no set at q < 0.25; ciclopirox rank 3 (NES -1.64, FDR 0.04); Neftel AC -0.50 (p 0.066).
+- Graft-fraction relation DONE (`ANALYSIS/graft_relation/`, job 40468073): graft % partly collinear with group
+  (r -0.70); translation, AC, MES1 per-sample scores rise with graft % (r 0.76-0.84); adding graft % to DESeq2 keeps the
+  translation fall (-0.40 -> -0.57) but DE genes 102 -> 42; group and graft fold changes correlate -0.66. Adversarial
+  review running (workflow wf_47e66eea-c0c) -> SUMMARY.md.
+- Stem-cell drug screen 40467921 still running; 40468077 (published GSC sets, out results_published) queued after it.
+- CIBERSORT v1.04 all 9 signatures DONE; LM22 on human reads is a clean negative (fit R < 0, p > 0.9).
+- Background workflows resumed: host refs + GSC sets (wf_5b325374-7af), human cohorts + power (wf_49b86515-404).
+
 ## 2026-09-26 12:25 EDT (grid clock): PENDING GRID JOBS: host reads, IL66B hold-out, stem-cell drug screen
 
 | job | what | ETA | output |

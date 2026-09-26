@@ -1,0 +1,5 @@
+model	padj05	padj05_fc1.5
+~ group	102	98
+~ graft_z + group (group term)	42	42
+~ graft_z + group (graft term)	9	9
+~ graft_z (tumours only)	26	20
