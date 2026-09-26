@@ -231,6 +231,8 @@ def build(out: Path):
               "primary tumors come from animals that were not ablated, recurrent tumors from other animals after ablation and regrowth, three per arm. "
               "The graft is human and the host is rat, so xengsort sorts every read by species before anything is counted; human reads plus the "
               "shared reads enter the analysis.",
+              "If asked why three per arm when Nagaraja 2026 describes four and four: the libraries come from animals numbered 64 to 71; IL64B's "
+              "graft failed (it is used only as a control) and there is no library for animal 65 in the data.",
               "Numbers to reconcile before the talk: the J Neurosurg paper reports four per arm for RNA-seq; this analysis has three per arm plus "
               "IL64B, a primary that did not engraft and serves as a control. Ask Dr. Nagaraja what happened to the fourth recurrent library.",
               "The rat-brain controls went through the same pipeline; one (N269B) carries human Y-linked reads, so it holds some tumor cells."])
