@@ -99,3 +99,26 @@ Nothing below is copied into this repository (it is public). The lab holds the o
    `metadata_full.csv` and `host/metadata_host.csv` stays `Control`. Only the descriptive `cohort` strings in
    `sample_cohorts.csv` changed: IL64B is `Control (no tumour in sample)`, N168B and N269B are
    `Control (contralateral hemisphere)`.
+
+## Dates: what bounds the harvests, and what is not recorded
+
+Searched 2026-09-26: the JNS submission and supplement (every figure page and embedded image, PDF annotations), the
+Acta Neurochirurgica 2021 paper, the lab's slide decks (text, notes, embedded media and file properties), the
+methylation IDATs and sample sheet, the RNA-seq analysis folder and the sorted reads' headers.
+
+- **No file gives an implantation, ablation or sacrifice date, the LITT-to-harvest interval (2 or 4 weeks), or the
+  order of sacrifice for any of rats 64-71.** The RNA-seq rats are not the animals in any MRI or histology figure of
+  the paper (a "separate group"; fresh-frozen brains, whereas the figure brains were perfused with tracers and fixed).
+- **Upper bound:** the methylation chip (205648300021) holding rats 66, 67, 68, 69, 70, 71, rat 69's contralateral
+  hemisphere and C2B was scanned on 7 April 2022 (iScan RunInfo in every IDAT; the core's QC report is dated
+  11 April 2022). Those animals were harvested before then. Rats 64 and 65 are not on the chip.
+- All ten RNA libraries ran together (NextSeq 2000 VH00948, run 4, flow cell AAAMFFWHV, lane 1); the run date is not in
+  the read headers. IL64B already appears in the lab's analysis deck created 2022-06-11.
+- **Protocol, not per-animal record** (the paper's imaging cohort; the paper does not say the RNA-seq rats followed
+  it): MRI about 2 weeks after implantation, LITT the next day, recurrence visible after about a week, sacrifice 2 or
+  4 weeks after LITT; unablated rats survive about 3 weeks after implantation.
+- **The lab's MRI files encode animal and date.** A slide in the lab's ablation-video deck embeds
+  "IL360705(Ablation) - 20180705_082218_IL36_..." (rat IL36, 5 July 2018): "IL" is the lab's running animal prefix in
+  its MRI records, so the MRI study folders for IL64-IL71 would carry the dates.
+- **To obtain from the lab:** the MRI study folders for IL64-IL71, the Visualase logs for rats 65, 66, 70 and 71, the
+  IACUC #1509 surgery and euthanasia log, and the USC Molecular Genomics Core submission and receipt forms.
