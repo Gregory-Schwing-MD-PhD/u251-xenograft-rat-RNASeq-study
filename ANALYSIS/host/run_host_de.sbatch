@@ -21,10 +21,11 @@ unset JAVA_HOME LD_LIBRARY_PATH PYTHONPATH R_LIBS R_LIBS_USER R_LIBS_SITE
 export XDG_RUNTIME_DIR="${HOME}/xdr"
 export NXF_SINGULARITY_CACHEDIR=/rs/rs_grp_oschome/go2432/singularity_cache
 export NXF_SINGULARITY_HOME_MOUNT=true
-cd "$U"
-nextflow run nf-core/differentialabundance -r 1.5.0 -profile singularity -c ANALYSIS/host/host.config \
-  --input ANALYSIS/host/metadata_host.csv --contrasts ANALYSIS/host/contrasts_host.csv \
+L=/rs/rs_grp_oschome/go2432/u251_host/launch_de; mkdir -p "$L"; cd "$L"   # own launch directory (see run_host_rnaseq)
+nextflow run nf-core/differentialabundance -r 1.5.0 -profile singularity \
+  -c "$U/nextflow.config" -c "$U/ANALYSIS/host/host.config" \
+  --input "$U/ANALYSIS/host/metadata_host.csv" --contrasts "$U/ANALYSIS/host/contrasts_host.csv" \
   --matrix "$R/salmon.merged.gene_counts.tsv" --transcript_length_matrix "$R/salmon.merged.gene_lengths.tsv" \
-  -params-file ANALYSIS/host/host_de_params.yaml -w /rs/rs_grp_oschome/go2432/u251_host/work_de -ansi-log false
+  -params-file "$U/ANALYSIS/host/host_de_params.yaml" -w /rs/rs_grp_oschome/go2432/u251_host/work_de -ansi-log false
 ls /rs/rs_grp_oschome/go2432/u251_host/results_de/tables/differential/
 echo "host DE done"

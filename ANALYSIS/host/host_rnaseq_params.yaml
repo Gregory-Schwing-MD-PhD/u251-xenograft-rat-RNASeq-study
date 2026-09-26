@@ -1,9 +1,9 @@
 # nf-core/rnaseq 3.22.2 on the rat host reads (xengsort `host` bin only; see extract_host.sbatch). Same aligner and
 # quantifier as the human run (rnaseq_params.yaml); Ensembl 110 mRatBN7.2 references already in ANALYSIS/refs/rat.
-input: "ANALYSIS/host/samplesheet_host.csv"
+input: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/host/samplesheet_host.csv"
 outdir: "/rs/rs_grp_oschome/go2432/u251_host/results_rnaseq"
-fasta: "ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.dna.toplevel.fa.gz"
-gtf: "ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.110.gtf.gz"
+fasta: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.dna.toplevel.fa.gz"
+gtf: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.110.gtf.gz"
 aligner: "star_salmon"
 skip_bbsplit: true
 featurecounts_group_type: "gene_biotype"   # Ensembl GTF (the human GENCODE run used gene_type)

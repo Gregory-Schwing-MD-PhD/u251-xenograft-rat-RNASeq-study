@@ -1,0 +1,604 @@
+{
+ "de": {
+  "published_n": 35,
+  "holdout_n": 140,
+  "shared": 30,
+  "jaccard": 0.20689655172413793,
+  "published_up": 23,
+  "holdout_up": 83,
+  "spearman_lfc_all_genes": 0.9107830160250987,
+  "lost": [
+   "ENSG00000289697",
+   "GPC3",
+   "IGFBP3",
+   "NAALADL2",
+   "PRSS12"
+  ],
+  "gained": [
+   "AC084219.4",
+   "ACSBG1",
+   "ADGRG6",
+   "ALDH1A3",
+   "ANK3",
+   "ANO4",
+   "APCDD1",
+   "AQP1",
+   "ARAP2",
+   "ARHGAP19",
+   "B4GALNT4",
+   "C15orf59",
+   "C3",
+   "CHAT",
+   "CRB2",
+   "CSF2RA",
+   "CYB5R2",
+   "DAAM2",
+   "DIRC3-AS1",
+   "EDNRB",
+   "EGFL8",
+   "EGR2",
+   "ENO1P4",
+   "ENSG00000285920",
+   "ENSG00000288709",
+   "ENSG00000290842",
+   "ERICH3",
+   "F3",
+   "F8A3",
+   "FAM71F1",
+   "FAM84A",
+   "FLG",
+   "FOXD3-AS1",
+   "GALNT16",
+   "GLDC",
+   "HTR1D",
+   "IL4R",
+   "KLF5",
+   "KNL1",
+   "LINC01137",
+   "LINC01468",
+   "LONRF2",
+   "LRRC8C",
+   "LTF",
+   "MAP3K7CL",
+   "MFAP5",
+   "MIR3648-2",
+   "MUC16",
+   "MYB",
+   "NBEAL2",
+   "NPSR1-AS1",
+   "NRCAM",
+   "NTRK2",
+   "OXTR",
+   "PAK3",
+   "PARP8",
+   "PIK3CD",
+   "PKDCC",
+   "PLEKHH1",
+   "PPM1E",
+   "PRR15",
+   "PRSS35",
+   "RAB3D",
+   "RAB40B",
+   "RALGPS2",
+   "RGCC",
+   "RGS8",
+   "ROBO2",
+   "RP11-1212A22.4",
+   "RP11-29G8.3",
+   "RP11-371E8.4",
+   "RP11-468E2.2",
+   "RP11-54H7.4",
+   "RP11-613M10.9",
+   "RP11-717F1.2",
+   "RP4-694A7.2",
+   "RPPH1",
+   "RRP7BP",
+   "S100A1",
+   "S100B",
+   "SCARNA2",
+   "SCG2",
+   "SCN3A",
+   "SEMA3F",
+   "SERF1B",
+   "SERPINA3",
+   "SERPINA5",
+   "SHC4",
+   "SIRPB1",
+   "SLC22A23",
+   "SLC25A48",
+   "SLC38A3",
+   "SLCO1B3",
+   "SNORA16A",
+   "SNORD116-3",
+   "SOD3",
+   "SOX3",
+   "SYNJ2",
+   "SYT12",
+   "SYT6",
+   "TACR1",
+   "TGIF2-C20orf24",
+   "TGM3",
+   "TNFRSF9",
+   "TNS1",
+   "U2",
+   "ZNF483",
+   "ZNF676",
+   "ZNF717",
+   "ZRSR1"
+  ]
+ },
+ "gsea": {
+  "lead": [
+   {
+    "set": "KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION",
+    "NES_pub": -1.9908375,
+    "q_pub": 0.02184563,
+    "NES_ho": -1.950484,
+    "p_ho": 0.0,
+    "q_ho": 0.30856273
+   },
+   {
+    "set": "REACTOME_EUKARYOTIC_TRANSLATION_ELONGATION",
+    "NES_pub": -1.956947,
+    "q_pub": 0.15752324,
+    "NES_ho": -1.8655294,
+    "p_ho": 0.0046620048,
+    "q_ho": 1.0
+   },
+   {
+    "set": "REACTOME_RESPONSE_OF_EIF2AK4_GCN2_TO_AMINO_ACID_DEFICIENCY",
+    "NES_pub": -1.9508193,
+    "q_pub": 0.14603627,
+    "NES_ho": -1.9144021,
+    "p_ho": 0.0,
+    "q_ho": 0.78469247
+   },
+   {
+    "set": "KEGG_RIBOSOME",
+    "NES_pub": -1.9398143,
+    "q_pub": 0.2039984,
+    "NES_ho": -1.9251935,
+    "p_ho": 0.0,
+    "q_ho": 0.5863362
+   },
+   {
+    "set": "REACTOME_SELENOAMINO_ACID_METABOLISM",
+    "NES_pub": -1.9390899,
+    "q_pub": 0.16894068,
+    "NES_ho": -1.959455,
+    "p_ho": 0.006651885,
+    "q_ho": 0.7224079
+   },
+   {
+    "set": "REACTOME_CELLULAR_RESPONSE_TO_STARVATION",
+    "NES_pub": -1.9277046,
+    "q_pub": 0.24665302,
+    "NES_ho": -1.8922287,
+    "p_ho": 0.0069284067,
+    "q_ho": 1.0
+   }
+  ],
+  "published": {
+   "down_q05": 1,
+   "down_q25": 6,
+   "up_q25": 0
+  },
+  "holdout": {
+   "down_q05": 0,
+   "down_q25": 0,
+   "up_q25": 0
+  }
+ },
+ "drug_screen": {
+  "n": {
+   "published": 100,
+   "control": 100,
+   "holdout": 100
+  },
+  "jaccard_control_vs_published": 1.0,
+  "jaccard_holdout_vs_published": 0.4076923076923077,
+  "jaccard_holdout_vs_control": 0.4076923076923077,
+  "ciclopirox": {
+   "published": {
+    "NES": -2.261,
+    "FDR": 1.66e-05,
+    "rank": 1
+   },
+   "control": {
+    "NES": -2.261,
+    "FDR": 1.66e-05,
+    "rank": 1
+   },
+   "holdout": {
+    "NES": -1.638,
+    "FDR": 0.0398,
+    "rank": 2
+   }
+  },
+  "entered_holdout": [
+   "1-methylphenanthrene",
+   "2,2',3,4,4',5,5'-heptachlorobiphenyl",
+   "2e,4e,6e,8e",
+   "5-aminosalicylic acid",
+   "alitretinoin",
+   "anthracene",
+   "benzyl butyl phthalate",
+   "caffeic acid",
+   "calcium",
+   "camptothecin",
+   "chlorhexidine diacetate",
+   "chlorpyrifos",
+   "creatine",
+   "cytarabine",
+   "endosulfan",
+   "fenvalerate",
+   "flecainide",
+   "fluoranthene",
+   "gabexate",
+   "gadolinium",
+   "gentamicin",
+   "ionomycin",
+   "leflunomide",
+   "lynestrenol",
+   "menadione bisulfite",
+   "methylergometrine",
+   "pentamidine",
+   "perhexiline",
+   "pyrogallol",
+   "pyrvinium",
+   "raloxifene",
+   "rofecoxib",
+   "s-1,2-dichlorovinyl-n-acetylcysteine",
+   "sodium dichromate",
+   "stannic fluoride",
+   "tetracycline",
+   "vinblastine",
+   "zeranol"
+  ],
+  "left_holdout": [
+   "0297417-0002b",
+   "1,6,7,8,9,11a,12,13,14,14a-decahydro-1,13-dihydroxy-6-methyl-4h-cyclopent [f]oxacyclotridecin-4-one",
+   "7-aminocephalosporanic acid",
+   "7-diethylamino-4-methylcoumarin",
+   "amiodarone",
+   "astemizole",
+   "axitinib",
+   "cefotiam",
+   "cumene hydroperoxide",
+   "cyperquat chloride",
+   "dacarbazine",
+   "econazole",
+   "escitalopram oxalate",
+   "estropipate",
+   "ethaverine",
+   "ferric ammonium",
+   "ferrous",
+   "gnf-pf-3832",
+   "heptachlor",
+   "ifosfamide",
+   "lysergide",
+   "mefloquine",
+   "nicotinic acid",
+   "nilutamide",
+   "nitrofural",
+   "osajin",
+   "oxygen",
+   "paroxetine",
+   "pentetrazol",
+   "pomiferin",
+   "primidone",
+   "propantheline bromide",
+   "salbutamol",
+   "succinylsulfathiazole",
+   "terfenadine",
+   "tolbutamide",
+   "trimipramine",
+   "vandetanib",
+   "wortmannin"
+  ]
+ },
+ "ranking": {
+  "n_clinical": {
+   "published": 54,
+   "control": 54,
+   "holdout": 49
+  },
+  "n_both_bbb": {
+   "published": 15,
+   "control": 13,
+   "holdout": 11
+  },
+  "top20": {
+   "published": [
+    "ciclopirox",
+    "pentetrazol",
+    "primidone",
+    "nilutamide",
+    "pyrantel",
+    "ifosfamide",
+    "magnesium",
+    "diazepam",
+    "dexverapamil",
+    "malathion",
+    "progesterone",
+    "thioridazine",
+    "oxygen",
+    "astemizole",
+    "nitrofural",
+    "ganciclovir",
+    "paroxetine",
+    "ozone",
+    "trimipramine",
+    "amiodarone"
+   ],
+   "control": [
+    "ciclopirox",
+    "pentetrazol",
+    "nilutamide",
+    "primidone",
+    "pyrantel",
+    "ifosfamide",
+    "magnesium",
+    "progesterone",
+    "diazepam",
+    "trimipramine",
+    "thioridazine",
+    "malathion",
+    "oxygen",
+    "nitrofural",
+    "l-citrulline",
+    "ozone",
+    "dacarbazine",
+    "ganciclovir",
+    "astemizole",
+    "dexverapamil"
+   ],
+   "holdout": [
+    "flecainide",
+    "magnesium",
+    "ciclopirox",
+    "progesterone",
+    "thioridazine",
+    "diazepam",
+    "perhexiline",
+    "malathion",
+    "paricalcitol",
+    "s-1,2-dichlorovinyl-n-acetylcysteine",
+    "l-citrulline",
+    "ozone",
+    "vincristine",
+    "leflunomide",
+    "pyrantel",
+    "rofecoxib",
+    "methylergometrine",
+    "dexverapamil",
+    "vinblastine",
+    "alitretinoin"
+   ]
+  },
+  "top20_jaccard_holdout_vs_control": 0.3333333333333333,
+  "top20_jaccard_control_vs_published": 0.8181818181818182,
+  "ciclopirox": {
+   "published": {
+    "rank_bbb": 1,
+    "rank_nobbb": 1,
+    "score_bbb": 3.137234747325821,
+    "both_agree": "True"
+   },
+   "control": {
+    "rank_bbb": 1,
+    "rank_nobbb": 1,
+    "score_bbb": 3.2686287804438394,
+    "both_agree": "True"
+   },
+   "holdout": {
+    "rank_bbb": 3,
+    "rank_nobbb": 14,
+    "score_bbb": 2.0155129967805987,
+    "both_agree": "True"
+   }
+  }
+ },
+ "subtypes": {
+  "published": {
+   "Garofano_MTC": {
+    "change": -0.5808722827885429,
+    "p": 0.1420594837645438
+   },
+   "Neftel_AC": {
+    "change": -0.5301518464982181,
+    "p": 0.0074846760747501
+   },
+   "Neftel_MES1": {
+    "change": -0.4753963553966595,
+    "p": 0.0894758146368836
+   },
+   "Neftel_MES2": {
+    "change": -0.3581501012749174,
+    "p": 0.3447261148328936
+   },
+   "Neftel_NPC2": {
+    "change": -0.151042249745046,
+    "p": 0.4648488196063346
+   },
+   "Neftel_NPC1": {
+    "change": 0.0350903385973025,
+    "p": 0.8760250979118179
+   },
+   "Neftel_OPC": {
+    "change": 0.0545749700284127,
+    "p": 0.5110531821590529
+   },
+   "Garofano_GPM": {
+    "change": 0.1081019851199507,
+    "p": 0.6982013348478918
+   },
+   "Garofano_PPR": {
+    "change": 0.3119909287020001,
+    "p": 0.4186990971228447
+   },
+   "Garofano_NEU": {
+    "change": 0.3442527272742138,
+    "p": 0.2671577401430494
+   }
+  },
+  "control": {
+   "Garofano_MTC": {
+    "change": -0.5808722827885429,
+    "p": 0.1420594837645438
+   },
+   "Neftel_AC": {
+    "change": -0.5301518464982181,
+    "p": 0.0074846760747501
+   },
+   "Neftel_MES1": {
+    "change": -0.4753963553966595,
+    "p": 0.0894758146368836
+   },
+   "Neftel_MES2": {
+    "change": -0.3581501012749174,
+    "p": 0.3447261148328936
+   },
+   "Neftel_NPC2": {
+    "change": -0.151042249745046,
+    "p": 0.4648488196063346
+   },
+   "Neftel_NPC1": {
+    "change": 0.0350903385973025,
+    "p": 0.8760250979118179
+   },
+   "Neftel_OPC": {
+    "change": 0.0545749700284127,
+    "p": 0.5110531821590529
+   },
+   "Garofano_GPM": {
+    "change": 0.1081019851199507,
+    "p": 0.6982013348478918
+   },
+   "Garofano_PPR": {
+    "change": 0.3119909287020001,
+    "p": 0.4186990971228447
+   },
+   "Garofano_NEU": {
+    "change": 0.3442527272742138,
+    "p": 0.2671577401430494
+   }
+  },
+  "holdout": {
+   "Garofano_MTC": {
+    "change": -0.7338866405807588,
+    "p": 0.1267273208819332
+   },
+   "Neftel_AC": {
+    "change": -0.5047767272444991,
+    "p": 0.0663318104208121
+   },
+   "Neftel_NPC2": {
+    "change": -0.3354187102378951,
+    "p": 0.0871222566838256
+   },
+   "Neftel_MES1": {
+    "change": -0.321856704424564,
+    "p": 0.3292690809906767
+   },
+   "Neftel_NPC1": {
+    "change": -0.1212636691456925,
+    "p": 0.6297754486563305
+   },
+   "Neftel_MES2": {
+    "change": -0.1200663684229487,
+    "p": 0.7877450600112685
+   },
+   "Neftel_OPC": {
+    "change": 0.0659396696941286,
+    "p": 0.6944116743542531
+   },
+   "Garofano_GPM": {
+    "change": 0.1390115691875554,
+    "p": 0.7071584950614436
+   },
+   "Garofano_NEU": {
+    "change": 0.2908874394516416,
+    "p": 0.4886323238347603
+   },
+   "Garofano_PPR": {
+    "change": 0.5789770706794667,
+    "p": 0.1129318694057778
+   }
+  }
+ },
+ "hubs": {
+  "published": {
+   "nodes": 11,
+   "edges": 30,
+   "hubs_deg3": [
+    "BGN",
+    "COL17A1",
+    "COL1A1",
+    "GPC3",
+    "HMCN1",
+    "IGFBP3",
+    "LRP1",
+    "PCLO",
+    "PRELP",
+    "RYR2"
+   ]
+  },
+  "control": {
+   "nodes": 11,
+   "edges": 30,
+   "hubs_deg3": [
+    "BGN",
+    "COL17A1",
+    "COL1A1",
+    "GPC3",
+    "HMCN1",
+    "IGFBP3",
+    "LRP1",
+    "PCLO",
+    "PRELP",
+    "RYR2"
+   ]
+  },
+  "holdout": {
+   "nodes": 49,
+   "edges": 126,
+   "hubs_deg3": [
+    "ADGRG6",
+    "ANK3",
+    "BGN",
+    "C3",
+    "CALB1",
+    "CHAT",
+    "COL17A1",
+    "COL1A1",
+    "CSF2RA",
+    "EGR2",
+    "F3",
+    "FLG",
+    "HMCN1",
+    "HTR2A",
+    "IL4R",
+    "LTF",
+    "MFAP5",
+    "MUC16",
+    "NRCAM",
+    "NRG1",
+    "NTRK2",
+    "PCLO",
+    "PIK3AP1",
+    "PIK3CD",
+    "PRELP",
+    "ROBO2",
+    "RYR2",
+    "S100A1",
+    "S100B",
+    "SCN3A",
+    "SEMA3F",
+    "SERPINA3",
+    "SERPINA5",
+    "TACR1"
+   ]
+  }
+ }
+}

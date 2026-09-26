@@ -19,10 +19,11 @@ export XDG_RUNTIME_DIR="${HOME}/xdr"
 export NXF_SINGULARITY_CACHEDIR=/rs/rs_grp_oschome/go2432/singularity_cache
 export NXF_SINGULARITY_HOME_MOUNT=true
 mkdir -p "$XDG_RUNTIME_DIR"
-cd "$U"
+# own launch directory: from the repository root, -resume picked up (and could not lock) a concurrent Nextflow run
+L=/rs/rs_grp_oschome/go2432/u251_host/launch_rnaseq; mkdir -p "$L"; cd "$L"
 nextflow run nf-core/rnaseq -r 3.22.2 -profile singularity \
-  -c rnaseq_custom.config -c ANALYSIS/host/host.config \
-  -params-file ANALYSIS/host/host_rnaseq_params.yaml \
+  -c "$U/nextflow.config" -c "$U/rnaseq_custom.config" -c "$U/ANALYSIS/host/host.config" \
+  -params-file "$U/ANALYSIS/host/host_rnaseq_params.yaml" \
   -w /rs/rs_grp_oschome/go2432/u251_host/work -resume -ansi-log false
 ls /rs/rs_grp_oschome/go2432/u251_host/results_rnaseq/star_salmon/ | grep merged
 echo "host rnaseq done"

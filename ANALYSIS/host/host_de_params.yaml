@@ -4,8 +4,8 @@ max_cpus: 16
 deseq2_cores: 8
 
 # --- INPUTS ---
-gtf: "ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.110.gtf.gz"
-gene_sets_files: "ANALYSIS/refs/pathways/rat/combined_rat.gmt"
+gtf: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.110.gtf.gz"
+gene_sets_files: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/pathways/rat/combined_rat.gmt"
 # --- GSEA (small-N safe) ---
 gsea_run: true
 gsea_permute: "gene_set"          # required for N<7
