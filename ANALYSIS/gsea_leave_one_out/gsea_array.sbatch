@@ -15,7 +15,14 @@
 set -euo pipefail
 D=/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/gsea_leave_one_out
 IMG=/rs/rs_grp_oschome/go2432/singularity_cache/depot.galaxyproject.org-singularity-gsea-4.3.2--hdfd78af_0.img
-SING=$(command -v singularity || echo /wsu/home/go/go24/go2432/.local/bin/singularity)
+# container runtime as in the repo's working run scripts (run_decontaminate.sh, run_ruvseq.sh): the nextflow conda env's
+# singularity, which ships its starter; ~/.local/bin/singularity has no libexec and fails on the compute nodes
+export PATH="$HOME/mambaforge/envs/nextflow/bin:$PATH"
+unset JAVA_HOME LD_LIBRARY_PATH PYTHONPATH
+export XDG_RUNTIME_DIR="$HOME/xdr"; mkdir -p "$XDG_RUNTIME_DIR"
+SING=$HOME/mambaforge/envs/nextflow/bin/singularity
+[ -x "$SING" ] || { echo "no singularity at $SING"; exit 5; }
+"$SING" --version
 [ -s "$IMG" ] || { echo "no GSEA image at $IMG (prep failed?)"; exit 2; }
 [ -s "$D/tasks.tsv" ] || { echo "no tasks.tsv (prep failed?)"; exit 3; }
 
