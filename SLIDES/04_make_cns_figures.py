@@ -510,22 +510,22 @@ def fig_pipeline():
 
 
 # ====================================================================== what else moves: hypoxia, iron, stress down; cell cycle up
-THEMES2 = [("hypoxia", NAVY, [("HIF1\ntargets", "HIF1 targets"), ("hypoxia\nmetagene", "hypoxia metagene"), ("hypoxia\nhallmark", "hypoxia"),
+THEMES2 = [("hypoxia", NAVY, [("HIF1\ntargets", "HIF1 targets"), ("hypoxia\nmetagene", "hypoxia metagene"), ("hypoxia\n(hallmark)", "hypoxia"),
                               ("angio-\ngenesis", "angiogenesis")]),
            ("iron, stress", BLUE, [("iron\nuptake", "iron uptake and transport"), ("senes-\ncence", "senescence"), ("EMT", "EMT")]),
            ("cell cycle", RED, [("mitotic\nspindle", "mitotic spindle"), ("G2M\ncheckpoint", "G2M checkpoint"), ("E2F\ntargets", "E2F targets")])]
 
 
 def fig_themes2():
-    fig, ax = plt.subplots(figsize=(9.0, 4.8))
+    fig, ax = plt.subplots(figsize=(9.8, 4.8))
     xs, vals, cols, labels, ps, heads = [], [], [], [], [], []
     x = 0.0
     for head, col, members in THEMES2:
         x0 = x
         for lab, key in members:
-            t = theme(key); xs.append(x); vals.append(t["nes"]); cols.append(col); labels.append(lab); ps.append(t["p"]); x += 1.6
-        heads.append(((x0 + x - 1.6) / 2, head, col)); x += 1.1
-    ax.bar(xs, vals, width=0.9, color=cols, zorder=3)
+            t = theme(key); xs.append(x); vals.append(t["nes"]); cols.append(col); labels.append(lab); ps.append(t["p"]); x += 1.9
+        heads.append(((x0 + x - 1.9) / 2, head, col)); x += 1.2
+    ax.bar(xs, vals, width=1.0, color=cols, zorder=3)
     ax.axhline(0, color=INK, lw=1.2, zorder=4)
     for xx, v, p in zip(xs, vals, ps):
         up = v > 0
@@ -533,7 +533,7 @@ def fig_themes2():
         ax.text(xx, v + (0.32 if up else -0.32), f"p {p:.3f}" if p < 0.01 else f"p {p:.2f}", ha="center", va="bottom" if up else "top", fontsize=11.5, color=GREY)
     for xc, head, col in heads:
         ax.text(xc, -2.85, head, ha="center", va="top", fontsize=15, color=col, fontweight="bold")
-    ax.set_xticks(xs); ax.set_xticklabels(labels, fontsize=12, color=INK, linespacing=1.1)
+    ax.set_xticks(xs); ax.set_xticklabels(labels, fontsize=11.5, color=INK, linespacing=1.1)
     ax.xaxis.set_ticks_position("top"); ax.tick_params(axis="x", length=0, pad=4)
     ax.set_ylim(-3.2, 2.8); ax.set_ylabel("normalized enrichment score", fontsize=14, color=INK)
     ax.set_yticks([2, 1, 0, -1, -2]); ax.yaxis.set_major_formatter(FuncFormatter(lambda v, _: MINUS(f"{v:.0f}")))
