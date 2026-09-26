@@ -61,3 +61,8 @@ depmap/Model.csv
 # ChEMBL REST cache of the exact-name resolver (regenerable)
 ANALYSIS/drug_rematch/chembl_exact_cache.json
 ANALYSIS/drug_rematch/runs/
+
+# Nagaraja lab raw data (unpublished; never commit): methylation IDATs and the 2023 RNA-seq analysis folder
+DATA/raw_lab/
+DATA/METHYLATION
+*.idat
