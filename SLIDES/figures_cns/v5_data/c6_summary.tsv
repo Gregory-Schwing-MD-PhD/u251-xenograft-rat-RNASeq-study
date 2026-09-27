@@ -1,0 +1,12 @@
+key	value
+corr_f_arm	-0.7042165493
+variance_inflation_arm	1.983815825
+de_arm_term_f_plus_arm	30
+de_arm_only_design	133
+human_stream_DE_genes	82
+human_stream_DE_in_one2one_universe	48
+recovered_same_sign_f_plus_arm	2
+recovered_share_f_plus_arm	0.04166666667
+recovered_same_sign_arm_only	10
+recovered_share_arm_only	0.2083333333
+expectation	fewer than half recovered, from collinearity at n = 3; written as such, not as biology

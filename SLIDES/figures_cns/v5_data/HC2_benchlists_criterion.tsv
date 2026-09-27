@@ -1,0 +1,15 @@
+list	A	B_bespoke	B_fDNA	C	criterion_B_bespoke	criterion_B_fDNA
+E1-all	1	4	4	1	TRUE	TRUE
+E1-any	1	4	4	1	TRUE	TRUE
+E2-b2	1	4	4	1	TRUE	TRUE
+E2-b3	1	4	4	1	TRUE	TRUE
+E3-all	1	4	4	1	TRUE	TRUE
+E3-any	1	4	4	1	TRUE	TRUE
+E3-half	1	4	4	1	TRUE	TRUE
+E4a	1	4	4	1	TRUE	TRUE
+E4b	1	4	4	1	TRUE	TRUE
+E5-Rnor6-any	1	4	4	1	TRUE	TRUE
+E5-Rnor6-unique	1	4	4	1	TRUE	TRUE
+E5-mR7-any	1	4	4	1	TRUE	TRUE
+E5-mR7-any-Rexp	1	4	4	1	TRUE	TRUE
+bespoke_rat_list	1	4	4	1	TRUE	TRUE

@@ -50,6 +50,8 @@ manuscript/references/*.pdf
 
 # portable LaTeX engine fetched by MBR/build.sh
 MBR/.build/
+# manuscript drafts and analysis notes (never in the public repository)
+MBR/nature_draft/
 MBR/*.aux
 MBR/*.out
 MBR/*.log

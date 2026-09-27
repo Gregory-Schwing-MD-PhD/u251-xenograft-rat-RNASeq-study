@@ -1,0 +1,474 @@
+{
+  "primary": "union_designC",
+  "results": {
+    "union_designC": {
+      "list": "union",
+      "betas": "designC",
+      "n_fcpg_listed": 2765,
+      "n_fcpg_used": 2396,
+      "n_controls": 23960,
+      "n_controls_unique": 23960,
+      "W": {
+        "IL67B": -0.0052583045,
+        "IL68B": -0.0047804454,
+        "IL69B": -0.0048300733,
+        "IL66B": -0.0046023064,
+        "IL70B": -0.0057064637,
+        "IL71B": -0.00515726,
+        "N2": 0.0007265733,
+        "C2B": -0.00050861564
+      },
+      "W_fcpg": {
+        "IL67B": 0.28379954,
+        "IL68B": 0.28246996,
+        "IL69B": 0.2828166,
+        "IL66B": 0.29363357,
+        "IL70B": 0.28749924,
+        "IL71B": 0.30090228,
+        "N2": 0.33561485,
+        "C2B": 0.29261801
+      },
+      "W_controls": {
+        "IL67B": 0.28905784,
+        "IL68B": 0.2872504,
+        "IL69B": 0.28764667,
+        "IL66B": 0.29823588,
+        "IL70B": 0.2932057,
+        "IL71B": 0.30605954,
+        "N2": 0.33488827,
+        "C2B": 0.29312663
+      },
+      "G3a": {
+        "p": 0.0091866221,
+        "median_sd_fcpg": 0.03347506,
+        "median_sd_controls": 0.032325825,
+        "pass": true
+      },
+      "G3b": {
+        "dip": 0.038175856,
+        "p": 0,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.00019906897,
+      "relabel_p": 0.7,
+      "relabel_rank_of_20": 14,
+      "arm": {
+        "statistic": "W_union_designC",
+        "values": {
+          "IL67B": -0.0052583045,
+          "IL68B": -0.0047804454,
+          "IL69B": -0.0048300733,
+          "IL66B": -0.0046023064,
+          "IL70B": -0.0057064637,
+          "IL71B": -0.00515726
+        },
+        "rec_minus_prim": -0.00019906897,
+        "exact90": [-0.00092601832, 0.0006559981],
+        "welch95": [-0.0013538061, 0.00095566817],
+        "welch_p_two_sided": 0.61395551,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.7,
+        "relabel_rank_of_20": 14,
+        "matched_pair": {
+          "IL70B": -0.0057064637,
+          "IL67B": -0.0052583045,
+          "difference": -0.00044815921
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    },
+    "union_noob": {
+      "list": "union",
+      "betas": "noob",
+      "n_fcpg_listed": 2765,
+      "n_fcpg_used": 2396,
+      "n_controls": 23960,
+      "n_controls_unique": 23960,
+      "W": {
+        "IL67B": -0.0046823216,
+        "IL68B": -0.0043798059,
+        "IL69B": -0.0042703988,
+        "IL66B": -0.0039319086,
+        "IL70B": -0.0056448061,
+        "IL71B": -0.0044293271,
+        "N2": 0.00047280456,
+        "C2B": -0.00045093673
+      },
+      "W_fcpg": {
+        "IL67B": 0.28107711,
+        "IL68B": 0.27945228,
+        "IL69B": 0.27982774,
+        "IL66B": 0.28864038,
+        "IL70B": 0.28300216,
+        "IL71B": 0.29254636,
+        "N2": 0.30796,
+        "C2B": 0.29261801
+      },
+      "W_controls": {
+        "IL67B": 0.28575944,
+        "IL68B": 0.28383209,
+        "IL69B": 0.28409814,
+        "IL66B": 0.29257229,
+        "IL70B": 0.28864697,
+        "IL71B": 0.29697569,
+        "N2": 0.30748719,
+        "C2B": 0.29306895
+      },
+      "G3a": {
+        "p": 0.12344015,
+        "median_sd_fcpg": 0.02820392,
+        "median_sd_controls": 0.027477837,
+        "pass": false
+      },
+      "G3b": {
+        "dip": 0.038175856,
+        "p": 0,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.00022450517,
+      "relabel_p": 0.65,
+      "relabel_rank_of_20": 13,
+      "arm": {
+        "statistic": "W_union_noob",
+        "values": {
+          "IL67B": -0.0046823216,
+          "IL68B": -0.0043798059,
+          "IL69B": -0.0042703988,
+          "IL66B": -0.0039319086,
+          "IL70B": -0.0056448061,
+          "IL71B": -0.0044293271
+        },
+        "rec_minus_prim": -0.00022450517,
+        "exact90": [-0.0013744073, 0.00075041306],
+        "welch95": [-0.002265303, 0.0018162926],
+        "welch_p_two_sided": 0.70586693,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.65,
+        "relabel_rank_of_20": 13,
+        "matched_pair": {
+          "IL70B": -0.0056448061,
+          "IL67B": -0.0046823216,
+          "difference": -0.00096248446
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    },
+    "gabbutt2022_designC": {
+      "list": "gabbutt2022",
+      "betas": "designC",
+      "n_fcpg_listed": 1794,
+      "n_fcpg_used": 1570,
+      "n_controls": 15700,
+      "n_controls_unique": 15700,
+      "W": {
+        "IL67B": -0.0059245502,
+        "IL68B": -0.0040020093,
+        "IL69B": -0.0044386711,
+        "IL66B": -0.0050330313,
+        "IL70B": -0.0059559573,
+        "IL71B": -0.0053206868,
+        "N2": 0.0017664062,
+        "C2B": -0.00021578373
+      },
+      "W_fcpg": {
+        "IL67B": 0.29153088,
+        "IL68B": 0.29134361,
+        "IL69B": 0.29107006,
+        "IL66B": 0.30162504,
+        "IL70B": 0.29630475,
+        "IL71B": 0.31110701,
+        "N2": 0.34265791,
+        "C2B": 0.29790011
+      },
+      "W_controls": {
+        "IL67B": 0.29745543,
+        "IL68B": 0.29534562,
+        "IL69B": 0.29550873,
+        "IL66B": 0.30665807,
+        "IL70B": 0.30226071,
+        "IL71B": 0.31642769,
+        "N2": 0.34089151,
+        "C2B": 0.29811589
+      },
+      "G3a": {
+        "p": 0.004530515,
+        "median_sd_fcpg": 0.033135663,
+        "median_sd_controls": 0.031214096,
+        "pass": true
+      },
+      "G3b": {
+        "dip": 0.016667569,
+        "p": 0.0046174659,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.00064814824,
+      "relabel_p": 0.85,
+      "relabel_rank_of_20": 17,
+      "arm": {
+        "statistic": "W_gabbutt2022_designC",
+        "values": {
+          "IL67B": -0.0059245502,
+          "IL68B": -0.0040020093,
+          "IL69B": -0.0044386711,
+          "IL66B": -0.0050330313,
+          "IL70B": -0.0059559573,
+          "IL71B": -0.0053206868
+        },
+        "rec_minus_prim": -0.00064814824,
+        "exact90": [-0.0019539479, 0.0008915189],
+        "welch95": [-0.0027609124, 0.0014646159],
+        "welch_p_two_sided": 0.39126307,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.85,
+        "relabel_rank_of_20": 17,
+        "matched_pair": {
+          "IL70B": -0.0059559573,
+          "IL67B": -0.0059245502,
+          "difference": -3.1407074e-05
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    },
+    "gabbutt2022_noob": {
+      "list": "gabbutt2022",
+      "betas": "noob",
+      "n_fcpg_listed": 1794,
+      "n_fcpg_used": 1570,
+      "n_controls": 15700,
+      "n_controls_unique": 15700,
+      "W": {
+        "IL67B": -0.0060797046,
+        "IL68B": -0.0045933859,
+        "IL69B": -0.0046056234,
+        "IL66B": -0.0051328216,
+        "IL70B": -0.0057713234,
+        "IL71B": -0.0049407846,
+        "N2": 0.0015023945,
+        "C2B": -0.00048978364
+      },
+      "W_fcpg": {
+        "IL67B": 0.2883975,
+        "IL68B": 0.28752057,
+        "IL69B": 0.2874889,
+        "IL66B": 0.29718075,
+        "IL70B": 0.29111923,
+        "IL71B": 0.30172138,
+        "N2": 0.31673179,
+        "C2B": 0.29790011
+      },
+      "W_controls": {
+        "IL67B": 0.2944772,
+        "IL68B": 0.29211396,
+        "IL69B": 0.29209452,
+        "IL66B": 0.30231357,
+        "IL70B": 0.29689055,
+        "IL71B": 0.30666216,
+        "N2": 0.31522939,
+        "C2B": 0.29838989
+      },
+      "G3a": {
+        "p": 0.024437091,
+        "median_sd_fcpg": 0.027994739,
+        "median_sd_controls": 0.026667484,
+        "pass": false
+      },
+      "G3b": {
+        "dip": 0.016667569,
+        "p": 0.0046174659,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.00018873861,
+      "relabel_p": 0.75,
+      "relabel_rank_of_20": 15,
+      "arm": {
+        "statistic": "W_gabbutt2022_noob",
+        "values": {
+          "IL67B": -0.0060797046,
+          "IL68B": -0.0045933859,
+          "IL69B": -0.0046056234,
+          "IL66B": -0.0051328216,
+          "IL70B": -0.0057713234,
+          "IL71B": -0.0049407846
+        },
+        "rec_minus_prim": -0.00018873861,
+        "exact90": [-0.0011779375, 0.00113892],
+        "welch95": [-0.0019605237, 0.0015830465],
+        "welch_p_two_sided": 0.75584553,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.75,
+        "relabel_rank_of_20": 15,
+        "matched_pair": {
+          "IL70B": -0.0057713234,
+          "IL67B": -0.0060797046,
+          "difference": 0.00030838119
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    },
+    "gabbutt2025_designC": {
+      "list": "gabbutt2025",
+      "betas": "designC",
+      "n_fcpg_listed": 978,
+      "n_fcpg_used": 831,
+      "n_controls": 8310,
+      "n_controls_unique": 8310,
+      "W": {
+        "IL67B": -0.0021054981,
+        "IL68B": -0.0035042285,
+        "IL69B": -0.0030915961,
+        "IL66B": -0.0027583557,
+        "IL70B": -0.0044594773,
+        "IL71B": -0.0033916948,
+        "N2": -0.0014569888,
+        "C2B": -0.00076308008
+      },
+      "W_fcpg": {
+        "IL67B": 0.26854377,
+        "IL68B": 0.26518344,
+        "IL69B": 0.26666807,
+        "IL66B": 0.27785978,
+        "IL70B": 0.27045004,
+        "IL71B": 0.28112348,
+        "N2": 0.32168902,
+        "C2B": 0.28213363
+      },
+      "W_controls": {
+        "IL67B": 0.27064926,
+        "IL68B": 0.26868767,
+        "IL69B": 0.26975966,
+        "IL66B": 0.28061814,
+        "IL70B": 0.27490952,
+        "IL71B": 0.28451517,
+        "N2": 0.32314601,
+        "C2B": 0.28289671
+      },
+      "G3a": {
+        "p": 0.83953077,
+        "median_sd_fcpg": 0.034031552,
+        "median_sd_controls": 0.035106704,
+        "pass": false
+      },
+      "G3b": {
+        "dip": 0.02558523,
+        "p": 0.00069406984,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.00063606837,
+      "relabel_p": 0.8,
+      "relabel_rank_of_20": 16,
+      "arm": {
+        "statistic": "W_gabbutt2025_designC",
+        "values": {
+          "IL67B": -0.0021054981,
+          "IL68B": -0.0035042285,
+          "IL69B": -0.0030915961,
+          "IL66B": -0.0027583557,
+          "IL70B": -0.0044594773,
+          "IL71B": -0.0033916948
+        },
+        "rec_minus_prim": -0.00063606837,
+        "exact90": [-0.0023539792, 0.00074587283],
+        "welch95": [-0.0024548327, 0.001182696],
+        "welch_p_two_sided": 0.38281884,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.8,
+        "relabel_rank_of_20": 16,
+        "matched_pair": {
+          "IL70B": -0.0044594773,
+          "IL67B": -0.0021054981,
+          "difference": -0.0023539792
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    },
+    "gabbutt2025_noob": {
+      "list": "gabbutt2025",
+      "betas": "noob",
+      "n_fcpg_listed": 978,
+      "n_fcpg_used": 831,
+      "n_controls": 8310,
+      "n_controls_unique": 8310,
+      "W": {
+        "IL67B": -0.0012778562,
+        "IL68B": -0.0026404765,
+        "IL69B": -0.0025152791,
+        "IL66B": -0.0021027887,
+        "IL70B": -0.0044241393,
+        "IL71B": -0.0032245768,
+        "N2": -0.0003749029,
+        "C2B": -0.00060963878
+      },
+      "W_fcpg": {
+        "IL67B": 0.26660298,
+        "IL68B": 0.26369111,
+        "IL69B": 0.26480309,
+        "IL66B": 0.2718431,
+        "IL70B": 0.26725941,
+        "IL71B": 0.27472582,
+        "N2": 0.29082255,
+        "C2B": 0.28213363
+      },
+      "W_controls": {
+        "IL67B": 0.26788084,
+        "IL68B": 0.26633158,
+        "IL69B": 0.26731837,
+        "IL66B": 0.27394588,
+        "IL70B": 0.27168355,
+        "IL71B": 0.2779504,
+        "N2": 0.29119746,
+        "C2B": 0.28274327
+      },
+      "G3a": {
+        "p": 0.82345563,
+        "median_sd_fcpg": 0.028446917,
+        "median_sd_controls": 0.028673329,
+        "pass": false
+      },
+      "G3b": {
+        "dip": 0.02558523,
+        "p": 0.00069406984,
+        "pass": false
+      },
+      "gates_pass": false,
+      "T_T3": -0.0011059643,
+      "relabel_p": 0.9,
+      "relabel_rank_of_20": 18,
+      "arm": {
+        "statistic": "W_gabbutt2025_noob",
+        "values": {
+          "IL67B": -0.0012778562,
+          "IL68B": -0.0026404765,
+          "IL69B": -0.0025152791,
+          "IL66B": -0.0021027887,
+          "IL70B": -0.0044241393,
+          "IL71B": -0.0032245768
+        },
+        "rec_minus_prim": -0.0011059643,
+        "exact90": [-0.0031462831, 0.0005376878],
+        "welch95": [-0.0034773211, 0.0012653924],
+        "welch_p_two_sided": 0.24948675,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.9,
+        "relabel_rank_of_20": 18,
+        "matched_pair": {
+          "IL70B": -0.0044241393,
+          "IL67B": -0.0012778562,
+          "difference": -0.0031462831
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)"
+      },
+      "exclusion": "rat list only (registered sensitivity); the primary adds the BENCH lists when they exist"
+    }
+  },
+  "n_eligible": 678040
+}

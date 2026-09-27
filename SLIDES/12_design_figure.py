@@ -6,7 +6,8 @@ IL-65, IL-66, IL-70, IL-71 Recurrent; N1, N2 Control 'Contralateral'; C1, C2 cul
 '1724 (Raj-8).xlsx' (IL66B..IL71B, '69B control N2', C2B). Procedure and timing from Nagaraja et al., J Neurosurg 2026 (LITT
 when the tumour reached about 4 mm; recurrence imaged at 2 and 4 weeks). Harvest time per animal is not recorded, so no
 per-animal time axis is drawn. Human-read shares: xengsort graft fractions (SLIDES/figures_cns/chart_sorting.csv).
-ANALYSIS/SAMPLE_KEY.md has the table and what is not known.
+Methylation marks: the EPIC v1 chip 205648300021 as listed in ANALYSIS/methylation/assets/samplesheet.csv (eight arrays,
+each joined to its RNA library by the rna_library column). ANALYSIS/SAMPLE_KEY.md has the table and what is not known.
 
     python SLIDES/12_design_figure.py      -> SLIDES/figures_cns/fig_design.png
 """
@@ -29,7 +30,17 @@ graft = {r["sample"]: float(r["graft"]) for r in csv.DictReader(open(HERE / "fig
 assert graft["IL64B"] < 1 and graft["N168B"] < 1 and 4 < graft["N269B"] < 6
 assert min(graft[s] for s in ("IL67B", "IL68B", "IL69B", "IL66B", "NL70B", "NL71B")) > 25
 
-fig = plt.figure(figsize=(13.2, 4.7))
+sheet = list(csv.DictReader(open(HERE.parent / "ANALYSIS" / "methylation" / "assets" / "samplesheet.csv", encoding="utf-8")))
+assert len(sheet) == 8 and {r["sentrix_id"] for r in sheet} == {"205648300021"}
+array_of = {r["rna_library"]: r["sample"] for r in sheet}          # RNA library -> array name
+assert set(array_of) <= set(graft), set(array_of) - set(graft)
+
+W = 14.3                                                            # 13.2 before the two assay columns; a and b keep their size
+fig = plt.figure(figsize=(W, 4.7))
+
+
+def ax_at(x_in, w_in):
+    return fig.add_axes([x_in / W, 0.0, w_in / W, 1.0])
 
 
 def letter(ax, s):
@@ -65,7 +76,7 @@ def rat(ax, x, y, s=1.0, color="#4D4D4D"):
 
 
 # ---------------------------------------------------------------- a  procedure
-a = fig.add_axes([0.0, 0.0, 0.50, 1.0]); a.axis("off"); letter(a, "a")
+a = ax_at(0.0, 6.6); a.axis("off"); letter(a, "a")
 rat(a, 0.075, 0.52, 0.95)
 a.text(0.07, 0.38, "athymic\nRNU/RNU rat", transform=a.transAxes, ha="center", va="top", fontsize=10.5, color=GREY)
 box(a, 0.31, 0.50, 0.19, 0.2, "U251N cells\nimplanted in\none hemisphere")
@@ -94,7 +105,7 @@ a.text(0.625, yr - 0.12, "Recurrent   4 rats (65, 66, 70, 71)", transform=a.tran
        color=ORANGE, fontweight="bold")
 
 # ---------------------------------------------------------------- b  tissue sampled
-b = fig.add_axes([0.505, 0.0, 0.165, 1.0]); b.axis("off"); letter(b, "b")
+b = ax_at(6.666, 2.178); b.axis("off"); letter(b, "b")
 b.set_xlim(0, 1); b.set_ylim(0, 1)
 cx, cy = 0.5, 0.54                                              # coronal section, true proportions (axes are 2.2 x 4.7 in)
 b.add_patch(Ellipse((cx, cy), 0.92, 0.25, fc="#FAFAFA", ec=INKK, lw=1.2))   # whole section, ~1.6 : 1 as in a rat
@@ -109,30 +120,43 @@ b.text(cx + 0.215, cy - 0.14, "rats 68, 69\nonly", ha="center", va="top", fontsi
 b.text(cx, 0.06, "2-mm coronal slices,\nfrozen, then dissected", ha="center", va="bottom", fontsize=10, color=GREY, style="italic")
 
 # ---------------------------------------------------------------- c  sample matrix
-c = fig.add_axes([0.685, 0.02, 0.315, 0.96]); c.axis("off"); letter(c, "c")
-c.set_xlim(0, 1); c.set_ylim(0, 1)
+CX, CW = 9.042, W - 9.042                                          # panel c in inches; columns placed in inches below
+c = fig.add_axes([CX / W, 0.02, CW / W, 0.96]); c.axis("off"); letter(c, "c")
+c.set_xlim(0, CW); c.set_ylim(0, 1)
 ROWS = [("IL67B", 67, "tumour", "P", "cmp"), ("IL68B", 68, "tumour", "P", "cmp"), ("IL69B", 69, "tumour", "P", "cmp"),
         ("IL66B", 66, "tumour", "R", "cmp"), ("NL70B", 70, "tumour", "R", "cmp"), ("NL71B", 71, "tumour", "R", "cmp"),
         ("IL64B", 64, "no tumour", "P", "ctl"), ("N168B", 68, "opposite", "P", "ctl"), ("N269B", 69, "opposite", "P", "ctl"),
         ("C2B", "–", "culture", "", "ref")]
-colx = {"lib": 0.02, "rat": 0.25, "tis": 0.36, "hum": 0.66, "cmp": 0.76, "ctl": 0.86, "ref": 0.96}
-top, step = 0.84, 0.072
-heads = [("lib", "library", "left"), ("rat", "rat", "center"), ("tis", "tissue", "left"), ("hum", "human\nreads", "right"),
+assert set(array_of) <= {r[0] for r in ROWS}
+colx = {"lib": 0.08, "rat": 1.04, "tis": 1.50, "hum": 2.74, "rna": 3.13, "dna": 3.55, "cmp": 4.13, "ctl": 4.57, "ref": 5.0}
+L, R_ = 0.05, CW - 0.03
+top, step = 0.80, 0.072
+heads = [("lib", "sample", "left"), ("rat", "rat", "center"), ("tis", "tissue", "left"), ("hum", "human\nreads", "right"),
+         ("rna", "RNA-\nseq", "center"), ("dna", "EPIC\narray", "center"),
          ("cmp", "3 v 3", "center"), ("ctl", "control", "center"), ("ref", "ref.", "center")]
 for k, h, ha in heads:
     c.text(colx[k], top + 0.045, h, ha=ha, va="bottom", fontsize=10.5, color=GREY, linespacing=1.0)
-c.plot([0.01, 0.99], [top + 0.035, top + 0.035], color=INKK, lw=0.9)
+for x0, x1, h in ((colx["rna"] - 0.2, colx["dna"] + 0.2, "assay"), (colx["cmp"] - 0.2, colx["ref"] + 0.16, "use")):
+    c.text((x0 + x1) / 2, top + 0.13, h, ha="center", va="bottom", fontsize=10.5, color=GREY)
+    c.plot([x0, x1], [top + 0.122, top + 0.122], color=RULE, lw=0.7)
+c.plot([L, R_], [top + 0.035, top + 0.035], color=INKK, lw=0.9)
+S = 0.18                                                            # mark size, inches wide; height in axes units below
 for i, (lib, r, tis, arm, use) in enumerate(ROWS):
     y = top - (i + 0.5) * step
     if i in (3, 6, 9):
-        c.plot([0.01, 0.99], [y + step / 2, y + step / 2], color=RULE, lw=0.6)
+        c.plot([L, R_], [y + step / 2, y + step / 2], color=RULE, lw=0.6)
     col = NAVY if arm == "P" and use == "cmp" else ORANGE if arm == "R" else INKK
     c.text(colx["lib"], y, lib, ha="left", va="center", fontsize=11.5, color=col, fontweight="bold")
     c.text(colx["rat"], y, str(r), ha="center", va="center", fontsize=11.5, color=INKK)
     c.text(colx["tis"], y, tis, ha="left", va="center", fontsize=11, color=INKK)
     g = graft[lib]
     c.text(colx["hum"], y, f"{g:.0f} %" if g >= 1 else f"{g:.1f} %", ha="right", va="center", fontsize=11, color=INKK)
-    c.add_patch(Rectangle((colx[use] - 0.022, y - 0.022), 0.044, 0.044, fc=INKK, ec=INKK, lw=0.8))
-c.plot([0.01, 0.99], [top - 10 * step, top - 10 * step], color=INKK, lw=0.9)
-c.text(0.01, top - 10 * step - 0.03, "Not sequenced: rat 65 (recurrent), culture C1.", ha="left", va="top", fontsize=10, color=GREY)
+    for k in ["rna"] + (["dna"] if lib in array_of else []) + [use]:
+        c.add_patch(Rectangle((colx[k] - S / 2, y - 0.022), S, 0.044, fc=INKK, ec=INKK, lw=0.8))
+c.plot([L, R_], [top - 10 * step, top - 10 * step], color=INKK, lw=0.9)
+renamed = [(lib, array_of[lib]) for lib, *_ in ROWS if lib in array_of and array_of[lib] != lib]
+note = ("Array names " + ", ".join(arr for _, arr in renamed) + " = libraries " + ", ".join(lib for lib, _ in renamed)
+        + ".\n" if renamed else "")
+c.text(L, top - 10 * step - 0.03, note + "Not profiled: rat 65 (recurrent), culture C1.", ha="left", va="top",
+       fontsize=10, color=GREY, linespacing=1.3)
 save(fig, "fig_design.png", pad=0.04)

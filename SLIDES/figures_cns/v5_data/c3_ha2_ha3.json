@@ -1,0 +1,206 @@
+{
+  "analysis": "C3_HA2_HA3",
+  "prereg_sha256": "1b823ad50b2eb6299a56cb4b13ef2e99d7dfc46a62ed2bc2508b486ca2383d08",
+  "seed": 20260926,
+  "python": "3.11.16",
+  "numpy": "2.2.6",
+  "node": "rhi2",
+  "inputs": {
+    "splits": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/sbde/splits.tsv",
+      "sha256": "84337ece3ee16d270418a8211e7fffa8501aece872f6fafc168e162c71ce957b"
+    },
+    "decomp_universe": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/composition/decomposition_genes_universe_main.tsv.gz",
+      "sha256": "8a84a7f47b7d62374ca59f83d8122a404cfe34cc69a75bf27d96adad567fd58c"
+    },
+    "splits_cshare": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/composition/splits_cshare_main.tsv",
+      "sha256": "a6603addbafa0bf6084ddb1e0bde998e2b31f8a36672e0e550656d036f2c8e3f"
+    }
+  },
+  "C3": [
+    {
+      "split": "split_00",
+      "recurrent_group": "IL68B+IL69B+IL66B",
+      "true_split": false,
+      "n_tested": 11051,
+      "n_DE_padj05": 5,
+      "n_DE_padj05_lfc1": 5,
+      "n_up": 0,
+      "n_down": 5,
+      "status": "ok",
+      "C_share": 0.3115349981850954,
+      "abs_diff_f_RNA": 0.069956787301449,
+      "abs_diff_f_s": 0.0897187320942631
+    },
+    {
+      "split": "split_01",
+      "recurrent_group": "IL68B+IL69B+NL70B",
+      "true_split": false,
+      "n_tested": 10170,
+      "n_DE_padj05": 73,
+      "n_DE_padj05_lfc1": 36,
+      "n_up": 11,
+      "n_down": 62,
+      "status": "ok",
+      "C_share": 0.4520360359155966,
+      "abs_diff_f_RNA": 0.158125707784508,
+      "abs_diff_f_s": 0.1714968708261026
+    },
+    {
+      "split": "split_02",
+      "recurrent_group": "IL68B+IL69B+NL71B",
+      "true_split": false,
+      "n_tested": 11021,
+      "n_DE_padj05": 8,
+      "n_DE_padj05_lfc1": 2,
+      "n_up": 0,
+      "n_down": 8,
+      "status": "ok",
+      "C_share": 0.319882968612072,
+      "abs_diff_f_RNA": 0.0940078355800277,
+      "abs_diff_f_s": 0.094939120027037
+    },
+    {
+      "split": "split_03",
+      "recurrent_group": "IL68B+IL66B+NL70B",
+      "true_split": false,
+      "n_tested": 11011,
+      "n_DE_padj05": 0,
+      "n_DE_padj05_lfc1": 0,
+      "n_up": 0,
+      "n_down": 0,
+      "status": "ok",
+      "C_share": 0.2679556073227667,
+      "abs_diff_f_RNA": 0.0749235151963785,
+      "abs_diff_f_s": 0.0639034685042716
+    },
+    {
+      "split": "split_04",
+      "recurrent_group": "IL68B+IL66B+NL71B",
+      "true_split": false,
+      "n_tested": 11016,
+      "n_DE_padj05": 14,
+      "n_DE_padj05_lfc1": 12,
+      "n_up": 14,
+      "n_down": 0,
+      "status": "ok",
+      "C_share": 0.4254850930556091,
+      "abs_diff_f_RNA": 0.1390413874008587,
+      "abs_diff_f_s": 0.1404612193033374
+    },
+    {
+      "split": "split_05",
+      "recurrent_group": "IL68B+NL70B+NL71B",
+      "true_split": false,
+      "n_tested": 11052,
+      "n_DE_padj05": 29,
+      "n_DE_padj05_lfc1": 22,
+      "n_up": 26,
+      "n_down": 3,
+      "status": "ok",
+      "C_share": 0.2135213352429143,
+      "abs_diff_f_RNA": 0.0508724669177997,
+      "abs_diff_f_s": 0.0586830805714979
+    },
+    {
+      "split": "split_06",
+      "recurrent_group": "IL69B+IL66B+NL70B",
+      "true_split": false,
+      "n_tested": 11009,
+      "n_DE_padj05": 0,
+      "n_DE_padj05_lfc1": 0,
+      "n_up": 0,
+      "n_down": 0,
+      "status": "ok",
+      "C_share": 0.2560646714605321,
+      "abs_diff_f_RNA": 0.051875371535474,
+      "abs_diff_f_s": 0.0507985718202865
+    },
+    {
+      "split": "split_07",
+      "recurrent_group": "IL69B+IL66B+NL71B",
+      "true_split": false,
+      "n_tested": 11019,
+      "n_DE_padj05": 0,
+      "n_DE_padj05_lfc1": 0,
+      "n_up": 0,
+      "n_down": 0,
+      "status": "ok",
+      "C_share": 0.1412733106900451,
+      "abs_diff_f_RNA": 0.0122425006690061,
+      "abs_diff_f_s": 0.0257591789787792
+    },
+    {
+      "split": "split_08",
+      "recurrent_group": "IL69B+NL70B+NL71B",
+      "true_split": false,
+      "n_tested": 11055,
+      "n_DE_padj05": 303,
+      "n_DE_padj05_lfc1": 159,
+      "n_up": 94,
+      "n_down": 209,
+      "status": "ok",
+      "C_share": 0.1605927286920334,
+      "abs_diff_f_RNA": 0.0759264198140527,
+      "abs_diff_f_s": 0.0560189597530602
+    },
+    {
+      "split": "split_09",
+      "recurrent_group": "IL66B+NL70B+NL71B",
+      "true_split": true,
+      "n_tested": 10840,
+      "n_DE_padj05": 133,
+      "n_DE_padj05_lfc1": 47,
+      "n_up": 103,
+      "n_down": 30,
+      "status": "ok",
+      "C_share": 0.4657703477667222,
+      "abs_diff_f_RNA": 0.1571228031668337,
+      "abs_diff_f_s": 0.1793813795773141
+    }
+  ],
+  "H_A2": {
+    "padj05": {
+      "n_DE": 133,
+      "share_composition_dominant": 0.12781954887218044,
+      "status": "fail",
+      "sign_agreement_DESeq2_vs_decomposition_LFC": 1.0
+    },
+    "padj05_lfc1": {
+      "n_DE": 47,
+      "share_composition_dominant": 0.0,
+      "status": "fail",
+      "sign_agreement_DESeq2_vs_decomposition_LFC": 1.0
+    }
+  },
+  "H_A3": {
+    "C_share": {
+      "spearman_vs_abs_diff_f_RNA": 0.8545454545454544,
+      "rho_ge_0.6": true,
+      "true_value": 0.4657703477667222,
+      "pred80_from_other_nine": [
+        0.36330678580669684,
+        0.5320054349879134
+      ],
+      "pred_point": 0.44765611039730513,
+      "true_inside_band": true,
+      "n_splits": 10
+    },
+    "n_DE_padj05": {
+      "spearman_vs_abs_diff_f_RNA": 0.6074076879484503,
+      "rho_ge_0.6": true,
+      "true_value": 133.0,
+      "pred80_from_other_nine": [
+        -111.6497658141703,
+        247.14191047377267
+      ],
+      "pred_point": 67.74607232980118,
+      "true_inside_band": true,
+      "n_splits": 10
+    },
+    "pass": true,
+    "note": "descriptive support: the ten splits share samples"
+  }
+}

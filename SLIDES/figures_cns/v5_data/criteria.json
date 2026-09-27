@@ -1,0 +1,738 @@
+{
+  "pending": [
+    "E1 floor (phi_g.tsv) absent: every Part 2 number is the IL64B-floor version only"
+  ],
+  "inputs_read": [
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/nullA_IL69B_stats.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/nullA_IL67B_stats.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/nullA_IL68B_stats.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_n1000/split_check.json",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_switchtest/switch_selftest.json",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_switchtest2/switch_selftest.json",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_obs.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c00.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c01.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c02.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c03.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c04.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c05.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c06.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c07.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c08.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_nullA1000_c09.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_obs_mehani_sc8.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_obs_bayesprism_ct6.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/fractions_v104_spread_obs_tumor3.tsv",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/iii_singscore_R/iii_singscore.json",
+    "/rs/rs_grp_oschome/go2432/u251_science/spread/axis/projection_observed.tsv"
+  ],
+  "rerun_n1000_check": {
+    "stats_identical_IL69B": true,
+    "stats_identical_IL67B": true,
+    "stats_identical_IL68B": true,
+    "obs_mixture_identical": true,
+    "first_200_null_columns_max_abs_diff": 0.0,
+    "null_columns_total": 1000,
+    "jobs": 12,
+    "jobs_file": "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/jobs_n1000.tsv"
+  },
+  "e1_switch_selftest_first_even_split": {
+    "gene_ids_sharing_a_name": 1830,
+    "kept_genes": [
+      13300,
+      13306
+    ],
+    "expected_floor_in_N269B": [
+      1039132.4844308196,
+      1039132.4844307989
+    ],
+    "d_obs": [
+      0.1528782644657939,
+      0.1458383422788606
+    ],
+    "delta_obs": [
+      -0.028044995373375015,
+      -0.027584073174196866
+    ],
+    "alpha": [
+      0.5746355579491649,
+      0.5746355579491649
+    ],
+    "phi_switch_log": {
+      "phi_tsv": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_switchtest/phi_g_selftest_IL64B.tsv",
+      "phi_tsv_sha256": "a6bffd01373e8adbd8d9fc6ecc27cfd1bbb4a047953aa2e036f2ff8de0173d0a",
+      "phi_col": "phi_public_per_rat_read",
+      "gene_ids_without_phi": 0,
+      "gene_ids_with_nan_or_negative_phi": 0,
+      "floor_y_rate_override": null
+    },
+    "d_abs_diff": 0.007039922186933278,
+    "floor_rel_diff": 1.994156432954239e-14,
+    "PASS": false
+  },
+  "e1_switch_selftest": {
+    "gene_ids_sharing_a_name": 1830,
+    "runs": {
+      "name_keyed": {
+        "kept_genes": [
+          13300,
+          13300
+        ],
+        "floor_heavy_excluded": [
+          1793,
+          1793
+        ],
+        "expected_floor_in_N269B": [
+          1039132.4844308196,
+          1039132.4844307987
+        ],
+        "d_obs": [
+          0.1528782644657939,
+          0.152878264465794
+        ],
+        "delta_obs": [
+          -0.028044995373375015,
+          -0.028044995373375015
+        ],
+        "alpha": [
+          0.5746355579491649,
+          0.5746355579491649
+        ],
+        "phi_switch_log": {
+          "phi_tsv": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_switchtest2/name_keyed/phi_g_selftest_IL64B_name_keyed.tsv",
+          "phi_tsv_sha256": "a6bffd01373e8adbd8d9fc6ecc27cfd1bbb4a047953aa2e036f2ff8de0173d0a",
+          "phi_col": "phi_public_per_rat_read",
+          "keyed_by": "gene_name (split over same-name ids by IL64B's counts)",
+          "gene_ids_without_phi": 0,
+          "gene_ids_with_nan_or_negative_phi": 0,
+          "gene_ids_sharing_a_name": 1830,
+          "IL64B_floor_share_on_shared_name_ids": 0.07748275225166529,
+          "floor_y_rate_override": null
+        },
+        "d_abs_diff": 1.1102230246251565e-16,
+        "PASS": true
+      },
+      "id_keyed": {
+        "kept_genes": [
+          13300,
+          13300
+        ],
+        "floor_heavy_excluded": [
+          1793,
+          1793
+        ],
+        "expected_floor_in_N269B": [
+          1039132.4844308196,
+          1039132.4844308031
+        ],
+        "d_obs": [
+          0.1528782644657939,
+          0.152878264465794
+        ],
+        "delta_obs": [
+          -0.028044995373375015,
+          -0.028044995373375015
+        ],
+        "alpha": [
+          0.5746355579491649,
+          0.5746355579491649
+        ],
+        "phi_switch_log": {
+          "phi_tsv": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_switchtest2/id_keyed/phi_g_selftest_IL64B_id_keyed.tsv",
+          "phi_tsv_sha256": "06bd72f772bdb2277f324b0762ae83dcae2f6d673afdb0ce6664ad88e6911ef6",
+          "phi_col": "phi_public_per_rat_read",
+          "keyed_by": "gene_id",
+          "gene_ids_without_phi": 0,
+          "gene_ids_with_nan_or_negative_phi": 0,
+          "gene_ids_sharing_a_name": 1830,
+          "IL64B_floor_share_on_shared_name_ids": 0.07748275225166529,
+          "floor_y_rate_override": null
+        },
+        "d_abs_diff": 1.1102230246251565e-16,
+        "PASS": true
+      }
+    },
+    "PASS": true
+  },
+  "E1_floor_available": false,
+  "H1A": {
+    "statistic_i": {
+      "d_observed": 0.1528782644657939,
+      "nullA_n": 1000,
+      "nullA_median": 0.02529473094387935,
+      "nullA_p99_5": 0.028350590686033055,
+      "nullA_max": 0.0292334188187903,
+      "rejects": true,
+      "empirical_p_one_sided": 0.0,
+      "between_animal_reference_d_median": {
+        "IL69B": 0.02529473094387935,
+        "IL67B": 0.0708985024141741,
+        "IL68B": 0.1207663047105014
+      }
+    },
+    "statistic_iii_ivygap_LE_minus_CT": {
+      "observed": -0.33477417553932026,
+      "own_core_IL69B": -0.3353576995427765,
+      "nullA_median": -0.3320284242861766,
+      "nullA_band_99": [
+        -0.3571720447428711,
+        -0.30671701942766877
+      ],
+      "outside_band": false,
+      "direction_up_as_predicted": false,
+      "empirical_p_one_sided_up": 0.595
+    },
+    "statistic_ii_cibersort": {
+      "matrix": "varn2022_glass_sc12 (RMRP-free), three malignant columns renormalised",
+      "tvd_obs_vs_core": 0.10245538302105092,
+      "fit_r": {
+        "C2B": 0.228465245124167,
+        "IL64B": 0.063921645848848,
+        "IL66B": 0.198374845568883,
+        "IL67B": 0.208214902885485,
+        "IL68B": 0.132780918262141,
+        "IL69B": 0.229490976105108,
+        "N168B": 0.172486614568345,
+        "N269B": 0.201192085253703,
+        "NL70B": 0.296407175239378,
+        "NL71B": 0.239731445564392
+      },
+      "fit_P": {
+        "C2B": 0.0,
+        "IL64B": 0.03,
+        "IL66B": 0.0,
+        "IL67B": 0.0,
+        "IL68B": 0.0,
+        "IL69B": 0.0,
+        "N168B": 0.0,
+        "N269B": 0.0,
+        "NL70B": 0.0,
+        "NL71B": 0.0
+      },
+      "malignant_sum_before_renormalising": {
+        "C2B": 0.641023196504706,
+        "IL64B": 0.39617482822704303,
+        "IL66B": 0.63840077578229,
+        "IL67B": 0.651873444615155,
+        "IL68B": 0.6345040566056439,
+        "IL69B": 0.6214764017611639,
+        "N168B": 0.617878967181332,
+        "N269B": 0.6130939933848699,
+        "NL70B": 0.6386300654781597,
+        "NL71B": 0.63166202360403
+      },
+      "composition": {
+        "C2B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 1.0,
+          "differentiated_tumor": 0.0
+        },
+        "IL64B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.7310962820383523,
+          "differentiated_tumor": 0.2689037179616477
+        },
+        "IL66B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.8803988882982727,
+          "differentiated_tumor": 0.11960111170172724
+        },
+        "IL67B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.8257122947549493,
+          "differentiated_tumor": 0.1742877052450507
+        },
+        "IL68B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.9636056780659414,
+          "differentiated_tumor": 0.03639432193405853
+        },
+        "IL69B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.8609631416280648,
+          "differentiated_tumor": 0.13903685837193527
+        },
+        "N168B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.80502253325417,
+          "differentiated_tumor": 0.1949774667458301
+        },
+        "N269B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.9634185246491157,
+          "differentiated_tumor": 0.03658147535088439
+        },
+        "NL70B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.9085738962801126,
+          "differentiated_tumor": 0.09142610371988738
+        },
+        "NL71B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.9839484479418539,
+          "differentiated_tumor": 0.016051552058146103
+        }
+      },
+      "full_depth_tvd_vs_IL69B_reference": {
+        "C2B": 0.13903685837193525,
+        "IL64B": 0.12986685958971245,
+        "IL66B": 0.019435746670208004,
+        "IL67B": 0.035250846873115416,
+        "IL68B": 0.10264253643787671,
+        "N168B": 0.05594060837389482,
+        "N269B": 0.10245538302105092,
+        "NL70B": 0.04761075465204789,
+        "NL71B": 0.12298530631378915
+      },
+      "nullA_source": "1,000 draws (rerun, ten chunks)",
+      "nullA_n": 1000,
+      "nullA_n_failed_fits": 0,
+      "nullA_tvd_median": 0.012800969743934791,
+      "nullA_band_99": [
+        6.622219274246548e-05,
+        0.05487192565455985
+      ],
+      "nullA_max": 0.06934448556277885,
+      "nullA_fit_r_range": [
+        0.218455423022584,
+        0.23650930548134
+      ],
+      "outside_band": true,
+      "empirical_p_one_sided_up": 0.0,
+      "direction_of_shift": {
+        "stemcell_tumor": 0.0,
+        "prolif_stemcell_tumor": 0.10245538302105095,
+        "differentiated_tumor": -0.10245538302105088
+      }
+    },
+    "secondary_matrices_not_gating": {
+      "mehani_sc8": {
+        "C2B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.39885057810315,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.228608741748235,
+          "IDHwt_malignant": 0.372540680148615,
+          "fit_r": 0.325173418389333,
+          "P": 0.02
+        },
+        "IL64B": {
+          "IDHmut_malignant": 0.0950151812652939,
+          "T_CD8": 0.0,
+          "NK": 0.328199840498824,
+          "T_CD4": 0.0,
+          "B": 0.041275058809442,
+          "Microglia": 0.53550991942644,
+          "Macrophage": 0.0,
+          "IDHwt_malignant": 0.0,
+          "fit_r": -0.0169994958335717,
+          "P": 0.64
+        },
+        "IL66B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.532219872397959,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.0838229065673223,
+          "IDHwt_malignant": 0.383957221034719,
+          "fit_r": 0.262704747760009,
+          "P": 0.03
+        },
+        "IL67B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.332976029399752,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.174060407081521,
+          "IDHwt_malignant": 0.492963563518728,
+          "fit_r": 0.268855126086099,
+          "P": 0.03
+        },
+        "IL68B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.260993604276011,
+          "T_CD4": 0.0,
+          "B": 0.0169109199433349,
+          "Microglia": 0.0,
+          "Macrophage": 0.115885191459715,
+          "IDHwt_malignant": 0.606210284320938,
+          "fit_r": 0.202155952668914,
+          "P": 0.04
+        },
+        "IL69B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.0908986794241919,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.158046018610992,
+          "IDHwt_malignant": 0.751055301964817,
+          "fit_r": 0.279731014162562,
+          "P": 0.03
+        },
+        "N168B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.292771147615782,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.0525842268826198,
+          "IDHwt_malignant": 0.654644625501598,
+          "fit_r": 0.284437949208099,
+          "P": 0.03
+        },
+        "N269B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0731289553259755,
+          "NK": 0.418535651213169,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.0676694107681201,
+          "IDHwt_malignant": 0.440665982692735,
+          "fit_r": 0.297810944647495,
+          "P": 0.03
+        },
+        "NL70B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.497569208138744,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.0456766567488327,
+          "IDHwt_malignant": 0.456754135112424,
+          "fit_r": 0.363828493555556,
+          "P": 0.02
+        },
+        "NL71B": {
+          "IDHmut_malignant": 0.0,
+          "T_CD8": 0.0,
+          "NK": 0.38665311761337,
+          "T_CD4": 0.0,
+          "B": 0.0,
+          "Microglia": 0.0,
+          "Macrophage": 0.121946886714912,
+          "IDHwt_malignant": 0.491399995671718,
+          "fit_r": 0.312840512470167,
+          "P": 0.02
+        }
+      },
+      "bayesprism_ct6": {
+        "C2B": {
+          "tumor": 0.287893719195542,
+          "myeloid": 0.153631281719998,
+          "pericyte": 0.263172958793878,
+          "endothelial": 0.111325296711684,
+          "tcell": 0.100283436954009,
+          "oligo": 0.0836933066248896,
+          "fit_r": 0.629433041317866,
+          "P": 0.0
+        },
+        "IL64B": {
+          "tumor": 0.173140575115795,
+          "myeloid": 0.0,
+          "pericyte": 0.166497792704264,
+          "endothelial": 0.102539076016784,
+          "tcell": 0.0255723695029637,
+          "oligo": 0.532250186660193,
+          "fit_r": 0.0467706233709556,
+          "P": 0.0
+        },
+        "IL66B": {
+          "tumor": 0.330616836029905,
+          "myeloid": 0.0259386703286583,
+          "pericyte": 0.411821428834469,
+          "endothelial": 0.0647459846609443,
+          "tcell": 0.147714576091603,
+          "oligo": 0.0191625040544209,
+          "fit_r": 0.614769969895161,
+          "P": 0.0
+        },
+        "IL67B": {
+          "tumor": 0.254133586458862,
+          "myeloid": 0.0465151481847086,
+          "pericyte": 0.371144923206733,
+          "endothelial": 0.118720728871315,
+          "tcell": 0.171021825017772,
+          "oligo": 0.0384637882606101,
+          "fit_r": 0.661135907804947,
+          "P": 0.0
+        },
+        "IL68B": {
+          "tumor": 0.409362936051523,
+          "myeloid": 0.049627164551665,
+          "pericyte": 0.330853162753461,
+          "endothelial": 0.0700426153711737,
+          "tcell": 0.116230812466716,
+          "oligo": 0.0238833088054618,
+          "fit_r": 0.64199053787527,
+          "P": 0.0
+        },
+        "IL69B": {
+          "tumor": 0.290736591064562,
+          "myeloid": 0.0578411315338457,
+          "pericyte": 0.378344992864301,
+          "endothelial": 0.107026660191125,
+          "tcell": 0.140408681586798,
+          "oligo": 0.0256419427593677,
+          "fit_r": 0.634958250038297,
+          "P": 0.0
+        },
+        "N168B": {
+          "tumor": 0.418811591135878,
+          "myeloid": 0.065803782503857,
+          "pericyte": 0.166155339308132,
+          "endothelial": 0.136877473611602,
+          "tcell": 0.174705620227231,
+          "oligo": 0.0376461932133005,
+          "fit_r": 0.654051906052803,
+          "P": 0.0
+        },
+        "N269B": {
+          "tumor": 0.29263627576906,
+          "myeloid": 0.0314030310273159,
+          "pericyte": 0.406320297836096,
+          "endothelial": 0.0846532231068922,
+          "tcell": 0.127011064682622,
+          "oligo": 0.0579761075780144,
+          "fit_r": 0.609454989230467,
+          "P": 0.0
+        },
+        "NL70B": {
+          "tumor": 0.277673531400285,
+          "myeloid": 0.08722709502401,
+          "pericyte": 0.310730967671438,
+          "endothelial": 0.12666237864442,
+          "tcell": 0.166258996910528,
+          "oligo": 0.0314470303493182,
+          "fit_r": 0.626876585415547,
+          "P": 0.0
+        },
+        "NL71B": {
+          "tumor": 0.306919348285765,
+          "myeloid": 0.0547589143658332,
+          "pericyte": 0.326636154970941,
+          "endothelial": 0.115790649602261,
+          "tcell": 0.165573354166795,
+          "oligo": 0.0303215786084052,
+          "fit_r": 0.611042624713031,
+          "P": 0.0
+        }
+      },
+      "tumor3": {
+        "C2B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.902175487049984,
+          "differentiated_tumor": 0.097824512950016,
+          "fit_r": 0.175057481994244,
+          "P": 0.0
+        },
+        "IL64B": {
+          "stemcell_tumor": 0.814402013254932,
+          "prolif_stemcell_tumor": 0.0995380330723037,
+          "differentiated_tumor": 0.0860599536727646,
+          "fit_r": 0.026070433068125,
+          "P": 0.11
+        },
+        "IL66B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.79675999108933,
+          "differentiated_tumor": 0.20324000891067,
+          "fit_r": 0.165261230846363,
+          "P": 0.0
+        },
+        "IL67B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.722623293622194,
+          "differentiated_tumor": 0.277376706377806,
+          "fit_r": 0.183339053843571,
+          "P": 0.0
+        },
+        "IL68B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.808105295377339,
+          "differentiated_tumor": 0.191894704622661,
+          "fit_r": 0.114204659560528,
+          "P": 0.01
+        },
+        "IL69B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.740169745556365,
+          "differentiated_tumor": 0.259830254443635,
+          "fit_r": 0.198619880200362,
+          "P": 0.0
+        },
+        "N168B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.750753982826319,
+          "differentiated_tumor": 0.249246017173681,
+          "fit_r": 0.120325038697148,
+          "P": 0.01
+        },
+        "N269B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.791305667238768,
+          "differentiated_tumor": 0.208694332761232,
+          "fit_r": 0.167324602954735,
+          "P": 0.0
+        },
+        "NL70B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.819621853223555,
+          "differentiated_tumor": 0.180378146776445,
+          "fit_r": 0.237886631326257,
+          "P": 0.0
+        },
+        "NL71B": {
+          "stemcell_tumor": 0.0,
+          "prolif_stemcell_tumor": 0.848913091531113,
+          "differentiated_tumor": 0.151086908468887,
+          "fit_r": 0.198537856488672,
+          "P": 0.0
+        }
+      }
+    },
+    "statistic_iii_published_singscore": {
+      "package": "singscore 1.22.0",
+      "R": "R version 4.3.2 (2023-10-31)",
+      "null_file": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_n1000/export/nullA_logcpm_1000.tsv.gz",
+      "null_n": 1000,
+      "LE_minus_CT_observed": -0.336310868849194,
+      "LE_minus_CT_own_core": -0.335464158184381,
+      "nullA_median": -0.33465259143864,
+      "nullA_band_99": [
+        -0.36007050545958,
+        -0.308934522280706
+      ],
+      "outside_band": false,
+      "direction_up_as_predicted": false,
+      "empirical_p_one_sided_up": 0.559,
+      "LE_observed": -0.218032869150671,
+      "LE_own_core": -0.18266465939029,
+      "LE_nullA_band_99": [
+        -0.208109095471083,
+        -0.160543294442354
+      ],
+      "python_vs_R_null_LE_minus_CT_max_abs_diff": 0.00333760863992877,
+      "python_vs_R_null_LE_minus_CT_spearman": 0.999688263688264,
+      "python_vs_R_observed_LE_minus_CT_max_abs_diff": 0.049683103711054,
+      "neftel_MES_observed_core_band": [
+        0.0702622510367386,
+        0.128064365399217,
+        0.120636072659307,
+        0.132080287366392
+      ],
+      "neftel_AC_observed_core_band": [
+        -0.0316238330170778,
+        0.00895969639468686,
+        -0.000447851233396611,
+        0.0133167392789374
+      ],
+      "neftel_OPC_observed_core_band": [
+        -0.0582782639365829,
+        -0.0496906145974703,
+        -0.0612414630112198,
+        -0.0425065091972191
+      ],
+      "neftel_NPC_observed_core_band": [
+        -0.0753077692095577,
+        -0.108313574849962,
+        -0.121068006801106,
+        -0.100382248133901
+      ]
+    },
+    "verdict": {
+      "clause_i_rejects": true,
+      "clause_ii_outside_band": true,
+      "clause_iii_up_as_predicted": false,
+      "clause_iii_source": "published singscore",
+      "clause_ii_or_iii": true,
+      "H1A_criterion_met": true
+    }
+  },
+  "H1B": {
+    "version_one_delta": {
+      "delta_observed": -0.028044995373375015,
+      "nullA_median": -0.05076479375115715,
+      "nullA_p99": -0.04670504575503269,
+      "rejects_nullA": true,
+      "empirical_p_one_sided": 0.0,
+      "similarity": {
+        "IL67B": 0.8430194933885429,
+        "IL68B": 0.7690576599200992,
+        "IL69B": 0.8320604012066515,
+        "IL66B": 0.8371465214870661,
+        "NL70B": 0.7424703195123484,
+        "NL71B": 0.7803857273957542,
+        "C2B": 0.7178592200252868
+      },
+      "closest_comparator": "IL67B",
+      "NULL_L": {
+        "n_labellings": 20,
+        "delta_true": -0.028044995373375015,
+        "rank_of_true": 15,
+        "p_one_sided": 0.75,
+        "deltas": [
+          0.028044995373375015,
+          0.03143574222698475,
+          -0.03168172575616057,
+          -0.006404787167223258,
+          0.07343756975135285,
+          0.010320101768207746,
+          0.03559704035714506,
+          0.013710848621817595,
+          0.03898778721075469,
+          -0.024129680772390527,
+          0.024129680772390527,
+          -0.03898778721075469,
+          -0.013710848621817595,
+          -0.03559704035714506,
+          -0.010320101768207746,
+          -0.07343756975135285,
+          0.006404787167223258,
+          0.03168172575616057,
+          -0.03143574222698475,
+          -0.028044995373375015
+        ]
+      },
+      "rejects_nullL": false
+    },
+    "version_two_axis": {
+      "projection_observed": -0.262113606916892,
+      "projection_tumours": {
+        "IL67B": -0.865510285361327,
+        "IL68B": -0.821806315159729,
+        "IL69B": -0.320644210206423,
+        "IL66B": 0.0815253589970806,
+        "NL70B": 0.932988347265987,
+        "NL71B": 0.827444789793918
+      },
+      "nullA_n": 200,
+      "nullA_median": -0.275567331052732,
+      "nullA_p99": -0.21680046886216253,
+      "rejects_nullA": false,
+      "empirical_p_one_sided": 0.36,
+      "NULL_L_rank_of_true": 15,
+      "NULL_L_n": 20,
+      "rejects_nullL": false,
+      "NULL_L_p_one_sided": 0.75,
+      "NULL_L_max": 0.67492846702818
+    },
+    "verdict": {
+      "version_one_supported": false,
+      "version_two_supported": false,
+      "direction_of_delta": "toward primaries"
+    }
+  }
+}

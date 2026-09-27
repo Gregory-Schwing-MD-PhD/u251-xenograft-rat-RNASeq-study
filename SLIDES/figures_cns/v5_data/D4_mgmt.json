@@ -1,0 +1,166 @@
+{
+  "model": "MGMT-STP27 (mgmtstp27 0.8)",
+  "cutoff": 0.35824762,
+  "flip": [
+    {
+      "array": "IL67B",
+      "beta_cg12434587": 0.4926137,
+      "beta_cg12981137": 0.67853995,
+      "stp27_prob": 0.99502136,
+      "flip_distance_beta": 0.47543595
+    },
+    {
+      "array": "IL68B",
+      "beta_cg12434587": 0.49270045,
+      "beta_cg12981137": 0.69754623,
+      "stp27_prob": 0.9955759,
+      "flip_distance_beta": 0.47819077
+    },
+    {
+      "array": "IL69B",
+      "beta_cg12434587": 0.50993108,
+      "beta_cg12981137": 0.69722121,
+      "stp27_prob": 0.99579226,
+      "flip_distance_beta": 0.49296319
+    },
+    {
+      "array": "IL66B",
+      "beta_cg12434587": 0.4911125,
+      "beta_cg12981137": 0.71896875,
+      "stp27_prob": 0.99612776,
+      "flip_distance_beta": 0.47923284
+    },
+    {
+      "array": "IL70B",
+      "beta_cg12434587": 0.45286876,
+      "beta_cg12981137": 0.77700535,
+      "stp27_prob": 0.99711755,
+      "flip_distance_beta": 0.4473918
+    },
+    {
+      "array": "IL71B",
+      "beta_cg12434587": 0.45561153,
+      "beta_cg12981137": 0.74729343,
+      "stp27_prob": 0.99644325,
+      "flip_distance_beta": 0.44857472
+    },
+    {
+      "array": "N2",
+      "beta_cg12434587": 0.54038165,
+      "beta_cg12981137": 0.78118066,
+      "stp27_prob": 0.99786158,
+      "flip_distance_beta": 0.52973762
+    },
+    {
+      "array": "C2B",
+      "beta_cg12434587": 0.53022464,
+      "beta_cg12981137": 0.7461375,
+      "stp27_prob": 0.99714152,
+      "flip_distance_beta": 0.51705546
+    }
+  ],
+  "observed_shift": [
+    {
+      "cpg": "cg12434587",
+      "rec_minus_prim": -0.031884152,
+      "welch_lo95": -0.076617656,
+      "welch_hi95": 0.012849353
+    },
+    {
+      "cpg": "cg12981137",
+      "rec_minus_prim": 0.056653377,
+      "welch_lo95": -0.0064001626,
+      "welch_hi95": 0.11970692
+    }
+  ],
+  "recurrence_flip_distances": {
+    "IL66B": 0.47923284,
+    "IL70B": 0.4473918,
+    "IL71B": 0.44857472
+  },
+  "expression": [
+    {
+      "library": "C2B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 13513,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 0,
+      "idxstats_mapped_records": 313903542,
+      "MGMT_reads_per_million": 0
+    },
+    {
+      "library": "IL66B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 12363,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 2,
+      "idxstats_mapped_records": 142863536,
+      "MGMT_reads_per_million": 0.014
+    },
+    {
+      "library": "IL67B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 12885,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 7,
+      "idxstats_mapped_records": 137918264,
+      "MGMT_reads_per_million": 0.0508
+    },
+    {
+      "library": "IL68B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 11773,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 0,
+      "idxstats_mapped_records": 143332983,
+      "MGMT_reads_per_million": 0
+    },
+    {
+      "library": "IL69B",
+      "MGMT_TPM": 0.00719,
+      "n_expressed_TPM_ge_1": 13153,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 4,
+      "idxstats_mapped_records": 188022046,
+      "MGMT_reads_per_million": 0.0213
+    },
+    {
+      "library": "N269B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 9526,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 0,
+      "idxstats_mapped_records": 48563766,
+      "MGMT_reads_per_million": 0
+    },
+    {
+      "library": "NL70B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 13230,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 0,
+      "idxstats_mapped_records": 135871628,
+      "MGMT_reads_per_million": 0
+    },
+    {
+      "library": "NL71B",
+      "MGMT_TPM": 0,
+      "n_expressed_TPM_ge_1": 12213,
+      "percentile_among_expressed": 0,
+      "below_10th": true,
+      "MGMT_exon_reads_unique_primary": 0,
+      "idxstats_mapped_records": 134127951,
+      "MGMT_reads_per_million": 0
+    }
+  ],
+  "expected": "MGMT below the 10th percentile of expressed genes in C2B and the six tumours",
+  "expression_expectation_met": true,
+  "outside_checks_pending_text": ["Hermisson 2006 U251 MGMT status: quote before citing", "Noren 2026: 84 % unchanged in 426 pairs", "no alkylating agent: confirm from Nagaraja 2026 methods"]
+}

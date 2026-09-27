@@ -1,0 +1,51 @@
+pipeline	design	split	true	p_lt_1e3	rank
+bespoke	A_arm	IL66B+IL70B+IL71B	TRUE	3975	1
+bespoke	A_arm	IL69B+IL70B+IL71B	FALSE	1502	1
+bespoke	A_arm	IL69B+IL66B+IL71B	FALSE	169	1
+bespoke	A_arm	IL69B+IL66B+IL70B	FALSE	85	1
+bespoke	A_arm	IL68B+IL70B+IL71B	FALSE	659	1
+bespoke	A_arm	IL68B+IL66B+IL71B	FALSE	147	1
+bespoke	A_arm	IL68B+IL66B+IL70B	FALSE	58	1
+bespoke	A_arm	IL68B+IL69B+IL71B	FALSE	84	1
+bespoke	A_arm	IL68B+IL69B+IL70B	FALSE	1825	1
+bespoke	A_arm	IL68B+IL69B+IL66B	FALSE	173	1
+bespoke	B_arm_plus_fraction	IL66B+IL70B+IL71B	TRUE	326	4
+bespoke	B_arm_plus_fraction	IL69B+IL70B+IL71B	FALSE	2547	4
+bespoke	B_arm_plus_fraction	IL69B+IL66B+IL71B	FALSE	238	4
+bespoke	B_arm_plus_fraction	IL69B+IL66B+IL70B	FALSE	155	4
+bespoke	B_arm_plus_fraction	IL68B+IL70B+IL71B	FALSE	1361	4
+bespoke	B_arm_plus_fraction	IL68B+IL66B+IL71B	FALSE	240	4
+bespoke	B_arm_plus_fraction	IL68B+IL66B+IL70B	FALSE	137	4
+bespoke	B_arm_plus_fraction	IL68B+IL69B+IL71B	FALSE	195	4
+bespoke	B_arm_plus_fraction	IL68B+IL69B+IL70B	FALSE	2424	4
+bespoke	B_arm_plus_fraction	IL68B+IL69B+IL66B	FALSE	102	4
+bespoke	C_background_corrected	IL66B+IL70B+IL71B	TRUE	1496	1
+bespoke	C_background_corrected	IL69B+IL70B+IL71B	FALSE	495	1
+bespoke	C_background_corrected	IL69B+IL66B+IL71B	FALSE	30	1
+bespoke	C_background_corrected	IL69B+IL66B+IL70B	FALSE	21	1
+bespoke	C_background_corrected	IL68B+IL70B+IL71B	FALSE	686	1
+bespoke	C_background_corrected	IL68B+IL66B+IL71B	FALSE	56	1
+bespoke	C_background_corrected	IL68B+IL66B+IL70B	FALSE	14	1
+bespoke	C_background_corrected	IL68B+IL69B+IL71B	FALSE	35	1
+bespoke	C_background_corrected	IL68B+IL69B+IL70B	FALSE	555	1
+bespoke	C_background_corrected	IL68B+IL69B+IL66B	FALSE	41	1
+nf-core/methylarray	~ group	R_IL66B-IL70B-IL71B	TRUE	2800	1
+nf-core/methylarray	~ group	R_IL66B-IL67B-IL68B	FALSE	2221	1
+nf-core/methylarray	~ group	R_IL66B-IL67B-IL69B	FALSE	499	1
+nf-core/methylarray	~ group	R_IL66B-IL67B-IL70B	FALSE	66	1
+nf-core/methylarray	~ group	R_IL66B-IL67B-IL71B	FALSE	1956	1
+nf-core/methylarray	~ group	R_IL66B-IL68B-IL69B	FALSE	130	1
+nf-core/methylarray	~ group	R_IL66B-IL68B-IL70B	FALSE	45	1
+nf-core/methylarray	~ group	R_IL66B-IL68B-IL71B	FALSE	151	1
+nf-core/methylarray	~ group	R_IL66B-IL69B-IL70B	FALSE	60	1
+nf-core/methylarray	~ group	R_IL66B-IL69B-IL71B	FALSE	110	1
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL70B-IL71B	TRUE	341	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL67B-IL68B	FALSE	3711	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL67B-IL69B	FALSE	975	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL67B-IL70B	FALSE	143	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL67B-IL71B	FALSE	2532	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL68B-IL69B	FALSE	94	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL68B-IL70B	FALSE	90	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL68B-IL71B	FALSE	171	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL69B-IL70B	FALSE	157	4
+nf-core/methylarray	~ group + f_DNA [bespoke]	R_IL66B-IL69B-IL71B	FALSE	185	4

@@ -1,0 +1,13 @@
+view	term	name	query_size	intersection	term_size	domain	p	p_gSCS	p_holm_12	significant_holm
+species_blind_DE	GO:0007049	cell cycle	103	3	1158	10840	0.999248533971484	1	1	FALSE
+species_blind_DE	GO:0048870	cell motility	103	26	1111	10840	1.01315272980896e-05	0.506576364904481	0.000111446800278986	TRUE
+species_blind_DE	GO:0006954	inflammatory response	103	26	507	10840	8.17248027571418e-13	4.08624013785708e-08	9.80697633085702e-12	TRUE
+composition_only	GO:0007049	cell cycle	0	0			1		1	FALSE
+composition_only	GO:0048870	cell motility	0	0			1		1	FALSE
+composition_only	GO:0006954	inflammatory response	0	0			1		1	FALSE
+human_stream	GO:0007049	cell cycle	58	7	1551	17054	0.273246088160074	1	1	FALSE
+human_stream	GO:0048870	cell motility	58	9	1202	17054	0.0194550143300197	1	0.194550143300197	FALSE
+human_stream	GO:0006954	inflammatory response	58	2	494	17054	0.50402404566051	1	1	FALSE
+host_stream	GO:0007049	cell cycle	6	0			1		1	FALSE
+host_stream	GO:0048870	cell motility	6	2	1102	10756	0.119083410164727	1	0.952667281317816	FALSE
+host_stream	GO:0006954	inflammatory response	6	2	510	10756	0.0296394813208207	1	0.266755331887386	FALSE

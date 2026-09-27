@@ -211,14 +211,16 @@ def build(out: Path):
               "are sorted from the host, read gene-set-wide, stress-tested, and taken to a drug. End on the question."])
 
     # ---- 3 the design (SLIDES/12_design_figure.py; lab sample key and array sheet, ANALYSIS/SAMPLE_KEY.md)
-    s = content_slide(prs, "The design: eight rats, ten RNA libraries")
+    s = content_slide(prs, "The design: eight rats, RNA and methylation")
     img = FIG / "fig_design.png"
     w, h = fit(img, R - L, 3700000)
     picture(s, img, L + (R - L - w) // 2, TOP, w, h)
     add_text(s, L, TOP + h + 100000, R - L, BOTTOM - (TOP + h + 100000), [
         "Three primaries (rats 67, 68, 69) are compared with three recurrences (66, 70, 71). Rat 64's sample held almost no "
         "tumor and rat 65 has no library.",
-        "The two brain controls are the opposite hemispheres of rats 68 and 69, not separate animals."], size=16, gap=6)
+        "The two brain controls are the opposite hemispheres of rats 68 and 69, not separate animals.",
+        "Eight samples were also run on one EPIC methylation array: the six tumors, rat 69's opposite hemisphere "
+        "and the culture."], size=16, gap=6)
     refs(s, C.line("Nagaraja lab sample key (2023) and methylation-array sample sheet. The sequencing files call rats 70 and 71 "
                    "NL70B and NL71B; the lab records call them IL-70 and IL-71."))
     notes(s, ["0:35–0:55  The design, because it is easy to misread. Eight rats, all implanted. Four primaries, never ablated; four "

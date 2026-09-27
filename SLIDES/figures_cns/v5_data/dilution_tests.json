@@ -1,0 +1,592 @@
+{
+  "registered": "bespoke",
+  "null_status": "UNVALIDATED NULL (CURVE step 1 did not pass or CURVE is absent): supports no claim",
+  "known_limits": ["GSE174568 rat DNA is an EpigenDx liver-derived standard, not RNU brain", "other chips, other lab", "the 0-100 % methylated standards widen the null (conservative)"],
+  "tests": {
+    "curve": {
+      "variant": "curve",
+      "registered": false,
+      "null_status": "UNVALIDATED NULL (CURVE step 1 did not pass or CURVE is absent): supports no claim",
+      "n_null_draws": 1000,
+      "A_dil_at_each_array": [
+        {
+          "target": "IL67B",
+          "A_dil": 0.99321114,
+          "A_min": 0.98929042,
+          "A_max": 0.9943862
+        },
+        {
+          "target": "IL68B",
+          "A_dil": 0.99496555,
+          "A_min": 0.99218752,
+          "A_max": 0.99584732
+        },
+        {
+          "target": "IL69B",
+          "A_dil": 0.99551654,
+          "A_min": 0.99311952,
+          "A_max": 0.99625456
+        },
+        {
+          "target": "IL66B",
+          "A_dil": 0.98872124,
+          "A_min": 0.97990343,
+          "A_max": 0.99067712
+        },
+        {
+          "target": "IL70B",
+          "A_dil": 0.98963726,
+          "A_min": 0.98211383,
+          "A_max": 0.99143628
+        },
+        {
+          "target": "IL71B",
+          "A_dil": 0.98397627,
+          "A_min": 0.96987842,
+          "A_max": 0.98686866
+        },
+        {
+          "target": "N2",
+          "A_dil": 0.94151195,
+          "A_min": 0.87521637,
+          "A_max": 0.95110912
+        }
+      ],
+      "HC1": {
+        "statistic": "R_t = A_t - A_dil(f_t) [curve]",
+        "values": {
+          "IL67B": -0.067748354,
+          "IL68B": -0.096333923,
+          "IL69B": -0.10395383,
+          "IL66B": 0.011689481,
+          "IL70B": -0.00089494461,
+          "IL71B": 0.050515574
+        },
+        "rec_minus_prim": 0.10978207,
+        "exact90": [0.06685341, 0.1544694],
+        "welch95": [0.054744099, 0.16482005],
+        "welch_p_two_sided": 0.0060493133,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.05,
+        "relabel_rank_of_20": 1,
+        "matched_pair": {
+          "IL70B": -0.00089494461,
+          "IL67B": -0.067748354,
+          "difference": 0.06685341
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)",
+        "null_q025": 0.0022049099,
+        "null_q975": 0.0049514289,
+        "null_q95": 0.0048870106,
+        "percentile_of_observed": 1,
+        "outside_95_envelope_above": true,
+        "primaries_minus_Adil": {
+          "IL67B": -0.067748354,
+          "IL68B": -0.096333923,
+          "IL69B": -0.10395383
+        },
+        "recurrences_minus_Adil": {
+          "IL66B": 0.011689481,
+          "IL70B": -0.00089494461,
+          "IL71B": 0.050515574
+        },
+        "N2_minus_Adil_descriptive": 0.19758393
+      },
+      "HC3": {
+        "observed_rec_minus_prim": -0.014206923,
+        "null_q025": -0.00093778443,
+        "null_q975": 0.0017232959,
+        "percentile_of_observed": 0,
+        "within_95": false
+      },
+      "T3": {
+        "union_designC": {
+          "observed": -0.00019906897,
+          "null_q95": 0.00010302962,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00031509384,
+            "IL68B": -0.00036876512,
+            "IL69B": -0.0003848109,
+            "IL66B": -0.00017958934,
+            "IL70B": -0.00020728796,
+            "IL71B": -1.554149e-05,
+            "N2": 0.0012630383
+          }
+        },
+        "union_noob": {
+          "observed": -0.00022450517,
+          "null_q95": 0.00015710515,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00029881469,
+            "IL68B": -0.00034110333,
+            "IL69B": -0.00035437326,
+            "IL66B": -0.0001914166,
+            "IL70B": -0.00021223259,
+            "IL71B": -5.0562781e-05,
+            "N2": 0.0011160927
+          }
+        },
+        "gabbutt2022_designC": {
+          "observed": -0.00064814824,
+          "null_q95": 0.00015799109,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 2.8316308e-05,
+            "IL68B": -4.1938901e-05,
+            "IL69B": -6.2860157e-05,
+            "IL66B": 0.00020355439,
+            "IL70B": 0.00016798325,
+            "IL71B": 0.00037499036,
+            "N2": 0.0019623645
+          }
+        },
+        "gabbutt2022_noob": {
+          "observed": -0.00018873861,
+          "null_q95": 0.00031497382,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00016447898,
+            "IL68B": -0.00025471701,
+            "IL69B": -0.0002817044,
+            "IL66B": 5.3778161e-05,
+            "IL70B": 1.1257341e-05,
+            "IL71B": 0.00027453413,
+            "N2": 0.0023562047
+          }
+        },
+        "gabbutt2025_designC": {
+          "observed": -0.00063606837,
+          "null_q95": -3.4661919e-05,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00076791391,
+            "IL68B": -0.00076414547,
+            "IL69B": -0.00076294462,
+            "IL66B": -0.00077441404,
+            "IL70B": -0.00077347149,
+            "IL71B": -0.00078003141,
+            "N2": -0.00066366393
+          }
+        },
+        "gabbutt2025_noob": {
+          "observed": -0.0011059643,
+          "null_q95": 1.3756759e-05,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00058706245,
+            "IL68B": -0.00059221274,
+            "IL69B": -0.00059386012,
+            "IL66B": -0.00058071688,
+            "IL70B": -0.00058145059,
+            "IL71B": -0.00058137409,
+            "N2": -0.00050333958
+          }
+        }
+      },
+      "T4": {
+        "observed": 0.081204049,
+        "null_q95": 0.024769118,
+        "percentile_of_observed": 1,
+        "above_q95": true
+      }
+    },
+    "curve_cal": {
+      "variant": "curve_cal",
+      "registered": false,
+      "null_status": "UNVALIDATED NULL (CURVE step 1 did not pass or CURVE is absent): supports no claim",
+      "n_null_draws": 1000,
+      "A_dil_at_each_array": [
+        {
+          "target": "IL67B",
+          "A_dil": 0.97353671,
+          "A_min": 0.94762543,
+          "A_max": 0.97825929
+        },
+        {
+          "target": "IL68B",
+          "A_dil": 0.98158899,
+          "A_min": 0.96496606,
+          "A_max": 0.98500758
+        },
+        {
+          "target": "IL69B",
+          "A_dil": 0.98370917,
+          "A_min": 0.96929536,
+          "A_max": 0.98664203
+        },
+        {
+          "target": "IL66B",
+          "A_dil": 0.94603364,
+          "A_min": 0.88656966,
+          "A_max": 0.95528645
+        },
+        {
+          "target": "IL70B",
+          "A_dil": 0.95260827,
+          "A_min": 0.90299027,
+          "A_max": 0.96111061
+        },
+        {
+          "target": "IL71B",
+          "A_dil": 0.90341358,
+          "A_min": 0.7774598,
+          "A_max": 0.91962134
+        },
+        {
+          "target": "N2",
+          "A_dil": 0.42146348,
+          "A_min": 0.35450647,
+          "A_max": 0.52145645
+        }
+      ],
+      "HC1": {
+        "statistic": "R_t = A_t - A_dil(f_t) [curve_cal]",
+        "values": {
+          "IL67B": -0.048073919,
+          "IL68B": -0.082957359,
+          "IL69B": -0.092146462,
+          "IL66B": 0.054377076,
+          "IL70B": 0.036134045,
+          "IL71B": 0.13107827
+        },
+        "rec_minus_prim": 0.14825571,
+        "exact90": [0.084207964, 0.22322473],
+        "welch95": [0.042402764, 0.25410866],
+        "welch_p_two_sided": 0.021825495,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.05,
+        "relabel_rank_of_20": 1,
+        "matched_pair": {
+          "IL70B": 0.036134045,
+          "IL67B": -0.048073919,
+          "difference": 0.084207964
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)",
+        "null_q025": 0.013982732,
+        "null_q975": 0.03187588,
+        "null_q95": 0.031595545,
+        "percentile_of_observed": 1,
+        "outside_95_envelope_above": true,
+        "primaries_minus_Adil": {
+          "IL67B": -0.048073919,
+          "IL68B": -0.082957359,
+          "IL69B": -0.092146462
+        },
+        "recurrences_minus_Adil": {
+          "IL66B": 0.054377076,
+          "IL70B": 0.036134045,
+          "IL71B": 0.13107827
+        },
+        "N2_minus_Adil_descriptive": 0.71763241
+      },
+      "HC3": {
+        "observed_rec_minus_prim": -0.014206923,
+        "null_q025": -0.0031988395,
+        "null_q975": 0.0089485068,
+        "percentile_of_observed": 0,
+        "within_95": false
+      },
+      "T3": {
+        "union_designC": {
+          "observed": -0.00019906897,
+          "null_q95": 0.00047559286,
+          "percentile": 0.001,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 0.00028826296,
+            "IL68B": 6.8074803e-05,
+            "IL69B": -4.6747973e-06,
+            "IL66B": 0.0011092653,
+            "IL70B": 0.00087090339,
+            "IL71B": 0.0026381758,
+            "N2": 0.0023156973
+          }
+        },
+        "union_noob": {
+          "observed": -0.00022450517,
+          "null_q95": 0.00079369179,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 0.00021272705,
+            "IL68B": 1.003206e-05,
+            "IL69B": -4.3554317e-05,
+            "IL66B": 0.00097291257,
+            "IL70B": 0.00076034706,
+            "IL71B": 0.0022623197,
+            "N2": -0.0060179284
+          }
+        },
+        "gabbutt2022_designC": {
+          "observed": -0.00064814824,
+          "null_q95": 0.00084835922,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 0.00072134043,
+            "IL68B": 0.0004618805,
+            "IL69B": 0.00038481256,
+            "IL66B": 0.0017298523,
+            "IL70B": 0.0014196663,
+            "IL71B": 0.0038215999,
+            "N2": 0.00094380935
+          }
+        },
+        "gabbutt2022_noob": {
+          "observed": -0.00018873861,
+          "null_q95": 0.0016865926,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 0.00077019949,
+            "IL68B": 0.00038836937,
+            "IL69B": 0.00028791972,
+            "IL66B": 0.0021194829,
+            "IL70B": 0.0017746823,
+            "IL71B": 0.0040387326,
+            "N2": -0.0078635021
+          }
+        },
+        "gabbutt2025_designC": {
+          "observed": -0.00063606837,
+          "null_q95": -9.7610368e-05,
+          "percentile": 0.139,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00079541071,
+            "IL68B": -0.00078591499,
+            "IL69B": -0.00078106472,
+            "IL66B": -0.00068562685,
+            "IL70B": -0.00071526585,
+            "IL71B": -0.00033180751,
+            "N2": 0.0038896218
+          }
+        },
+        "gabbutt2025_noob": {
+          "observed": -0.0011059643,
+          "null_q95": -5.1294366e-05,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00060813212,
+            "IL68B": -0.00058630193,
+            "IL69B": -0.0005820267,
+            "IL66B": -0.00049831988,
+            "IL70B": -0.0005360317,
+            "IL71B": -0.00033701685,
+            "N2": -0.0019247105
+          }
+        }
+      },
+      "T4": {
+        "observed": 0.081204049,
+        "null_q95": 0.080058499,
+        "percentile_of_observed": 0.958,
+        "above_q95": true
+      }
+    },
+    "bespoke": {
+      "variant": "bespoke",
+      "registered": true,
+      "null_status": "UNVALIDATED NULL (CURVE step 1 did not pass or CURVE is absent): supports no claim",
+      "n_null_draws": 1000,
+      "A_dil_at_each_array": [
+        {
+          "target": "IL67B",
+          "A_dil": 0.98920081,
+          "A_min": 0.98111825,
+          "A_max": 0.99105605
+        },
+        {
+          "target": "IL68B",
+          "A_dil": 0.99215948,
+          "A_min": 0.98733318,
+          "A_max": 0.99347484
+        },
+        {
+          "target": "IL69B",
+          "A_dil": 0.99437741,
+          "A_min": 0.99124338,
+          "A_max": 0.99536861
+        },
+        {
+          "target": "IL66B",
+          "A_dil": 0.98072413,
+          "A_min": 0.96312922,
+          "A_max": 0.98428655
+        },
+        {
+          "target": "IL70B",
+          "A_dil": 0.98573699,
+          "A_min": 0.97370657,
+          "A_max": 0.98827135
+        },
+        {
+          "target": "IL71B",
+          "A_dil": 0.97130034,
+          "A_min": 0.94258162,
+          "A_max": 0.97620997
+        },
+        {
+          "target": "N2",
+          "A_dil": 0.89077525,
+          "A_min": 0.74471722,
+          "A_max": 0.90819164
+        }
+      ],
+      "HC1": {
+        "statistic": "R_t = A_t - A_dil(f_t) [bespoke]",
+        "values": {
+          "IL67B": -0.063738021,
+          "IL68B": -0.093527852,
+          "IL69B": -0.1028147,
+          "IL66B": 0.019686595,
+          "IL70B": 0.0030053218,
+          "IL71B": 0.063191511
+        },
+        "rec_minus_prim": 0.11532133,
+        "exact90": [0.066743343, 0.16600621],
+        "welch95": [0.051829363, 0.1788133],
+        "welch_p_two_sided": 0.0087002846,
+        "relabel_direction": "greater",
+        "relabel_p_one_sided": 0.05,
+        "relabel_rank_of_20": 1,
+        "matched_pair": {
+          "IL70B": 0.0030053218,
+          "IL67B": -0.063738021,
+          "difference": 0.066743343
+        },
+        "floor_note": "3 v 3: the smallest one-sided p the design allows is 0.05 (0.10 two-sided)",
+        "null_q025": 0.0041578671,
+        "null_q975": 0.0086518817,
+        "null_q95": 0.0085332453,
+        "percentile_of_observed": 1,
+        "outside_95_envelope_above": true,
+        "primaries_minus_Adil": {
+          "IL67B": -0.063738021,
+          "IL68B": -0.093527852,
+          "IL69B": -0.1028147
+        },
+        "recurrences_minus_Adil": {
+          "IL66B": 0.019686595,
+          "IL70B": 0.0030053218,
+          "IL71B": 0.063191511
+        },
+        "N2_minus_Adil_descriptive": 0.24832063
+      },
+      "HC3": {
+        "observed_rec_minus_prim": -0.014206923,
+        "null_q025": -0.001571695,
+        "null_q975": 0.0032203787,
+        "percentile_of_observed": 0,
+        "within_95": false
+      },
+      "T3": {
+        "union_designC": {
+          "observed": -0.00019906897,
+          "null_q95": 0.00016362469,
+          "percentile": 0.001,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00019543636,
+            "IL68B": -0.00028160553,
+            "IL69B": -0.00035086558,
+            "IL66B": 9.1721791e-05,
+            "IL70B": -7.9219245e-05,
+            "IL71B": 0.00034716567,
+            "N2": 0.0031529792
+          }
+        },
+        "union_noob": {
+          "observed": -0.00022450517,
+          "null_q95": 0.00024576788,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00020264154,
+            "IL68B": -0.00027179758,
+            "IL69B": -0.00032722082,
+            "IL66B": 3.1253893e-05,
+            "IL70B": -0.00010336127,
+            "IL71B": 0.0002717327,
+            "N2": 0.0026381762
+          }
+        },
+        "gabbutt2022_designC": {
+          "observed": -0.00064814824,
+          "null_q95": 0.00024270703,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 0.00018400896,
+            "IL68B": 6.9679667e-05,
+            "IL69B": -1.8953299e-05,
+            "IL66B": 0.00049198466,
+            "IL70B": 0.00031084358,
+            "IL71B": 0.00079802263,
+            "N2": 0.004459704
+          }
+        },
+        "gabbutt2022_noob": {
+          "observed": -0.00018873861,
+          "null_q95": 0.00051571408,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": 2.9985453e-05,
+            "IL68B": -0.00011235498,
+            "IL69B": -0.00022468226,
+            "IL66B": 0.00042803618,
+            "IL70B": 0.00018959131,
+            "IL71B": 0.00088107135,
+            "N2": 0.0044672357
+          }
+        },
+        "gabbutt2025_designC": {
+          "observed": -0.00063606837,
+          "null_q95": -3.9020345e-05,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00077325287,
+            "IL68B": -0.00076919227,
+            "IL69B": -0.00076562246,
+            "IL66B": -0.00078753047,
+            "IL70B": -0.00077554352,
+            "IL71B": -0.0007981543,
+            "N2": -0.00010416134
+          }
+        },
+        "gabbutt2025_noob": {
+          "observed": -0.0011059643,
+          "null_q95": 1.3183862e-05,
+          "percentile": 0,
+          "above_q95": false,
+          "W_dil_at_f": {
+            "IL67B": -0.00058061882,
+            "IL68B": -0.00058401674,
+            "IL69B": -0.0005905213,
+            "IL66B": -0.00058767002,
+            "IL70B": -0.00057914801,
+            "IL71B": -0.00061662201,
+            "N2": -0.00020306665
+          }
+        }
+      },
+      "T4": {
+        "observed": 0.081204049,
+        "null_q95": 0.03588024,
+        "percentile_of_observed": 1,
+        "above_q95": true
+      }
+    }
+  }
+}

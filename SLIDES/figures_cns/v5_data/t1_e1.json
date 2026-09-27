@@ -1,0 +1,302 @@
+{
+  "analysis": "T1_E0_E1",
+  "prereg_sha256": "1b823ad50b2eb6299a56cb4b13ef2e99d7dfc46a62ed2bc2508b486ca2383d08",
+  "seed": 20260926,
+  "python": "3.11.16",
+  "numpy": "2.2.6",
+  "node": "zfh17",
+  "inputs": {
+    "corrected_logcpm": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/export/corrected_logcpm.tsv",
+      "sha256": "7876cffefa4628a7d765689fb85a8dc83b9b027772955c74b65210b1136f5813"
+    },
+    "nullA_1000": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_n1000/export/nullA_logcpm_1000.tsv.gz",
+      "sha256": "f5d733d3a8d89100fb22c53ed343735c11c08b0f7656309c74673e7e53ebabe9"
+    },
+    "composition_samples": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/composition/composition_samples_main.tsv",
+      "sha256": "42fd7a87c0bf998de4f121a56c537afa847f4177738f50a0cbb192a143930126"
+    },
+    "spread_rna.py": {
+      "path": "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/spread/spread_rna.py",
+      "sha256": "3a212bb2306a66cef388c314332316de874ab0f2bbefdd2b448a007ef235ee20"
+    },
+    "split_check": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna_n1000/split_check.json",
+      "sha256": "c32b9dd6f7a93c838394d24e96e093b06600305c77b4489822929b2d6826a334"
+    }
+  },
+  "set_sha256": {
+    "chanochmyers2026_dig_invasion_up.txt": "c4daab9b0f5eb597fd7e22c76bf4cec9bcfc8d1483aef2297f3cbc8030700dc8",
+    "chanochmyers2026_dig_invasion_down.txt": "a7709ee879063302c279aee0c3222eada4ccb663a57423c14b62b6399c89fc82",
+    "chanochmyers2026_lig_invasion_up.txt": "12dbdeece6a961d21478a052045e80e20e4cc73d46e89f4d56636dbc3affdf5f",
+    "chanochmyers2026_lig_invasion_down.txt": "3792bb08b4abf60e0ceaf15d2c6f189d79b904742ee7b904dc39d9b2d138bf74",
+    "chanochmyers2026_potential_distal_up.txt": "64c1cd5e9947c6c54f54ff95d0f8d6d0bd3f8909e23a8d307040c78aa944c105",
+    "chanochmyers2026_potential_distal_down.txt": "8a3a81a020a4201024e0172584375a256ba62e1afb2b8be9a5ff789a9b807a3b"
+  },
+  "genes_matched": {
+    "DiG": {
+      "up": 45,
+      "down": 58
+    },
+    "LiG": {
+      "up": 61,
+      "down": 70
+    },
+    "potential": {
+      "up": 120,
+      "down": 150
+    }
+  },
+  "T1": {
+    "DiG": {
+      "arm_coef_adjusted_for_f": 0.019474458761853636,
+      "relabelling_rank": 1,
+      "p_one_sided": 0.05,
+      "all_coefs": [
+        -0.019474458761853636,
+        -0.011096404494149656,
+        -0.015367083092008266,
+        -0.013407688638243612,
+        0.0045755943583594486,
+        -0.001915552738785048,
+        0.0016529737587881732,
+        -0.0014180694940155586,
+        0.0029571051124870837,
+        -0.00447766517952853,
+        0.004477665179528509,
+        -0.0029571051124870976,
+        0.0014180694940155517,
+        -0.001652973758788194,
+        0.001915552738785041,
+        -0.0045755943583594486,
+        0.01340768863824366,
+        0.015367083092008254,
+        0.011096404494149593,
+        0.019474458761853636
+      ],
+      "unadjusted": {
+        "statistic": "DiG_contrast",
+        "per_animal": {
+          "IL67B": -0.07620816912176664,
+          "IL68B": -0.07857790163665612,
+          "IL69B": -0.07011002588100779,
+          "IL66B": -0.04665890233097825,
+          "NL70B": -0.06379173079621736,
+          "NL71B": -0.053383296982894235
+        },
+        "mean_prim": -0.07496536554647686,
+        "mean_rec": -0.054611310036696614,
+        "diff_rec_minus_prim": 0.02035405550978024,
+        "direction_tested": "greater",
+        "relabelling_rank": 1,
+        "p_one_sided": 0.05,
+        "n_labellings": 20,
+        "ci90_relabelling_inversion": [
+          0.006328208013376663,
+          0.031900399622914605
+        ],
+        "ci95_welch_normal_theory": [
+          0.002446211096553172,
+          0.03826189992300731
+        ],
+        "welch_df": 2.9614139626059743,
+        "matched_pair_NL70B_minus_IL67B": 0.012416438325549284,
+        "_hedges_g_power_input_only": 2.380236263019327
+      },
+      "role": "H-T1 (secondary; expected to fail)"
+    },
+    "LiG": {
+      "arm_coef_adjusted_for_f": 0.004613881322070301,
+      "relabelling_rank": 8,
+      "p_one_sided": 0.4,
+      "all_coefs": [
+        -0.004613881322070329,
+        0.0065470219441848,
+        -0.011684098244911817,
+        -0.014897289654895216,
+        0.011969979145169687,
+        -0.009957744930190082,
+        -0.00961746518878065,
+        0.002461152338178077,
+        -0.0008406119339326862,
+        -0.019803418677570017,
+        0.019803418677570017,
+        0.0008406119339326446,
+        -0.002461152338178063,
+        0.009617465188780684,
+        0.009957744930190054,
+        -0.011969979145169674,
+        0.014897289654895257,
+        0.011684098244911845,
+        -0.0065470219441848415,
+        0.004613881322070301
+      ],
+      "unadjusted": {
+        "statistic": "LiG_contrast",
+        "per_animal": {
+          "IL67B": -0.1003778736664852,
+          "IL68B": -0.09431121974400081,
+          "IL69B": -0.11054023093638898,
+          "IL66B": -0.0532185025345,
+          "NL70B": -0.09645614311128403,
+          "NL71B": -0.08769598648549659
+        },
+        "mean_prim": -0.101743108115625,
+        "mean_rec": -0.07912354404376021,
+        "diff_rec_minus_prim": 0.022619564071864787,
+        "direction_tested": "greater",
+        "relabelling_rank": 2,
+        "p_one_sided": 0.1,
+        "n_labellings": 20,
+        "ci90_relabelling_inversion": [
+          -0.0021302473601383376,
+          0.057319681372204945
+        ],
+        "ci95_welch_normal_theory": [
+          -0.027407744091726922,
+          0.07264687223545649
+        ],
+        "welch_df": 2.506403455268832,
+        "matched_pair_NL70B_minus_IL67B": 0.003921730555201175,
+        "_hedges_g_power_input_only": 1.0538093022038475
+      },
+      "role": "descriptive"
+    },
+    "potential": {
+      "arm_coef_adjusted_for_f": -0.004614559859543559,
+      "relabelling_rank": 12,
+      "p_one_sided": 0.6,
+      "all_coefs": [
+        0.004614559859543569,
+        0.007077997085095168,
+        -0.010866511813907756,
+        -0.0076593533947395195,
+        0.025086197645861973,
+        0.010936899269936285,
+        0.011583987222892434,
+        0.012913598544010026,
+        0.028550350370193205,
+        -0.0031962415754919968,
+        0.003196241575492094,
+        -0.02855035037019319,
+        -0.012913598544010103,
+        -0.011583987222892403,
+        -0.01093689926993622,
+        -0.02508619764586198,
+        0.007659353394739592,
+        0.010866511813907635,
+        -0.007077997085095187,
+        -0.004614559859543559
+      ],
+      "unadjusted": {
+        "statistic": "potential_contrast",
+        "per_animal": {
+          "IL67B": -0.32291922969664455,
+          "IL68B": -0.3554825625395471,
+          "IL69B": -0.33726581451906046,
+          "IL66B": -0.316539904385221,
+          "NL70B": -0.34778773427688375,
+          "NL71B": -0.3383245413990934
+        },
+        "mean_prim": -0.3385558689184173,
+        "mean_rec": -0.33421739335373274,
+        "diff_rec_minus_prim": 0.004338475564684585,
+        "direction_tested": "greater",
+        "relabelling_rank": 8,
+        "p_one_sided": 0.4,
+        "n_labellings": 20,
+        "ci90_relabelling_inversion": [
+          -0.024841409401482883,
+          0.038922042931994166
+        ],
+        "ci95_welch_normal_theory": [
+          -0.03232873843239485,
+          0.04100568956176402
+        ],
+        "welch_df": 3.998658114826248,
+        "matched_pair_NL70B_minus_IL67B": -0.024868504580239204,
+        "_hedges_g_power_input_only": 0.21461010709794517
+      },
+      "role": "descriptive"
+    },
+    "fraction_variable": "f_RNA_graft_total_floorcorr_IL64B",
+    "corr_f_arm": -0.7042116443979374
+  },
+  "H_E0": {
+    "N269B": 0.0019098004436308713,
+    "IL64B": 0.00242083080165878,
+    "N168B": -0.054793863881688276,
+    "pass": false
+  },
+  "spread_40480791_check": {
+    "stats_identical_IL69B": true,
+    "stats_identical_IL67B": true,
+    "stats_identical_IL68B": true,
+    "obs_mixture_identical": true,
+    "first_200_null_columns_max_abs_diff": 0.0,
+    "null_columns_total": 1000,
+    "jobs": 12,
+    "jobs_file": "/rs/rs_grp_oschome/go2432/u251_science/spread/cibersort/jobs_n1000.tsv"
+  },
+  "regeneration_check": "first 50 regenerated IL69B draws reproduce the saved rna_n1000 draws (max abs diff <= 1e-4)",
+  "H_E1": {
+    "abandoned": true,
+    "N269B_DiG": 0.0019098004436308713,
+    "IL69B_DiG": -0.07011002588100779,
+    "effect_N269B_minus_IL69B": 0.07201982632463866,
+    "effect_boot95_set_membership": [
+      0.03341883048955578,
+      0.11579853421849194
+    ],
+    "p_one_sided_vs_saved_nullA_IL69B": 0.000999000999000999,
+    "alpha": 0.01,
+    "reject": false,
+    "null_saved_median": -0.06964053045676655,
+    "null_saved_q99": -0.058292445393893604,
+    "p_vs_regenerated_IL69B": 0.000999000999000999,
+    "between_animal_refs": {
+      "IL67B": {
+        "median": -0.0753889555367796,
+        "q01": -0.0871233839180506,
+        "q99": -0.06375765310385605,
+        "p_obs_vs_this_null": 0.000999000999000999
+      },
+      "IL68B": {
+        "median": -0.07809018619561975,
+        "q01": -0.09029082499889908,
+        "q99": -0.0660746586582942,
+        "p_obs_vs_this_null": 0.000999000999000999
+      }
+    },
+    "LiG_N269B_minus_IL69B": -0.0038165244935957077,
+    "potential_N269B_minus_IL69B": 0.028534275633665507,
+    "outside_check_i_published_core_to_invasion_DiG": [
+      [
+        0.127,
+        0.918
+      ],
+      [
+        0.877,
+        1.463
+      ],
+      [
+        0.14,
+        1.013
+      ]
+    ],
+    "outside_check_i_published_shift_sizes": [
+      0.791,
+      0.5860000000000001,
+      0.8729999999999999
+    ],
+    "residual_readings": [
+      "N269B maps uniquely at 50.9 % against IL69B's 77.2 %",
+      "NULL-A models resampling plus a floor only: not aliquot, extraction, degradation, the mapping gap, or a dissection that took rim rather than centre",
+      "one animal; nothing separates spread in life from carry-over at dissection; the animal was never ablated"
+    ],
+    "family_note": "second directional test after the failed Ivy GAP primary; family-wise error about 2 %, stated, not corrected",
+    "role": "case observation, one animal"
+  }
+}

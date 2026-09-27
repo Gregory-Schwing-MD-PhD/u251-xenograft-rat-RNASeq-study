@@ -4,6 +4,442 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-27 07:45 EDT: MANUSCRIPT DRAFT 1 AND DECK v5 ARE WRITTEN. Greg's directive: the instrument finding is the headline
+
+**Two deliverables exist on disk now.**
+
+1. `MBR/nature_draft/manuscript.md` (untracked, 651 lines) - draft 1 of the Nature/Cell-form paper, written from the
+   pre-registered analyses: PREREG.md (sha256 `1b823ad5...2383d08`), SPREAD/SECTION_spread.md, XVAL_RESULTS.md, the
+   CURVE result, the RNA and DNA science blocks, TARGETS.md (sha256 `88b5ac10...`) and `power_closed_only.json`
+   (job 40481525). Structure: abstract, introduction, five aims of results, the contralateral subsection inserted
+   verbatim from SECTION_spread.md between its delimiters, discussion, "the experiment this pilot sizes" with the
+   target table, condensed methods, the figure list, and the editorial list of sentences that must not enter it.
+   24 `\PENDING{}` slots remain and each names the job or file that fills it. `CHANGES.md` beside it records every
+   insertion and every slot closed.
+
+2. `SLIDES/CNS2026_Schwing_Abstract418_CNStemplate_v5.pptx` - **46 slides**: v4's 21 unchanged, plus 5 main and 20
+   backups. Built by `SLIDES/14_build_deck_v5.py`, which opens the v4 deck and inserts; figures by
+   `SLIDES/13_v5_figures.py`, which imports the manuscript's own drawing code and re-saves each panel at slide type.
+   Plan and cut order: `SLIDES/STORY_v5.md`. Every slide was rendered to PNG through PowerPoint and looked at; three
+   defects found that way were fixed (text colliding with the footer on two slides, the dilution null quoted in the
+   wrong direction on the mesenchymal slide, the nine-panel power figure too small as a top figure).
+
+**Greg's directive, 2026-09-27 (verbatim in intent).** Even if the contralateral signal is carry-over on the
+instrument, *that is the positive finding for a neurosurgical audience*: the cellularity of the tumour is detectable
+molecularly on what the surgeon touched, and surgeons should be aware of seeding distant brain with their
+instruments. Both deliverables now carry it that way:
+- manuscript: a new results subsection, "What both readings carry: tumour on the instrument is measurable", plus a
+  paragraph in the discussion. No rate or risk during a human resection is asserted.
+- deck: main slide 14, "Tumor in the opposite hemisphere - and what it means in the OR".
+- anchor, measured and checked against Europe PMC before it was written: malignant cells recovered from gloves or
+  instruments in 14 of 47 canine cancer operations (30 %), 57 % with involved margins against 19 % with clear
+  margins, P = 0.016 (Orjefelt et al., J Small Anim Pract 2026;67:528-533). Case reports that such cells can
+  establish: Steinmetz 2001 (J Neurooncol 55:167-171), Perrin & Bernstein 1998 (36:243-246), Bouillot-Eimer 2005
+  (Clin Neuropathol 24:247-251), Bekar 2010 (World Neurosurg 73:719-721). What is new here is that species identity
+  MEASURES the transferred material at the distant site; cytology and case reports cannot.
+
+**Results that closed slots since the 02:30 block.**
+- Bench lists (40481545): the H-C2 criterion holds under **all fourteen** published cross-species exclusion lists -
+  true split rank 1 without the fraction covariate, rank 4 with it, in every list. The methylation arm difference is
+  tumour fraction, replicated.
+- Figure 6 draws from the closed-form power file; panels e and f (T4, T5) stay blank until `u251_pwr_asm` lands.
+- Kept-gene count for the decomposition: 10,192 of 12,377 one-to-one ortholog pairs.
+
+**Still pending on the grid (nothing blocks the drafts):** E1 external floor (40481267 running, 40481268 queued);
+Aim 3 (pub_count 40481516 running, pub_noiseq 40481517 queued - and by pre-registration Aim 3 goes to the lab before
+a sentence about it is drafted); the BENCH -> f_DNA chain (40481546-49) that would replace every uncalibrated
+fraction; `u251_pwr_asm` for T4/T5; the multi-omics runs (rnavar, rnasplice, de_null_B, invasion_niche, irp_graft;
+rnafusion blocked on its reference).
+
+**For Greg.**
+- The v5 deck and its figures are committed to this PUBLIC repository, as v3 and v4 were. The manuscript draft stays
+  untracked (`MBR/` is gitignored). Say if slide 14 should wait until the manuscript is submitted.
+- The dissection record does not say whether a fresh blade was used between pieces. If Raj's records say it was, the
+  "one pass of an instrument" sentence changes in both deliverables.
+- Unverified references still marked pending: Woodworth 2013 (29 % of reoperated recurrences held no active tumour),
+  Wang L 2022 and Drexler 2024 for the mesenchymal shift, the J Neurosurg 2026 page range, and Shorrocks 2013 for the
+  Shapley attribution (kept in the speaker notes, not the footer, until checked).
+
+## 2026-09-27 02:30 EDT (grid clock): pipeline_v2 VERIFIED (refutation pass); GSE310817 batch-1 defect wired into SELECT; jobs 40481813, 40481814
+
+**Checked and holding:**
+- PREREG.md sha256 `67e9e250...832` recomputed; it matches in the scratchpad, local and grid copies.
+- The bench code follows PREREG 3-9 as written: f grid, pairings, cross-fitted anchors, C1a/C1b criteria, the Q/Q_null
+  metric, and the 8.1/8.2 rules.
+- Mixing uses raw SigDF M/U fields with S* = S-con, not betas. The exclusion check pairs rat 0 % and 100 % arrays at the
+  same f and the same human end.
+- GSM-to-species and GSM-to-methylation-level mappings were re-checked against GEO for all three series.
+- INTERFACE file names agree between the align/collect jobs and REFCHECK/E5.
+- The bespoke `u251_meth/pipeline/` is untouched; only its README changed, at 23:54, by the nf-core workflow.
+  40479710 had been cancelled at 21:34, before this workflow started; its replacement 40480027 finished at 21:57.
+- README citations resolve and support their sentences. "provenance" does not occur. Nothing in
+  `ANALYSIS/methylation_v2` was ever committed, and no IDAT is tracked.
+
+**Found (high): GSE310817 batch 1 has no red channel.** Every Red IDAT of GSM9309404-416 is a byte copy of its Grn IDAT;
+the titration workflow found this at 01:02. pipeline_v2's 01:15 block had read it as a "weak red channel". It decides
+F2's C1b: F2 is "not evaluable in batch 1" and therefore fails under PREREG 5.1. It also puts 10 of C1a's 28 mixtures
+and the pooled F1 curve on those arrays.
+
+PREREG was not edited. SELECT still applies it as frozen, with batch 1 included. What was added:
+- `select.R` records the defect in `selection.json` (`input_defects`), plus two reported-only items, with a flag saying
+  they were never used for selection:
+  - C1 over batch 2 alone (`sensitivity_c1_batch2.R`);
+  - a C2-exclusion tail diagnostic (`diag_c2e_tail.R`: Q over probes the human end detects, and an independent
+    recomputation of Q).
+- `report_v2.R` prints these items.
+- README.md and a METHODS.md section 9 describe the defect, plus two E5 corrections: the command admits 2 mismatches,
+  not 1, and Needhamsen's FASTA has R already set to A.
+
+Everything is synced to the grid and all 30 R scripts parse.
+
+**Jobs:**
+
+| job | what | state and ETA |
+|---|---|---|
+| 40481813 | u251_v2_verify: IDAT identity (`ref/geo/IDAT_CHANNEL_IDENTITY.tsv`), the batch-2 C1 sensitivity and tail diagnostic (`pipeline_v2/results/sensitivity_not_preregistered/`), and a code test of C2E/SELECT/REPORT in tmp (deleted after) | PENDING 02:25; about 20-30 min once it starts |
+| 40481814 | u251_v2_xls: which ID forms Needhamsen's Additional file 4 holds | DONE 02:26. The file holds 17,944 IDs: 17,916 cg and 28 ch. R2's regex had dropped the 28 ch; `method_e5.R` is fixed and synced. R2 now also reports a cg-only Jaccard and whether their CHR/Mapinfo match our Rnor_6.0 loci, which answers the "assembly not stated" unknown |
+| 40481317 | dependency is now `afterany:40481260:40481813`, so SELECT sees the files | ETA unchanged |
+
+Logs: `u251_meth/logs/v2_verify_40481813.out` and `v2_xls_40481814.out`.
+
+**Check before recording the selection sha256 (the 00:36 gate):**
+1. The log shows `RED_IS_BYTE_COPY_OF_GRN` for 13 GSE310817 arrays and no others.
+2. `SELECT field ... PRESENT` three times.
+3. `compare_q.py` prints AGREE.
+
+**Greg's decision, not made here:** whether to adopt "C1 on batch 2 only" as a PREREG section 11 deviation. It would
+be dated after results were seen. `sensitivity_not_preregistered/c1_batch2.json` states what it would change, and adds
+this: every F2 candidate's C2 mean MAE (0.096-0.124) is above the 0.05 adequacy bar. So even if an F2 variant became
+eligible, PREREG 8.1 would still keep the fraction out of downstream adjustment.
+
+## 2026-09-27 02:12 EDT (grid clock): XVAL (matched DNA array x RNA-seq cross-validation) DONE — all four tests run, nothing pending that changes a number
+
+Greg's question: can the matched arrays show that SNPs or transcripts are real rather than errors? The write-up is
+**`MBR/nature_draft/XVAL_RESULTS.md`**. It covers:
+- what was cross-validated, and each criterion's outcome;
+- what each test validates and what it cannot;
+- the methylation-expression concordance rates with their nulls;
+- draft Methods and Results paragraphs;
+- captions of 60 words or fewer.
+
+Identical copies are at scratch `xval/RESULTS_xval.md` and grid `u251_science/xval/results/RESULTS_xval.md` (sha256
+`8494f8e8...` after the 02:40 hostile check; it was `6765d0a0...`). This block supersedes the "Pending" line in the XVAL
+sub-bullets of the 22:55 block.
+
+**Hostile check, 02:15-02:40 EDT.** No number changed a decision. What was checked:
+- the PREREG hash in all three copies;
+- that every table number traces to `xval/`;
+- eleven rs positions and alleles against dbSNP (all match);
+- the bin liftover, re-done with pyliftover (25,730 of 25,730 identical);
+- the decile-matched dosage null, and that the floor handling comes before the dosage statistic;
+- no `sra_*`/`xs_*`/`star_*` jobs, and nothing committed.
+
+What was corrected in the write-up:
+- The Results draft had said the 0.25-0.40 % descriptive rate sets the RNA-only threshold. kmin uses the
+  pre-registered e_s upper bound per depth bin.
+- The five sites: array betas of 0.90-0.94 at four of them allow at most about 10 % DNA ALT, against 14-57 % in RNA.
+  The pre-registered paralogue check (PREREG 2.3) was not run, so three readings stay open.
+- Job states: 40480668 was FAILED in Slurm, and 40481699 has COMPLETED.
+- Caption word counts.
+
+`ANALYSIS/xval/` was added to `.git/info/exclude`. The recomputed tables are in `xval/results/hostile_check/`.
+
+**PREREG.** `PREREG_xval.md`, sha256 `140fdd44c15143ddfc70d5852fe9aa7d69e7a9897b2047ebc19b2afaf8568c75`. It was
+re-hashed at 02:06, locally and on the grid, and is unchanged.
+- Deviations 1-30 are in scratch `xval/DEVIATIONS.md` and grid `xval/DEVIATIONS_xval.md`.
+- Entries 26, 27, 29 and 30 were written after the result they concern was read, and each is labelled so.
+- No deviation changes a pre-registered decision.
+
+**Jobs.** All ids are in `/rs/rs_grp_oschome/go2432/u251_raw/JOBS.txt`, with a status line appended at 02:11.
+
+| step | job | state |
+|---|---|---|
+| SRA fetch (`sra_*`) | none | not submitted: all ten human STAR BAMs exist; PREREG_xval 1.5 excludes it |
+| xengsort re-sort (`xs_*`) | none | not submitted: no test needs it |
+| STAR (`star_*`) | none | not submitted: the BAMs exist |
+| bcftools 1.21 pile-up | 40480752, 40480754 FAILED (no `--regions-overlap`); 40480755 CANCELLED (too slow); **40481325** (40 chunks) | 40481325 COMPLETED; chunk 30 was last, at 02:03:39 |
+| test 1 analysis | 40481651 (primary only) COMPLETED 01:48; **40481326** (primary + duplicates kept) COMPLETED 02:05:02, exit 0 | the primary files are byte-identical between the two runs |
+| tests 2-4 | 40480794 xval_deseq, 40480795 xval_tests, 40481406 xval_desc, 40481374/40481408 xval_fig | COMPLETED |
+| cosmetic | 40481699 xval_geno1 (redraw of the primary-only figure) | COMPLETED 02:20:47, exit 0; duplicates-excluded rows identical to `rna/` |
+
+**Result paths** (grid, `G/u251_science/xval/`):
+- `rna/`: test 1. It holds `setB_contradiction.tsv`, `error_model*.tsv`, `kmin_table.tsv`, `rna_vs_rna_agreement.tsv`,
+  `genotype.json` and the merged `pileup_sites*.vcf.gz`. The primary-only copies are in `rna/nodup_only/`.
+- `cnv/`: test 2.
+- `meth/`: test 3.
+- `lists/`: test 4.
+- `results/`: `fig_xval_{genotype,dosage,meth}.png` and `RESULTS_xval.md`.
+
+**Findings.**
+- *Test 1, SNPs.*
+  - Set A (the 59 rs probes) is **not testable**: the probes are never expressed, with at most two reads.
+  - Set B (CpG-SNP sites where the array implies hom-REF): 2.95 % contradictions (16 of 543; Wilson 1.8-4.7 %). That is
+    between the 2 % tolerance and the 5 % failure line, so it is reported. The 16 come from five common-SNP sites
+    that recur across libraries (FKBP9, PGM1, EP400, ELL2, RBM12B). What they are is not known: a low-fraction DNA
+    allele, an RNA-DNA difference or paralogue reads.
+  - B + B\* gives 1.39 %. With duplicates kept: 2.31 % (B) and 1.08 % (B + B\*).
+  - RNA-vs-RNA agreement is 99.86 % (pass).
+  - The pre-registered e_s is 1.5-2.7 %, above the 1 % bar, because the five sites are counted as errors. With them
+    removed (descriptive), it is 0.17-0.40 %.
+  - The kmin table, built from the pre-registered e_s upper bound per depth bin, is the null for any RNA-only
+    variant. This validates the pipeline, **not somatic subclones**: every
+    sample shares the U251N germline, and the array does not sequence.
+- *Test 2, copy number.*
+  - The positive controls pass: CDKN2A/B is silent, and the dosage slope is 0.54 (p 7e-6).
+  - The pre-registered rule passes N2's 3p (p 0.0083) and, borderline, 4p (0.0120; a second draw gave 0.0134).
+  - But N269B's arm-level expression does not follow N2's copy number anywhere: slope 0.17 (p 0.45), against 0.97 for
+    IL69B.
+  - So **the N2-only losses are neither confirmed nor shown to be noise**. They stay array-only.
+- *Test 3, methylation.*
+  - Within sample, rho is -0.33 to -0.36 in all seven U251-rich samples; no shuffle out of 10,000 reached it (pass).
+  - Delta-delta: rho -0.003, eighth of ten relabellings, shuffle p 0.37, no gene selected. There is no coordinated
+    change.
+- *Test 4, the RNA lists.*
+  - The RP block has no DNA support, and its unadjusted promoter hypomethylation was a tumour-fraction effect.
+  - The fraction-adjusted up-list is "DNA-supported" only by the letter (+0.013 log2, three genes, p 0.043).
+  - Absence of DNA support is not refutation.
+
+**Shared inputs for the SPREAD workflow's C2.**
+- **BAMs:** `/rs/rs_grp_oschome/go2432/u251_science/xval/bam/<lib>.bam(.bai)` are symlinks to the home-clone
+  nf-core/rnaseq 3.22.2 BAMs, `~/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/<lib>.markdup.sorted.bam`.
+  Read them only; home is at 96.8 % of quota.
+- **Re-sorted reads do not exist.** `/rs/rs_grp_oschome/go2432/u251_raw/xengsort/` was never created, because no
+  xengsort re-sort was run.
+  - The original sorted reads are at `~/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/<lib>_{human,rat}_R{1,2}.fq.gz`:
+    human = graft + both, rat = host + both; 85 GB, 12 May 2026. The index is in `ANALYSIS/xengsort_index_clean/`.
+  - A re-sort at another threshold needs SRA GSE338105 (SRR39547363-72, about 200 GB, into `u251_raw/`). Check
+    `JOBS.txt` and `squeue` for `sra_*` and `xs_*` first.
+- **Variant null:** `xval/rna/kmin_table.tsv`.
+  - PREREG_xval 2.4 requires SPREAD C2 to state which threshold it used.
+  - C2 ran (about 01:00) before the table existed (01:48). Its verdict is negative, so a stricter threshold cannot
+    reverse it, but the text must name the threshold.
+
+**Loose ends for other workflows** (not edited by XVAL):
+1. `MBR/nature_draft/SPREAD_RESULTS.md`, around line 189 and in its status-table row at about line 467, still says
+   the XVAL dosage check "has not run" because pile-up 40480752 failed.
+   - The dosage check never depended on the pile-up. It ran at 00:29 and found that N269B's expression does not track
+     N2's copy number.
+   - Suggested replacement wording is in `XVAL_RESULTS.md`, under "Other documents that are now stale".
+2. SCIENCE T2 gate G2a (01:30 block, item 3) waits on `xval/rna/genotype_concordance_per_library.tsv`. The file now
+   exists but **has no rows** (Set A has no RNA depth), so G2a cannot pass on it as written, and SCIENCE needs its own
+   deviation. The per-library Set B rows are in `xval/rna/setB_contradiction_per_library.tsv`.
+3. `fig_xval_genotype.png` panel b draws N269B's zero rate at the 1e-4 axis floor. The draft caption says so.
+
+**Not done, and not possible with these data:** somatic-subclone confirmation. The next experiment is targeted DNA
+sequencing of the leftover array DNA. The cause of N269B's copy-number-independent expression is also untested.
+
+**Nothing is committed.** `ANALYSIS/xval/` is untracked code, `MBR/nature_draft/` is git-ignored, and this RESUME edit
+is uncommitted.
+
+## 2026-09-27 02:10 EDT (grid clock): pipeline_v2: C2-exclusion / SELECT / REPORT code paths tested; ETA of 40481317 corrected to ~06:30-07:00 (latest ~10:30)
+
+Code tests 40481655 and 40481656 ran C2 exclusion, SELECT and REPORT into `u251_meth/tmp/v2test_*`, with E5 marked as
+not built. All three completed with exit 0. The test outputs are deleted: they are not the selection. Two cosmetic
+fixes were synced before 40481317 runs: REPORT number formatting, and the PREREG hash read in `select.R`. The parse
+check still passes (28 R scripts).
+
+**ETA.** 40481317 (E5, C2 exclusion, SELECT) follows the ref collect job 40481260, which the fetch agent estimates at
+~06:30 EDT, latest ~10:00. That puts the selection at ~06:30-07:00, latest ~10:30. The apply job 40481327 stays HELD
+until the gate in the 00:36 block, then takes about 1 h plus queue time. The SCIENCE follow-up chain (40481545-40481549)
+waits on 40481317 and 40481327.
+
+**Seen in the test.** This is benchmark data only, with no tumour read. Every exclusion list had Q - Q_null of about
+0.27 at the 99th percentile, against the 0.02 criterion, so none met it:
+- U: Q 0.483, Q_null 0.176;
+- none: Q 0.554.
+
+If 40481317 gives the same with the E5 lists, the PREREG 8.2 outcome is "no published list brings rat contamination
+to within 0.02 of the replicate floor". Downstream then uses the pre-declared fallback U, labelled as not protected.
+The fraction outcome in the test was also "none eligible", as the 01:15 block predicted.
+
+**Before any commit of `ANALYSIS/methylation_v2/`:** PREREG.md and METHODS.md quote two bespoke numbers derived from
+our unpublished arrays (N2 0.264; 56 of 939 iDMCs). Nothing is committed.
+
+## 2026-09-27 02:05 EDT (grid clock): SCIENCE DNA side + RNA-DNA integration: all registered DNA analyses run; BENCH follow-up chain queued (40481545-40481549)
+
+SCIENCE PREREG (`scratchpad/science/PREREG.md`, sha256 `1b823ad5...`; grid `u251_science/PREREG.md`): every
+DNA-methylation analysis (M2, H-M1 DNA, M3, L1, L4, L5, N0, H-C1, H-C2, H-C3, T3, T4, the S1 bound, the D3-DNA spike-in
+floor) and the integration pieces (M3, Holm across RNA and DNA, the homogeneity triad, the DNA figure panels). Code
+`ANALYSIS/science/dna/` (not committed; grid copy `u251_science/code/dna/`, `CODE_SHA256_<job>.txt` per job in
+`u251_science/dna/`). Outputs `u251_science/dna/{j9,fdna,dilution,nfcore_cofactor/bespoke,integrate}/`; figures
+`u251_science/figures/dna/` (fig1b, fig1c, fig4a-c, fig5c-d, PNG + PDF, `captions_dna.md`, all <= 60 words; every panel
+looked at); logs `u251_science/logs/sci_*_<id>.out`; ids `u251_science/dna/JOBS_DNA.txt`. Frozen inputs
+`u251_science/inputs/dna/` (bespoke work-dir objects copied with sha256), references `u251_science/ref/dna/` (LUMP 44,
+Gabbutt 2022 EPIC fCpGs 1,794, Gabbutt 2025 lymphoid fCpGs 978, CCLE U251MG segments; `REF_SHA256_dna.txt`).
+Deviations D-DNA-1 to D-DNA-10 appended to `scratchpad/science/DEVIATIONS.md` and `u251_science/DEVIATIONS.md` (incl.
+a disclosure: the nf-core true-split FDR count, 46, was seen at 00:31 while locating files). Nothing committed or pushed.
+
+| job | what | state / ETA (EDT) | output |
+|---|---|---|---|
+| 40481410 sci_dna_refs | freeze inputs, lists, CCLE; diptest; EPIC.5.SigDF.normal | DONE 00:49 | `inputs/dna/`, `ref/dna/` |
+| 40481447 sci_dna1 (J9) | L1, L4, L5, D4, T3 gates + statistic, T4 + S1 | DONE 01:09 | `dna/j9/` |
+| 40481488 sci_fdna | f_DNA resolver, M2 + H-M1, M3, D3-DNA spike-in | DONE 01:03 | `dna/fdna/` |
+| 40481489 sci_dilution (J10) | N0: 680 mixtures; H-C1, H-C3, T3, T4 nulls (1,000 draws) | DONE 01:42 | `dna/dilution/` |
+| 40481490 sci_nfcofactor (J11a) | nf-core/methylarray, cofactors = f_DNA (bespoke), ten splits | DONE 01:51 | `dna/nfcore_cofactor/bespoke/` |
+| 40481491, 40481719 sci_dna_integrate | H-C2, triad, sentences, figures (40481719 = label-only rerun, D-DNA-10) | DONE 02:00 | `dna/integrate/`, `figures/dna/` |
+| 40481723 sci_benchlists (interim) | H-C2 under the lists BENCH has already published (E1-E4, from its run 40481316); T3 exclusion without E5 | PENDING (priority) at 02:10; about 30-45 min once it starts | `dna/benchlists_interim_E1-E4/` (never read by 06_integrate; superseded by 40481545) |
+| 40481545 sci_benchlists (J11b) | H-C2 under every BENCH list; T3 primary exclusion | afterany BENCH 40481317 (u251_v2; after ref_collect 40481260, ~10:00) | `dna/benchlists/` |
+| 40481546 sci_fdna (rerun) | re-resolve f_DNA with BENCH | afterany BENCH C3 40481327 (**HELD** until BENCH's selection sha256 is recorded) | `dna/fdna/` (old kept as `fdna_before_<id>/`) |
+| 40481547 sci_dilution (rerun) | T3 primary null; all nulls on the new f_DNA | afterany 40481545:40481546 | `dna/dilution_benchprimary/` |
+| 40481548 sci_nfcofactor (rerun) | cofactor run on the new registered f_DNA | afterany 40481546 | `dna/nfcore_cofactor/<variant>/` |
+| 40481549 sci_dna_integrate (rerun) | everything re-read, T2 picked up | afterany 40481547:40481548 | `dna/integrate/` |
+
+**Registered f_DNA = the bespoke estimate, uncalibrated: every f_DNA-based number is `\PENDING{}`, every N0 percentile
+is an "unvalidated null".** CURVE step 1 FAILED (MAE 0.242, max |error| 0.531); CURVE Amendment 1's calibrated reading
+failed its gate too (and, post-freeze, was never eligible; D-DNA-2). BENCH has published nothing. The N0 machinery
+itself checks out: its k_c equals CURVE's to 1e-15 for all ten rat arrays; the N0 code path reproduces the bespoke
+amplitudes (|diff| <= 3.3e-4), fCpG W and MGMT promoter means (<= 1e-8); the exact 90 % interval code matches a
+brute-force inversion of the 20-labelling test.
+
+**Results (descriptive; 3 v 3 floor p = 0.05).**
+- **L1 LUMP: FAIL.** 39 of 44 CpGs usable; LUMP 0.84-0.87 in the six tumours, 0.88 N2, 0.92 C2B; Spearman with RNA
+  share -0.77. By section 8 every DNA-side statement carries this failure and "rat-blind" is withdrawn from the text.
+- **L4 CCLE: PASS** (directional agreement 0.89 over the 19 arms CCLE calls). **L5 SeSAMe vs conumee: FAIL** on its
+  letter (arm calls agree in 0.926 of 312 cells; amplitude slopes not rank-identical, Spearman 0.75). Both kept.
+- **H-M1 DNA (bespoke, PENDING):** recurrent minus primary -0.196 (exact 90 % -0.340 to -0.059; Welch 95 % -0.367 to
+  -0.025), rank 1 of 20 (p = 0.05); CURVE f_hat and f_cal also rank 1. RNA (replication) rank 2 (p = 0.10). Holm over
+  RNA and DNA: 0.10, 0.10.
+- **M3:** Spearman(RNA share, DNA fraction) 0.886 over six tumours, 0.929 over seven arrays. N2's DNA/RNA ratio 4.0
+  (bespoke), 6.5 (CURVE f_hat), 1.0 (CURVE f_cal): unexplained, CURVE having failed.
+- **H-C1 (unvalidated null, uncalibrated f_DNA):** C2B diluted in silico with rat DNA keeps its amplitude (A_dil 0.97-0.99
+  at the tumours' fractions). The primaries sit below that curve (A - A_dil -0.064 / -0.094 / -0.103), the recurrences on
+  or above it (+0.020 / +0.003 / +0.063). T_C1 0.115 (exact 90 % 0.067 to 0.166), rank 1 of 20, above all 1,000
+  pseudo-recurrence draws (null 95 % 0.004 to 0.009); same under both CURVE fractions. Section 8 wording: "unexplained
+  by dilution"; no homogeneity claim (the triad fails, below) and, with the null unvalidated, no claim at all yet.
+- **H-C2:** replicated in the independent pipeline: nf-core/methylarray true split rank 1 of 10 at p < 1e-3 (2,800
+  probes) without the covariate, rank 4 (341) with f_DNA; bespoke A rank 1 (3,975) -> B rank 4 (326). Criterion met in
+  both; the covariate is the uncalibrated bespoke fraction; BENCH-list reruns pending.
+- **H-C3:** STP27 "M" in all eight; flip distance 0.45-0.48 beta per recurrence against observed shifts -0.032 (Welch
+  -0.077 to 0.013) and +0.057 (-0.006 to 0.120); promoter-mean difference -0.014 lies below all 1,000 null draws
+  (null 95 % -0.002 to 0.003; unvalidated). MGMT TPM 0 in C2B and all tumours; 0-7 STAR exon reads per library.
+- **T3 fCpG: UNINFORMATIVE** (G3b fails: C2B already multimodal at the fCpGs, dip p < 0.005 for every list; G3a fails
+  for the lymphoid list and for noob betas). T_T3 about 0, rank 14 of 20. **Triad: not distinguishable from tumour
+  share (T3 failed; T2 pending).**
+- **T4:** T_T4 0.081, rank 5 of 20 (p = 0.25; above the pseudo-recurrence null q95 0.036, but the relabelling criterion
+  fails): no convergence. **S1:** a shared single-copy loss is flagged on >= 80 % of arms at s >= 0.55 (from 2 copies) /
+  0.80 (from 3); a shared gain never reaches 80 % (maximum 77 %: the unchanged rule cannot flag arms the primaries already
+  call gained).
+- **D3-DNA spike-in (POWER T5):** FDR < 0.05 recovery of a shared 0.05 / 0.10 / 0.15 / 0.20 beta shift: design A 19 / 46
+  / 68 / 86 %; with the fraction covariate 0 / 0 / 14 / 22 %.
+
+**Next.**
+1. BENCH: the chain above runs by itself once BENCH's 40481317 finishes and its C3 job 40481327 is released (see the
+   00:36 block for the manual gate). If 40481327 is cancelled instead, 40481546 re-resolves to bespoke and the chain
+   still completes. Then read `dna/fdna/fdna_resolved.json`: if `registered` became `bench`, H-M1 (DNA), H-C1, H-C3 and
+   the cofactor run stop being `\PENDING{}`; the N0 null stays unvalidated whatever BENCH picks (section 6 ties it to
+   CURVE step 1).
+2. H-T2 is RNA-side (sci_ai 40481604 -> `rna/allelic/t2.json`); `06_integrate.R` reads it on its next run (40481549, or
+   `sbatch -D /rs/rs_grp_oschome/go2432/u251_science /rs/rs_grp_oschome/go2432/u251_science/code/dna/06_integrate.sbatch`).
+   It cannot rescue the triad (T3 already failed its gate).
+3. Not run, by rule: G3c (no verified accession of an independent U251 methylation array; NCBI eutils returned 500
+   at 01:03); X1 (optional). Torsvik 2014 aCGH dropped (figures only; D-DNA-5).
+
+## 2026-09-27 01:15 EDT (grid clock): pipeline_v2 bench run 1 DONE (40481316, 26 min, all tasks exit 0); 40481317 waits on the E5 alignment; 40481327 (apply) HELD
+
+This block updates the pipeline_v2 block of 00:36 further down. Job ids are unchanged:
+- **40481317** runs E5, C2 exclusion and SELECT. It depends on afterany:40481260, the ref collect job, which is still
+  waiting on the bowtie-1 index builds 40481256/7 (running 1 h 05 min at 01:10). ETA about 03:00-05:30 EDT, plus
+  15-30 min.
+- **40481327** (apply) stays **HELD** until the selection sha256 is recorded. The gate is described in the 00:36 block.
+- Code test **40481567**: C2 exclusion and SELECT run into `u251_meth/tmp/v2test_*`, not into results. It was queued
+  at 01:10. A first attempt failed only because the test harness did not bind `/.rs`; Nextflow's own run of the same
+  code path (C2 fraction) read C2B fine.
+
+Benchmark facts from run 1. They come from public arrays and C2B only; nothing from the tumours was read.
+- **R3 not reproduced.** The rule nearest Ebata's 133,377 is minfi "all" at 173,314, 30 % off; the criterion is 20 %.
+- **C1a failed for every scaling.** The floor is median |d'| 0.101 and median |delta beta| 0.012. S* = S-con, so
+  every C2 number is conditional on additive hybridisation.
+- **C1b failed** for F1-i, F1-lin and F1-curve (MAE 0.15-0.22). F2 was **not evaluable** in batch 1 of GSE310817, so
+  under PREREG 5.1 it fails C1b. In batch 1 the red Extension controls read 145-230 against 10,000-15,000 green, and
+  RGdistort is 6-7.5. The batch-1 human array reads the human-green switch probes at r_p about 0.3, so the QC leaves no
+  probes. Batch 2 behaves: pure human 0.93, pure mouse 0.005.
+- **Consequence under PREREG 8.1:** no fraction candidate is eligible. SELECT should report the fraction as unresolved,
+  and no tumour fraction will adjust anything downstream.
+- **C0** passes only F2-50-lin, F2-50-curve and F2-45-lin (worst |error| 0.017-0.038).
+- **C2 fraction** mean MAE runs from 0.088 (F1-i) to 0.40 (F1-Y); none is at or below 0.05.
+- **Also seen:**
+  - GSM5319816, a rat standard, has a failed red Extension control (568);
+  - F4 precondition passes (C2B chrY 8.0x female blood);
+  - F5's reimplementation matches InfiniumPurify exactly (939 iDMCs on EPIC, 66 rat-functional);
+  - R1 reproduced;
+  - E1-any 485,739 and E1-all 114,787 probes, as PREREG predicted for detection over ten arrays.
+- **Not decided here:** whether to run C1b on batch 2 only. That would be a deviation after seeing results, so it
+  goes in PREREG section 11 as a dated deviation, and only if Greg asks for it.
+
+## 2026-09-27 01:30 EDT (grid clock): SCIENCE, RNA side: every pre-registered RNA analysis coded and submitted; the core has finished; S1, T2 and the Aim 3 reproduction are queued or running
+
+PREREG `scratchpad/science/PREREG.md`, sha256 `1b823ad50b2eb6299a56cb4b13ef2e99d7dfc46a62ed2bc2508b486ca2383d08`. The grid copy
+`u251_science/PREREG.md` is read-only, and every job checks the hash before it prints a number. Code is in
+`ANALYSIS/science/` (not committed), with a README per analysis. The grid copy is `u251_science/code/` with
+`CODE_SHA256.txt`. Outputs go to `u251_science/rna/`, except Aim 3, which goes to `u251_science/pub/` as PREREG section 3
+says. RNA-side deviations P1-P17 are appended, never overwritten, to `u251_science/DEVIATIONS.md` and
+`scratchpad/science/DEVIATIONS.md`. Job ids are in `u251_science/JOBS_RNA.txt`. `rna/RUN_RECORD_RNA.json` lists the job
+states and which outputs exist. G = `/rs/rs_grp_oschome/go2432`.
+
+**Finished; each log was read after its job completed:**
+
+- **40481434 `sci_rna_core`**
+  - **H-A1 (the primary endpoint) FAILS.** C-share is 0.466, and the threshold was > 0.50. Mixture is not the main
+    source of the species-blind recurrent-versus-primary fold change.
+  - Of the ten splits, the true split has the highest C-share. Spearman of C-share with |difference in f_RNA| = 0.85.
+  - Sensitivities, all on the same side of 0.50: S2 0.449, S6 0.453, S3 (without IL66B) 0.369. The fraction-matched
+    pair gives 0.031.
+  - The covariance residual is flagged: 39 % of genes exceed 10 % of |LFC|.
+  - H-M1 (RNA) ranks 2 of 20. This is a replication.
+  - T1: the DiG contrast ranks 1 of 20, both fraction-adjusted (p = 0.05) and unadjusted. The PREREG expected it to fail.
+  - H-E0 gate **FAILED**: IL64B (0.0024) is not below N269B (0.0019), so **H-E1 is abandoned**. The p-value the job
+    printed is not a result.
+- **40481453 (array) + 40481454: species-blind DE**
+  - The true split has 133 DE genes; the ten splits range from 0 to 303.
+  - **H-A2 fails**: 12.8 % of the true split's DE genes are composition-dominant.
+  - H-A3 passes. It is descriptive.
+  - C4: cell motility and inflammatory response are Holm-significant among the species-blind DE genes, and none of the
+    three categories is in the human stream.
+  - The composition-only view is empty by construction: phi_f cannot exceed about 0.62 here, and the view needs >= 1.
+- **40481466 `sci_rna_r`**
+  - C6: corr(f, arm) is -0.70 and the variance inflation 1.98. The arm term calls 30 DE genes (133 without f) and
+    recovers 2 of 48 human-stream DE genes.
+  - C5 (H-A5): D ranks 5 of 20 for Neftel MES and 9 of 20 for Wang MES, so the result is "not shown". But the
+    human-only MES drop is below all 1,000 dilution-null draws for Neftel MES, and below 99.3 % of them for Wang MES.
+    The rat-only MES score tracks myeloid cells (Spearman 0.66 and 0.60).
+  - L2 ESTIMATE fails: Spearman 0.12 over the ten libraries.
+  - T1 robustness: GSVA and the singscore package both rank DiG 1 of 20.
+  - The S4 step failed here and was rerun as `sci_s4` (P17).
+- **40481616 `sci_s4`**: S4 (HCOP orthologs) C-share 0.471, the same side as the main run.
+- **40481582 `sci_host` (M4)**
+  - Check (i) passes for BRETIGEA, NeuroExpresso MGP and CIBERSORT.
+  - Check (ii): all six cell types are interpretable.
+  - Check (iii): LM22 is rejected (T-cell share over 5 %).
+  - H-M2a ranks 7 of 20 and H-M2b 9 of 20 (Holm 0.7 each).
+  - The Liddelow/Zamanian, Keren-Shaul DAM and Dorrier fibrotic-scar lists were dropped: none is retrievable verbatim.
+- **J0 jobs:** 40481377, 40481465, 40481439 and 40481379 are done. All references, the lab files, the JNS supplement, the
+  published Neftel modules, the R library and the Bioconductor 3.14 and 3.13 libraries are in place.
+
+**Queued or running (ETAs are grid clock, 27 Sep):**
+
+| job | what | ETA | read |
+|---|---|---|---|
+| 40481475 `sci_s1_rnaseq` | S1: nf-core/rnaseq 3.22.2 on graft-only reads, then C2 | 04:00-06:00 | `rna/composition/composition_S1.json` |
+| 40481604 `sci_ai` | T2 (allelic imbalance) | ~30 min after it starts; ~02:30 | `rna/allelic/t2.json` |
+| 40481514 `pub_index` | Aim 3: rebuild the lab's second-pass STAR 2.7.1a index | ~03:00 | `logs/pub_index_40481514.out` (identity check), `pub/INDEX_DONE` |
+| 40481515[0-6] `pub_align` | Aim 3: the lab's STAR command, route (ii) | ~06:00 | `pub/bam/*.ALIGN_DONE` |
+| 40481516 `pub_count` | Aim 3: species split, featureCounts, D0-s, D0-c | ~08:00 | `pub/d0s_strand.tsv`, `pub/d0c_counts.tsv` |
+| 40481517 `pub_noiseq` | Aim 3: D0-d gate, D2 (H-B1), D3 (H-B2), D4; Bioc 3.13 check | ~11:00 | `pub/noiseq/pub_noiseq.json`, `pub/noiseq_bioc313/` |
+
+**When the jobs finish:**
+
+1. S1: read the C-share in `composition_S1.json`. H-A1 has to be judged in sign under S1 and S4 together.
+2. Aim 3: first check the index identity in the `pub_index` log. Then read `pub/d0s_strand.tsv` **first**. The D0-s
+   outcome and the IL64B grouping go to Greg and to the lab (T. Nagaraja, N. Morosini) before any sentence about the
+   published analysis is drafted. After that, read D0-c, then D0-d; on FAIL, only the discrepancy is reported.
+3. T2: gate G2a stays pending until XVAL Test 1 writes `xval/rna/genotype_concordance_per_library.tsv`. XVAL's
+   `xval_geno` 40481240 was cancelled. When the file exists, rerun only the `stats` stage; the command is the last call
+   in `j8_allelic/sci_ai.sbatch`.
+4. When SPREAD's E1 floor lands, rerun S2 and T1 on the E1-corrected export. This is not coded yet.
+5. Rerun `code/common/run_record.py --sci G/u251_science`.
+
+X1, the optional exploratory analysis, was not run.
+
 ## 2026-09-27 01:02 EDT (grid clock): human:rat titration curve DONE. In-silico mixing FAILED its test; order and N2 human DNA hold
 
 Greg's question: mix pure rat and pure U251N in silico, draw a curve, and see where our eight arrays lie. **Nothing is
@@ -284,6 +720,14 @@ backs the last three):
 
 ## STATE 2026-09-26 23:45 EDT — SAVED ON GREG'S ORDER ("Save the resume file asap!"). Read this block, then the ones below it (newest first). All workflows run inside Claude session f1bdbd78 (Fable driving); a new session reads their journals (`C:\Users\grego\.claude\projects\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\subagents\workflows\<run>\journal.jsonl`), the scratch files under `...\f1bdbd78-...\scratchpad\`, and `sacct`. Nothing committed by any workflow; MBR/ stays untracked.
 
+## 2026-09-27 05:20 EDT: WEEKLY LIMIT HIT (resets Sep 30 22:00 ET); Fable driving solo; Greg's priority order: LITT first, then the real-time video inference demo, then the corpus screen
+
+- **Subagent workflows are unavailable until Sep 30 22:00** ("weekly limit"); work continues on the main thread only. Also: an Opus 5.5 safety classifier withheld one reply (about the cross-validation results) and flagged two science-workflow verification agents; nothing to redo, just do not re-emit that reply.
+- **Workflow end states (all U251 runs are now finished or dead):** SPREAD v2 DONE; XVAL DONE (`MBR/nature_draft/XVAL_RESULTS.md`; hostile-verified); CURVE DONE; TIMING DONE; BENCH DONE as a workflow (pipeline_v2: 40481316 DONE 00:58, 40481317 DONE 02:50, **40481327 still held/pending**; results dir has c0/c1/c2e/c2f/e1-e5/classes but no REPORT.md yet); multi-omics: 15/16 agents (final verify failed at the limit) with **nine builds submitted**; SCIENCE: research, inventory, three proposals, PREREG and both analysis submissions DONE, **manuscript/referee/revision NOT written** (Fable writes it); POWER: TARGETS.md (sha256 88b5ac10...) and pilot.json DONE, **curves/figure/SCALED_EXPERIMENT.md NOT done** (u251_pwr_asm job pending on the grid); nf-core/methylarray **DONE 00:41 (40480724)**.
+- **nf-core/methylarray result (PR #41 + patch 0ef3365e...):** six tumours kept (unmasked pOOBAH fail 1.4-4.4 %); 719,866 probes after QC, 702,636 annotated; **true split: 46 DMPs at FDR < 0.05, 43 significant CpGs, 9 DMRs; relabelling rank 1 of 10 (p = 0.10, the floor of a 10-split null); lambda_GC 1.88 for the true split vs 0.66-1.49 for the others** (inflation = tumour fraction, which this arm does not model). The bespoke arm with fraction as covariate gives 0. Read Q5 as "arm confounded with fraction"; the nf-core arm confirms the bespoke arm's headline once fraction is ignored.
+- **Grid jobs running at 05:17 (from the finished workflows):** E1 floor: 40481264/40481265 arrays DONE, 40481266 DONE 03:13, **40481267 floor_quant RUNNING (2 h), 40481268 floor_final PENDING** -> `/rs/rs_grp_oschome/go2432/u251_science/spread/floor/REPORT.md`; multi-omics: `u251_rnaseq_graft` 40480725 RUNNING 4.3 h + check 40480726; `u251_rnavar` RUNNING (seq2HLA, STAR index) + `u251_rnavar_integ`; `u251_rnasplice` RUNNING (DEXSeq) + check + null launch; `u251_de_null_B`, `u251_invasion_niche`, `u251_irp_graft` PENDING; rnafusion has NEXTFLOW_EXIT_PASS1/PASS2 files (check them); **stage_refs 40481320 FAILED at 05:10 on the rnafusion reference (122 GB bundle) and REDIportal unavailable**: rnafusion's reference is not staged; SCIENCE jobs `sci_ai` RUNNING, `sci_dilution`, `sci_dna_integrate`, `sci_fdna`, `sci_nfcofactor` PENDING, `pub_count` RUNNING, `pub_noiseq` PENDING (outputs `/rs/rs_grp_oschome/go2432/u251_science/{rna,dna}/`); POWER `u251_pwr_asm` PENDING; BENCH `u251_v2` 40481327 PENDING.
+- **Fable's plan (main thread):** (1) write `MBR/nature_draft/manuscript.md` from the verified pieces (SPREAD_RESULTS, XVAL_RESULTS, CURVE RESULT, science PREREG/proposals, TARGETS) with \PENDING slots for the running jobs; (2) compute the rats-needed curves from TARGETS + pilot.json and write SCALED_EXPERIMENT.md + the closing section; (3) collect E1/multi-omics/BENCH/SCIENCE results as they land.
+
 **SPREAD v2 DONE (wjy1l2zie / wf_e44b06bf-0e6, 2026-09-27 ~01:05): Greg's hypothesis tested against pre-registered nulls (PREREG_spread.md sha256 96131616...; frozen base 454a24f3...). Write-ups `MBR/nature_draft/SPREAD_RESULTS.md`, `SECTION_spread.md` (hostile-verified; nine disclosure issues fixed in place).**
 - **H-c artefact:** rejected in substance (chrY 112 vs 2.9 per million in the floor library; genotype 56/59 vs null 37 %; chrY DNA dosage 0.879; CNV r 0.721, z 8.4), FORMALLY open until the external floor E1 lands: jobs 40481264-40481268 (GSE53960 F344 brain + PRJNA627944 SD control brain through the study's own xengsort image and index; final report ~03:00-03:30 at `/rs/rs_grp_oschome/go2432/u251_science/spread/floor/REPORT.md`).
 - **H1-A (contralateral U251 distinct from its core): met on its letter only.** Whole-profile distance 0.153 vs carry-over-null 99.5th pct 0.028; CIBERSORT state TVD 0.102 vs null max 0.069. Allowed wording: "not the core diluted", nothing more: the only directional statistic (Ivy GAP leading edge minus cellular tumour) sits inside its band (p 0.56) and its leading-edge part moved the wrong way; another animal's tumour (IL68B) differs from IL69B by the same TVD (0.103); deconvolution fits r 0.13-0.30 and fails its negative controls; the null carries an anti-conservative asymmetry (the two floor estimates disagree 1.7-fold, ~23 % unsubtracted floor counts), and (ii) was extended to 1,000 draws after the 200-draw result was seen (both disclosed).
@@ -345,9 +789,19 @@ Greg-side: send the GEO update (`GEO/seq_template_u251_FILLED.xlsx`, edited 22:5
       rank 8/10, 0 genes selected, so there is no coordinated change.
     - *Test 4:* the RP block has no DNA support, and its unadjusted promoter hypomethylation vanishes with fraction
       modelled. The fraction-adjusted up-list is "DNA-supported" by the letter (CNV +0.013 log2, p 0.043, three genes).
-    - **Test 1 running:** the pile-up was chunked (40481325, array 1-40; the single-process 40480755 was cancelled as too
-      slow), and `xval_geno` 40481326 (afterany) merges the chunks and runs `03_genotype.R`.
-    - Numbers are in scratch `xval/RESULTS_xval.md`; copy in `MBR/nature_draft/XVAL_RESULTS.md` when test 1 lands.
+    - *Test 1, primary (duplicates excluded), DONE* from the primary-only run 40481651, outputs in `xval/rna/nodup_only/`:
+      - **Set A is not testable:** the 59 rs probes have at most 2 RNA reads.
+      - Set B: 543 pairs, 2.95 % contradictions (B + B* 1.39 %). All 16 come from five reproducible germline sites
+        (FKBP9, PGM1, EP400, ELL2, RBM12B).
+      - RNA-vs-RNA agreement 99.86 %.
+      - The pre-registered e_s is 1.5-2.7 %, above the 1 % bar, and is driven by those five sites; the descriptive rate
+        with them set aside is 0.25-0.40 %. The kmin table is written.
+    - **Pending:** duplicates-kept chunk 30 of 40481325 (3-h limit, by about 03:45 EDT), then `xval_geno` 40481326
+      (afterany) reruns everything into `xval/rna/` with the sensitivity; 40481699 re-draws the primary-only figure.
+      - If chunk 30 times out, the duplicates-kept sensitivity is missing that chunk and 40481326 STOPs. The primary
+        numbers stand either way.
+    - Write-up: `MBR/nature_draft/XVAL_RESULTS.md` (= scratch `xval/RESULTS_xval.md`, grid `xval/results/RESULTS_xval.md`).
+    - Deviations 14-30 are in scratch `xval/DEVIATIONS.md`, and the grid copy is `xval/DEVIATIONS_xval.md`.
 
 ## 2026-09-26 22:20 EDT (grid clock): bespoke methylation run DONE (40480027); contralateral-spread evidence in hand; SPREAD workflow launched
 
