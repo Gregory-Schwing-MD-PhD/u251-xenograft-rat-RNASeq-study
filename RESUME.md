@@ -4,6 +4,52 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-27 08:25 EDT: the two assays are joined sample by sample; the methylation deposit is staged
+
+**Greg's directive (2026-09-27): do NOT rename anything. "Just make sure GEO and people know which samples
+correspond to multiomics data of the same sample since there's different names."** A rename scoped through the
+pipeline was started and abandoned on his instruction; nothing was renamed. What the abandoned pass established, and
+is worth not rediscovering:
+
+- `N1` and `N2` in `ANALYSIS/power/` and `ANALYSIS/spread/design/` are **null-hypothesis labels**, not samples
+  ("Null N1 : contralateral barcode counts ~ Multinomial(D, p_core)"). A token sweep of `N2` would have corrupted
+  them. `ANALYSIS/power/pilot/` uses `N2` in the sample sense, so it does not even split by directory.
+- `PREREG*.md` and `TARGETS.md` must never be edited: their SHA-256 is recorded inside the result files
+  (`prereg_sha256`) and quoted in the manuscript. The result JSONs carry `_sha256` stamps, so their keys cannot be
+  hand-edited either - they can only be regenerated.
+- `IL` is the **laboratory's own** animal prefix (its RNA key says IL-70/IL-71; "IL" is its MRI prefix). `NL` appears
+  only in the sequencing core's FASTQ file names, and from there in GEO and SRA. The public record carries the odd
+  label and is the one that cannot be changed.
+
+**Two things verified against the outside record, both of which decided the design.**
+
+1. Of the ten GEO Series carrying both a methylation-array and a sequencing assay type, **ten of ten are
+   SuperSeries**. So a SuperSeries is the route; arrays cannot be added to GSE338105.
+2. In GSE335256, the sequencing SubSeries carries one `!Sample_relation = BioSample` per sample and the array
+   SubSeries carries **none**. GEO mints no BioSample for an array sample, so **there is no accession the two arms
+   share** and NCBI will not link them for anyone. The link exists only in metadata the submitter writes.
+
+**What was built (commit `61f07f5`, pushed to origin/research-letter-expansion).** The correspondence is stated four
+times and inferred nowhere: in each array sample's title (`U251N recurrent DNA methylation [IL70B = RNA library
+NL70B]`), in five characteristics fields per sample (matched RNA library, GEO sample, SRA experiment, BioSample,
+array label), in the Series summary, and in `GEO/multiomics_sample_key.tsv`, deposited as a supplementary file.
+`GEO/make_sample_key.py` generates the key and cross-checks the array core's sheet against the accession map in both
+directions, refusing to write it if they disagree on any pairing, rat number or chip position. The three two-name
+pieces: **NL70B = IL70B, NL71B = IL71B, N269B = N2**. IL64B and N168B have no array.
+
+**Grid: job 40483632 (`u251_geo_meth`), submitted 08:24, ETA ~15-25 min** (unzip 16 IDATs, pull the pinned minfi
+container, noob betas + detection P values for 8 EPIC arrays, checksums). Log:
+`~/u251-xenograft-murine-RNASeq-study/GEO/methylation/u251_geo_meth_40483632.out`. Its predecessor **40483631 failed
+at exit 127** because `singularity` is on the login node's PATH and not a compute node's; the job now resolves
+`singularity` or `apptainer`, loading the module if needed, and refuses in step 0 instead of after staging.
+
+**Greg's to do, outward-facing.** `GEO/methylation/COVER_NOTE.md` is a ready-to-send draft to geo@ncbi.nlm.nih.gov
+bundling the SuperSeries request with four corrections the audit found in the already-public record: no pointer from
+GSE338105 to the methylation data, an SRA study descriptor that still says the data are private until July 2027,
+IL64B described as a "failed graft" that the laboratory's key does not support (and the three controls carrying one
+identical string), and `salmon.merged.gene_lengths.tsv` missing from the deposit so the DE step cannot be run from it.
+Item 4 should be cleared with the laboratory first; the others are facts about the record.
+
 ## 2026-09-27 07:45 EDT: MANUSCRIPT DRAFT 1 AND DECK v5 ARE WRITTEN. Greg's directive: the instrument finding is the headline
 
 **Two deliverables exist on disk now.**
