@@ -36,8 +36,11 @@ MAP = REPO / "PIPELINE" / "00_fetch_reads" / "library_map.csv"
 OUT = HERE / "metadata_methylation.xlsx"
 
 PLATFORM = "Illumina Infinium MethylationEPIC BeadChip (EPIC v1.0)"
-GPL = "GPL21145"          # Infinium MethylationEPIC v1.0 B5; confirm the exact B-version at submission
-CHIP_SCANNED = "2026-04-07"
+GPL = "GPL21145"          # Infinium MethylationEPIC v1.0; the core annotated with ilm10b4 (manifest B4)
+# 2022, not 2026. The RunInfo block of every IDAT records Scan on 4/7/2022 09:24-09:26 and Decode on 07/11/2021, and
+# ANALYSIS/SAMPLE_KEY.md says the same. An earlier version of this file had 2026 and it reached the workbook.
+CHIP_SCANNED = "2022-04-07"
+CHIP_DECODED = "2021-07-11"
 
 
 def rna_study_fields() -> dict:
@@ -124,6 +127,9 @@ def main() -> int:
            "characteristics: matched RNA library", "characteristics: matched RNA GEO sample",
            "characteristics: matched RNA SRA experiment", "characteristics: matched RNA BioSample",
            "characteristics: matched RNA series", "characteristics: array label on the core sheet",
+           "characteristics: plate well", "characteristics: dna volume ul",
+           "characteristics: qc ct HB-313", "characteristics: qc ct HB-365",
+           "characteristics: detected probes at P<0.05", "characteristics: detected probes percent",
            "*molecule", "*description", "*platform", "raw file: Grn", "raw file: Red", "processed data file"]
     put(*hdr, head=True)
     treat = {"Primary": "none (U251N implanted, not ablated)",
@@ -154,6 +160,7 @@ def main() -> int:
             src, organism, r["rat"], r["arm"], r["tissue"], "U251N", treat.get(r["arm"], ""),
             r["sentrix_id"], pos, rl, m.get("geo_sample", "PENDING"),
             m.get("experiment_accession", "PENDING"), m.get("sample_accession", "PENDING"), "GSE338105", s,
+            r["well"], r["dna_volume_ul"], r["ct_hb313"], r["ct_hb365"], r["detected_probes"], r["detected_pct"],
             "genomic DNA",
             f"{same}. Matched RNA-seq library {rl} in GSE338105 ({m.get('geo_sample','PENDING')}, "
             f"{m.get('experiment_accession','PENDING')}, BioSample {m.get('sample_accession','PENDING')}).{alias} "
@@ -167,20 +174,36 @@ def main() -> int:
         if rna.get(k):
             put(label, rna[k])
     put("*extract protocol",
-        "Genomic DNA was extracted from the same frozen pieces used for RNA (different aliquots). "
-        "\\PENDING{extraction kit and operator from the laboratory record}")
-    put("*label protocol", "Bisulfite conversion and Infinium chemistry as performed by the core facility. "
-                           "\\PENDING{kit, input mass and conversion protocol from the core}")
-    put("*hybridization protocol", "Illumina Infinium MethylationEPIC BeadChip, standard protocol. "
-                                   "\\PENDING{core facility and instrument}")
-    put("*scan protocol", f"Illumina iScan. Chip 205648300021 scanned {CHIP_SCANNED}.")
+        "Genomic DNA was extracted by the laboratory from the same frozen pieces of tissue used for RNA, as separate "
+        "aliquots. 45 uL of DNA per sample was submitted to the array core with no added water (plate 1724, one "
+        "column of eight wells, A01 to H01). "
+        "\\PENDING{the DNA extraction kit, and the DNA mass corresponding to that 45 uL, from the laboratory record}")
+    put("*label protocol",
+        "Bisulfite conversion and Infinium chemistry were performed by the array core on plate 1724 (\"Raj-8\"). The "
+        "core checked each sample's DNA by qPCR before conversion; the per-sample Ct values for assays HB-313 and "
+        "HB-365 are given in the sample characteristics. "
+        "\\PENDING{the bisulfite conversion kit and the DNA input mass, from the core}")
+    put("*hybridization protocol",
+        "Illumina Infinium MethylationEPIC BeadChip v1.0, 8x5 format (SentrixDescriptor \"BeadChip 8x5\"); one chip, "
+        "205648300021, carrying the eight samples in column 1. Standard Infinium protocol. "
+        "\\PENDING{the name of the array core facility}")
+    put("*scan protocol",
+        f"Illumina iScan, scanner N141, iScan Control Software 3.4.8 (FPGA 4.0.20). Chip 205648300021 was decoded on "
+        f"{CHIP_DECODED} and scanned on {CHIP_SCANNED} between 09:24 and 09:26; the instrument software extracted "
+        "intensities with Extract Algorithm StandardWithBackground. Every value in this sentence is read from the "
+        "RunInfo block of the deposited IDAT files themselves.")
     put("*data processing",
-        "IDATs were read with minfi; normalisation by noob; probes were filtered with the study's rat "
-        "cross-hybridisation exclusion list before any human-compartment statistic. Copy number by conumee and "
-        "DNAcopy against CopyNeutralIMA normals, with SeSAMe as an independent implementation; MGMT status by "
-        "MGMT-STP27. The processed matrix supplied here is the noob beta matrix over all probes passing detection, "
-        "with the matching detection P-value matrix.")
-    put("*genome build/assembly", "hg19 (EPIC v1.0 manifest); copy-number segments lifted to hg38 where stated")
+        "The deposited matrices were built from the deposited IDATs with minfi 1.56.0 and "
+        "IlluminaHumanMethylationEPICmanifest: detection P values by detectionP, normalisation by preprocessNoob, "
+        "beta values by getBeta, over all 866,238 probes on the array. Column names are the array sample names. "
+        "Per array, 864,815 to 865,311 probes pass detection at P < 0.05 (99.879 to 99.937 %), as reported by the "
+        "core and given per sample in the characteristics. In the study's own analyses, probes were then filtered "
+        "with a rat cross-hybridisation exclusion list before any human-compartment statistic; copy number by "
+        "conumee and DNAcopy against CopyNeutralIMA normals, with SeSAMe as an independent implementation; MGMT "
+        "status by MGMT-STP27. sessionInfo_processed.txt records the exact versions used for the deposited matrices.")
+    put("*genome build/assembly",
+        "hg19. The array core's own analysis used the EPIC v1.0 B4 manifest "
+        "(IlluminaHumanMethylationEPICanno.ilm10b4.hg19); copy-number segments are lifted to hg38 where stated.")
     put("*processed data files format and content",
         "U251N_EPIC_beta_noob.tsv.gz: probes (rows) by the eight arrays (columns), noob-normalised beta values. "
         "U251N_EPIC_detection_pvalues.tsv.gz: the same shape, detection P values.")
@@ -188,8 +211,12 @@ def main() -> int:
     put("# The two file columns per sample are both required: GEO expects the Grn and Red IDAT of every array.")
     wb.save(OUT)
     print(f"wrote {OUT} ({len(rows)} samples)")
-    print("PENDING fields to fill from the laboratory and core records: extraction kit, bisulfite kit and input, "
-          "hybridisation facility, and the exact EPIC manifest B-version behind the platform accession.")
+    print("Three fields still need a human:")
+    print("  1. the DNA extraction kit, and the DNA mass behind the 45 uL   -- the laboratory")
+    print("  2. the bisulfite conversion kit and the DNA input mass         -- the array core")
+    print("  3. the name of the array core facility                         -- either")
+    print("Everything else is filled. The scan protocol and the manifest version were read out of the data itself,")
+    print("not asked for: the IDAT RunInfo block and the core's own dnamet.R.")
     return 0
 
 

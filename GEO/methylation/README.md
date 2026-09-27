@@ -76,9 +76,41 @@ reproducible from the deposited raw files, and writes md5 checksums for everythi
 | Sample-to-array mapping | **exists** (`array_samplesheet.csv`; the laboratory's own sheet is `1724 (Raj-8).xlsx` inside the archive) |
 | Processed matrix (noob betas) + detection P values | **made by the job** from the IDATs with pinned minfi |
 | Metadata workbook (STUDY / SAMPLES / PROTOCOLS) | **made by `make_metadata.py`**, reusing the accepted RNA wording, contributors and contact |
-| Extraction, bisulfite, hybridisation protocol detail | **PENDING** — from the laboratory and the core facility |
-| Exact EPIC manifest B-version behind GPL21145 | **PENDING** — confirm at submission |
+| Scan protocol | **filled from the data**, not asked for: the IDAT RunInfo block gives scanner N141, iScan Control Software 3.4.8, FPGA 4.0.20, `Extract Algorithm=StandardWithBackground`, decoded 2021-07-11, scanned 2022-04-07 09:24–09:26 |
+| EPIC manifest version | **filled from the data**: the core's own `dnamet.R` loads `IlluminaHumanMethylationEPICanno.ilm10b4.hg19`, so EPIC v1.0 **manifest B4, hg19** |
+| Per-sample QC | **filled from the core's sheet**: 45 µL DNA per sample, qPCR Ct for HB-313 and HB-365, and 864,815–865,311 probes passing detection at *P* < 0.05 (99.879–99.937 %) |
+| Extraction kit, bisulfite kit, core facility name | **PENDING** — the only three fields left; see the email below |
 | Upload and the SuperSeries request | **Greg** — GEO submissions are the submitter's to make |
+
+## The three fields that need a human, and the email that gets them
+
+Everything else in `metadata_methylation.xlsx` is filled. These three cannot be recovered from the files: the archive
+contains the IDATs, the core's minfi `qcReport` (plots only — no kit or facility text), the sample-array mapping sheet,
+the Illumina `.sdf` descriptor, the core's `dnamet.R`, and the processed CSVs. None of them names a kit or the facility.
+
+> Subject: two protocol details for the U251 methylation arrays (plate 1724, "Raj-8")
+>
+> Hello,
+>
+> I am depositing the eight Infinium MethylationEPIC arrays from plate 1724 ("Raj-8", chip 205648300021, run April
+> 2022) in GEO, and the submission needs three protocol details I cannot recover from the files you sent.
+>
+> 1. **The DNA extraction kit** used on the eight tissue pieces, and the **DNA mass** corresponding to the 45 µL per
+>    sample recorded on the mapping sheet (a concentration is equally good).
+> 2. **The bisulfite conversion kit** and the **DNA input mass** taken into conversion.
+> 3. **The name of the core facility** that performed the conversion, hybridisation and scanning, as it should be
+>    credited in the public record.
+>
+> For context, so you only have to answer what is missing: I already have the chip and plate identifiers, the well
+> positions, the 45 µL volumes, the HB-313 and HB-365 qPCR Ct values, the per-sample detection pass rates, the iScan
+> instrument and software versions and the scan date from the IDAT headers, and the EPIC B4 / hg19 annotation from
+> `dnamet.R`.
+>
+> One more, if you happen to know: what the **HB-313 and HB-365 assays** are, so I can describe the pre-conversion
+> DNA quality check correctly rather than just quoting Ct values.
+>
+> Thank you,
+> Greg
 
 ## What is deliberately not submitted
 
