@@ -4,6 +4,190 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-27 01:02 EDT (grid clock): human:rat titration curve DONE. In-silico mixing FAILED its test; order and N2 human DNA hold
+
+Greg's question: mix pure rat and pure U251N in silico, draw a curve, and see where our eight arrays lie. **Nothing is
+pending.**
+- Full job **40481271** COMPLETED 00:26-00:33 (mdt78); test 40481270 COMPLETED.
+- Verification jobs 40481412 (reimplementation) and 40481467 (Grn/Red check) COMPLETED.
+
+Write-up: `C:\Users\grego\AppData\Local\Temp\claude\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\scratchpad\titration_curve\RESULT.md`
+(the four figures sit beside it).
+
+- **Step 1 FAIL.** In-silico mixing does not reproduce real human:mouse DNA mixtures (GSE310817): MAE 0.242, max
+  0.531, against a bar of 0.05 and 0.10. Every mixture reads high: signal is concave in DNA fraction.
+- **Amendment 1 FAIL.** The corrected reading misses its held-out bar: MAE 0.057, max 0.283. It matches the
+  independent EPIC v2 set within 0.041.
+- **Corrected human DNA fraction (not validated at the pre-set bar).** The uncorrected in-silico reads are 0.24-0.41
+  higher; do not use them.
+
+  | Array | Corrected | RNA human % |
+  |---|---|---|
+  | IL69B | 0.62 | 64 |
+  | IL68B | 0.60 | 45 |
+  | IL67B | 0.51 | 43 |
+  | IL70B | 0.37 | 43 |
+  | IL66B | 0.34 | 29 |
+  | IL71B | 0.22 | 33 |
+  | N2 | 0.05 | 4.9 |
+  | C2B | 1.00 | 86 |
+
+- **What holds:**
+  - Order: Spearman 0.93 over the seven in vivo arrays.
+  - Primaries lie above recurrents.
+  - **N2 contains human DNA**: S is 2.3 log2 above every pure rat array. Arrays are not index-multiplexed, so this
+    is separate from the RNA index-hopping question. Infiltration cannot be told apart from carry-over.
+- **Input defect: GSE310817 batch 1's Red IDATs are byte copies of its Grn IDATs** (13/13 pairs; batch 2 is fine).
+  - With green only (a sensitivity check, not pre-registered), both verdicts still FAIL, the order is unchanged, and
+    the corrected values drop by at most 0.06.
+  - **pipeline_v2 also stages GSE310817**, so tell that benchmark.
+- **Open, for Greg:**
+  - Whether to add an Amendment 2 for batch 1 (suggested: keep the pre-registered run and disclose the green-only
+    check).
+  - `ANALYSIS/methylation_curve/` is untracked but not git-ignored.
+  - Cosmetic label fixes in figures b and c.
+- **Paths:**
+  - Grid results: `/rs/rs_grp_oschome/go2432/u251_meth/curve/results/`; verification in `curve/verify/`.
+  - Pre-registrations: `curve/PREREG_curve.md` (sha `00d0f72b...`) and `PREREG_curve.v1.md`.
+  - Code: `ANALYSIS/methylation_curve/` (not committed).
+
+## 2026-09-27 01:00 EDT (grid clock): SPREAD write-ups DONE — H1-A met on its letter only, H1-B refuted, clone level empty, E1 still the open gate
+
+Greg's contralateral-spread question is written up. Two documents, both untracked, in
+`MBR/nature_draft/`: **`SPREAD_RESULTS.md`** (the full internal note: question, H-a/H-b/H-c, H1-A/H1-B, every line
+of evidence with its number and criterion outcome, the decision under the pre-registered rule, the claims allowed
+and forbidden, the design implications, and the scaled barcode design with its power) and **`SECTION_spread.md`**
+(the manuscript-ready Results subsection, its Discussion paragraph, figure list with captions of 60 words or fewer,
+and the sentences that must not enter the manuscript). `MBR/nature_draft/manuscript.md` does not exist yet, so
+nothing was inserted and no CHANGES note was needed; `SECTION_spread.md` carries the exact insertion marker and
+says to record it in `CHANGES.md` when the SCIENCE workflow's manuscript lands.
+
+**PREREG_spread.md hashes.** Frozen base, sections 0-7: `454a24f3b3d6c438e2be6f0f498f5b11e4d90f2b7424204e9f6e40bae78be47d`
+(41,412 B). With the 23:15 section-8 entry: `96131616a574eb4040edab18e934ee1fc73c95b277cae266a2dc8d70da7f2dd9`.
+Current file, with the section-8 entry naming E1's second corpus:
+`575d713b2d8f7d17c5bded9fcb69f2932f04e9320e52bc3690941f56814a10e3`; the first 41,412 B are still the frozen base and
+the grid copy is byte-identical.
+
+**The answer, in the order the pre-registration asks for it.**
+- **H-c (species-assignment artefact): formally unrejected, because E1 has produced no number.** E2 and E3 are met:
+  chromosome Y at 112 counts per million human counts against 2.9 in the floor library (38-fold), donor genotype
+  56/59 (null 37 %, p = 0), chrY DNA dosage 0.879, CNV pattern r 0.721 at z 8.4. The internal floor is large and
+  internally inconsistent (a quarter of N269B's human counts by phi-scaling, two-fifths by the Y mixture).
+- **H1-A: met on its letter, weak by weight.** (i) whole-profile d 0.153 against a 99.5th percentile of 0.028;
+  (ii) state-composition TVD 0.102 against a 1,000-draw maximum of 0.069. Permitted wording: "not the core
+  diluted". **NOT permitted: "shifts toward an infiltrating programme"** — (iii), the only statistic with a
+  pre-named direction, sits inside its band (p 0.56) and its leading-edge component moved the opposite way.
+- **H1-B: not supported**, in the direction the literature predicted. Delta -0.028 (nearer the primaries); the true
+  labelling ranks 15th of 20 on both statistics, p 0.75.
+- **C1 and C2: both negative.** No contralateral-only arm event (the core carries all four pre-named arms at three
+  to six times the measured bound U99 = 0.0254); labelling p 0.35. C2 as pre-registered gave Fisher p = 9.4e-10 in
+  Greg's direction, and that was the rat-read floor: sharing tracks each tumour's human share at Spearman -1.00 and
+  removing floor-origin variants leaves 0.830 vs 0.828, p = 0.93.
+- **H-a vs H-b: not separated by anything in this study, as the pre-registration said in advance.** Nothing about
+  LITT (both contralaterals are untreated animals). One animal = a case observation; one of two positive gives an
+  exact interval of 1.3-98.7 %, so no rate exists.
+
+**New since the 00:36 blocks.** Report **40481262 COMPLETED 00:57**: the third registered matrix
+(bayesprism_gbm_ct6, 40480792_12) is in `rna/report/criteria.json` and the figures were rewritten. It fails its
+negative control too — a pure human culture fits as 0.288 tumour with 0.263 pericyte and 0.154 myeloid, i.e. 71 % to
+cell types a human-only stream from a rat host cannot contain, at the best fit of the three (r 0.63). Gates nothing;
+lowers confidence in all three deconvolutions. **CURVE has landed** (`u251_meth/curve/results/`, written 00:33):
+N2 in-silico 0.318 (0.256-0.344), mouse-calibrated **0.049** (0.039-0.060), bespoke two-mode 0.198 unchanged —
+but **both carry `validated: FALSE`** against that workflow's own criteria (step 1 max |error| 0.531 vs 0.10;
+Amendment 1 leave-one-batch-out MAE 0.0566 vs 0.05, max 0.283 vs 0.10). What passes there: the C2B anchor, the rat
+leave-one-out floor (max 0.032), and rank agreement with the RNA share (Spearman 0.93, p 0.007). So **the ordering
+is trustworthy and the level is not**: the calibrated reading would close the sixfold DNA-vs-RNA gap exactly and the
+in-silico reading would widen it. No cell percentage is quoted from either platform.
+
+**Jobs and ETAs (grid clock 00:59).**
+
+| job | what | state at 00:59 | ETA 27 Sep EDT |
+|---|---|---|---|
+| **40481264** | E1 public array 0-21 (16 GSE53960 + 6 PRJNA627944 controls at 2x100 and 2x150) | tasks 0-15 COMPLETED, 16-21 RUNNING (30 min) | ~01:15-01:45 |
+| **40481265** | E1 study libraries re-sorted at 50 bases single-end (matched chemistry) | tasks 0-6 COMPLETED, 7-9 RUNNING | ~01:10-01:30 |
+| **40481266** | E1 human STAR/salmon index rebuild + IL64B reproduction (nf-core/rnaseq 3.22.2) | RUNNING 33 min | ~01:45-02:30 |
+| **40481267** | E1 quantification of the public human streams (afterany 40481264:40481266) | PENDING | ~02:30-03:15 |
+| **40481268** | E1 collect, phi_g, apply the criterion | PENDING | **~03:00-03:30** |
+| 40480752 | XVAL pileup (the dosage check on N2's deeper 3p/4p/4q/12p losses) | PENDING | other workflow |
+| 40481316 → 40481317 → 40481327 (held) | pipeline_v2 methods benchmark: the other input to the absolute DNA fraction | see the 00:36 block | 40481317 ~03:00-05:30 |
+
+**Result paths.** `MBR/nature_draft/SPREAD_RESULTS.md`, `SECTION_spread.md`, `DEVIATIONS_spread_copy.md`.
+Grid: `/rs/rs_grp_oschome/go2432/u251_science/spread/` — `rna/report/` (criteria.json + figures a-c, rewritten
+00:57), `rna/iii_singscore_R/`, `cibersort/`, `dna/c1/`, `dna/c2/`, `dna/dna_evidence_N2.tsv`, `floor/` (E1, in
+flight; read `floor/REPORT.md` and `floor/tables/floor.json` when 40481268 ends). Curve:
+`u251_meth/curve/results/estimates.tsv`, `validation.json`. Code: `ANALYSIS/spread/` plus new
+`ANALYSIS/spread/design/barcode_power_sim{,2,3}.py` (seed 20260927). Session scratch `spread/`: `RESULTS_rna.md`,
+`RESULTS_dna.md`, `DEVIATIONS.md` (now with **W-D1**, this write-up's two additions), `DESIGN_IMPLICATIONS.md`,
+`CLONAL_LIT.md`, `barcode_power_sim*.json`. Nothing committed; `MBR/` stays untracked.
+
+**The scaled design, for the POWER workflow.** Barcoded U251N through LITT; compartments core, ipsilateral rim
+beyond the margin, contralateral hemisphere, recurrence, plus a pre-LITT sample of the same animal; the injectate
+sequenced per batch as the input null. Nulls N1 (contralateral barcodes = multinomial draw from the core), N2 (the
+recurrence = draw from the same animal's pre-LITT core), N3 (bottleneck, measured per compartment). **Simulated
+per-animal power (stated inputs, not estimates; no published U251N bottleneck exists): statistical power is not the
+binding constraint.** Five recovered clones at 200 reads detect a bottleneck with certainty, and a reweighting with
+no clone lost still gives 0.76-0.94. What binds is carry-over and recovery: with the contralateral pool sequenced
+to 10,000 reads the test tolerates 90-95 % carry-over (power 0.93-1.00) and collapses at 99 % (0.06-0.22), and pure
+carry-over is exactly the null (realised size 0.04-0.06 at alpha 0.05). Across animals it is a binomial: at
+per-animal power 0.95, rejecting in at least n-1 of n animals has probability 0.99 (n=4) to 0.91 (n=10); at 0.80,
+0.82 to 0.38. So the rats-needed figure is driven by N3, the recovery fraction, not by the statistics.
+
+**Next steps.** (1) When 40481268 lands, read `floor/REPORT.md`; if the criterion rejects H-c, the two write-ups
+need only their E1 rows and the H-c paragraph changed — the wording is already staged as conditional. If it does
+not reject, PREREG section 5 requires Parts 2 and 3 to be reported as uninterpretable for origin, and both
+documents must be cut back to Part 1. (2) Re-run Part 2 with the external phi_g
+(`spread_rna.py --phi-tsv floor/tables/phi_g.tsv`; the switch self-test passed as 40481252) and record whether any
+verdict moves. (3) XVAL 40480752 settles whether N2's deeper losses are a subclone or low-signal distortion. (4)
+Ask Raj for the one cheap decisive control: a cutting-order blank — a naive rat hemisphere processed with the same
+blade immediately after a tumour-bearing one — plus the adjacent sections for a human-specific stain and the
+tared-vial weights. (5) The DiG/LiG lists (Chanoch-Myers 2026) are still the single most informative addition to
+the state level. (6) `SECTION_spread.md` lists four clinical claims for which this project's verification run
+produced **no citable source** (recurrence geometry beyond the treated volume, pseudoprogression after LITT,
+hyperthermia and invasion, CSF liquid biopsy) and two that were refuted and must not be cited; those citations
+have to be found before the Discussion can carry a stronger clinical frame.
+
+## 2026-09-27 00:47 EDT (grid clock): multi-omics build VERIFIED; three items running (prep_reads, stage_refs, rnaseq_graft); plan in `ANALYSIS/MULTIOMICS_PLAN.md`
+
+Plan (what exists, what runs, triggers, rejected items, what each result can claim and its outside check):
+`ANALYSIS/MULTIOMICS_PLAN.md`. Scripts: local `ANALYSIS/multiomics/{prep_reads,stage_refs,rnaseq_graft}/` (untracked,
+not committed); grid copies and all outputs under `/rs/rs_grp_oschome/go2432/u251_multiomics/` (`M`). Nothing was
+cancelled or resubmitted: the verification found no high or medium defect in the three submitted items.
+
+| job | pipeline @ release | question | state 00:46 | ETA (EDT, 27 Sep) | read when it finishes |
+|---|---|---|---|---|---|
+| 40480709 (array 1-10) | prep_reads (custom awk/pigz) | graft-only pairs, R2 clipped 3 nt once; clipped human R2; `both` names; index pair per library | 9 of 10 COMPLETED, all checks OK; C2B at its final checks | C2B ~01:05-01:25 | `M/reads/checks/C2B.tsv` (status OK?), log `M/reads/logs/u251_prep_40480709_1.out` |
+| 40480710 | collect_prep (afterany 40480709) | 10 of 10 OK? READY; index pairs; N269B hopping verdict | PENDING | < 1 min after C2B | `M/reads/READY` (exists?), `M/reads/CHECKS.tsv`, `M/reads/INDEX_HOPPING.txt` |
+| 40481320 | stage_refs (custom, network) | GENCODE v44, known sites, VEP 115, rnafusion 4.1.3 bundle (v46), hg38ToRn7 chain, REDIportal | RUNNING (rhi2); containers, gencode, chain PASSED; known_sites started 00:46 | ~04:00-07:00 (limit 12:33; on TIMEOUT resubmit `sbatch -D M/refs M/stage_refs/run.sbatch`, done steps skip) | `M/refs/STATUS.tsv`, `M/refs/REFS_CHECKS.tsv` (any FAIL?), `M/refs/.done/`, `M/refs/.recheck_submitted` (recheck id) |
+| 40480725 | nf-core/rnaseq 3.22.2 (NXF 25.10.2), gate on READY | U251 profiles without the rat `both` bin; clip effect; IL64B/N168B graft reads; human indices saved | PENDING (afterany 40480710) | ~05:30-07:30 | `M/rnaseq_graft/NEXTFLOW_EXIT` (0? `gate_closed`?), log `M/rnaseq_graft/logs/u251_rnaseq_graft_40480725.out` |
+| 40480726 | rnaseq_graft checks (afterany 40480725) | hard checks 0-4, 9, 10; reports 5-8 | PENDING | ~06:00-08:15 | `M/rnaseq_graft/CHECKS.md`: check 5 (clip material? triggers the host rerun), check 7 (rat share vs 1.9-5.1 % / 5.1-8.0 %), check 8 (IL64B/N168B verdict; "unclassified" triggers the competitive alignment) |
+
+Found in the verification (details in the plan, Section 4):
+- **Index hopping into N269B cannot be excluded.** Index pairs from the read headers: N269B = CTGAAGCT+AGGATAGG shares
+  its i7 with IL66B and IL69B and its i5 with NL71B and C2B (C2B = TAATGCGC+AGGATAGG), all human-rich; the ten libraries
+  were indexed combinatorially (3 i7 x 4 i5). A rough ceiling from IL64B (every one of its 314 k graft reads counted as
+  hopped) is about 0.5 M of N269B's 3.82 M graft reads; it assumes similar per-molecule hopping for the two recipients,
+  which is not known. N168B's i7 is also shared with human-rich libraries (IL68B, NL71B); its i5 is unique.
+- **Two lanes, not one.** Every library's reads are split about evenly between lanes 1 and 2 of AAAMFFWHV. The
+  23:45 block's "one lane" and `ANALYSIS/SAMPLE_KEY.md`'s "lane 1" describe only the first read; neither file was
+  edited here. The GEO template should say two lanes if it names one.
+- **Raw FASTQs are on SRA**: SRR39547363-SRR39547372, spot counts public (N269B = SRR39547367 = 78,075,952 = the
+  xengsort total). The later "raw FASTQ re-download" item no longer needs the Drive token; not submitted.
+- Every param name in the submitted and planned param files exists in its release's schema (rnaseq 3.22.2 = 3816d48,
+  rnavar 1.3.0, rnafusion 4.1.3, rnasplice 1.0.4; schemas fetched from GitHub at the tag). Strandedness reverse in all
+  11 rnaseq rows; the R2 clip is applied once upstream (gate A passed in all ten) and TrimGalore does not clip again.
+- **Not built** (selected; see the plan, Section 5): human_de_null pass A and integration_rna_prep (no dependency, can
+  go now), invasion_niche and pass B (after the rnaseq_graft checks), rnavar 1.3.0, rnafusion 4.1.3, rnasplice 1.0.4.
+  The methylation integration (I1-I5) needs integration_rna_prep and human_de_null pass A, so nothing queued will
+  start it. METH_FINAL itself holds (bespoke `MT/results/summary.json` 22:10:52, REPORT COMPLETED, no `u251_meth` job);
+  whether the integration should use the bespoke result or pipeline_v2's is not settled.
+- The rnafusion launcher, when built, must rerun `python3 M/stage_refs/refs_util.py preflight --base M/refs/rnafusion
+  --ver 46` on its own head node before `nextflow run` (rnafusion 4.1.3 checks the last file its directory walk
+  returns, and CephFS listing order differs by node).
+- `beta_values.rda` (the lab's beta matrix, untracked) was not git-ignored; added to `.git/info/exclude` (local only).
+  Still untracked and not ignored, for Greg to decide: manuscript PDFs under `manuscript/`, `Submission_Package_ForRaj*`,
+  `NONC/`, `REVIEW/`, `SLIDES/*.pptx` copies. Nothing committed by this workflow; `ANALYSIS/multiomics/` and the plan are
+  untracked.
+
 ## 2026-09-27 00:36 EDT (grid clock): pipeline_v2 (rat host-DNA benchmark + downstream) SUBMITTED: 40481316 -> 40481317 -> 40481327 (held)
 
 pipeline_v2 = every published host-DNA method with rat as the host, judged by PREREG.md (sha256 `67e9e250...5832`,
@@ -44,15 +228,23 @@ from our chip. Scripts: local `ANALYSIS/methylation_v2/ref_jobs/` (not committed
 | 40481253 u251_ref_geo | GSE174568 (28), GSE310817 (37), GSE299969 (12, EPIC v2) RAW tars unpacked; Needhamsen files 1 and 4; Illumina B5 + Zhou manifests; sha256 + gzip + IDAT address-count table | ~01:30 | `ref/geo/<GSE>/`, `ref/geo/<GSE>/CHECKSUMS.tsv`, `ref/geo/GEO_FETCH_STATUS.txt` |
 | 40481254 u251_ref_sesame | names(EPIC.addressSpecies$species) + rat flag (expect TRUE, Rnor_6.0) | ~00:45 | `ref/sesame_species.txt`, `ref/sesame_species_rat_flag.txt`, `ref/sesame_species_detail.tsv` |
 | 40481255 u251_ref_tools | Bismark 0.14.5 + Bowtie 1.1.2 (published pair), fallback Bismark 0.20.0; smoke test picks the pair | ~00:45 | `u251_meth/envs/ref_tools.env` |
-| 40481256 / 40481257 u251_ref_prep_{Rnor6,mR7} | Rnor_6.0 (Ensembl 101) / mRatBN7.2 (Ensembl 110) + `bismark_genome_preparation --bowtie1` (single-threaded bowtie-build: the long step) | ~04:00-07:00 | `ref/rat_genome/<asm>/genome/Bisulfite_Genome/PREP_DONE` |
-| 40481258 / 40481259 u251_ref_align_{Rnor6,mR7} | Needhamsen's exact `bismark --bowtie1 -n 1 -l 28 -f` on their FASTA (+ `--ambiguous --un`); mR7 also the R-expanded deviation; spiked-mismatch test; Rnor6 vs Zhou's rat mapping | ~06:00-10:00 | `ref/e5/E5_Rnor6.tsv.gz`, `E5_mR7.tsv.gz`, `E5_mR7_Rexp.tsv.gz`; `ref/rat_alignment/checks/` |
-| 40481260 u251_ref_collect | writes `ref/e5/DONE` (built / not built + reason), merged hits, PREREG lists | ~10:00 | `ref/e5/DONE`, `ref/rat_alignment/epic_v1_rat_hits.tsv`, `ref/rat_alignment/lists/E5-*.txt` |
+| 40481256 / 40481257 u251_ref_prep_{Rnor6,mR7} | Rnor_6.0 (Ensembl 101) / mRatBN7.2 (Ensembl 110) + `bismark_genome_preparation --bowtie1` (single-threaded bowtie-build: the long step) | ~03:00-04:30 (bmax 492 M: ~7 sort blocks per conversion; 2 done in 35 min) | `ref/rat_genome/<asm>/genome/Bisulfite_Genome/PREP_DONE` |
+| 40481258 / 40481259 u251_ref_align_{Rnor6,mR7} | Needhamsen's exact `bismark --bowtie1 -n 1 -l 28 -f` on their FASTA (+ `--ambiguous --un`); mR7 also the R-expanded deviation; spiked-mismatch test; Rnor6 vs Zhou's rat mapping | ~04:00-06:30 | `ref/e5/E5_Rnor6.tsv.gz`, `E5_mR7.tsv.gz`, `E5_mR7_Rexp.tsv.gz`; `ref/rat_alignment/checks/` |
+| 40481260 u251_ref_collect | writes `ref/e5/DONE` (built / not built + reason), merged hits, PREREG lists | ~06:30 (latest ~10:00 if nodes are slow) | `ref/e5/DONE`, `ref/rat_alignment/epic_v1_rat_hits.tsv`, `ref/rat_alignment/lists/E5-*.txt` |
 
-Found while writing the jobs: Needhamsen's Additional file 1 is the reverse complement of AlleleA with every probe `R`
-already set to `A` (checked on the first 46,868 records of the file; the full-file count is in
-`ref/rat_alignment/checks/fasta_check_*.tsv` once the align jobs run), so Bowtie never saw an `R` in the published run, and after
-Bismark's C->T read conversion every R expansion collapses to the same read. The METHODS.md E5 step 3 premise ("Bowtie
-treats R as a mismatch") does not hold for their input; E5_mR7_Rexp is still built as INTERFACE.md specifies.
+Done by 00:23: GEO OVERALL OK (28/37/12 arrays, address counts 1,051,815 / 1,051,943 / 1,105,209); SeSAMe carries
+`rattus_norvegicus` (Rnor_6.0, 25,672 unmasked of 866,553); tools = Bowtie 1.1.2 + Bismark tag 0.14.5 (its script says
+v0.14.4), smoke PASS, no fallback.
+
+Found while writing the jobs (details in `meth_bench/INTERFACE.md` section 7; a local end-to-end test on Rnor_6.0 chr20
+backs the last three):
+- Needhamsen's Additional file 1 (866,894 sequences) is rc(AlleleA) with every probe `R` already set to `A`; Bowtie
+  never saw an `R`, and after Bismark's C->T read conversion every R expansion collapses to the same read. The
+  METHODS.md E5 step 3 premise does not hold for their input; E5_mR7_Rexp is still built as INTERFACE.md specifies.
+- The published command tolerates **2** mismatches per probe (at most 1 in the 28-nt seed), not 1: Bowtie 1 rounds
+  qualities to 30 by default, so `-e 70` admits two. Spike test on chr20: 2 outside the seed map 113/113.
+- Bismark 0.14.5's NM tag counts C->T conversions; E5 `mismatches` come from Bowtie's converted-space count instead.
+- Coordinate/colour rules agree 100 % with Zhou's Rnor_6.0 mapping on the probes both place at the same locus.
 
 ## 2026-09-26 23:58 EDT (grid clock): nf-core/methylarray arm FIXED and RESUBMITTED as 40480724 (40480122 failed)
 
@@ -91,6 +283,12 @@ treats R as a mismatch") does not hold for their input; E5_mR7_Rexp is still bui
   (`scratchpad/methylarray/labfiles/`) deleted. Nothing committed or pushed.
 
 ## STATE 2026-09-26 23:45 EDT — SAVED ON GREG'S ORDER ("Save the resume file asap!"). Read this block, then the ones below it (newest first). All workflows run inside Claude session f1bdbd78 (Fable driving); a new session reads their journals (`C:\Users\grego\.claude\projects\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\subagents\workflows\<run>\journal.jsonl`), the scratch files under `...\f1bdbd78-...\scratchpad\`, and `sacct`. Nothing committed by any workflow; MBR/ stays untracked.
+
+**CURVE DONE (wc2ib5g82 / wf_480455e9-000, 2026-09-27 ~01:00):** full run 40481271 (66 arrays). Result `scratchpad/titration_curve/RESULT.md`; grid `/rs/rs_grp_oschome/go2432/u251_meth/curve/results/` (validation.json, estimates.tsv, four figures); PREREG v1 sha256 0bfa0b2e..., Amendment 1 sha256 00d0f72b... (added after the test run showed the problem, before any tumour array or N2 was read).
+- **The pre-registered curve FAILED its test:** in-silico mixing of pure arrays does not behave like real DNA mixing (GSE310817, 28 real human:mouse mixtures: MAE 0.242, max 0.531 vs bar 0.05/0.10; GSE299969 also fails). The signal is concave in DNA fraction: a real 50:50 mix carries 79-89 % of the pure-human signal, a software mix 53-62 %.
+- **The corrected reading (Amendment 1) also FAILED, narrowly:** leave-one-batch-out MAE 0.057, max 0.283 (23 of 28 within ±0.10; misses depend on the host tissue); the independent EPIC v2 set (not in the fit) lands within 0.041 on all four.
+- **What survives:** the ordering (DNA vs RNA human share Spearman 0.93 across seven in-vivo arrays, p = 0.007; all three primaries above all three recurrents, descriptive) and **N2 contains human DNA** (its statistic is 2.3 log2 above the highest of ten pure-rat arrays). Corrected readings (not evidence: the correction failed its own check): IL69B 0.62, IL68B 0.60, IL67B 0.51, IL70B 0.37, IL66B 0.34, IL71B 0.22, **N2 0.049**, C2B 1.00. This points to the earlier "N2 DNA 20 % vs RNA 3 %" discrepancy as the bespoke two-mode estimator's inflation at low fraction (the same concavity), not biology; unproven.
+- **GEO deposit error found:** in GSE310817 batch 1, all 13 Red IDATs are byte copies of their Green IDATs (batch 2 is fine). Green-only rerun: both verdicts still FAIL, order unchanged, corrected values move <= 0.06. **The BENCH workflow (wsg4cdgp5; pipeline_v2 jobs 40481316 -> 40481317 -> 40481327) uses GSE310817 for its C1 check and must use batch 2 or the green channel only: check its C1 when it lands.** Worth reporting to GEO / the Zhou lab (Greg's call).
 
 **TIMING DONE (wmem2cm7r, 2026-09-27):** no per-animal date for rats 64-71 in any figure, legend, table or supplement of the lab's papers (JNS 2026 published + submitted, Acta 2021 + video, six abstracts, eleven same-lab U251 papers) or in any lab file; the RNA-seq rats appear only in aggregate (JNS Fig. 8, S6). Hard bound: rats 66-71 harvested before 7 Apr 2022 09:22 (chip scan). Group level: SNO 2023 MODL-14 says recurrences were taken 2 weeks after LITT (about 4 weeks after implantation); no source gives the primaries' harvest age (about 2-4 weeks). "Raj" = Tavarekere N. Nagaraja. Applied: SAMPLE_KEY.md "What is not known" + dates section (MODL-14, 3-4 week survival, 5x10^4 vs 5x10^5 inoculum discrepancy); CONTRALATERAL_CONTROL_PRIOR_ART.md Acta pages 3455-3463; SLIDES/03_build_deck.py JNS 2026;145:364-377. Answer: scratch `u251_timing/ANSWER.md`, `TIMING.csv`, `PAPERS.md`, `FIGURE_READ.md`. Per-animal dates would come only from the lab: MRI folders `YYYYMMDD_HHMMSS_IL<rat>`, Visualase logs, IACUC #1509 log.
 **nf-core/methylarray (wkj7t0b8b) DONE as a workflow:** first grid run 40480122 dropped all six tumours at SeSAMe QC (EPIC v1 quality mask counted as failures); patch P6 counts only unmasked probes (patch sha256 0ef3365e...); resubmitted as **40480724** (started 23:59); results ~00:20-00:45, relabel_null ~01:15-02:15.
