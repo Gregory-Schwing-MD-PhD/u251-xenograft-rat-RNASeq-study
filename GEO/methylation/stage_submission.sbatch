@@ -46,12 +46,14 @@ for p in "$SING" "$SANDBOX" "$RLIB" "$ZIP"; do
 done
 unset R_LIBS R_LIBS_USER R_LIBS_SITE PYTHONPATH LD_LIBRARY_PATH
 export SINGULARITY_TMPDIR=$TMP APPTAINER_TMPDIR=$TMP TMPDIR=$TMP
-# /tmp inside the sandbox must be writable or even Rscript -e cannot open its temporary file.
-SB=(-B /rs -B "$HOME" -B "$TMP:/tmp")
+# Bind the SPECIFIC group path, not /rs: `-B /rs` does not make the tree visible inside on this cluster, and job
+# 40483633 died with "cannot open file .../tmp/probe.R" although the file was there on the host. Every other R step in
+# this study binds /rs/rs_grp_oschome/go2432. /tmp must also be writable, or even Rscript -e cannot open its temp file.
+SB=(-B /rs/rs_grp_oschome/go2432 -B "$HOME" -B "$TMP:/tmp")
 echo 'cat(R.version.string, "\n"); .libPaths(c(Sys.getenv("U251_RLIB"), .libPaths()))
 for (p in c("minfi", "IlluminaHumanMethylationEPICmanifest")) cat(" ", p, as.character(packageVersion(p)), "\n")' \
   > "$TMP/probe.R"
-U251_RLIB=$RLIB "$SING" exec "${SB[@]}" --env "U251_RLIB=$RLIB" "$SANDBOX" Rscript "$TMP/probe.R"
+"$SING" exec "${SB[@]}" --env "U251_RLIB=$RLIB" "$SANDBOX" Rscript /tmp/probe.R
 echo "   the route works"
 
 echo "== 1. the source archive, checked against its recorded digest"
@@ -73,7 +75,7 @@ for p in R01C01 R02C01 R03C01 R04C01 R05C01 R06C01 R07C01 R08C01; do
 done
 
 echo "== 3. the processed matrices, from those same IDATs"
-cat > "$OUT/make_processed.R" <<'RSCRIPT'
+cat > "$TMP/make_processed.R" <<'RSCRIPT'
 .libPaths(c(Sys.getenv("U251_RLIB"), .libPaths()))
 suppressMessages({library(minfi); library(IlluminaHumanMethylationEPICmanifest)})
 idat <- Sys.getenv("IDAT_DIR"); out <- Sys.getenv("OUT_DIR")
@@ -102,9 +104,10 @@ RSCRIPT
 SHEET=$SLURM_SUBMIT_DIR/array_samplesheet.csv
 [ -f "$SHEET" ] || SHEET=$HOME/u251-xenograft-murine-RNASeq-study/GEO/methylation/array_samplesheet.csv
 [ -f "$SHEET" ] || { echo "REFUSING: cannot find array_samplesheet.csv"; exit 1; }
+cp "$SHEET" "$TMP/sheet.csv"          # the sheet may live under $HOME or the submit dir; /tmp is always bound
 "$SING" exec "${SB[@]}" \
-  --env "U251_RLIB=$RLIB,IDAT_DIR=$OUT/idat,OUT_DIR=$OUT/processed,SHEET=$SHEET" \
-  "$SANDBOX" Rscript "$OUT/make_processed.R"
+  --env "U251_RLIB=$RLIB,IDAT_DIR=$OUT/idat,OUT_DIR=$OUT/processed,SHEET=/tmp/sheet.csv" \
+  "$SANDBOX" Rscript /tmp/make_processed.R
 
 echo "== 4. the multi-omics sample key travels with the deposit"
 # Three of the eight pieces are named differently in the two arms, and GEO mints no BioSample for an array sample, so
