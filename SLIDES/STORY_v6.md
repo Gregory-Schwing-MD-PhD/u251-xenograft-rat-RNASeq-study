@@ -1,7 +1,7 @@
 # Abstract 418 talk, v6: what changed from v5, and how to give it in six minutes
 
 CNS 2026, SSTU02, Monday 2 November 2026, 7:00–7:06 AM. Built by `SLIDES/16_build_deck_v6.py` as
-`CNS2026_Schwing_Abstract418_CNStemplate_v6.pptx`: **53 slides — 28 in the talk, 25 backups.** v4's slides and its
+`CNS2026_Schwing_Abstract418_CNStemplate_v6.pptx`: **54 slides — 29 in the talk, 25 backups.** v4's slides and its
 builder are untouched; v6 opens the v4 deck, adds, and re-orders.
 
 ## Greg's five instructions, and what each one did to the deck
@@ -11,7 +11,7 @@ builder are untouched; v6 opens the v4 deck, adds, and re-orders.
 2. **"Shift more of the slides from background into the actual talk, in a logical order."** Ten slides that were
    backups in v5 are in the talk in v6: what each lesion is made of, less tumour on both platforms, the composition
    check across ten splits, the four views of the three categories, the invasion programme, MGMT, copy-number
-   amplitude, the dilution null, and the sizing curve. The talk runs 4 → 28 slides in a logical arc.
+   amplitude, the dilution null, and the sizing curve. The talk runs 4 → 29 slides in a logical arc.
 3. **"It's a 6 minute talk."** The deck marks a **6-minute core of 14 slides (303 s)**; the other 14 talk slides are
    the expanded version, in the order they would be given, with a cut list. Nobody has to decide on stage.
 4. **"Don't definitively say the instrument contamination is what I'm measuring unless it's definitely true."** It is
@@ -33,7 +33,7 @@ builder are untouched; v6 opens the v4 deck, adds, and re-orders.
 | 2 | LITT kills the core; recurrence grows from the margin | 22 |
 | 3 | The design: eight rats, RNA and methylation | 18 |
 | 4 | A human tumour in a rat brain: every read sorted by species | 20 |
-| 6 | Recurrent lesions hold less tumour — on both platforms | 20 |
+| 6 | Recurrent lesions hold less tumour — RNA and DNA agree | 20 |
 | 8 | After LITT the regrown tumour turns its ribosomal-protein genes down | 28 |
 | 9 | Leave any tumour out: the direction holds, the FDR does not | 25 |
 | 10 | Recurrence, or less tumour in the sample? | 25 |
@@ -46,10 +46,10 @@ builder are untouched; v6 opens the v4 deck, adds, and re-orders.
 
 Fifty-seven seconds of slack against the six minutes: enough for the ablation video on slide 4 and one question.
 
-## The full talk order (28 slides)
+## The full talk order (29 slides)
 
-1 title · 2 margin · 3 design · 4 model and read sorting · **5 what each lesion is made of** · **6 less tumour on
-both platforms** · 7 PCA and volcano · 8 GSEA and leading edge · 9 leave-one-out · 10 the tumour-content confound ·
+1 title · 2 margin · 3 design · 4 model and read sorting · **5 what each lesion is made of** · **6 less tumour, RNA and DNA agree** ·
+**7 of twenty splits, ours is first** · 8 PCA and volcano · 8 GSEA and leading edge · 9 leave-one-out · 10 the tumour-content confound ·
 **11 the exact split** · **12 the composition term behaves** · **13 the three categories in four views** ·
 **14 where the mesenchymal shift comes from** · 15 subtype scores · **16 the invasion programme** ·
 **17 methylation** · **18 MGMT** · **19 copy-number amplitude** · **20 the opposite hemisphere** ·
@@ -85,3 +85,23 @@ argument, and the wrapped-line overflow, neither of which the numbers showed.
   worth re-cropping before the talk.
 - Panel letters (a, b, c …) survive on the R-drawn crops; they mean nothing on a slide but are not wrong.
 - Whether slide 22 should be given at all before the manuscript is submitted is Greg's call.
+
+## Second pass, 2026-09-27 09:10 — an independent wording audit, applied
+
+An independent pass over the deck, the draft and the notes found ten statements that claimed more than the data
+carry. Three were mine in v6 and are fixed here:
+
+- **"Three measurements, two platforms, no shared failure mode."** The genotype, the Y dosage and the copy-number
+  profile are three readouts of ONE array and share its failure modes. The slide now says two platforms on separate
+  aliquots, and names the array readouts as what they are.
+- **"the bulk mesenchymal signal here is host tissue."** The pre-registered test of that ranks 5 of 20 and cannot
+  resolve it at six animals. The slide now says the rat-only score tracking myeloid content is *consistent with* it,
+  and gives the rank.
+- **"moved tumor centimetres."** A rat brain is about two centimetres across. The bar now says "across the midline".
+
+Also: the contralateral-null slide title says "on two of three tests" rather than a flat claim, and the sizing slide
+no longer says "bound transfer at dissection" (which presupposes transfer) but "bound how often a control piece
+reads positive".
+
+The running order also took two changes from the audit: slide 6 now shows the two-platform scatter, which a surgeon
+reads at a glance, and the twenty-labelling plot became its own slide 7.

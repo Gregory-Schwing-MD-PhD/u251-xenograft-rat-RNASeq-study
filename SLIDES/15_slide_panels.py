@@ -278,11 +278,11 @@ def build_rasters(log: list, problems: list):
             continue
         im = Image.open(src).convert("RGB")
         if im.size != tuple(spec["size"]):
-            problems.append(f"{name}: is {im.size}, the cut lines were measured on {tuple(spec['size'])} -- skipped")
+            problems.append(f"{name}: is {im.size}, the bands were measured on {tuple(spec['size'])} -- skipped")
             continue
         arr = np.asarray(im)
         stem = Path(name).stem
-        xc, yc = spec["xcuts"], spec["ycuts"]
+        xb, yb = spec["xbands"], spec["ybands"]
         lm = spec.get("left_margin")
         skip = set(map(tuple, spec.get("skip", [])))
         legend_cell = spec.get("legend_cell")
@@ -292,7 +292,7 @@ def build_rasters(log: list, problems: list):
 
         if legend_cell:
             r, c = legend_cell
-            box = tight(arr, yc[r], yc[r + 1], xc[c], xc[c + 1])
+            box = tight(arr, *yb[r], *xb[c])
             if box:
                 leg = im.crop(box)
                 bots = bots + [leg]
@@ -301,15 +301,13 @@ def build_rasters(log: list, problems: list):
                 problems.append(f"{name}: the cell named as the legend block is blank")
 
         n = 0
-        for r in range(len(yc) - 1):
-            for c in range(len(xc) - 1):
+        for r, (y0, y1) in enumerate(yb):
+            for c, (x0, x1) in enumerate(xb):
                 n += 1
                 if (r, c) in skip or (legend_cell and (r, c) == tuple(legend_cell)):
                     continue
-                cell = im.crop((xc[c], yc[r], xc[c + 1], yc[r + 1]))
-                margin = None
-                if lm and c > 0:
-                    margin = im.crop((lm[0], yc[r], lm[1], yc[r + 1]))
+                cell = im.crop((x0, y0, x1, y1))
+                margin = im.crop((lm[0], y0, lm[1], y1)) if (lm and c > 0) else None
                 write(stack(tops + [beside(margin, cell)] + bots), OUT / f"{stem}_p{n}.png", log)
 
 

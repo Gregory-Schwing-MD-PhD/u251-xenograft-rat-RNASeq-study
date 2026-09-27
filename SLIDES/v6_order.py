@@ -107,17 +107,30 @@ def build_slides(prs, slide):
         note=["PROMOTED from backup in v6. 15 s. The point: 'less tumor' is not an abstraction - here is what fills "
               "the rest of the lesion, and in the two NL recurrences it is mostly myeloid cells."])
 
-    add("less_tumour", "panel", prs, "Recurrent lesions hold less tumor - on both platforms",
-        "fig1c_share_labellings_p1.png", [
-            f"DNA: recurrent minus primary {float(HM1['DNA_bespoke']['rec_minus_prim']):.2f} "
-            f"(90 % {float(HM1['DNA_bespoke']['exact90_lo']):.2f} to {float(HM1['DNA_bespoke']['exact90_hi']):.2f}), "
-            f"the true labelling first of twenty - p = 0.05, the floor of a three-against-three design.",
-            f"RNA agrees and ranks second of twenty. Every DNA fraction here is uncalibrated."],
+    add("less_tumour", "panel", prs, "Recurrent lesions hold less tumor - RNA and DNA agree",
+        "fig1b_rna_vs_dna_p1.png", [
+            "Two platforms, one direction: the recurrences sit low on both.",
+            f"DNA: recurrent minus primary {float(HM1['DNA_bespoke']['rec_minus_prim']):.2f}, the largest difference "
+            f"of all twenty balanced labellings; RNA ranks second of twenty.",
+            "The DNA fractions are uncalibrated - only their order is used."],
         core=True, seconds=20,
-        ref="Twenty balanced three-against-three labellings of the six tumors; the true labelling is filled. " + DESIGN,
+        ref="Tumor DNA fraction against the share of RNA reads assigned human, registered estimator; bars are the "
+            "estimator's own interval. " + DESIGN,
         note=["PROMOTED in v6. 20 s. Say: whatever else differs, the recurrent lesions have less tumor in them, and "
-              "that is the confound the next three slides deal with. The twenty-labelling floor means p = 0.05 is "
-              "the smallest number this design can produce - quote it as a floor, never as significance."])
+              "that is the confound the next slides deal with. Two platforms on different aliquots agree on the "
+              "order, which is why this is not a sequencing artefact.",
+              "The twenty-labelling floor means p = 0.05 is the smallest number this design can produce - quote it as "
+              "a floor, never as significance. The labelling plot itself is the next slide."])
+
+    add("labellings", "panel", prs, "Of twenty ways to split six animals, ours is first",
+        "fig1c_share_labellings_p1.png", [
+            "Relabel the six animals every balanced way: twenty splits.",
+            f"The true split gives the largest difference of the twenty on DNA fraction "
+            f"(p = 0.05, the floor of the design) and ranks second on RNA share."],
+        core=False, seconds=18,
+        ref="Twenty balanced three-against-three labellings of the six tumors; the true labelling is filled. " + DESIGN,
+        note=["PROMOTED in v6. 18 s. This is what replaces a p-value at n = 3: there are only twenty ways to call "
+              "three of six animals recurrent, and ours is the extreme one."])
 
     add("exact_split", "panel", prs, "How much of the difference is simply less tumor?",
         "fig2a_shapley_de_genes.png", [
@@ -162,8 +175,9 @@ def build_slides(prs, slide):
         "fig2d_mes_human_vs_virtual_p1.png", [
             f"In the tumor cells alone the mesenchymal score FALLS at recurrence{sup(7)} - below every one of 1,000 "
             f"draws of a dilution null.",
-            f"The rat-only score tracks myeloid content (Spearman {OUT['neftel_MES']['spearman_vs_TAM_BMDM']:.2f}), so "
-            f"the bulk mesenchymal signal here is host tissue.{sup(22)}"],
+            f"The rat-only score tracks myeloid content (Spearman {OUT['neftel_MES']['spearman_vs_TAM_BMDM']:.2f}): "
+            f"consistent with the bulk signal being host tissue, though the pre-registered test of that ranks "
+            f"{MES['D_rank']} of 20 and cannot resolve it at six animals.{sup(22)}"],
         core=False, seconds=22,
         ref="7. Neftel C, et al. Cell 2019;178:835-849.   " + R22 + "   GSVA on TMM log-CPM; dot, human reads; arrow "
             "head, the same sample read as bulk. " + DESIGN,
@@ -221,8 +235,8 @@ def build_slides(prs, slide):
     add("contra_identity", "panel", prs, "U251N in the opposite hemisphere", "fig_c1_N2_over_core_bins.png", [
         f"Rat 69's contralateral hemisphere: {N269:.1f} % of reads human, the donor genotype at 56 of 59 identity "
         f"probes, Y-chromosome dose 0.88, and the line's copy-number profile (r = 0.72).",
-        f"Three measurements, two platforms, no shared failure mode. The other animal's contralateral hemisphere "
-        f"reads {N168:.1f} %."],
+        f"Two platforms on separate aliquots - sequencing and the array; the three array readouts share the array. The "
+        f"other animal's contralateral hemisphere reads {N168:.1f} %."],
         core=True, seconds=25,
         ref="Copy number on human-specific probes with rat cross-hybridising probes removed, scaled to the parental "
             "culture; 31-bin running medians. One animal.",
@@ -230,9 +244,12 @@ def build_slides(prs, slide):
               "Establish the identity first and slowly: this is not a statistical whisper, it is the cell line's own "
               "genotype, sex chromosome and copy-number profile in tissue from the other side of the brain, on an "
               "array handled separately from the libraries.",
+              "Be precise about independence if asked: the genotype, the Y dosage and the copy-number profile are "
+              "three readouts of ONE array and share its failure modes; the independence is between the array and the "
+              "RNA libraries, which are different aliquots and a different chemistry.",
               "Do not say anything yet about how it got there - that is the next slide but one."])
 
-    add("contra_null", "panel", prs, "It is not simply the core, sampled thinner", "fig_a_nullA_p1.png", [
+    add("contra_null", "panel", prs, "Not the core sampled thinner - on two of three tests", "fig_a_nullA_p1.png", [
         "The null: that animal's own tumor subsampled to the contralateral sample's depth, plus the measured "
         "assignment floor, 1,000 draws.",
         "Whole-profile distance 0.153 against a null 99.5th percentile of 0.028, and larger than another animal's "
@@ -250,9 +267,9 @@ def build_slides(prs, slide):
         [(f"For scale, someone else's measurement: malignant cells were recovered from gloves or instruments in 14 of "
           f"47 canine cancer operations (30 %), and in 57 % when margins were involved.{sup(23)}", BLUE)]],
         core=True, seconds=25,
-        bar="If it was carried, then one pass of an instrument moved tumor centimetres - which is a question this "
-            "method can answer, and the next study answers it with a naive hemisphere cut straight after a "
-            "tumor-bearing one.",
+        bar="If it was carried, then something that had just been through tumor left tumor behind across the midline - "
+            "which is a question this method makes answerable, and the next study answers it with a naive hemisphere "
+            "cut straight after a tumor-bearing one.",
         ref=R23 + "   " + R24 + "   " + R25 + "   Those are other groups' measurements of instrument contamination, "
             "not ours. Both contralateral samples come from animals that were never ablated.",
         note=["NEW in v6, and the slide to be careful on. 25 s.",
@@ -274,7 +291,8 @@ def build_slides(prs, slide):
             f"Targets were fixed and hashed before any pilot number entered a calculation.{sup(28)}",
             f"The binding constraint is the per-animal endpoint: {PWR['T2b']['n_per_arm_needed']} rats per arm to move "
             f"invasion frequency 0.20 to 0.50, {PWR['T1']['n_per_arm_needed']} for a 15-point difference in tumor "
-            f"content, {PWR['T2c']['n_controls_needed']} control pieces to bound transfer at dissection at 10 %.",
+            f"content, and {PWR['T2c']['n_controls_needed']} control pieces to bound how often a control piece reads "
+            f"positive at 10 %.",
             [(f"The clone-level test - are the cells that grew back the ones that had already left? - needs "
               f"{PWR['T8']['n_animals_needed']['k0']} to {PWR['T8']['n_animals_needed_bound_0.80']['k0']} barcoded "
               f"animals, because the unit becomes the clone.{sup(27)}", BLUE)]],
@@ -392,7 +410,7 @@ def arrange(prs):
     n_v4 = 21
     idx = {k: n_v4 + i for i, k in enumerate(NEW)}
     main = [0, 1, 2, 3,                                   # title, margin, design, model
-            idx["libraries"], idx["less_tumour"],
+            idx["libraries"], idx["less_tumour"], idx["labellings"],
             4, 5, 6, 7,                                   # PCA+volcano, GSEA, leave-one-out, the confound
             idx["exact_split"], idx["splits"], idx["categories"], idx["mes"],
             8,                                            # subtypes
