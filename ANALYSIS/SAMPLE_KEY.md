@@ -15,6 +15,16 @@ ablation". At sacrifice the lab also took the **contralateral hemisphere** of tw
 culture of the same cells was sequenced as well. Ten RNA libraries exist; our differential-expression comparison is
 **three primary versus three recurrent**.
 
+## The machine-readable version
+
+`GEO/multiomics_sample_key.tsv` is this table's join column-for-column: one row per RNA library with its GSM, SRX,
+SRR and BioSample, and the matched methylation array's label, chip position and column name in the deposited beta
+matrix. Build it with `python GEO/make_sample_key.py`, which cross-checks the array core's sheet against the
+accession map in both directions and refuses to write the file if they disagree on any pairing, rat number or chip
+position. Use it, not a name, whenever code or a reader has to pair the two assays: three pieces are named
+differently in the two arms (**NL70B = IL70B**, **NL71B = IL71B**, **N269B = N2**), and NCBI mints no BioSample for an
+array sample, so there is no accession the two arms share.
+
 ## Per library
 
 Human % is the xengsort graft fraction (reads assigned to human only), from `ANALYSIS/metadata_full.csv` and the

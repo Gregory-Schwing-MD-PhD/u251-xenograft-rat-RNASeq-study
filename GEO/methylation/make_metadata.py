@@ -10,6 +10,14 @@ STUDY / SAMPLES / PROTOCOLS layout GEO's own template uses.
 
 Nothing is invented here: the sample rows come from array_samplesheet.csv, the RNA cross-reference comes from
 PIPELINE/00_fetch_reads/library_map.csv, and the reused wording is read out of the filled RNA workbook.
+
+The array names are NOT changed to match the RNA names, and the RNA names are not changed either: the RNA names are
+public and minted in SRA, and the array names are what the chip, the core's sheet and every analysis in this
+repository use. Three pieces therefore carry two names each (NL70B/IL70B, NL71B/IL71B, N269B/N2). Every one of the
+three is stated in the sample title, in four characteristics fields, and in the deposited
+GEO/multiomics_sample_key.tsv, so no reader has to infer a pairing from a name. This matters because GEO mints a
+BioSample for a sequencing sample but not for an array sample (checked against real multi-omics SuperSeries), so NCBI
+will not link the two arms for anyone: the link exists only in the metadata written here.
 """
 from __future__ import annotations
 
@@ -73,7 +81,11 @@ def main() -> int:
     put("# Built by GEO/methylation/make_metadata.py from array_samplesheet.csv and the accepted RNA submission.")
     put("# SUBMISSION STRATEGY: submit this as its own Series, then ask GEO to combine it with GSE338105 under a")
     put("#   SuperSeries. GEO's SuperSeries/SubSeries mechanism is how one study that used two assay types is held")
-    put("#   together; a Series cannot mix an array platform with a sequencing platform.")
+    put("#   together, one SubSeries per assay.")
+    put("# SAMPLE NAMES: three pieces carry two names, because two facilities named the same animals differently.")
+    put("#   The array side (this submission, the chip, the core's sheet) says IL70B, IL71B, N2. The RNA side")
+    put("#   (GSE338105, SRA, the sequencing core's file names) says NL70B, NL71B, N269B. Neither is renamed. The")
+    put("#   pairing is stated per sample below and in the deposited multiomics_sample_key.tsv.")
     put("")
     put("STUDY", head=True)
     put("*title", "DNA methylation profiling of U251N orthotopic glioblastoma xenografts in athymic RNU/RNU rats "
@@ -85,7 +97,13 @@ def main() -> int:
         "is measured rather than estimated. Eight Illumina Infinium MethylationEPIC arrays were run on one chip: the "
         "six orthotopic tumours that were also sequenced (three untreated, three regrown after LITT), the "
         "contralateral hemisphere of one tumour-bearing animal, and the parental U251N culture. The arrays support "
-        "copy-number, MGMT-STP27 and tumour-fraction readouts, and are reported with the matched RNA libraries.")
+        "copy-number, MGMT-STP27 and tumour-fraction readouts, and are reported with the matched RNA libraries. "
+        "Every array here has a matched RNA-seq library in GSE338105, taken from a different aliquot of the same "
+        "piece of tissue; the pairing is given per sample and in the supplementary file multiomics_sample_key.tsv. "
+        "Three pieces carry a different name in each arm because two facilities named the same animals differently: "
+        "arrays IL70B, IL71B and N2 are RNA libraries NL70B, NL71B and N269B respectively. The remaining five "
+        "(IL66B, IL67B, IL68B, IL69B, C2B) carry the same name in both arms. Two RNA libraries in GSE338105 have no "
+        "array in this Series (IL64B and N168B).")
     put("*experimental design",
         "Eight arrays on a single EPIC BeadChip (sentrix 205648300021, positions R01C01-R08C01), scanned "
         f"{CHIP_SCANNED}. Six tumours: primary/pre-LITT (IL67B, IL68B, IL69B) against recurrent/post-LITT (IL66B, "
@@ -97,12 +115,15 @@ def main() -> int:
         put("contributor", c)
     put("supplementary file", "U251N_EPIC_beta_noob.tsv.gz")
     put("supplementary file", "U251N_EPIC_detection_pvalues.tsv.gz")
+    put("supplementary file", "multiomics_sample_key.tsv")
     put("")
     put("SAMPLES", head=True)
     hdr = ["*Sample name", "*title", "*source name", "*organism", "characteristics: rat", "characteristics: arm",
            "characteristics: tissue", "characteristics: cell line", "characteristics: treatment",
            "characteristics: sentrix id", "characteristics: sentrix position",
            "characteristics: matched RNA library", "characteristics: matched RNA GEO sample",
+           "characteristics: matched RNA SRA experiment", "characteristics: matched RNA BioSample",
+           "characteristics: matched RNA series", "characteristics: array label on the core sheet",
            "*molecule", "*description", "*platform", "raw file: Grn", "raw file: Red", "processed data file"]
     put(*hdr, head=True)
     treat = {"Primary": "none (U251N implanted, not ablated)",
@@ -117,12 +138,25 @@ def main() -> int:
         src = ("in vitro cell culture" if r["arm"] == "Culture"
                else "brain, contralateral hemisphere" if r["arm"] == "Contralateral"
                else "brain (orthotopic xenograft)")
+        # The array name and the RNA name differ for three of the eight pieces. Say so in the title, so that a
+        # reader who only ever sees the sample list still sees the pairing.
+        renamed = rl != s
+        title = (f"U251N {r['arm'].lower()} DNA methylation [{s} = RNA library {rl}]" if renamed
+                 else f"U251N {r['arm'].lower()} DNA methylation [{s}]")
+        same = ("DNA and RNA come from the same culture"
+                if r["arm"] == "Culture" else
+                "DNA and RNA come from different aliquots of the same piece of tissue")
+        alias = (f" This array is named {s} on the core's sample sheet and its RNA library is named {rl}: "
+                 f"the same piece under two names, because the array core and the sequencing core named the "
+                 f"animals differently. Neither name has been changed." if renamed else "")
         put(f"{s}_EPIC",
-            f"U251N {r['arm'].lower()} DNA methylation [{s}]",
+            title,
             src, organism, r["rat"], r["arm"], r["tissue"], "U251N", treat.get(r["arm"], ""),
             r["sentrix_id"], pos, rl, m.get("geo_sample", "PENDING"),
+            m.get("experiment_accession", "PENDING"), m.get("sample_accession", "PENDING"), "GSE338105", s,
             "genomic DNA",
-            f"Matched RNA-seq library {rl} in GSE338105 ({m.get('geo_sample','PENDING')}); "
+            f"{same}. Matched RNA-seq library {rl} in GSE338105 ({m.get('geo_sample','PENDING')}, "
+            f"{m.get('experiment_accession','PENDING')}, BioSample {m.get('sample_accession','PENDING')}).{alias} "
             f"{r['rna_human_pct']} % of that library's reads were assigned human.",
             f"{PLATFORM} ({GPL})",
             f"{r['sentrix_id']}_{pos}_Grn.idat", f"{r['sentrix_id']}_{pos}_Red.idat",

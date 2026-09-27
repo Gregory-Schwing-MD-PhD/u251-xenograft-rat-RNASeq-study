@@ -1,11 +1,11 @@
-library,arm,rat,tissue,run_accession,sample_accession,geo_sample,note
-IL67B,primary,67,tumour,SRR39547369,SAMN61491948,GSM9866608,untreated lesion; SRX34236535
-IL68B,primary,68,tumour,SRR39547366,SAMN61491947,GSM9866609,untreated lesion; SRX34236536
-IL69B,primary,69,tumour,SRR39547370,SAMN61491946,GSM9866610,untreated lesion; SRX34236537
-IL66B,recurrent,66,tumour,SRR39547365,SAMN61491945,GSM9866611,regrowth after LITT; SRX34236538
-NL70B,recurrent,70,tumour,SRR39547364,SAMN61491944,GSM9866612,regrowth after LITT; SRX34236539; the array sheet calls this IL70B
-NL71B,recurrent,71,tumour,SRR39547363,SAMN61491943,GSM9866613,regrowth after LITT; SRX34236540; the array sheet calls this IL71B
-IL64B,no_tumour,64,implanted hemisphere,SRR39547371,SAMN61491951,GSM9866605,no tumour in the piece; the internal assignment floor; SRX34236532
-N168B,contralateral,68,contralateral hemisphere,SRR39547368,SAMN61491950,GSM9866606,opposite hemisphere of rat 68; SRX34236533
-N269B,contralateral,69,contralateral hemisphere,SRR39547367,SAMN61491949,GSM9866607,opposite hemisphere of rat 69; SRX34236534; the array sheet calls this N2
-C2B,culture,,parental culture,SRR39547372,SAMN61491952,GSM9866604,U251N at the implanted passage; SRX34236531
+library,arm,rat,tissue,run_accession,experiment_accession,sample_accession,geo_sample,array_label,note
+IL67B,primary,67,tumour,SRR39547369,SRX34236535,SAMN61491948,GSM9866608,IL67B,untreated lesion
+IL68B,primary,68,tumour,SRR39547366,SRX34236536,SAMN61491947,GSM9866609,IL68B,untreated lesion
+IL69B,primary,69,tumour,SRR39547370,SRX34236537,SAMN61491946,GSM9866610,IL69B,untreated lesion
+IL66B,recurrent,66,tumour,SRR39547365,SRX34236538,SAMN61491945,GSM9866611,IL66B,regrowth after LITT
+NL70B,recurrent,70,tumour,SRR39547364,SRX34236539,SAMN61491944,GSM9866612,IL70B,regrowth after LITT; the array sheet and the laboratory's own key call this animal IL-70
+NL71B,recurrent,71,tumour,SRR39547363,SRX34236540,SAMN61491943,GSM9866613,IL71B,regrowth after LITT; the array sheet and the laboratory's own key call this animal IL-71
+IL64B,no_tumour,64,implanted hemisphere,SRR39547371,SRX34236532,SAMN61491951,GSM9866605,,no tumour in the piece; the internal assignment floor; no array was run
+N168B,contralateral,68,contralateral hemisphere,SRR39547368,SRX34236533,SAMN61491950,GSM9866606,,opposite hemisphere of rat 68; no array was run
+N269B,contralateral,69,contralateral hemisphere,SRR39547367,SRX34236534,SAMN61491949,GSM9866607,N2,opposite hemisphere of rat 69; the array sheet calls this N2 ("69B control N2")
+C2B,culture,,parental culture,SRR39547372,SRX34236531,SAMN61491952,GSM9866604,C2B,U251N at the implanted passage

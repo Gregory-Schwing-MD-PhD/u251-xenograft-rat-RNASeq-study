@@ -2,10 +2,14 @@
 
 ## How GEO handles a study that used two assay types
 
-GEO keeps one assay type per Series: a Series cannot mix an array platform with a sequencing platform. A study that
-did both is held together by a **SuperSeries** — a record whose members are the individual **SubSeries**, one per
-assay. That is the standard route for multi-omics deposits (for example GSE209878, RNA-seq + WGBS + ATAC-seq, and
-GSE26168, RRBS + RNA-seq), and it is what this study needs.
+A study that used an array and a sequencer is held together by a **SuperSeries** — a record whose members are the
+individual **SubSeries**, one per assay.
+
+Checked, rather than assumed, on 27 September 2026: of the ten GEO Series that carry both a methylation-array assay
+type and a sequencing assay type (Entrez `gds`, `"Methylation profiling by array"[DataSet Type] AND "Expression
+profiling by high throughput sequencing"[DataSet Type] AND gse[Entry Type]`), **ten out of ten are SuperSeries** —
+every one has `!Series_relation = SuperSeries of:` lines in its family SOFT record. No counterexample turned up, so
+the practical route is not in doubt, whatever GEO's curation rule is stated to be.
 
 So:
 
@@ -16,10 +20,40 @@ So:
    curators create the SuperSeries; it then appears on both records as `!Series_relation = SuperSeries of: …` /
    `SubSeries of: …`. Do not try to add array samples to GSE338105 itself.
 
-The two records are also joined sample by sample, which is the part that matters for reuse: every array row in the
-metadata carries `characteristics: matched RNA library` and `characteristics: matched RNA GEO sample`, so a reader
-can pair `IL67B_EPIC` with `GSM9866608` without guessing. Note the naming, which is a real trap and is spelled out
-in every file here: the arrays called **IL70B, IL71B and N2** are the libraries **NL70B, NL71B and N269B**.
+## The part GEO will not do for you: saying which two samples are the same piece of tissue
+
+A SuperSeries links the two *Series*. It does not link the two *samples*, and neither does anything else at NCBI.
+Checked in a real multi-omics SuperSeries (GSE335256): its sequencing SubSeries carries one
+`!Sample_relation = BioSample: SAMN...` per sample, and its array SubSeries **carries none at all**. GEO mints a
+BioSample for a sequencing sample and not for an array sample, so there is no shared accession for a reuser to join
+on. Whatever links the arms has to be written into the metadata by the submitter.
+
+That is made worse here by the names, which we are deliberately **not** changing. Two facilities named the same
+animals differently:
+
+| the same piece of tissue | RNA side (GSE338105, SRA, the sequencing core's file names) | array side (this Series, the chip, the core's sheet, every analysis in this repository) |
+| --- | --- | --- |
+| rat 70, recurrent | `NL70B` | `IL70B` |
+| rat 71, recurrent | `NL71B` | `IL71B` |
+| rat 69, contralateral hemisphere | `N269B` | `N2` |
+
+The other five (`IL66B`, `IL67B`, `IL68B`, `IL69B`, `C2B`) carry the same name in both arms. Neither vocabulary is
+renamed: the RNA names are public and minted in SRA, and the array names are what the chip, the core's sheet and
+every analysis in this repository use. `IL` is in fact the laboratory's own animal prefix — its RNA key says IL-70
+and IL-71, and `NL` appears only in the sequencing core's file names — so the public record is the one carrying the
+odd label, and it is the one that cannot be changed.
+
+So the correspondence is stated four times over, and never left to be inferred from a name:
+
+1. **In each sample's title**, where a reader cannot miss it:
+   `U251N recurrent DNA methylation [IL70B = RNA library NL70B]`.
+2. **In five characteristics fields per sample** — matched RNA library, GEO sample, SRA experiment, BioSample, and
+   the array label on the core's sheet — so the join is machine-readable from the sample record alone.
+3. **In the Series summary**, which names all three two-name pieces and says that IL64B and N168B have no array.
+4. **In `multiomics_sample_key.tsv`**, deposited as a supplementary file: one row per RNA library with its GSM, SRX,
+   SRR, BioSample, and the matched array's label, chip position and column name in the beta matrix. It is generated
+   by `python GEO/make_sample_key.py`, which cross-checks the array sheet against the accession map in both
+   directions and refuses to write the file if they disagree on any pairing, rat number or chip position.
 
 ## What to run
 
