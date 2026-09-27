@@ -1,0 +1,9 @@
+sentrix_id,sentrix_position,sample,rat,arm,tissue,rna_library,rna_human_pct
+205648300021,R01C01,IL66B,66,Recurrent,recurrent tumour after LITT,IL66B,29.44
+205648300021,R02C01,IL67B,67,Primary,tumour (not ablated),IL67B,42.52
+205648300021,R03C01,IL68B,68,Primary,tumour (not ablated),IL68B,45.38
+205648300021,R04C01,IL69B,69,Primary,tumour (not ablated),IL69B,64.40
+205648300021,R05C01,IL70B,70,Recurrent,recurrent tumour after LITT,NL70B,42.67
+205648300021,R06C01,IL71B,71,Recurrent,recurrent tumour after LITT,NL71B,33.05
+205648300021,R07C01,N2,69,Contralateral,contralateral hemisphere of rat 69 (sheet: 69B control N2),N269B,4.90
+205648300021,R08C01,C2B,,Culture,U251N cultured cells (parental line),C2B,86.19
