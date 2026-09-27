@@ -68,3 +68,7 @@ ANALYSIS/drug_rematch/runs/
 DATA/raw_lab/
 DATA/METHYLATION
 *.idat
+
+# older Abstract 418 decks kept locally, never part of the public repository
+SLIDES/CNS2026_Schwing_Abstract418.pptx
+SLIDES/CNS2026_Schwing_Abstract418_2026-09-07_lab_template.pptx
