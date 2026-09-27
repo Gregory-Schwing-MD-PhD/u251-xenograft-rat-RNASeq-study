@@ -4,12 +4,101 @@ Newest first. Everything for this study lives in this directory and this reposit
 should be contained in the u251 dir and the respective git repo"). The checkpoints below were first written into
 spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here the same day.
 
+## 2026-09-27 00:36 EDT (grid clock): pipeline_v2 (rat host-DNA benchmark + downstream) SUBMITTED: 40481316 -> 40481317 -> 40481327 (held)
+
+pipeline_v2 = every published host-DNA method with rat as the host, judged by PREREG.md (sha256 `67e9e250...5832`,
+checked at the start of every job). Code: local `ANALYSIS/methylation_v2/` (README.md explains it; nothing committed),
+grid `/rs/rs_grp_oschome/go2432/u251_meth/pipeline_v2/` (results in `pipeline_v2/results/`, work `u251_meth/work_v2`,
+launch dir `u251_meth/launch_v2`, logs `u251_meth/logs/pipeline_v2_<id>.out`). Bespoke pipeline dir untouched.
+
+| job | what | depends on | ETA (EDT, 27 Sep) |
+|---|---|---|---|
+| **40481316** | bench, `WITH_E5=false`: SETUP_V2, CLASSES, STAGE_C2B (C2B only), PREP (GSE174568 13 + C2B + GSE310817 37), PREP_V2 (GSE299969), E1-E4, F1/F2/F4/F5, C0, C1 (a/b/c), C2 fraction (400 mixtures) | afterany:40479710 (satisfied) | running since 00:32; done ~01:15-01:45 |
+| **40481317** | bench, `WITH_E5=true`, `-resume`: E5, C2 exclusion, SELECT -> `results/selection.json` | afterany:40481316 and afterany:40481260 (ref collect, writes `ref/e5/DONE`) | ~15-30 min after 40481260; the bowtie-1 index builds (40481256/7) started 00:21, so roughly 03:00-05:30 |
+| **40481327** | apply: STAGE_ALL, C3, QC_NORMALISE, ADAPT, CNV, DMP_DMR, REPORT | afterany:40481317, **HELD** | ~1 h after release |
+
+**Manual gate before releasing 40481327 (PREREG section 2, order step 4):** when 40481317 has written
+`results/selection.json`, put its sha256 (printed at the end of `logs/pipeline_v2_40481317.out`) as a new block at the
+top of this file, then `echo <sha256> > .../pipeline_v2/results/selection.recorded` and `scontrol release 40481327`.
+The loader refuses every tumour array until that file matches. If 40481316 or 40481317 fails, fix the code in
+`ANALYSIS/methylation_v2/`, rsync it to the grid (excluding `ref_jobs`, `PREREG.*`, `results`), and resubmit the same
+phase. `-resume` reuses every finished task.
+
+Already seen at 00:36: CLASSES reproduced every manifest count that was fixed before the freeze. That covers:
+- switch probes: 24 rat at AS 50 (16 G->R, 8 R->G), 74 at AS >= 45; mouse 23 / 71;
+- E4a 25,672; E4b 58,599;
+- R1: 24,936 unmasked cg, 0 disagreements;
+- 46 chrY probes at rat AS >= 30.
+
+These are manifest-only facts, not results.
+
+## 2026-09-27 00:21 EDT (grid clock): BENCH reference data + E5 rat alignment chain SUBMITTED (40481253-40481260)
+
+Rat host-DNA benchmark (BENCH workflow, PREREG `meth_bench/PREREG.md` sha256 67e9e250...). Public data only; nothing
+from our chip. Scripts: local `ANALYSIS/methylation_v2/ref_jobs/` (not committed), grid copy
+`u251_meth/pipeline_v2/ref_jobs/`; job ids also in `pipeline_v2/ref_jobs/JOBS.tsv`. Output names follow
+`meth_bench/INTERFACE.md` (the pipeline_v2 reading contract). All reqp/requeue, logs `u251_meth/logs/ref_*_<id>.out`.
+
+| job | what | ETA (EDT, 27 Sep) | output |
+|---|---|---|---|
+| 40481253 u251_ref_geo | GSE174568 (28), GSE310817 (37), GSE299969 (12, EPIC v2) RAW tars unpacked; Needhamsen files 1 and 4; Illumina B5 + Zhou manifests; sha256 + gzip + IDAT address-count table | ~01:30 | `ref/geo/<GSE>/`, `ref/geo/<GSE>/CHECKSUMS.tsv`, `ref/geo/GEO_FETCH_STATUS.txt` |
+| 40481254 u251_ref_sesame | names(EPIC.addressSpecies$species) + rat flag (expect TRUE, Rnor_6.0) | ~00:45 | `ref/sesame_species.txt`, `ref/sesame_species_rat_flag.txt`, `ref/sesame_species_detail.tsv` |
+| 40481255 u251_ref_tools | Bismark 0.14.5 + Bowtie 1.1.2 (published pair), fallback Bismark 0.20.0; smoke test picks the pair | ~00:45 | `u251_meth/envs/ref_tools.env` |
+| 40481256 / 40481257 u251_ref_prep_{Rnor6,mR7} | Rnor_6.0 (Ensembl 101) / mRatBN7.2 (Ensembl 110) + `bismark_genome_preparation --bowtie1` (single-threaded bowtie-build: the long step) | ~04:00-07:00 | `ref/rat_genome/<asm>/genome/Bisulfite_Genome/PREP_DONE` |
+| 40481258 / 40481259 u251_ref_align_{Rnor6,mR7} | Needhamsen's exact `bismark --bowtie1 -n 1 -l 28 -f` on their FASTA (+ `--ambiguous --un`); mR7 also the R-expanded deviation; spiked-mismatch test; Rnor6 vs Zhou's rat mapping | ~06:00-10:00 | `ref/e5/E5_Rnor6.tsv.gz`, `E5_mR7.tsv.gz`, `E5_mR7_Rexp.tsv.gz`; `ref/rat_alignment/checks/` |
+| 40481260 u251_ref_collect | writes `ref/e5/DONE` (built / not built + reason), merged hits, PREREG lists | ~10:00 | `ref/e5/DONE`, `ref/rat_alignment/epic_v1_rat_hits.tsv`, `ref/rat_alignment/lists/E5-*.txt` |
+
+Found while writing the jobs: Needhamsen's Additional file 1 is the reverse complement of AlleleA with every probe `R`
+already set to `A` (checked on the first 46,868 records of the file; the full-file count is in
+`ref/rat_alignment/checks/fasta_check_*.tsv` once the align jobs run), so Bowtie never saw an `R` in the published run, and after
+Bismark's C->T read conversion every R expansion collapses to the same read. The METHODS.md E5 step 3 premise ("Bowtie
+treats R as a mismatch") does not hold for their input; E5_mR7_Rexp is still built as INTERFACE.md specifies.
+
+## 2026-09-26 23:58 EDT (grid clock): nf-core/methylarray arm FIXED and RESUBMITTED as 40480724 (40480122 failed)
+
+- **Why 40480122 failed (21:51-21:56)**: SeSAMe sample QC dropped all six tumours ("Samples: initial = 6 | kept = 0"),
+  so DENSITY_PLOTS, SEX_QC and SNP_HEATMAP failed on an empty matrix. PR #41 counts a probe as failed if it is NA in the
+  SeSAMe betas, and the Q step (quality mask) alone makes ~11-12 % of EPIC v1 probes NA in every array, so the default
+  `fail_sample_fr` 0.10 cannot be met on EPIC v1. Rates: IL66B 0.149, IL67B 0.142, IL68B 0.139, IL69B 0.136, IL70B
+  0.142, IL71B 0.161, each 0.109-0.118 above the bespoke pOOBAH fraction (0.037/0.026/0.021/0.018/0.028/0.052). The mask
+  share is inferred from that constant gap, not counted; the new run counts it (`N_masked_without_P`). The earlier
+  README sentence "any tumour dropped would be a recurrent one" was a prediction that the run contradicted; rewritten.
+- **Fix (patch P6, `bin/sesame_poobah_qc.R`)**: new `fail_sample_scope` = `unmasked`: SeSAMe also runs with P removed
+  (`QCDB`) and the per-sample rate is the share of probes that pass every other step but are NA after `QCDPB` (the
+  pOOBAH failures the parameter's help text describes). `fail_sample_fr` stays 0.10. Mock-tested locally (sesame is not
+  installed locally); first real execution is 40480724. Chosen over raising `fail_sample_fr` to ~0.22, which would
+  have given the threshold a different meaning per array.
+- **Also fixed**: P3's DMRcate "no regions" pattern now matches DMRcate's misspelled message ("No signficant regions
+  found"); `bin/relabel_null.py` ranks ties AGAINST the true split and prints permutation p = #(count >= true)/10 and
+  the tie count (all-zero counts read "10 of 10, p = 1.00", not "1 of 10"); the rat list is content-addressed
+  (`inputs/rat_exclusion_list.6f4a850ed0c60e0b.txt`, named in params.yaml, name checked against sha256 every run) so a
+  changed list is a changed path and `-resume` re-runs SPLIT_COLLAPSE. Bespoke run 40480154 (done 22:10) did not change
+  the list: sha256 `6f4a850e...` (85,764 IDs), same as 40480027's.
+- **New patch**: `patches/pr41_3a7ff00_epicv1.patch` sha256 `0ef3365e6ef4d5a3409c8006f1c9f5d343d284175d82a4587aabe7cdbc35317e`
+  (applies cleanly to pristine 3a7ff00 with git apply and patch -p1; results byte-identical to the patched tree).
+  Submitted with `U251_MOVE_ASIDE=1`: the job moves 40480122's work/, results/, relabel/, launch/ to
+  `nfcore_methylarray/superseded/patch_52e2e99892398c5b_moved_by_40480724/` and starts clean.
+- **Job 40480724** (reqp, requeue, 8 CPU, 64 GB, 8 h): RUNNING on amx2 since 23:59:12. Checked at 23:59:34: steps
+  1-3 passed (zip sha256, IDAT md5s, rat list matches its name, 40480122's dirs moved aside, patch 0ef3365e applied).
+  Estimate, since P6 and the DMP/DMR steps have never run: main-run results ~00:20-00:45 EDT 27 Sep; `results/relabel_null.tsv`
+  ~01:15-02:15 EDT. Read `run_status_40480724.txt`, `results/u251_checks.txt`,
+  `results/sesame_poobah_qc/masking_failrate_per_sample.csv` (all six tumours kept? mask count per array).
+- **Bespoke pipeline** is now 40480154 (COMPLETED 22:10); 40477975 and 40480027 are history. Not touched here.
+- **`-profile test`** at the pinned commit failed at the container pull (quay.io 401) before reaching its test data;
+  the test-data samplesheet URL also returns 404. Recorded only (`logs/test_profile_result.txt`), not re-run.
+- Housekeeping: RESUME.md back to LF (the working tree had become CRLF; HEAD is LF); `MBR/` added to
+  `.git/info/exclude` (untracked, no commit); the lab files copied into the session scratch
+  (`scratchpad/methylarray/labfiles/`) deleted. Nothing committed or pushed.
+
 ## STATE 2026-09-26 23:45 EDT — SAVED ON GREG'S ORDER ("Save the resume file asap!"). Read this block, then the ones below it (newest first). All workflows run inside Claude session f1bdbd78 (Fable driving); a new session reads their journals (`C:\Users\grego\.claude\projects\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\subagents\workflows\<run>\journal.jsonl`), the scratch files under `...\f1bdbd78-...\scratchpad\`, and `sacct`. Nothing committed by any workflow; MBR/ stays untracked.
+
+**TIMING DONE (wmem2cm7r, 2026-09-27):** no per-animal date for rats 64-71 in any figure, legend, table or supplement of the lab's papers (JNS 2026 published + submitted, Acta 2021 + video, six abstracts, eleven same-lab U251 papers) or in any lab file; the RNA-seq rats appear only in aggregate (JNS Fig. 8, S6). Hard bound: rats 66-71 harvested before 7 Apr 2022 09:22 (chip scan). Group level: SNO 2023 MODL-14 says recurrences were taken 2 weeks after LITT (about 4 weeks after implantation); no source gives the primaries' harvest age (about 2-4 weeks). "Raj" = Tavarekere N. Nagaraja. Applied: SAMPLE_KEY.md "What is not known" + dates section (MODL-14, 3-4 week survival, 5x10^4 vs 5x10^5 inoculum discrepancy); CONTRALATERAL_CONTROL_PRIOR_ART.md Acta pages 3455-3463; SLIDES/03_build_deck.py JNS 2026;145:364-377. Answer: scratch `u251_timing/ANSWER.md`, `TIMING.csv`, `PAPERS.md`, `FIGURE_READ.md`. Per-animal dates would come only from the lab: MRI folders `YYYYMMDD_HHMMSS_IL<rat>`, Visualase logs, IACUC #1509 log.
+**nf-core/methylarray (wkj7t0b8b) DONE as a workflow:** first grid run 40480122 dropped all six tumours at SeSAMe QC (EPIC v1 quality mask counted as failures); patch P6 counts only unmasked probes (patch sha256 0ef3365e...); resubmitted as **40480724** (started 23:59); results ~00:20-00:45, relabel_null ~01:15-02:15.
 
 **RESUMED 23:45 EDT (machine clock) on Opus 5.5; agents work again.** The limit actually hit at ~22:11. New task ids (same run ids): SPREAD v2 wjy1l2zie, XVAL wbyvmmgyq, SCIENCE whvuo0fak, CURVE wc2ib5g82, POWER wmvpy6nwg, BENCH wsg4cdgp5, multi-omics wi5bjtzih, nf-core/methylarray wkj7t0b8b, TIMING wmem2cm7r.
 
 **SESSION LIMIT HIT ~23:55 EDT (resets 03:00 ET).** Agents started after that failed. Resume each run after 03:00 in the same Claude session with `Workflow({scriptPath: "<workflows\scripts\<name>-<run>.js>", resumeFromRunId: "<run>"})` (scripts under `C:\Users\grego\.claude\projects\c--Users-grego-OneDrive-Desktop-CTSpinoPelvic1K-1\f1bdbd78-151f-470b-b703-dd9af9b3fecc\workflows\scripts\` or the `C--...` variants; finished agents replay from cache). Known state at the limit:
-- **SPREAD v2 (wf_e44b06bf-0e6)**: research, EVIDENCE_existing.md, DESIGN_IMPLICATIONS.md, CLONAL_LIT.md and PREREG_spread.md DONE (111 of 115 agents); the two analysis jobs, the write-up and the verify FAILED at the limit. Facts found: the human count matrix was quantified from graft+both reads (both = 53.6 % of N269B's human input; > 90 % of the floors'), so the floor correction must model the both class; N168B's floor RNA is itself Y-bearing (92 chrY per million graft pairs, 0.59x cores: hopping, handling or a few cells; unexplained) while IL64B's is Y-poor (true artefact); index hopping cannot be excluded (one lane with six Y-bearing cores + C2B); the contralateral piece was dissected from the same tumour-bearing slices with the same blades on the same slide, so carry-over is permitted by the method and nothing in hand separates it from spread; DNA/RNA fraction ratio 4.0 at N2 vs 1.3-2.0 in cores (CURVE to settle); the literature has no false-human-call floor, and the public tumour-free rat brain corpus for it is GEO **GSE53960** (rat BodyMap, 32 F344 brain total-RNA libraries).
+- **SPREAD v2 (wf_e44b06bf-0e6)**: research, EVIDENCE_existing.md, DESIGN_IMPLICATIONS.md, CLONAL_LIT.md and PREREG_spread.md DONE (111 of 115 agents); the two analysis jobs, the write-up and the verify FAILED at the limit. **PREREG_spread.md hashes, recorded here as the document's section 8 requires: frozen base (sections 0-7) sha256 `454a24f3b3d6c438e2be6f0f498f5b11e4d90f2b7424204e9f6e40bae78be47d` (41,412 B, the digest DEVIATIONS.md and both RESULTS files cite); current file with the one appended section-8 entry of 23:15 (DiG unobtainable -> Ivy GAP leading-edge contrast is the primary directional statistic) sha256 `96131616a574eb4040edab18e934ee1fc73c95b277cae266a2dc8d70da7f2dd9` (43,113 B), byte-identical in `ANALYSIS/spread/PREREG_spread.md` and on the grid at `/rs/rs_grp_oschome/go2432/u251_science/spread/PREREG_spread.md`; sections 0-7 verified byte-identical between the two by diff. Parts 2 and 3 were prospective at freezing; E2 and E3 are labelled ALREADY OBSERVED in section 0.1 and carry no pre-registration credit. E1, the only pre-specified gate that can retire the artefact hypothesis, is still in flight (40480691 RUNNING, 40480692/40480693 PENDING behind it), so its result has not been examined. Facts found: the human count matrix was quantified from graft+both reads (both = 53.6 % of N269B's human input; > 90 % of the floors'), so the floor correction must model the both class; N168B's floor RNA is itself Y-bearing (92 chrY per million graft pairs, 0.59x cores: hopping, handling or a few cells; unexplained) while IL64B's is Y-poor (true artefact); index hopping cannot be excluded (one lane with six Y-bearing cores + C2B); the contralateral piece was dissected from the same tumour-bearing slices with the same blades on the same slide, so carry-over is permitted by the method and nothing in hand separates it from spread; DNA/RNA fraction ratio 4.0 at N2 vs 1.3-2.0 in cores (CURVE to settle); the literature has no false-human-call floor, and the public tumour-free rat brain corpus for it is GEO **GSE53960** (rat BodyMap, 32 F344 brain total-RNA libraries).
 - **XVAL (wf_0186e254-651)**: INVENTORY_xval.md, PREREG_xval.md (sha256 140fdd44c15143ddfc70d5852fe9aa7d69e7a9897b2047ebc19b2afaf8568c75; copies on the grid and in ANALYSIS/xval/), reference annotations hashed under `u251_science/xval/ref/`, reads step DONE (no SRA fetch needed); array-derived tables, validate, write and verify FAILED at the limit. Corrections to earlier notes: the human STAR BAMs exist (45.5 GB) AND the xengsort graft/host FASTQs survive in `~/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/` (106 GB) with the index (`xengsort_index_clean/`, 17.9 GB, k = 25) and both reference FASTAs; only the ambiguous+neither bins were discarded. SRA runs SRR39547363-72 (spot counts equal the xengsort totals exactly). HOME is at 96.8 % of quota: nothing new goes there; use /rs.
 - Other runs (SCIENCE, POWER, CURVE, BENCH, multi-omics, nf-core/methylarray, TIMING): state unknown at the limit; read their journals first.
 
@@ -22,7 +111,7 @@ spinesurg-ct-nnunet/docs/RESUME_2026-09-22_PM.md by mistake and were moved here 
 | wzvcizag3 (wf_480455e9-000) CURVE | in-silico human:rat titration curve validated on real human:mouse mixtures (GSE310817, GSE299969); our eight arrays placed on it | grid `u251_meth/curve/results/` (three PNGs); scratch `titration_curve/RESULT.md` |
 | w1cox6j4w (wf_d243847e-fb8) BENCH | every published host-DNA method with rat, judged by PREREG checks C0-C3; pipeline_v2 after the bespoke run | grid `u251_meth/pipeline_v2/`, `u251_meth/ref/`; scratch `meth_bench/` |
 | wc03287jk (wf_d598cc75-610) multi-omics | nf-core candidates evaluated; at most three submitted; `ANALYSIS/MULTIOMICS_PLAN.md` | grid `u251_multiomics/` |
-| w3fa7sf50 (wf_2e081152-c82) nf-core/methylarray | PR #41 SeSAMe/limma/DMRcate arm; first grid run 40480122 failed at 5.5 min; the workflow's fix agent was running | `u251_meth/nfcore_methylarray/`, log `u251_meth/logs/nfcore_methylarray_*.out` |
+| w3fa7sf50 (wf_2e081152-c82) nf-core/methylarray | PR #41 SeSAMe/limma/DMRcate arm; first grid run 40480122 failed at 5.5 min (SeSAMe dropped all six tumours: EPIC v1 quality mask > 0.10); fixed (patch P6) and resubmitted as **40480724** at 23:58, see the 23:58 block | `u251_meth/nfcore_methylarray/`, log `u251_meth/logs/nfcore_methylarray_40480724.out` |
 | wlw03fxg7 (wf_1ce53ed2-059) TIMING | per-animal implant/LITT/harvest timing from Raj's papers' figures, lab zips, IDAT headers, GEO | scratch `u251_timing/ANSWER.md`, `TIMING.csv` |
 | DONE 40480027 bespoke methylation | REPORT.md, summary.json; N2 carries U251N DNA (genotype 56/59, male Y, U251 CNV pattern); MGMT all M; Q5 no DMPs after fraction; Q4 no shared CNV change | `/rs/rs_grp_oschome/go2432/u251_meth/results/` |
 
@@ -98,6 +187,8 @@ Greg (22:15, Fable now driving): "SAY SOMETHING SIGNIFICANT ABOUT SOMETHING HOT 
 - Older open items: RUVSeq 2-control rerun (40476123; check sacct) then rerun 06/07 and replace "rerun pending" on B1; host verify 40475691 COMPLETED, B7 exact numbers still to be written in.
 
 ## 2026-09-26 21:50 EDT (grid clock): PENDING nf-core/methylarray standard arm (Greg: "i find it hard to believe that no nfcore pipeline exists for this data?")
+
+> SUPERSEDED: 40480122 below FAILED at 21:56 (SeSAMe sample QC dropped all six tumours); the timings below never happened. Fixed and resubmitted as 40480724, see the 23:58 block.
 
 | job | what | ETA | output |
 |---|---|---|---|

@@ -83,7 +83,7 @@ Literal counts over the full PMC text (~48.7k characters): 'contralateral' 0, 'c
 
 Sources:
 
-- https://pubmed.ncbi.nlm.nih.gov/34554269/ (doi:10.1007/s00701-021-05002-y, Acta Neurochir 2021;163:3555-3562, PMC8893160)
+- https://pubmed.ncbi.nlm.nih.gov/34554269/ (doi:10.1007/s00701-021-05002-y, Acta Neurochir 2021;163(12):3455-3463, PMC8893160)
 
 ### 8. The unique value of a same-brain control is that it separates tumour-local from brain-wide change and cancels animal-level variation in an outbred host, but this rationale rests on design reasoning plus one stroke study's side-by-side comparison, not on any glioma transcriptomics paper found.
 

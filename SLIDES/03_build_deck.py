@@ -466,7 +466,7 @@ textbox(s, 0.28, 5.15, 12.6, 1.2, [
          "can be assigned to a species, so the tumor compartment can be read on "
          "its own.", 17, after=0)])
 refs(s, ["4. Nagaraja TN, et al. Acta Neurochir 2021;163:3455–3463.    "
-         "5. Nagaraja TN, et al. J Neurosurg 2026:1–14."])
+         "5. Nagaraja TN, et al. J Neurosurg 2026;145:364–377."])
 
 # ------------------------------------------------------- 7. the analysis -----
 s = content_slide("The analysis", "Methods")

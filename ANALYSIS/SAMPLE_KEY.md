@@ -89,9 +89,16 @@ Nothing below is copied into this repository (it is public). The lab holds the o
   69 is written down (DNA sheet).
 - Why IL64B's sample held almost no tumor: a graft that did not take, or tissue taken beside the tumor. The lab key
   records rat 64 as a primary with "Tumor grown in rat brain". We do not call it a failed graft.
-- The interval from LITT to harvest for each recurrent animal. The JNS 2026 paper's imaging cohort was sacrificed 2
-  or 4 weeks after LITT; for the RNA-seq rats it says only "monitored for recurrence", and no file we hold records
-  the interval per animal.
+- The interval from LITT to harvest for each recurrent animal, and the harvest age of each primary. Per animal,
+  nothing is recorded. At group level, the lab's SNO 2023 abstract MODL-14 (Neuro-Oncology 25 Suppl 5:v301,
+  doi:10.1093/neuonc/noad179.1165) says LITT was at about 2 weeks after implantation and "tissues from 4 other
+  unablated and 4 recurrent tumors at post-LITT 2-weeks were used for RNAseq": recurrences about 4 weeks after
+  implantation. That these are our rats is an inference (4 + 4, the same genomics co-authors, the lab's only RNA-seq
+  run), and "at post-LITT 2-weeks" could also mean "had recurred by the 2-week scan". No source gives the primaries'
+  harvest time: "euthanized by 2 weeks" describes the imaging cohort's controls, while JNS 2026 Fig. 1 shows an
+  unablated rat alive at about 3 weeks and its Discussion says unablated rats survive about 3-4 weeks. So tumour age
+  may differ by arm by up to about 2 weeks and cannot be separated from arm. JNS 2026 itself says only "monitored for
+  recurrence" for the RNA-seq rats.
 - Why rat 65 and culture C1 have no RNA library.
 - Whether any other contralateral hemispheres (rats 64, 67, 65, 66, 70, 71) were collected.
 
@@ -137,7 +144,15 @@ methylation IDATs and sample sheet, the RNA-seq analysis folder and the sorted r
   the read headers. IL64B already appears in the lab's analysis deck created 2022-06-11.
 - **Protocol, not per-animal record** (the paper's imaging cohort; the paper does not say the RNA-seq rats followed
   it): MRI about 2 weeks after implantation, LITT the next day, recurrence visible after about a week, sacrifice 2 or
-  4 weeks after LITT; unablated rats survive about 3 weeks after implantation.
+  4 weeks after LITT; unablated rats survive about 3-4 weeks after implantation (published JNS 2026 Discussion; the
+  2024 submission said about 3 weeks). Inoculum: JNS 2026 prints 5x10^4 U251N cells, Acta Neurochir 2021 and Valadie
+  2023 print 5x10^5; which applies to the RNA-seq rats is not stated.
+- **Group-level timing (MODL-14, SNO 2023, text only):** RNA-seq recurrences taken 2 weeks after LITT, about 4 weeks
+  after implantation; see "What is not known". Searched again 2026-09-27 (every figure, legend, table and supplement
+  of JNS 2026 published and submitted, Acta 2021 with its video, the lab's six meeting abstracts, eleven same-lab
+  U251 papers, both lab zips, all 16 IDAT headers, all FASTQ headers, GEO/BioSample/SRA): no per-animal date for rats
+  64-71 anywhere; the RNA-seq rats appear only in aggregate (JNS Fig. 8 volcano, Fig. S6 networks). Full answer:
+  session scratch `u251_timing/ANSWER.md`, `TIMING.csv`.
 - **The lab's MRI files encode animal and date.** A slide in the lab's ablation-video deck embeds
   "IL360705(Ablation) - 20180705_082218_IL36_..." (rat IL36, 5 July 2018): "IL" is the lab's running animal prefix in
   its MRI records, so the MRI study folders for IL64-IL71 would carry the dates.
