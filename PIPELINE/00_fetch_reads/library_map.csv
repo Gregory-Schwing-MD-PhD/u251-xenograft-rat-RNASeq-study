@@ -1,0 +1,11 @@
+library,arm,rat,tissue,run_accession,sample_accession,geo_sample,note
+IL67B,primary,67,tumour,SRR39547369,PENDING,PENDING,untreated lesion
+IL68B,primary,68,tumour,SRR39547366,PENDING,PENDING,untreated lesion
+IL69B,primary,69,tumour,SRR39547370,PENDING,PENDING,untreated lesion
+IL66B,recurrent,66,tumour,SRR39547365,PENDING,PENDING,regrowth after LITT
+NL70B,recurrent,70,tumour,SRR39547364,PENDING,PENDING,regrowth after LITT; the array sheet calls this IL70B
+NL71B,recurrent,71,tumour,SRR39547363,PENDING,PENDING,regrowth after LITT; the array sheet calls this IL71B
+IL64B,no_tumour,64,implanted hemisphere,SRR39547371,PENDING,PENDING,no tumour in the piece; the internal assignment floor
+N168B,contralateral,68,contralateral hemisphere,SRR39547368,PENDING,PENDING,opposite hemisphere of rat 68
+N269B,contralateral,69,contralateral hemisphere,SRR39547367,PENDING,PENDING,opposite hemisphere of rat 69; the array sheet calls this N2
+C2B,culture,,parental culture,SRR39547372,PENDING,PENDING,U251N at the implanted passage
