@@ -1,0 +1,147 @@
+{
+  "analysis": "composition[S4]",
+  "prereg_sha256": "1b823ad50b2eb6299a56cb4b13ef2e99d7dfc46a62ed2bc2508b486ca2383d08",
+  "seed": 20260926,
+  "python": "3.11.16",
+  "numpy": "2.2.6",
+  "node": "amy1",
+  "inputs": {
+    "human_counts": {
+      "path": "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_counts.tsv",
+      "sha256": "8952e59bad589afabc9dae6c102d7ae07b535897d013f8e53e3d5f11de93802f"
+    },
+    "rat_counts": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_host/results_rnaseq/star_salmon/salmon.merged.gene_counts.tsv",
+      "sha256": "902b665dba25de64f02604c1ff0265a132447d1b47983ec20f00592ce03971c5"
+    },
+    "compara_human": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/ref/compara110/homo_sapiens.protein_default.tsv.gz",
+      "sha256": "5204996431e4640cf2dbbabf4f2ad4eeb60da9eb640e47ed4a7350293c721017"
+    },
+    "xengsort_classes": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/spread/rna/xengsort_classes.tsv",
+      "sha256": "6906eeab34b4ae52419eacf0b8ee4fb54300c7099dc9b737fa7ee56b38fb7b72"
+    },
+    "ortho_alt": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/composition/orthologs_hcop_babelgene.tsv",
+      "sha256": "98d3420c14c61efdcce570c0f01b2bb014d54dc029ee115c269bbe3d43da7405"
+    },
+    "human_gtf": {
+      "path": "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/gencode.v44.primary_assembly.annotation.gtf.gz",
+      "sha256": "31ae5d8f663834d98014421072ac5643002ffc635dd0a320d09e8e6e1623de58"
+    },
+    "rat_gtf": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_host/results_rnaseq/genome/Rattus_norvegicus.mRatBN7.2.110.gtf",
+      "sha256": "d26fda567b79937dac44f5d2ac1d9f65b2bf6d8c8c2b22e868e4a9a44792a6f9"
+    }
+  },
+  "C1": {
+    "compara_one2one_pairs": 16172,
+    "pairs_in_both_count_tables": 16170,
+    "excluded_MT_Y_rRNA": 16,
+    "universe": 16154,
+    "kept_meanCPM_ge1_either_arm": 13122
+  },
+  "L3": {
+    "tumour_median_chrY_per_M": 193.05532977418562,
+    "tumours_outside_band": [],
+    "C2B_ratio": 1.3242037539274085
+  },
+  "C2_true_split": {
+    "n_kept": 13122,
+    "f_prim_arm": 0.6635748135469325,
+    "f_rec_arm": 0.4816781971728344,
+    "identity_max_abs_error": 3.469446951953614e-18,
+    "shapley_sum_max_abs_error": 8.881784197001252e-16,
+    "C_share": 0.4705078789663908,
+    "C_share_centred_offset_to_composition": 0.46929191819245036,
+    "C_share_centred_offset_split_equally": 0.4672081260270601,
+    "median_LFC_offset": 0.03928166373343078,
+    "share_composition_dominant_kept": 0.4674592287761012,
+    "share_T_dominant_kept": 0.1898338667885993,
+    "share_H_dominant_kept": 0.11979881115683585,
+    "covariance_residual_flag_share": 0.38035360463344003,
+    "covariance_residual_flagged": true,
+    "sum_abs_phi": {
+      "f": 3331.2575752128705,
+      "T": 1586.4538193019525,
+      "H": 2162.4199361888413
+    }
+  },
+  "H_A1": {
+    "C_share": 0.4705078789663908,
+    "threshold": 0.5,
+    "pass": false,
+    "note": "noise at n = 3 inflates |phi_T| and |phi_H| and biases C-share down (conservative for H-A1)"
+  },
+  "splits_cshare_vs_abs_diff_f_RNA_spearman": {
+    "rho": 0.8545454545454544,
+    "p": 0.0016368033159867143
+  },
+  "sensitivities": {
+    "S3_without_IL66B": {
+      "n_kept": 13122,
+      "f_prim_arm": 0.6635748135469325,
+      "f_rec_arm": 0.5016602812030969,
+      "identity_max_abs_error": 3.469446951953614e-18,
+      "shapley_sum_max_abs_error": 8.881784197001252e-16,
+      "C_share": 0.3738661707062208,
+      "C_share_centred_offset_to_composition": 0.374943085447271,
+      "C_share_centred_offset_split_equally": 0.37442724886233114,
+      "median_LFC_offset": -0.010582830296705481,
+      "share_composition_dominant_kept": 0.31283340954122846,
+      "share_T_dominant_kept": 0.22199359853680842,
+      "share_H_dominant_kept": 0.21277244322511812,
+      "covariance_residual_flag_share": 0.44589239445206524,
+      "covariance_residual_flagged": true,
+      "sum_abs_phi": {
+        "f": 2960.694114359355,
+        "T": 1919.7261592811317,
+        "H": 3038.7078699053754
+      }
+    },
+    "matched_pair_IL67B_vs_NL70B": {
+      "n_kept": 13122,
+      "f_prim_arm": 0.5741923661744136,
+      "f_rec_arm": 0.5571673770740732,
+      "identity_max_abs_error": 3.469446951953614e-18,
+      "shapley_sum_max_abs_error": 1.7763568394002505e-15,
+      "C_share": 0.043949985869229165,
+      "C_share_centred_offset_to_composition": 0.11125335064164456,
+      "C_share_centred_offset_split_equally": 0.05619284966835104,
+      "median_LFC_offset": -0.05540221957091962,
+      "share_composition_dominant_kept": 0.007087334247828075,
+      "share_T_dominant_kept": 0.38164913885078494,
+      "share_H_dominant_kept": 0.5476299344612102,
+      "covariance_residual_flag_share": 0.0,
+      "covariance_residual_flagged": false,
+      "sum_abs_phi": {
+        "f": 302.29572407095316,
+        "T": 2180.0201506666845,
+        "H": 4395.8598081947275
+      }
+    },
+    "S6_length_ratio_0.8_1.25": {
+      "n_kept": 5492,
+      "f_prim_arm": 0.678117635823759,
+      "f_rec_arm": 0.49495381391167603,
+      "identity_max_abs_error": 6.938893903907228e-18,
+      "shapley_sum_max_abs_error": 4.440892098500626e-16,
+      "C_share": 0.4668060819118588,
+      "C_share_centred_offset_to_composition": 0.4649222057089636,
+      "C_share_centred_offset_split_equally": 0.46248914478425895,
+      "median_LFC_offset": 0.04726646643086774,
+      "share_composition_dominant_kept": 0.4539329934450109,
+      "share_T_dominant_kept": 0.20630007283321194,
+      "share_H_dominant_kept": 0.11252731245447924,
+      "covariance_residual_flag_share": 0.3780043699927167,
+      "covariance_residual_flagged": true,
+      "sum_abs_phi": {
+        "f": 1334.8235484256065,
+        "T": 663.6194856725454,
+        "H": 861.0388795878926
+      }
+    }
+  },
+  "H_A1_sign_holds": false
+}

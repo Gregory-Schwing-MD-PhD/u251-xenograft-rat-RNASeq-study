@@ -1,0 +1,65 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\c6_summary.tsv",
+ "_sha256": "dcace4ac0dc9de1ca1725bbf565c91e7ff507c0f399acef23e1bf905c6cace0f",
+ "_key_column": "key",
+ "rows": {
+  "corr_f_arm": {
+   "key": "corr_f_arm",
+   "value": "-0.7042165493"
+  },
+  "variance_inflation_arm": {
+   "key": "variance_inflation_arm",
+   "value": "1.983815825"
+  },
+  "de_arm_term_f_plus_arm": {
+   "key": "de_arm_term_f_plus_arm",
+   "value": "30"
+  },
+  "de_arm_only_design": {
+   "key": "de_arm_only_design",
+   "value": "133"
+  },
+  "human_stream_DE_genes": {
+   "key": "human_stream_DE_genes",
+   "value": "82"
+  },
+  "human_stream_DE_in_one2one_universe": {
+   "key": "human_stream_DE_in_one2one_universe",
+   "value": "48"
+  },
+  "recovered_same_sign_f_plus_arm": {
+   "key": "recovered_same_sign_f_plus_arm",
+   "value": "2"
+  },
+  "recovered_share_f_plus_arm": {
+   "key": "recovered_share_f_plus_arm",
+   "value": "0.04166666667"
+  },
+  "recovered_same_sign_arm_only": {
+   "key": "recovered_same_sign_arm_only",
+   "value": "10"
+  },
+  "recovered_share_arm_only": {
+   "key": "recovered_share_arm_only",
+   "value": "0.2083333333"
+  },
+  "expectation": {
+   "key": "expectation",
+   "value": "fewer than half recovered, from collinearity at n = 3; written as such, not as biology"
+  }
+ },
+ "order": [
+  "corr_f_arm",
+  "variance_inflation_arm",
+  "de_arm_term_f_plus_arm",
+  "de_arm_only_design",
+  "human_stream_DE_genes",
+  "human_stream_DE_in_one2one_universe",
+  "recovered_same_sign_f_plus_arm",
+  "recovered_share_f_plus_arm",
+  "recovered_same_sign_arm_only",
+  "recovered_share_arm_only",
+  "expectation"
+ ],
+ "n_rows": 11
+}

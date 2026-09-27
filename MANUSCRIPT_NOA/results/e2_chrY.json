@@ -1,0 +1,100 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\e2_chrY.tsv",
+ "_sha256": "f0180ec3d21f2d07f7f19e60a455fe9093967fd3ee7c13e07bb4251bc77314a3",
+ "_key_column": "(unnamed)",
+ "rows": {
+  "C2B": {
+   "": "C2B",
+   "Y7_counts": "16631.89",
+   "human_gene_counts": "65058641.936",
+   "Y_per_million_human_counts": "255.6445924026704",
+   "xengsort_graft_pairs": "84519445.0",
+   "Y_per_million_graft_pairs": "196.78181748590518"
+  },
+  "IL64B": {
+   "": "IL64B",
+   "Y7_counts": "4.0",
+   "human_gene_counts": "1358753.0119999999",
+   "Y_per_million_human_counts": "2.943875718893347",
+   "xengsort_graft_pairs": "314037.0",
+   "Y_per_million_graft_pairs": "12.737352604947825"
+  },
+  "IL66B": {
+   "": "IL66B",
+   "Y7_counts": "3593.8329999999996",
+   "human_gene_counts": "20321590.017999995",
+   "Y_per_million_human_counts": "176.84802206996284",
+   "xengsort_graft_pairs": "25459283.0",
+   "Y_per_million_graft_pairs": "141.1600240273852"
+  },
+  "IL67B": {
+   "": "IL67B",
+   "Y7_counts": "4775.037",
+   "human_gene_counts": "25386280.034",
+   "Y_per_million_human_counts": "188.09518344573382",
+   "xengsort_graft_pairs": "31886295.0",
+   "Y_per_million_graft_pairs": "149.75201728516907"
+  },
+  "IL68B": {
+   "": "IL68B",
+   "Y7_counts": "5300.639",
+   "human_gene_counts": "25316552.040999997",
+   "Y_per_million_human_counts": "209.37444370053427",
+   "xengsort_graft_pairs": "32225887.0",
+   "Y_per_million_graft_pairs": "164.48388216591215"
+  },
+  "IL69B": {
+   "": "IL69B",
+   "Y7_counts": "7864.128000000001",
+   "human_gene_counts": "39714713.995000005",
+   "Y_per_million_human_counts": "198.01547610263736",
+   "xengsort_graft_pairs": "49327614.0",
+   "Y_per_million_graft_pairs": "159.42648269993356"
+  },
+  "N168B": {
+   "": "N168B",
+   "Y7_counts": "40.0",
+   "human_gene_counts": "1702195.9940000002",
+   "Y_per_million_human_counts": "23.499056595711853",
+   "xengsort_graft_pairs": "435428.0",
+   "Y_per_million_graft_pairs": "91.86363761632234"
+  },
+  "N269B": {
+   "": "N269B",
+   "Y7_counts": "466.12399999999997",
+   "human_gene_counts": "4158124.002000001",
+   "Y_per_million_human_counts": "112.09959101166793",
+   "xengsort_graft_pairs": "3823923.0",
+   "Y_per_million_graft_pairs": "121.89680597648015"
+  },
+  "NL70B": {
+   "": "NL70B",
+   "Y7_counts": "4514.478",
+   "human_gene_counts": "25299612.039",
+   "Y_per_million_human_counts": "178.44060189700997",
+   "xengsort_graft_pairs": "31293679.0",
+   "Y_per_million_graft_pairs": "144.26165744206682"
+  },
+  "NL71B": {
+   "": "NL71B",
+   "Y7_counts": "5153.385",
+   "human_gene_counts": "24940392.06",
+   "Y_per_million_human_counts": "206.62806693665104",
+   "xengsort_graft_pairs": "29210358.0",
+   "Y_per_million_graft_pairs": "176.42320576831"
+  }
+ },
+ "order": [
+  "C2B",
+  "IL64B",
+  "IL66B",
+  "IL67B",
+  "IL68B",
+  "IL69B",
+  "N168B",
+  "N269B",
+  "NL70B",
+  "NL71B"
+ ],
+ "n_rows": 10
+}

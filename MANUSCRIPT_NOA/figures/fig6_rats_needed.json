@@ -1,0 +1,46 @@
+{
+ "figure": "fig6_rats_needed",
+ "px": [
+  3735,
+  2904
+ ],
+ "dpi": 600,
+ "panels": [
+  {
+   "letter": "A",
+   "file": "fig6_rats_needed_p1.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p1.png",
+   "sha256": "256402a052c5580999122bbafc52e4bcae40ebf8986fa5f80f1be4ed2df59c4b"
+  },
+  {
+   "letter": "B",
+   "file": "fig6_rats_needed_p2.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p2.png",
+   "sha256": "508e1ee6e6d002a824149891d2bfde1908fdaad190367422dda261c27f687851"
+  },
+  {
+   "letter": "C",
+   "file": "fig6_rats_needed_p3.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p3.png",
+   "sha256": "d06124abe7b449559fb53d254f731482ae3f11307487910e7d78d66caee1c57b"
+  },
+  {
+   "letter": "D",
+   "file": "fig6_rats_needed_p4.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p4.png",
+   "sha256": "0fe9e9b5476883ce17828490460a9e023bc634b6db47c6c17d449cd624987600"
+  },
+  {
+   "letter": "E",
+   "file": "fig6_rats_needed_p8.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p8.png",
+   "sha256": "45cb6f4c3567acaa2f55264ec0df4bab7192a374a843443fbc2a8cd3e65adb3a"
+  },
+  {
+   "letter": "F",
+   "file": "fig6_rats_needed_p9.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig6_rats_needed_p9.png",
+   "sha256": "3ed9bee20ee7f31a8e962d997f2ebb6bab53211a50a04161aec3992860f45828"
+  }
+ ]
+}

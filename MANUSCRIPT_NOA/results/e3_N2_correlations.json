@@ -1,0 +1,87 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\e3_N2_correlations.tsv",
+ "_sha256": "e44e8d3f24d79a188a13aa7e4ac4e3ad051a1362a39c116dbd4fd218afd44ab8",
+ "_key_column": "sample",
+ "rows": {
+  "IL66B": {
+   "sample": "IL66B",
+   "role": "recurrent",
+   "r_profile": "0.795061163003155",
+   "z_profile": "8.71411098127657",
+   "null_sd_profile": "0.0925950275398297",
+   "r_residual": "0.515950918825104",
+   "z_residual": "23.4877993476402",
+   "null_sd_residual": "0.0220512498370878"
+  },
+  "IL67B": {
+   "sample": "IL67B",
+   "role": "primary",
+   "r_profile": "0.761663855090557",
+   "z_profile": "8.62394617782538",
+   "null_sd_profile": "0.0896453970115602",
+   "r_residual": "0.362596791428438",
+   "z_residual": "18.278476692864",
+   "null_sd_residual": "0.0199055999615435"
+  },
+  "IL68B": {
+   "sample": "IL68B",
+   "role": "primary",
+   "r_profile": "0.751963139621722",
+   "z_profile": "8.31171765560437",
+   "null_sd_profile": "0.0918737403804075",
+   "r_residual": "0.308357909921329",
+   "z_residual": "15.5323086390771",
+   "null_sd_residual": "0.0199794901449726"
+  },
+  "IL69B": {
+   "sample": "IL69B",
+   "role": "own core",
+   "r_profile": "0.75637325016684",
+   "z_profile": "8.16252370073389",
+   "null_sd_profile": "0.094124095048299",
+   "r_residual": "0.330481453297002",
+   "z_residual": "13.366702111384",
+   "null_sd_residual": "0.0249787653275024"
+  },
+  "IL70B": {
+   "sample": "IL70B",
+   "role": "recurrent",
+   "r_profile": "0.777470791307375",
+   "z_profile": "8.56436345643004",
+   "null_sd_profile": "0.0921300755159759",
+   "r_residual": "0.423326313611034",
+   "z_residual": "19.5800181118428",
+   "null_sd_residual": "0.0217163670725102"
+  },
+  "IL71B": {
+   "sample": "IL71B",
+   "role": "recurrent",
+   "r_profile": "0.823470480044009",
+   "z_profile": "9.01423278547489",
+   "null_sd_profile": "0.092622966287024",
+   "r_residual": "0.593950567150628",
+   "z_residual": "28.7116446068828",
+   "null_sd_residual": "0.0207499142756191"
+  },
+  "C2B": {
+   "sample": "C2B",
+   "role": "culture",
+   "r_profile": "0.721031894401752",
+   "z_profile": "8.30534732804373",
+   "null_sd_profile": "0.0882146276038274",
+   "r_residual": "NA",
+   "z_residual": "NA",
+   "null_sd_residual": "NA"
+  }
+ },
+ "order": [
+  "IL66B",
+  "IL67B",
+  "IL68B",
+  "IL69B",
+  "IL70B",
+  "IL71B",
+  "C2B"
+ ],
+ "n_rows": 7
+}

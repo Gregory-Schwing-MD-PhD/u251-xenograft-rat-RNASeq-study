@@ -1,0 +1,9 @@
+# build outputs: the PDF is rebuilt from the tracked sources and the result files
+main.pdf
+main.log
+main.blg
+main.bbl
+main.aux
+main.out
+*.fls
+*.fdb_latexmk

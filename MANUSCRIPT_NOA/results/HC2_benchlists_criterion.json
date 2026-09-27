@@ -1,0 +1,150 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\HC2_benchlists_criterion.tsv",
+ "_sha256": "eec140a6daddf995e6efc520d30e1b8d65a81c5f642a580e3e3ca51b60433f09",
+ "_key_column": "list",
+ "rows": {
+  "E1-all": {
+   "list": "E1-all",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E1-any": {
+   "list": "E1-any",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E2-b2": {
+   "list": "E2-b2",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E2-b3": {
+   "list": "E2-b3",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E3-all": {
+   "list": "E3-all",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E3-any": {
+   "list": "E3-any",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E3-half": {
+   "list": "E3-half",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E4a": {
+   "list": "E4a",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E4b": {
+   "list": "E4b",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E5-Rnor6-any": {
+   "list": "E5-Rnor6-any",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E5-Rnor6-unique": {
+   "list": "E5-Rnor6-unique",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E5-mR7-any": {
+   "list": "E5-mR7-any",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "E5-mR7-any-Rexp": {
+   "list": "E5-mR7-any-Rexp",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  },
+  "bespoke_rat_list": {
+   "list": "bespoke_rat_list",
+   "A": "1",
+   "B_bespoke": "4",
+   "B_fDNA": "4",
+   "C": "1",
+   "criterion_B_bespoke": "TRUE",
+   "criterion_B_fDNA": "TRUE"
+  }
+ },
+ "order": [
+  "E1-all",
+  "E1-any",
+  "E2-b2",
+  "E2-b3",
+  "E3-all",
+  "E3-any",
+  "E3-half",
+  "E4a",
+  "E4b",
+  "E5-Rnor6-any",
+  "E5-Rnor6-unique",
+  "E5-mR7-any",
+  "E5-mR7-any-Rexp",
+  "bespoke_rat_list"
+ ],
+ "n_rows": 14
+}

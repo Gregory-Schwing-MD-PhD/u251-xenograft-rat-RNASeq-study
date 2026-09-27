@@ -1,0 +1,28 @@
+{
+ "figure": "fig4_methylation",
+ "px": [
+  3776,
+  3718
+ ],
+ "dpi": 600,
+ "panels": [
+  {
+   "letter": "A",
+   "file": "fig4b_dmp_counts.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig4b_dmp_counts.png",
+   "sha256": "34f7579bf44fa7f78a30e9eb1529e2805e52160fa7901bb3bc98be4ebad53fa2"
+  },
+  {
+   "letter": "B",
+   "file": "fig4c_mgmt_stp27.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig4c_mgmt_stp27.png",
+   "sha256": "30ad17b45ba9399a4c5e0287b97a5c984777b334b4868046c648b03e311bc36b"
+  },
+  {
+   "letter": "C",
+   "file": "fig4a_amplitude_dilution.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig4a_amplitude_dilution.png",
+   "sha256": "5742cebe808ddc73b3012be43c87e054639088131e910af51dbb329d80f9d50f"
+  }
+ ]
+}

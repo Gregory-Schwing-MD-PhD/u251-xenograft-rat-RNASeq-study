@@ -1,0 +1,106 @@
+{
+  "analysis": "T2",
+  "prereg_sha256": "1b823ad50b2eb6299a56cb4b13ef2e99d7dfc46a62ed2bc2508b486ca2383d08",
+  "seed": 20260926,
+  "python": "3.11.16",
+  "numpy": "2.2.6",
+  "node": "alt2",
+  "inputs": {
+    "sites": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/allelic/t2_candidate_sites.tsv",
+      "sha256": "96403774390be5bc167c52120aa8858c0d355d17f67d726b7f13d1ce842d7ea6"
+    },
+    "il64b": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/rna/allelic/il64b_covered.tsv",
+      "sha256": "287bfb90572ffc3caad16fe01e5572ce69e91d3855fa166b255e16a06c7f775a"
+    },
+    "cnv_arm": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_meth/results/cnv/cnv_arm_log2.tsv",
+      "sha256": "aa868e137574c1e34579ea19cac279c5dc25b050579e937021d896824806fda1"
+    },
+    "xval_conc": {
+      "path": "/rs/rs_grp_oschome/go2432/u251_science/xval/rna/genotype_concordance_per_library.tsv",
+      "sha256": "2c8ab6da940ba657f63b6862813aa87bcabd938d60c1a2ffa59b4042ccef4169"
+    }
+  },
+  "sites": {
+    "before_IL64B": 154,
+    "IL64B_covered_removed": 25,
+    "final": 129,
+    "genes": 120
+  },
+  "arms_used": [
+    "12q",
+    "1p",
+    "1q",
+    "3q"
+  ],
+  "B_per_tumour": {
+    "IL67B": 1.3065824703611513,
+    "IL68B": 1.0492229479335853,
+    "IL69B": 1.639798825319907,
+    "IL66B": 1.3127717029831354,
+    "NL70B": 1.4147420594507825,
+    "NL71B": 0.8694784931358369,
+    "N269B": 0.7582743713407086
+  },
+  "H_T2": {
+    "statistic": "B_allelic_imbalance_slope_on_C2B",
+    "per_animal": {
+      "IL67B": 1.3065824703611513,
+      "IL68B": 1.0492229479335853,
+      "IL69B": 1.639798825319907,
+      "IL66B": 1.3127717029831354,
+      "NL70B": 1.4147420594507825,
+      "NL71B": 0.8694784931358369
+    },
+    "mean_prim": 1.3318680812048813,
+    "mean_rec": 1.1989974185232517,
+    "diff_rec_minus_prim": -0.13287066268162961,
+    "direction_tested": "greater",
+    "relabelling_rank": 14,
+    "p_one_sided": 0.7,
+    "n_labellings": 20,
+    "ci90_relabelling_inversion": [
+      -0.7700762949802304,
+      0.36532289598814627
+    ],
+    "ci95_welch_normal_theory": [
+      -0.7972321224320528,
+      0.5314907970687935
+    ],
+    "welch_df": 3.9982053316841446,
+    "matched_pair_NL70B_minus_IL67B": 0.10815958908963119,
+    "_hedges_g_power_input_only": -0.3627730396039649,
+    "thinning_null": {
+      "median": -0.08562095125602409,
+      "q95": 0.0969453518283564,
+      "above_q95": false,
+      "share_null_ge_obs": 0.664
+    },
+    "gates_pass": false,
+    "status": "uninformative (a gate failed or is pending)",
+    "matched_pair_B_NL70B_minus_IL67B": 0.10815958908963119
+  },
+  "gates": {
+    "G2a": {
+      "status": "pending or unreadable: single positional indexer is out-of-bounds",
+      "pass": null
+    },
+    "G2b": {
+      "arms": 4,
+      "spearman": 0.7999999999999999,
+      "p": 0.20000000000000007,
+      "pass": false
+    }
+  },
+  "independent_counter_GATK_ASEReadCounter": {
+    "C2B": {
+      "error": "division by zero"
+    },
+    "IL69B": {
+      "error": "division by zero"
+    }
+  },
+  "ceiling": "allele-specific expression can change with cell state; an RNA VAF is never a cancer-cell fraction"
+}

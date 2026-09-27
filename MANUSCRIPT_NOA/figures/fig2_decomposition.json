@@ -1,0 +1,28 @@
+{
+ "figure": "fig2_decomposition",
+ "px": [
+  3006,
+  3152
+ ],
+ "dpi": 600,
+ "panels": [
+  {
+   "letter": "A",
+   "file": "fig2a_shapley_de_genes.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2a_shapley_de_genes.png",
+   "sha256": "0b897177826d84bde22e45dfdc353247f0a490c7adf63354c309ad3b991347c0"
+  },
+  {
+   "letter": "B",
+   "file": "fig2b_splits_p1.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2b_splits_p1.png",
+   "sha256": "e9d6bd384ce12695387bc089975ae0fda285c683f92148d55f7aeeb143e490e6"
+  },
+  {
+   "letter": "C",
+   "file": "fig2b_splits_p2.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2b_splits_p2.png",
+   "sha256": "77c5cc587e9fee2edfd1b563eb0bea958ea13f67c23013fcfd3afeb41e6b7a8e"
+  }
+ ]
+}

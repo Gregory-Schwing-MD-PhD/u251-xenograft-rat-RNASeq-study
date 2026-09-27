@@ -1,0 +1,58 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\M2_HM1_summary.tsv",
+ "_sha256": "e174a232625c726b1acea6f9eb73d672ca57cd6be801949fe42721c703b15993",
+ "_key_column": "which",
+ "rows": {
+  "RNA": {
+   "which": "RNA",
+   "rec_minus_prim": "-0.157122803166834",
+   "exact90_lo": "-0.34957383447133",
+   "exact90_hi": "0.00150435692651141",
+   "welch95_lo": "-0.400845344382844",
+   "welch95_hi": "0.0865997380491771",
+   "p_one_sided": "0.1",
+   "rank": "2",
+   "registered": "FALSE"
+  },
+  "DNA_curve": {
+   "which": "DNA_curve",
+   "rec_minus_prim": "-0.149421095736418",
+   "exact90_lo": "-0.231553164148782",
+   "exact90_hi": "-0.0764317482117708",
+   "welch95_lo": "-0.25106167855732",
+   "welch95_hi": "-0.0477805129155162",
+   "p_one_sided": "0.05",
+   "rank": "1",
+   "registered": "FALSE"
+  },
+  "DNA_curve_cal": {
+   "which": "DNA_curve_cal",
+   "rec_minus_prim": "-0.268866136419753",
+   "exact90_lo": "-0.405996148595491",
+   "exact90_hi": "-0.140819617398803",
+   "welch95_lo": "-0.43249244185423",
+   "welch95_hi": "-0.105239830985276",
+   "p_one_sided": "0.05",
+   "rank": "1",
+   "registered": "FALSE"
+  },
+  "DNA_bespoke": {
+   "which": "DNA_bespoke",
+   "rec_minus_prim": "-0.195813758632466",
+   "exact90_lo": "-0.340118155270781",
+   "exact90_hi": "-0.0588476610505809",
+   "welch95_lo": "-0.367118307328909",
+   "welch95_hi": "-0.0245092099360228",
+   "p_one_sided": "0.05",
+   "rank": "1",
+   "registered": "TRUE"
+  }
+ },
+ "order": [
+  "RNA",
+  "DNA_curve",
+  "DNA_curve_cal",
+  "DNA_bespoke"
+ ],
+ "n_rows": 4
+}

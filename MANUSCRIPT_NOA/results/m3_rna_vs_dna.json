@@ -1,0 +1,73 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\m3_rna_vs_dna.tsv",
+ "_sha256": "497b03e2af38fde566989b59546dc4a68f6569bba539a9081ae07b82fd2858a8",
+ "_key_column": "(unnamed)",
+ "rows": {
+  "IL67B": {
+   "": "IL67B",
+   "f_RNA": "0.4251763656877607",
+   "f_DNA_bespoke_uncalibrated": "0.714228617021511",
+   "odds_ratio_RNA_over_DNA": "0.2959483947467322",
+   "cell_share_DNAindex_1": "0.6811731790439777",
+   "cell_share_DNAindex_2": "0.5164993373051003"
+  },
+  "IL68B": {
+   "": "IL68B",
+   "f_RNA": "0.45380284626323464",
+   "f_DNA_bespoke_uncalibrated": "0.77426012784677",
+   "odds_ratio_RNA_over_DNA": "0.24223626558233613",
+   "cell_share_DNAindex_1": "0.7456759914905203",
+   "cell_share_DNAindex_2": "0.5944843488857487"
+  },
+  "IL69B": {
+   "": "IL69B",
+   "f_RNA": "0.6440011763610134",
+   "f_DNA_bespoke_uncalibrated": "0.828902574902492",
+   "odds_ratio_RNA_over_DNA": "0.373403240692",
+   "cell_share_DNAindex_1": "0.8054993708564392",
+   "cell_share_DNAindex_2": "0.674339846462844"
+  },
+  "IL66B": {
+   "": "IL66B",
+   "f_RNA": "0.2944273418896837",
+   "f_DNA_bespoke_uncalibrated": "0.585784668270735",
+   "odds_ratio_RNA_over_DNA": "0.29506966543945745",
+   "cell_share_DNAindex_1": "0.5472891933115912",
+   "cell_share_DNAindex_2": "0.3767365058426106"
+  },
+  "NL70B": {
+   "": "NL70B",
+   "f_RNA": "0.4266807226142721",
+   "f_DNA_bespoke_uncalibrated": "0.65538095597093",
+   "odds_ratio_RNA_over_DNA": "0.39133792054326016",
+   "cell_share_DNAindex_1": "0.6191482662956905",
+   "cell_share_DNAindex_2": "0.4483814237135706"
+  },
+  "NL71B": {
+   "": "NL71B",
+   "f_RNA": "0.3305039143075518",
+   "f_DNA_bespoke_uncalibrated": "0.488784419631711",
+   "odds_ratio_RNA_over_DNA": "0.516315654153446",
+   "cell_share_DNAindex_1": "0.4497422114994422",
+   "cell_share_DNAindex_2": "0.2901080161219138"
+  },
+  "N269B": {
+   "": "N269B",
+   "f_RNA": "0.048976962842540814",
+   "f_DNA_bespoke_uncalibrated": "0.197922378276771",
+   "odds_ratio_RNA_over_DNA": "0.20869993393428105",
+   "cell_share_DNAindex_1": "0.17419649200873244",
+   "cell_share_DNAindex_2": "0.09540812647489205"
+  }
+ },
+ "order": [
+  "IL67B",
+  "IL68B",
+  "IL69B",
+  "IL66B",
+  "NL70B",
+  "NL71B",
+  "N269B"
+ ],
+ "n_rows": 7
+}

@@ -72,3 +72,27 @@ DATA/METHYLATION
 # older Abstract 418 decks kept locally, never part of the public repository
 SLIDES/CNS2026_Schwing_Abstract418.pptx
 SLIDES/CNS2026_Schwing_Abstract418_2026-09-07_lab_template.pptx
+
+# ---------------------------------------------------------------------------
+# Data protection moved here from .git/info/exclude on 2026-09-27. An exclude
+# file is per-clone and never travels: re-clone the repository and a `git add -A`
+# would publish the lab's derived data and the unpublished drafts.
+beta_values.rda
+MBR/
+ANALYSIS/cibersort/vendor/
+ANALYSIS/human_cohorts/raw/
+ANALYSIS/host/refs_online/
+*.pptx
+*.docx
+*.zip
+DATA/RNASEQ/RAW/
+**/*.idat
+**/*.IDAT
+**/*.fastq
+**/*.fastq.gz
+**/*.fq.gz
+**/*.bam
+**/*.bai
+**/*.cram
+**/*.rda
+**/*.rds

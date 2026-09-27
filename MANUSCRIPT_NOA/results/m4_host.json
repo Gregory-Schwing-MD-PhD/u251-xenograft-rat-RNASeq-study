@@ -1,0 +1,140 @@
+{
+  "versions": ["1.0.3", "1.0.4.9000", "1.30.0"],
+  "mouse_symbol_to_rat_one2one": 9955,
+  "bretigea_markers_mapped_per_type": {
+    "ast": 421,
+    "end": 446,
+    "mic": 437,
+    "neu": 477,
+    "oli": 442,
+    "opc": 179
+  },
+  "check_i": {
+    "BRETIGEA": {
+      "neurons_low_above_every_tumour": true,
+      "myeloid_every_tumour_above_IL64B_N168B": true
+    },
+    "MGP": {
+      "neurons_low_above_every_tumour": true,
+      "myeloid_every_tumour_above_IL64B_N168B": true
+    },
+    "CIBERSORT": {
+      "neurons_low_above_every_tumour": true,
+      "myeloid_every_tumour_above_IL64B_N168B": true
+    }
+  },
+  "check_ii": {
+    "ast": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": 0.8,
+        "BRETIGEA_v_MGP": 0.933333333333333,
+        "CIBERSORT_v_MGP": 0.8
+      },
+      "interpretable": true
+    },
+    "neu": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": 0.933333333333333,
+        "BRETIGEA_v_MGP": 0.933333333333333,
+        "CIBERSORT_v_MGP": 0.833333333333333
+      },
+      "interpretable": true
+    },
+    "oli": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": 0.783333333333333,
+        "BRETIGEA_v_MGP": 1,
+        "CIBERSORT_v_MGP": 0.783333333333333
+      },
+      "interpretable": true
+    },
+    "mic": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": 0.95,
+        "BRETIGEA_v_MGP": 0.95,
+        "CIBERSORT_v_MGP": 0.95
+      },
+      "interpretable": true
+    },
+    "end": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": 0.4,
+        "BRETIGEA_v_MGP": 0.933333333333333,
+        "CIBERSORT_v_MGP": 0.5
+      },
+      "interpretable": true
+    },
+    "opc": {
+      "spearman": {
+        "BRETIGEA_v_CIBERSORT": -0.3,
+        "BRETIGEA_v_MGP": 0.966666666666667,
+        "CIBERSORT_v_MGP": -0.2
+      },
+      "interpretable": true
+    }
+  },
+  "check_iii": {
+    "Cd3_CPM": {
+      "IL64B": 0.0872926033312523,
+      "IL66B": 0.155418164843293,
+      "IL67B": 0.653924155735906,
+      "IL68B": 0.246143626371461,
+      "IL69B": 2.9661260511113,
+      "N168B": 0,
+      "N269B": 0.482281851964518,
+      "NL70B": 9.35235794640301,
+      "NL71B": 25.5466498006812
+    },
+    "LM22_T_cell_share": {
+      "IL67B": 0.0692378048085878,
+      "IL68B": 0.121688388362052,
+      "IL69B": 0.103357099314256,
+      "IL66B": 0.0917031344548784,
+      "NL70B": 0.168093338768514,
+      "NL71B": 0.200142012093508,
+      "IL64B": 0.360252205395414,
+      "N168B": 0.380341298443556,
+      "N269B": 0.263335877895134
+    },
+    "methods_assigning_T_over_5pct": "LM22 (rejected)",
+    "note": "BRETIGEA, MGP and the Zhang/Bowman CIBERSORT signature carry no T-cell type"
+  },
+  "programme_genes": {
+    "BMDM_up": 57,
+    "MG_down": 106
+  },
+  "programmes_dropped": ["Liddelow 2017 / Zamanian 2012 pan-reactive, A1, A2", "Keren-Shaul 2017 DAM", "Dorrier 2021 fibrotic scar"],
+  "H_M2": {
+    "H_M2a_normal_parenchyma": {
+      "per_tumour": {
+        "IL67B": -0.15772107864574,
+        "IL68B": -0.612733502945636,
+        "IL69B": -1.30774857188832,
+        "IL66B": 0.154902337767554,
+        "NL70B": -0.760794785849151,
+        "NL71B": -0.871023631583222
+      },
+      "diff_rec_minus_prim": 0.200429024604958,
+      "rank": 7,
+      "p_one_sided": 0.35
+    },
+    "H_M2b_reactive": {
+      "per_tumour": {
+        "IL67B": 0.464663780982091,
+        "IL68B": 0.413438391620227,
+        "IL69B": 0.903067258785962,
+        "IL66B": 0.209500357918091,
+        "NL70B": 0.899883503900622,
+        "NL71B": 0.908647477490387
+      },
+      "diff_rec_minus_prim": 0.0789539693069395,
+      "rank": 9,
+      "p_one_sided": 0.45
+    },
+    "holm": {
+      "H_M2a": 0.7,
+      "H_M2b": 0.7
+    },
+    "note": "descriptive; stated in advance that neither can pass at 0.05 after Holm; reactive index reduced to z(BRETIGEA microglia) because no reactive programme list was retrievable verbatim"
+  }
+}

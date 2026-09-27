@@ -1,0 +1,34 @@
+{
+ "figure": "fig3_programmes",
+ "px": [
+  4272,
+  3455
+ ],
+ "dpi": 600,
+ "panels": [
+  {
+   "letter": "A",
+   "file": "fig2c_categories_by_view.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2c_categories_by_view.png",
+   "sha256": "193b5af45902511b6322b2f12b6482386f9d27b48293bdeeb322e8d95ea3ada1"
+  },
+  {
+   "letter": "B",
+   "file": "fig2d_mes_human_vs_virtual_p1.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2d_mes_human_vs_virtual_p1.png",
+   "sha256": "cf4f6aa0df5a7482e436575d048bbd80e688ba048eea94bc73122477541edbff"
+  },
+  {
+   "letter": "C",
+   "file": "fig2d_mes_human_vs_virtual_p2.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig2d_mes_human_vs_virtual_p2.png",
+   "sha256": "83ac4c8a4a977c50897d1253b81e7998e0161f3b0645cd09d3ef9c70e4026569"
+  },
+  {
+   "letter": "D",
+   "file": "fig5a_dig_arms_p2.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig5a_dig_arms_p2.png",
+   "sha256": "52534bd61caab4f439ecab214aab4b0337b403353e99a36292ca62e54a634cb6"
+  }
+ ]
+}

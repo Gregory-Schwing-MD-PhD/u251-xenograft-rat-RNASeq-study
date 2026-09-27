@@ -1,0 +1,1902 @@
+{
+  "mode": "full",
+  "prereg_sha256": "00d0f72b317a32bcae94e204d9dfc58b50aa00a7544fd5d5bd08ee769e822cf5",
+  "started": "2026-09-27T00:32:08-0400",
+  "set_sizes_annotation": [
+    {
+      "host": "mus_musculus",
+      "H_G": 30635,
+      "H_R": 56837,
+      "B_G": 402,
+      "B_R": 664,
+      "H_all": 634721,
+      "B_all": 3896
+    },
+    {
+      "host": "rattus_norvegicus",
+      "H_G": 31124,
+      "H_R": 57462,
+      "B_G": 364,
+      "B_R": 616,
+      "H_all": 637221,
+      "B_all": 3716
+    }
+  ],
+  "step1": {
+    "dataset": "GSE310817",
+    "criterion": "primary S, all real mixtures: MAE <= 0.05 and max |error| <= 0.10",
+    "pass": false,
+    "E_max_abs_error": 0.530986,
+    "sets": {
+      "HG": 30635,
+      "HR": 56837,
+      "BG": 402,
+      "BR": 664,
+      "Hall": 634721,
+      "Ball": 3896,
+      "dropped_nonfinite": 0
+    },
+    "metrics": {
+      "noscale": {
+        "n": 28,
+        "MAE": 0.292893,
+        "max_abs": 0.609125,
+        "bias": 0.292893,
+        "RMSE": 0.340438,
+        "by_batch": {
+          "b1": {
+            "n": 10,
+            "MAE": 0.268572,
+            "max_abs": 0.472194,
+            "bias": 0.268572,
+            "RMSE": 0.298322
+          },
+          "b2": {
+            "n": 18,
+            "MAE": 0.306404,
+            "max_abs": 0.609125,
+            "bias": 0.306404,
+            "RMSE": 0.361723
+          }
+        },
+        "by_tissue": {
+          "Fat": {
+            "n": 14,
+            "MAE": 0.270219,
+            "max_abs": 0.472194,
+            "bias": 0.270219,
+            "RMSE": 0.308207
+          },
+          "Spleen": {
+            "n": 14,
+            "MAE": 0.315566,
+            "max_abs": 0.609125,
+            "bias": 0.315566,
+            "RMSE": 0.36987
+          }
+        }
+      },
+      "primary": {
+        "n": 28,
+        "MAE": 0.241671,
+        "max_abs": 0.530986,
+        "bias": 0.241671,
+        "RMSE": 0.281049,
+        "by_batch": {
+          "b1": {
+            "n": 10,
+            "MAE": 0.239554,
+            "max_abs": 0.409312,
+            "bias": 0.239554,
+            "RMSE": 0.264979
+          },
+          "b2": {
+            "n": 18,
+            "MAE": 0.242847,
+            "max_abs": 0.530986,
+            "bias": 0.242847,
+            "RMSE": 0.289591
+          }
+        },
+        "by_tissue": {
+          "Fat": {
+            "n": 14,
+            "MAE": 0.205339,
+            "max_abs": 0.409312,
+            "bias": 0.205339,
+            "RMSE": 0.234263
+          },
+          "Spleen": {
+            "n": 14,
+            "MAE": 0.278002,
+            "max_abs": 0.530986,
+            "bias": 0.278002,
+            "RMSE": 0.321089
+          }
+        }
+      },
+      "S2": {
+        "n": 28,
+        "MAE": 0.165378,
+        "max_abs": 0.41314,
+        "bias": 0.165378,
+        "RMSE": 0.192435,
+        "by_batch": {
+          "b1": {
+            "n": 10,
+            "MAE": 0.157056,
+            "max_abs": 0.290413,
+            "bias": 0.157056,
+            "RMSE": 0.174946
+          },
+          "b2": {
+            "n": 18,
+            "MAE": 0.170001,
+            "max_abs": 0.41314,
+            "bias": 0.170001,
+            "RMSE": 0.201497
+          }
+        },
+        "by_tissue": {
+          "Fat": {
+            "n": 14,
+            "MAE": 0.140019,
+            "max_abs": 0.290413,
+            "bias": 0.140019,
+            "RMSE": 0.156384
+          },
+          "Spleen": {
+            "n": 14,
+            "MAE": 0.190737,
+            "max_abs": 0.41314,
+            "bias": 0.190737,
+            "RMSE": 0.222725
+          }
+        }
+      }
+    },
+    "note": null
+  },
+  "step1b": {
+    "dataset": "GSE299969",
+    "role": "secondary, not gating",
+    "sets": {
+      "HG": 27361,
+      "HR": 51083,
+      "BG": 362,
+      "BR": 606,
+      "Hall": 602144,
+      "Ball": 3689,
+      "dropped_nonfinite": 32784
+    },
+    "metrics": {
+      "noscale": {
+        "n": 4,
+        "MAE": 0.28786,
+        "max_abs": 0.3677,
+        "bias": 0.28786,
+        "RMSE": 0.29812,
+        "by_batch": {
+          "e1": {
+            "n": 4,
+            "MAE": 0.28786,
+            "max_abs": 0.3677,
+            "bias": 0.28786,
+            "RMSE": 0.29812
+          }
+        },
+        "by_tissue": {
+          "Brain": {
+            "n": 4,
+            "MAE": 0.28786,
+            "max_abs": 0.3677,
+            "bias": 0.28786,
+            "RMSE": 0.29812
+          }
+        }
+      },
+      "primary": {
+        "n": 4,
+        "MAE": 0.283853,
+        "max_abs": 0.36142,
+        "bias": 0.283853,
+        "RMSE": 0.293654,
+        "by_batch": {
+          "e1": {
+            "n": 4,
+            "MAE": 0.283853,
+            "max_abs": 0.36142,
+            "bias": 0.283853,
+            "RMSE": 0.293654
+          }
+        },
+        "by_tissue": {
+          "Brain": {
+            "n": 4,
+            "MAE": 0.283853,
+            "max_abs": 0.36142,
+            "bias": 0.283853,
+            "RMSE": 0.293654
+          }
+        }
+      },
+      "S2": {
+        "n": 4,
+        "MAE": 0.256186,
+        "max_abs": 0.316302,
+        "bias": 0.256186,
+        "RMSE": 0.262637,
+        "by_batch": {
+          "e1": {
+            "n": 4,
+            "MAE": 0.256186,
+            "max_abs": 0.316302,
+            "bias": 0.256186,
+            "RMSE": 0.262637
+          }
+        },
+        "by_tissue": {
+          "Brain": {
+            "n": 4,
+            "MAE": 0.256186,
+            "max_abs": 0.316302,
+            "bias": 0.256186,
+            "RMSE": 0.262637
+          }
+        }
+      }
+    },
+    "thresholds_met": false
+  },
+  "amendment1": {
+    "what": "secondary mouse-calibrated reading (PREREG Amendment 1); the primary above is unchanged",
+    "criterion": "leave one batch out over the 28 GSE310817 mixtures: MAE <= 0.05 and max |error| <= 0.10",
+    "pass": false,
+    "E_cal": 0.2826,
+    "metrics": {
+      "n": 28,
+      "MAE": 0.056593,
+      "max_abs": 0.2826,
+      "bias": 0.0162533,
+      "by_batch": {
+        "b1": {
+          "n": 10,
+          "MAE": 0.0339764,
+          "max_abs": 0.184585,
+          "bias": -0.0288527
+        },
+        "b2": {
+          "n": 18,
+          "MAE": 0.0691578,
+          "max_abs": 0.2826,
+          "bias": 0.0413122
+        }
+      },
+      "by_tissue": {
+        "Fat": {
+          "n": 14,
+          "MAE": 0.0373153,
+          "max_abs": 0.184585,
+          "bias": -0.0276266
+        },
+        "Spleen": {
+          "n": 14,
+          "MAE": 0.0758707,
+          "max_abs": 0.2826,
+          "bias": 0.0601333
+        }
+      }
+    },
+    "phi": [
+      {
+        "f_nominal": 0,
+        "x": 0,
+        "n": 0,
+        "x_raw": 0
+      },
+      {
+        "f_nominal": 0.05,
+        "x": 0.324196,
+        "n": 2,
+        "x_raw": 0.324196
+      },
+      {
+        "f_nominal": 0.1,
+        "x": 0.427064,
+        "n": 4,
+        "x_raw": 0.427064
+      },
+      {
+        "f_nominal": 0.15,
+        "x": 0.565016,
+        "n": 2,
+        "x_raw": 0.565016
+      },
+      {
+        "f_nominal": 0.25,
+        "x": 0.657701,
+        "n": 4,
+        "x_raw": 0.657701
+      },
+      {
+        "f_nominal": 0.5,
+        "x": 0.793541,
+        "n": 4,
+        "x_raw": 0.793541
+      },
+      {
+        "f_nominal": 0.75,
+        "x": 0.927104,
+        "n": 4,
+        "x_raw": 0.927104
+      },
+      {
+        "f_nominal": 0.85,
+        "x": 0.953972,
+        "n": 2,
+        "x_raw": 0.953972
+      },
+      {
+        "f_nominal": 0.9,
+        "x": 0.97072,
+        "n": 4,
+        "x_raw": 0.97072
+      },
+      {
+        "f_nominal": 0.95,
+        "x": 0.987946,
+        "n": 2,
+        "x_raw": 0.987946
+      },
+      {
+        "f_nominal": 1,
+        "x": 1,
+        "n": 0,
+        "x_raw": 1
+      }
+    ],
+    "ebata_external": {
+      "values": [
+        {
+          "array_id": "GSM9327962",
+          "f_nominal": 0.7,
+          "f_hat": 0.909397,
+          "f_cal": 0.716856,
+          "err_cal": 0.0168563
+        },
+        {
+          "array_id": "GSM9327963",
+          "f_nominal": 0.7,
+          "f_hat": 0.907876,
+          "f_cal": 0.71401,
+          "err_cal": 0.01401
+        },
+        {
+          "array_id": "GSM9327964",
+          "f_nominal": 0.4,
+          "f_hat": 0.76142,
+          "f_cal": 0.440884,
+          "err_cal": 0.040884
+        },
+        {
+          "array_id": "GSM9327965",
+          "f_nominal": 0.4,
+          "f_hat": 0.756718,
+          "f_cal": 0.432231,
+          "err_cal": 0.0322313
+        }
+      ],
+      "MAE": 0.0259954,
+      "max_abs": 0.040884
+    },
+    "spearman_invivo_fcal": {
+      "n": 7,
+      "rho": 0.928571,
+      "p": 0.00674603
+    },
+    "spearman_all8_fcal": {
+      "n": 8,
+      "rho": 0.952381,
+      "p": 0.00114087
+    }
+  },
+  "step2": {
+    "sets": {
+      "HG": 31124,
+      "HR": 57462,
+      "BG": 364,
+      "BR": 616,
+      "Hall": 637221,
+      "Ball": 3716,
+      "dropped_nonfinite": 0
+    },
+    "n_curves": 40,
+    "n_c2b_curves": 10,
+    "scaling_k": [
+      {
+        "curve": "C2BxGSM5319812",
+        "pairing": "C2B",
+        "kG": 0.809991,
+        "kR": 0.586506
+      },
+      {
+        "curve": "C2BxGSM5319813",
+        "pairing": "C2B",
+        "kG": 0.5116,
+        "kR": 0.312265
+      },
+      {
+        "curve": "C2BxGSM5319814",
+        "pairing": "C2B",
+        "kG": 0.548682,
+        "kR": 0.383566
+      },
+      {
+        "curve": "C2BxGSM5319815",
+        "pairing": "C2B",
+        "kG": 0.593523,
+        "kR": 0.351862
+      },
+      {
+        "curve": "C2BxGSM5319816",
+        "pairing": "C2B",
+        "kG": 0.810141,
+        "kR": 1.69609
+      },
+      {
+        "curve": "C2BxGSM5319817",
+        "pairing": "C2B",
+        "kG": 0.88893,
+        "kR": 0.642225
+      },
+      {
+        "curve": "C2BxGSM5319818",
+        "pairing": "C2B",
+        "kG": 0.530904,
+        "kR": 0.31553
+      },
+      {
+        "curve": "C2BxGSM5319819",
+        "pairing": "C2B",
+        "kG": 0.491282,
+        "kR": 0.309023
+      },
+      {
+        "curve": "C2BxGSM5319820",
+        "pairing": "C2B",
+        "kG": 0.532018,
+        "kR": 0.314726
+      },
+      {
+        "curve": "C2BxGSM5319821",
+        "pairing": "C2B",
+        "kG": 0.779143,
+        "kR": 0.381151
+      },
+      {
+        "curve": "GSM5319794xGSM5319812",
+        "pairing": "GEO_human",
+        "kG": 0.681337,
+        "kR": 0.58805
+      },
+      {
+        "curve": "GSM5319794xGSM5319813",
+        "pairing": "GEO_human",
+        "kG": 0.430341,
+        "kR": 0.313088
+      },
+      {
+        "curve": "GSM5319794xGSM5319814",
+        "pairing": "GEO_human",
+        "kG": 0.461533,
+        "kR": 0.384576
+      },
+      {
+        "curve": "GSM5319794xGSM5319815",
+        "pairing": "GEO_human",
+        "kG": 0.499252,
+        "kR": 0.352789
+      },
+      {
+        "curve": "GSM5319794xGSM5319816",
+        "pairing": "GEO_human",
+        "kG": 0.681464,
+        "kR": 1.70055
+      },
+      {
+        "curve": "GSM5319794xGSM5319817",
+        "pairing": "GEO_human",
+        "kG": 0.747738,
+        "kR": 0.643916
+      },
+      {
+        "curve": "GSM5319794xGSM5319818",
+        "pairing": "GEO_human",
+        "kG": 0.446579,
+        "kR": 0.31636
+      },
+      {
+        "curve": "GSM5319794xGSM5319819",
+        "pairing": "GEO_human",
+        "kG": 0.41325,
+        "kR": 0.309836
+      },
+      {
+        "curve": "GSM5319794xGSM5319820",
+        "pairing": "GEO_human",
+        "kG": 0.447515,
+        "kR": 0.315555
+      },
+      {
+        "curve": "GSM5319794xGSM5319821",
+        "pairing": "GEO_human",
+        "kG": 0.655389,
+        "kR": 0.382155
+      },
+      {
+        "curve": "GSM5319795xGSM5319812",
+        "pairing": "GEO_human",
+        "kG": 0.839109,
+        "kR": 1.14794
+      },
+      {
+        "curve": "GSM5319795xGSM5319813",
+        "pairing": "GEO_human",
+        "kG": 0.529991,
+        "kR": 0.611182
+      },
+      {
+        "curve": "GSM5319795xGSM5319814",
+        "pairing": "GEO_human",
+        "kG": 0.568406,
+        "kR": 0.750734
+      },
+      {
+        "curve": "GSM5319795xGSM5319815",
+        "pairing": "GEO_human",
+        "kG": 0.614859,
+        "kR": 0.688682
+      },
+      {
+        "curve": "GSM5319795xGSM5319816",
+        "pairing": "GEO_human",
+        "kG": 0.839264,
+        "kR": 3.31967
+      },
+      {
+        "curve": "GSM5319795xGSM5319817",
+        "pairing": "GEO_human",
+        "kG": 0.920885,
+        "kR": 1.25699
+      },
+      {
+        "curve": "GSM5319795xGSM5319818",
+        "pairing": "GEO_human",
+        "kG": 0.549989,
+        "kR": 0.61757
+      },
+      {
+        "curve": "GSM5319795xGSM5319819",
+        "pairing": "GEO_human",
+        "kG": 0.508943,
+        "kR": 0.604835
+      },
+      {
+        "curve": "GSM5319795xGSM5319820",
+        "pairing": "GEO_human",
+        "kG": 0.551143,
+        "kR": 0.615998
+      },
+      {
+        "curve": "GSM5319795xGSM5319821",
+        "pairing": "GEO_human",
+        "kG": 0.807152,
+        "kR": 0.746009
+      },
+      {
+        "curve": "GSM5319796xGSM5319812",
+        "pairing": "GEO_human",
+        "kG": 0.537679,
+        "kR": 1.10737
+      },
+      {
+        "curve": "GSM5319796xGSM5319813",
+        "pairing": "GEO_human",
+        "kG": 0.339604,
+        "kR": 0.589581
+      },
+      {
+        "curve": "GSM5319796xGSM5319814",
+        "pairing": "GEO_human",
+        "kG": 0.36422,
+        "kR": 0.724201
+      },
+      {
+        "curve": "GSM5319796xGSM5319815",
+        "pairing": "GEO_human",
+        "kG": 0.393986,
+        "kR": 0.664342
+      },
+      {
+        "curve": "GSM5319796xGSM5319816",
+        "pairing": "GEO_human",
+        "kG": 0.537779,
+        "kR": 3.20234
+      },
+      {
+        "curve": "GSM5319796xGSM5319817",
+        "pairing": "GEO_human",
+        "kG": 0.590079,
+        "kR": 1.21257
+      },
+      {
+        "curve": "GSM5319796xGSM5319818",
+        "pairing": "GEO_human",
+        "kG": 0.352419,
+        "kR": 0.595743
+      },
+      {
+        "curve": "GSM5319796xGSM5319819",
+        "pairing": "GEO_human",
+        "kG": 0.326117,
+        "kR": 0.583458
+      },
+      {
+        "curve": "GSM5319796xGSM5319820",
+        "pairing": "GEO_human",
+        "kG": 0.353158,
+        "kR": 0.594226
+      },
+      {
+        "curve": "GSM5319796xGSM5319821",
+        "pairing": "GEO_human",
+        "kG": 0.517202,
+        "kR": 0.719642
+      }
+    ],
+    "nonmonotone_points": [
+      {
+        "curve": "C2BxGSM5319812",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319813",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319814",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319815",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319816",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319817",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319818",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319819",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319820",
+        "n": 0
+      },
+      {
+        "curve": "C2BxGSM5319821",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319812",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319813",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319814",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319815",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319816",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319817",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319818",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319819",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319820",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319794xGSM5319821",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319812",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319813",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319814",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319815",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319816",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319817",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319818",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319819",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319820",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319795xGSM5319821",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319812",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319813",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319814",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319815",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319816",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319817",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319818",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319819",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319820",
+        "n": 0
+      },
+      {
+        "curve": "GSM5319796xGSM5319821",
+        "n": 0
+      }
+    ],
+    "anchor": {
+      "median_read_on_GEO_human_curves": 1,
+      "min": 0.979273,
+      "max": 1,
+      "pass": true,
+      "threshold": 0.9
+    },
+    "rat_loo": {
+      "values": [
+        {
+          "rat_array": "GSM5319812",
+          "S": -4.50063,
+          "f_loo": 0.00385695,
+          "below_range": false
+        },
+        {
+          "rat_array": "GSM5319813",
+          "S": -5.1806,
+          "f_loo": 0,
+          "below_range": true
+        },
+        {
+          "rat_array": "GSM5319814",
+          "S": -5.0235,
+          "f_loo": 0,
+          "below_range": true
+        },
+        {
+          "rat_array": "GSM5319815",
+          "S": -5.06097,
+          "f_loo": 0,
+          "below_range": true
+        },
+        {
+          "rat_array": "GSM5319816",
+          "S": -3.73353,
+          "f_loo": 0.0323535,
+          "below_range": false
+        },
+        {
+          "rat_array": "GSM5319817",
+          "S": -4.2515,
+          "f_loo": 0.0115016,
+          "below_range": false
+        },
+        {
+          "rat_array": "GSM5319818",
+          "S": -4.74882,
+          "f_loo": 0,
+          "below_range": true
+        },
+        {
+          "rat_array": "GSM5319819",
+          "S": -4.64187,
+          "f_loo": 0,
+          "below_range": true
+        },
+        {
+          "rat_array": "GSM5319820",
+          "S": -4.60208,
+          "f_loo": 0.00105352,
+          "below_range": false
+        },
+        {
+          "rat_array": "GSM5319821",
+          "S": -4.34972,
+          "f_loo": 0.00836086,
+          "below_range": false
+        }
+      ],
+      "max": 0.0323535,
+      "expected_max": 0.05
+    },
+    "curve_range": {
+      "S_at_0": [
+        {
+          "S_point": -4.62197,
+          "S_band_min": -5.1806,
+          "S_band_max": -3.73353
+        }
+      ],
+      "S_at_1": [
+        {
+          "S_point": 0.0325343,
+          "S_band_min": -0.0173799,
+          "S_band_max": 0.0564758
+        }
+      ]
+    }
+  },
+  "step3": {
+    "estimates": [
+      {
+        "array_id": "C2B",
+        "arm": "Culture",
+        "rna_human_pct": 86.19,
+        "S_G": 0.0485876,
+        "S_R": 0.0164811,
+        "S": 0.0325343,
+        "f_hat": 1,
+        "band_lo": 0.979273,
+        "band_hi": 1,
+        "band_c2b_lo": 1,
+        "band_c2b_hi": 1,
+        "E": 0.530986,
+        "int_lo": 0.448286,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": true,
+        "S2": -0.0337009,
+        "f_hat_S2": 1,
+        "band_lo_S2": 1,
+        "band_hi_S2": 1,
+        "validated": false,
+        "f_cal": 1,
+        "band_cal_lo": 0.924824,
+        "band_cal_hi": 1,
+        "int_cal_lo": 0.642224,
+        "int_cal_hi": 1,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL66B",
+        "arm": "Recurrent",
+        "rna_human_pct": 29.44,
+        "S_G": -0.401478,
+        "S_R": -0.476878,
+        "S": -0.439178,
+        "f_hat": 0.704703,
+        "band_lo": 0.678208,
+        "band_hi": 0.751042,
+        "band_c2b_lo": 0.696942,
+        "band_c2b_hi": 0.724865,
+        "E": 0.530986,
+        "int_lo": 0.147222,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.638846,
+        "f_hat_S2": 0.594261,
+        "band_lo_S2": 0.568698,
+        "band_hi_S2": 0.863626,
+        "validated": false,
+        "f_cal": 0.336503,
+        "band_cal_lo": 0.287741,
+        "band_cal_hi": 0.421785,
+        "int_cal_lo": 0.00514113,
+        "int_cal_hi": 0.704385,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL67B",
+        "arm": "Primary",
+        "rna_human_pct": 42.52,
+        "S_G": -0.235865,
+        "S_R": -0.296273,
+        "S": -0.266069,
+        "f_hat": 0.798463,
+        "band_lo": 0.769003,
+        "band_hi": 0.863603,
+        "band_c2b_lo": 0.793317,
+        "band_c2b_hi": 0.816285,
+        "E": 0.530986,
+        "int_lo": 0.238017,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.398413,
+        "f_hat_S2": 0.735834,
+        "band_lo_S2": 0.716764,
+        "band_hi_S2": 1,
+        "validated": false,
+        "f_cal": 0.509213,
+        "band_cal_lo": 0.454841,
+        "band_cal_hi": 0.631141,
+        "int_cal_lo": 0.172241,
+        "int_cal_hi": 0.913741,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL68B",
+        "arm": "Primary",
+        "rna_human_pct": 45.38,
+        "S_G": -0.166328,
+        "S_R": -0.208256,
+        "S": -0.187292,
+        "f_hat": 0.844982,
+        "band_lo": 0.821174,
+        "band_hi": 0.906203,
+        "band_c2b_lo": 0.838596,
+        "band_c2b_hi": 0.860567,
+        "E": 0.530986,
+        "int_lo": 0.290187,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.301752,
+        "f_hat_S2": 0.801099,
+        "band_lo_S2": 0.783801,
+        "band_hi_S2": 1,
+        "validated": false,
+        "f_cal": 0.596286,
+        "band_cal_lo": 0.551723,
+        "band_cal_hi": 0.710878,
+        "int_cal_lo": 0.269123,
+        "int_cal_hi": 0.993478,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL69B",
+        "arm": "Primary",
+        "rna_human_pct": 64.4,
+        "S_G": -0.150469,
+        "S_R": -0.177105,
+        "S": -0.163787,
+        "f_hat": 0.860046,
+        "band_lo": 0.839669,
+        "band_hi": 0.92149,
+        "band_c2b_lo": 0.853862,
+        "band_c2b_hi": 0.874667,
+        "E": 0.530986,
+        "int_lo": 0.308683,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.234892,
+        "f_hat_S2": 0.849125,
+        "band_lo_S2": 0.838698,
+        "band_hi_S2": 1,
+        "validated": false,
+        "f_cal": 0.624483,
+        "band_cal_lo": 0.586342,
+        "band_cal_hi": 0.739493,
+        "int_cal_lo": 0.303742,
+        "int_cal_hi": 1,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL70B",
+        "arm": "Recurrent",
+        "rna_human_pct": 42.67,
+        "S_G": -0.371432,
+        "S_R": -0.438749,
+        "S": -0.405091,
+        "f_hat": 0.722031,
+        "band_lo": 0.696383,
+        "band_hi": 0.772477,
+        "band_c2b_lo": 0.713726,
+        "band_c2b_hi": 0.740527,
+        "E": 0.530986,
+        "int_lo": 0.165396,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.516576,
+        "f_hat_S2": 0.663335,
+        "band_lo_S2": 0.640901,
+        "band_hi_S2": 0.934498,
+        "validated": false,
+        "f_cal": 0.368394,
+        "band_cal_lo": 0.32119,
+        "band_cal_hi": 0.461234,
+        "int_cal_lo": 0.0385901,
+        "int_cal_hi": 0.743833,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "IL71B",
+        "arm": "Recurrent",
+        "rna_human_pct": 33.05,
+        "S_G": -0.550035,
+        "S_R": -0.641625,
+        "S": -0.59583,
+        "f_hat": 0.628493,
+        "band_lo": 0.601388,
+        "band_hi": 0.663355,
+        "band_c2b_lo": 0.618476,
+        "band_c2b_hi": 0.634547,
+        "E": 0.530986,
+        "int_lo": 0.0704019,
+        "int_hi": 1,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -0.844807,
+        "f_hat_S2": 0.494941,
+        "band_lo_S2": 0.475982,
+        "band_hi_S2": 0.754887,
+        "validated": false,
+        "f_cal": 0.218487,
+        "band_cal_lo": 0.189243,
+        "band_cal_hi": 0.260406,
+        "int_cal_lo": 0,
+        "int_cal_hi": 0.543006,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      },
+      {
+        "array_id": "N2",
+        "arm": "Contralateral",
+        "rna_human_pct": 4.9,
+        "S_G": -1.34799,
+        "S_R": -1.57534,
+        "S": -1.46166,
+        "f_hat": 0.317766,
+        "band_lo": 0.256107,
+        "band_hi": 0.344168,
+        "band_c2b_lo": 0.263681,
+        "band_c2b_hi": 0.333287,
+        "E": 0.530986,
+        "int_lo": 0,
+        "int_hi": 0.875155,
+        "any_below_range": false,
+        "any_above_range": false,
+        "S2": -1.94308,
+        "f_hat_S2": 0.195383,
+        "band_lo_S2": 0.142944,
+        "band_hi_S2": 0.331225,
+        "validated": false,
+        "f_cal": 0.0490082,
+        "band_cal_lo": 0.0394988,
+        "band_cal_hi": 0.0597077,
+        "int_cal_lo": 0,
+        "int_cal_hi": 0.342308,
+        "E_cal": 0.2826,
+        "cal_validated": false
+      }
+    ],
+    "E": 0.530986,
+    "validated": false,
+    "spearman_invivo": {
+      "n": 7,
+      "rho": 0.928571,
+      "p": 0.00674603
+    },
+    "spearman_all8": {
+      "n": 8,
+      "rho": 0.952381,
+      "p": 0.00114087
+    },
+    "note": "RNA comparison is descriptive only (PREREG section 8)"
+  },
+  "cannot_show": ["Human:rat mixing of real DNA is untested: only human:mouse real mixtures exist, so step 1 validates the in-silico procedure for mouse and its transfer to rat is assumed.", "The rat reference (GSE174568, EpigenDx standard; liver per component sheets; strain and lot unknown) is not RNU/RNU brain, and it was run on other chips in another lab; the f = 0 end of the curve is measured only off our chip, which is where N2 lies.", "f is a share of haploid genome copies under the scaling rule; GEO fractions are presumably by DNA mass; neither is a cell fraction, and U251 is aneuploid.", "U251 copy-number change in vivo, rat strain variants under probes, and cross-hybridisation below AS 35 enter the tumour arrays but the curve only through the rat arrays' own background.", "Calibrated reading (Amendment 1): phi is measured on human blood with mouse spleen or fat on two other chips; that the same phi holds for human:rat, for U251 DNA and on our chip is assumed. phi is steepest at low f, where it rests on the 0.05 and 0.1 mixtures (0.05 in batch 2 only), which is N2's range."],
+  "versions": {
+    "R": "R version 4.5.2 (2025-10-31)",
+    "sesame": "1.28.1",
+    "sesameData": "1.28.0",
+    "data.table": "1.18.6.1"
+  },
+  "arrays": [
+    {
+      "array_id": "GSM9309404",
+      "dataset": "GSE310817",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309405",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309406",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309407",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309408",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309409",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204339380081",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309410",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309411",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309412",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309413",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309414",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309415",
+      "dataset": "GSE310817",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309416",
+      "dataset": "GSE310817",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "204361720056",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309417",
+      "dataset": "GSE310817",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309418",
+      "dataset": "GSE310817",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309419",
+      "dataset": "GSE310817",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309420",
+      "dataset": "GSE310817",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309421",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309422",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309423",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309424",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309425",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309426",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760003",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309427",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309428",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309429",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309430",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309431",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309432",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309433",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309434",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760124",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309435",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309436",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309437",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309438",
+      "dataset": "GSE310817",
+      "role": "mixture",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309439",
+      "dataset": "GSE310817",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9309440",
+      "dataset": "GSE310817",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "205041760090",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM9327960",
+      "dataset": "GSE299969",
+      "role": "human",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R01C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327961",
+      "dataset": "GSE299969",
+      "role": "human",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R02C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327962",
+      "dataset": "GSE299969",
+      "role": "mixture",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R03C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327963",
+      "dataset": "GSE299969",
+      "role": "mixture",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R04C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327964",
+      "dataset": "GSE299969",
+      "role": "mixture",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R05C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327965",
+      "dataset": "GSE299969",
+      "role": "mixture",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R06C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327966",
+      "dataset": "GSE299969",
+      "role": "host",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R07C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM9327967",
+      "dataset": "GSE299969",
+      "role": "host",
+      "platform": "EPICv2",
+      "chip": "207080920044",
+      "position": "R08C01",
+      "n_sdf": 937690,
+      "n_kept": 721799,
+      "n_na_universe": 35123
+    },
+    {
+      "array_id": "GSM5319794",
+      "dataset": "GSE174568",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "203440280016",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319795",
+      "dataset": "GSE174568",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "203440280016",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319796",
+      "dataset": "GSE174568",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "203440280016",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319812",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319813",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319814",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319815",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319816",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319817",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203839170005",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319818",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203836210094",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319819",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203836210094",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319820",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203836210094",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "GSM5319821",
+      "dataset": "GSE174568",
+      "role": "host",
+      "platform": "EPIC",
+      "chip": "203836210094",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL66B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R01C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL67B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R02C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL68B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R03C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL69B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R04C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL70B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R05C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "IL71B",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R06C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "N2",
+      "dataset": "ours",
+      "role": "sample",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R07C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    },
+    {
+      "array_id": "C2B",
+      "dataset": "ours",
+      "role": "human",
+      "platform": "EPIC",
+      "chip": "205648300021",
+      "position": "R08C01",
+      "n_sdf": 866553,
+      "n_kept": 866553,
+      "n_na_universe": 0
+    }
+  ],
+  "finished": "2026-09-27T00:33:18-0400"
+}

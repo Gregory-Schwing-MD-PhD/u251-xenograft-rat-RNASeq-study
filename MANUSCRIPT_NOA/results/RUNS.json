@@ -1,0 +1,203 @@
+{
+ "about": "Every result file the manuscript compiles from, the grid job that wrote it, and what it is. A number in the paper resolves to file#pointer through numbers_manifest.json, and the file resolves to a job here.",
+ "files": {
+  "D4_mgmt.json": {
+   "job": "40481447 sci_dna1",
+   "what": "MGMT-STP27 per array, with the flip distance and the observed recurrence shift.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\D4_mgmt.json",
+   "sha256": "e7737821a9bf3d4c0b417dcb762df36e495b3556814148688ab00ce1f30ab44f"
+  },
+  "HC2_benchlists_criterion.json": {
+   "job": "40481545 sci_benchlists",
+   "what": "The fraction-confound criterion under every published cross-species probe-exclusion list.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\HC2_benchlists_criterion.tsv",
+   "sha256": "ade176f34fecdaace23c5ed3a80cd2493b34bbf2d4fc9a21024af0a8d97f4a5e"
+  },
+  "HC2_dmp_counts_all_splits.json": {
+   "job": "40481491 sci_dna_integrate",
+   "what": "Probes at p < 0.001 for all ten balanced splits, per pipeline and design.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\HC2_dmp_counts_all_splits.tsv",
+   "sha256": "3f7978c3eb3fbc9985f10a19a132a1eb634beb5619ebb0c356484bb0364f839d"
+  },
+  "L1_lump.json": {
+   "job": "40481447 sci_dna1",
+   "what": "The LUMP lever check per array: the test of whether the array betas read the human compartment only.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\L1_lump.tsv",
+   "sha256": "93376a8fe6a83199e240cb06f5dbc6d63116e066cc16011f40a9a7f5a1655491"
+  },
+  "M2_HM1_summary.json": {
+   "job": "40481488 sci_fdna",
+   "what": "Recurrent-minus-primary tumour share on each platform, with exact 90 % intervals and the labelling rank.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\M2_HM1_summary.tsv",
+   "sha256": "9565ee0acbc27c1c7b5a9cf0b444dea5858244531576618e15130fd20c62ca17"
+  },
+  "S1_smin.json": {
+   "job": "40481447 sci_dna1",
+   "what": "The detection bound: the smallest share of recurrent cells carrying a shared single-copy change that would be flagged.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\S1_smin.tsv",
+   "sha256": "efeb3a0106b5db6d89ad1c4c74387940aafe005a41dad68a629becbbf0308683"
+  },
+  "T3_fcpg.json": {
+   "job": "40481447 sci_dna1",
+   "what": "Fluctuating-CpG homogeneity with its two pre-stated gates.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\T3_fcpg.json",
+   "sha256": "935a129efc6fbbf188a07c37f51c7160ead708a20ac71360ffabf671008c7dc1"
+  },
+  "T4_S1.json": {
+   "job": "40481447 sci_dna1",
+   "what": "Convergence of derived arm-level copy-number change, and the smallest shared subclone the rule would detect.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\T4_S1.json",
+   "sha256": "0c2f7dadaa381ebcc7824c73a0bf158768eae5fc4ccf93168b66f9a6056bc780"
+  },
+  "c1.json": {
+   "job": "40480666 spread C1",
+   "what": "Arm-level copy number in the contralateral sample against its own core and the culture, with the noise bound.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c1.json",
+   "sha256": "317b41d131248cd2e6651e6b401e9c20f5ac1aa290665e2518defa6457469277"
+  },
+  "c3_ha2_ha3.json": {
+   "job": "40481453/40481454 sci_sbde",
+   "what": "Species-blind differential expression over all ten balanced splits; H-A2 and H-A3.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c3_ha2_ha3.json",
+   "sha256": "76bb3fb480208327b9973c885a97791d4e15f4f5ee31b01ad94cdc28b2873aec"
+  },
+  "c3_splits_summary.json": {
+   "job": "40481453 sci_sbde",
+   "what": "Differentially expressed genes per split, with each split's difference in tumour share.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c3_splits_summary.tsv",
+   "sha256": "0a07387afaa40c9147f97dd96920674bdfbe81a807b99e2bc3574f791f15c7ca"
+  },
+  "c4_categories_by_view.json": {
+   "job": "40481453 sci_sbde",
+   "what": "The three pre-stated GO categories across four views, Holm across 3 x 4.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c4_categories_by_view.tsv",
+   "sha256": "5f371e2436cdb7b44bce3254c9e7c307348191b681b790f27b5188496397c7fc"
+  },
+  "c5_l2_t1r.json": {
+   "job": "40481466 sci_rna_r",
+   "what": "GSVA mesenchymal scores with the dilution null, the ESTIMATE lever check, and the DiG robustness scorings.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c5_l2_t1r.json",
+   "sha256": "1352c3c0e67292f5f2fc32cd42f4a727032d9abb6c52e12755a0ab486b4db261"
+  },
+  "c6_summary.json": {
+   "job": "40481466 sci_rna_r",
+   "what": "The fraction-covariate model: collinearity, variance inflation, and how many tumour-cell changes it recovers.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\c6_summary.tsv",
+   "sha256": "adccf053f617c9bae6ae69371b599ec05c17351a8c59b2cf154ff801d6fca61f"
+  },
+  "composition_S1.json": {
+   "job": "40481475 sci_s1_rnaseq",
+   "what": "Sensitivity S1: the same decomposition on graft-only reads (nf-core/rnaseq 3.22.2 re-quantification).",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\composition_S1.json",
+   "sha256": "7df3c14b12175403853ab38407866e35c126ccada92a62f71f446ff2e75dfa74"
+  },
+  "composition_S4.json": {
+   "job": "40481616 sci_s4",
+   "what": "Sensitivity S4: the same decomposition over HCOP one-to-one orthologs instead of Compara 110.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\composition_S4.json",
+   "sha256": "054b1e4ee406e09d50243a0413f4bbd2c2536289dd794b815e5c06d7613f35f5"
+  },
+  "composition_main.json": {
+   "job": "40481434 sci_rna_core",
+   "what": "Species-blind virtual bulk, exact mixing identity and Shapley decomposition; the primary endpoint.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\composition_main.json",
+   "sha256": "c12c03d4c02d2661e57a5bceda2848f5a8f455413e685c99104e026c34c27531"
+  },
+  "composition_samples_main.json": {
+   "job": "40481434 sci_rna_core",
+   "what": "Per-library tumour shares on every definition, and human chromosome Y per million human counts.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\composition_samples_main.tsv",
+   "sha256": "b4434f00800b223ad0ae516acc3ebe5e46a3621e734af3b942e80f68159ef19e"
+  },
+  "criteria.json": {
+   "job": "40480791 spread",
+   "what": "The contralateral case: the pre-registered statistics against the depth-matched dilution null.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\criteria.json",
+   "sha256": "7afff5766e91e3c9ab78af23d6ae0095ba26b4c094321fc016346bfffc51acdb"
+  },
+  "dilution_tests.json": {
+   "job": "40481489 sci_dilution",
+   "what": "Copy-number amplitude, MGMT promoter mean and fCpG index against the in-silico dilution nulls (UNVALIDATED).",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\dilution_tests.json",
+   "sha256": "6ea1cc288b2de252bf21f85d6cd65bdd6b41b3c831525e3033f1988790397e55"
+  },
+  "e2_chrY.json": {
+   "job": "40480665 spread E2",
+   "what": "Human chromosome Y counts per million human counts, per library.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\e2_chrY.tsv",
+   "sha256": "b92ceabee8329e9b74efaf94134eddd199226d5541c38171a7606ae510e51587"
+  },
+  "e3_N2_correlations.json": {
+   "job": "40480666 spread C1",
+   "what": "Bin-profile correlation of the contralateral array with the core and the culture.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\e3_N2_correlations.tsv",
+   "sha256": "5a797a6652cd8f0f707dc12f8c5ee25e5e00ee997e925be5fd2e216a577857d4"
+  },
+  "estimates.json": {
+   "job": "40481271 curve",
+   "what": "Each array read on the titration curve, raw and mixture-corrected.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\estimates.tsv",
+   "sha256": "fb181aac8d12bd7709cb8e9cf4a3cc43e57e8d7b42b9df81689a77bff177e6e6"
+  },
+  "fdna_resolved.json": {
+   "job": "40481488 sci_fdna",
+   "what": "Every tumour DNA fraction estimate per array, with which one is registered and which gates it passed.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\fdna_resolved.tsv",
+   "sha256": "17d947a9760ef53384d4f501041e0ae74da94b1af6374fd8548c560805aaf981"
+  },
+  "l2_estimate_scores.json": {
+   "job": "40481466 sci_rna_r",
+   "what": "ESTIMATE stromal, immune and combined scores on the virtual bulk.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\l2_estimate_scores.tsv",
+   "sha256": "40240c6e470343bbe25f422a7215d1e505362d2fa8b99cb2c8bdb7c23a6e2d21"
+  },
+  "m3_rna_vs_dna.json": {
+   "job": "40481434 sci_rna_core",
+   "what": "RNA share against DNA fraction per lesion, and the cell-share range under two DNA indexes.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\m3_rna_vs_dna.tsv",
+   "sha256": "ca42bf31356710356ff1903f4a555d2c5b5586e70f81cf7a7e78218afa2ce0cf"
+  },
+  "m4_host.json": {
+   "job": "40481582 sci_host",
+   "what": "Host deconvolution by three published methods with the pre-stated ordering, agreement and athymic controls.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\m4_host.json",
+   "sha256": "386db8c3f09d1de8008a1af5299cf1c685edf1c093bc22506621fd162a6ca7b2"
+  },
+  "m4_lesion_accounting.json": {
+   "job": "40481582 sci_host",
+   "what": "Per-lesion accounting: tumour share plus host cell-type terms, summing to read composition.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\m4_lesion_accounting.tsv",
+   "sha256": "55b397dd5fe2fdd13c18faef052a162ee3640d0433ff6dec4c91b843caa089d8"
+  },
+  "power_closed_only.json": {
+   "job": "40481525 u251_pwr",
+   "what": "The pre-stated targets of the scaled experiment and the animals each needs, closed-form.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\power_closed_only.json",
+   "sha256": "85082bd7a100849ff453288e03efd4e997ad1fd16adcfaa0cc40656e3626750a"
+  },
+  "t1_e1.json": {
+   "job": "40481434 sci_rna_core",
+   "what": "The distal-invasion (DiG) programme, fraction-adjusted, over the twenty labellings; and the abandoned E1 gate.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\t1_e1.json",
+   "sha256": "7fa8648bd05cdfc9d01cf5e79783fb21956cf1d0629260123ae0c270f7800d20"
+  },
+  "t2.json": {
+   "job": "40481604 sci_ai",
+   "what": "Allelic imbalance in species-exact human reads, its gates and its thinning null.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\t2.json",
+   "sha256": "f54138dd0f1fd34e72b755b28a2bb6700708482f28735ef107986deb38db76aa"
+  },
+  "validation.json": {
+   "job": "40481271 curve",
+   "what": "The human:mouse titration that the in-silico mixing had to reproduce, and its failure against the pre-set bar.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\validation.json",
+   "sha256": "239c4985beda89749dd66361337025f95b2fe6ceeb9c2ebf2110819c105ff1d9"
+  },
+  "xengsort_classes.json": {
+   "job": "xengsort 2.1.0 (May 2026 sort)",
+   "what": "Read pairs per library assigned graft, host, both, ambiguous or neither.",
+   "copied_from": "SLIDES\\figures_cns\\v5_data\\xengsort_classes.tsv",
+   "sha256": "cc76619d1e88a3769fc9590b94665657bc503b6233db97954d7a01b1254bcc1c"
+  }
+ }
+}

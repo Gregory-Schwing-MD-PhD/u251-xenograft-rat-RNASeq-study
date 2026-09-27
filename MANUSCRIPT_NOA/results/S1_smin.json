@@ -1,0 +1,34 @@
+{
+ "_source": "C:\\Users\\grego\\OneDrive\\Desktop\\u251-xenograft-murine-RNASeq-study\\SLIDES\\figures_cns\\v5_data\\S1_smin.tsv",
+ "_sha256": "194ddb0ff2618d73986a5ca8cf406b7a584ace53de20eaabaa8c30d27e87eca6",
+ "_key_column": "dc (repeats; rows keyed by position)",
+ "rows": {
+  "0": {
+   "dc": "-1",
+   "c": "2",
+   "s_min": "0.55"
+  },
+  "1": {
+   "dc": "-1",
+   "c": "3",
+   "s_min": "0.8"
+  },
+  "2": {
+   "dc": "1",
+   "c": "2",
+   "s_min": "NA"
+  },
+  "3": {
+   "dc": "1",
+   "c": "3",
+   "s_min": "NA"
+  }
+ },
+ "order": [
+  "0",
+  "1",
+  "2",
+  "3"
+ ],
+ "n_rows": 4
+}

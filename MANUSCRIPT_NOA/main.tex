@@ -1,0 +1,37 @@
+% Neuro-Oncology Advances, Basic and Translational Investigation.
+%
+% Build:  bash build.sh            (collect results -> resolve numbers -> compose figures -> latexmk -> check)
+% Never type a result into this file. Every number arrives through \RESULT{key}; numbers_manifest.json says which
+% file and which grid job produced it, and tools/results_macros.py --check refuses a build in which a result-looking
+% number sits in the Abstract or Results outside a macro.
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}\doublespacing
+\usepackage{lineno}\linenumbers
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{authblk}
+\usepackage[numbers,super,sort&compress]{natbib}
+\usepackage{noaresults}          % [review] adds a source tag after every resolved number
+\input{generated/numbers}        % written at build time; do not edit
+
+\title{\input{sections/title.tex}\unskip}
+\date{}
+
+\begin{document}
+\input{sections/titlepage.tex}
+\clearpage
+\input{sections/abstract.tex}
+\clearpage
+\input{sections/introduction.tex}
+\input{sections/methods.tex}
+\input{sections/results.tex}
+\input{sections/discussion.tex}
+\input{sections/statements.tex}
+\clearpage
+\bibliographystyle{unsrtnat}
+\bibliography{refs}
+\clearpage
+\input{sections/figures.tex}
+\end{document}

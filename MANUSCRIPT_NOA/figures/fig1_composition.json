@@ -1,0 +1,34 @@
+{
+ "figure": "fig1_composition",
+ "px": [
+  5706,
+  4708
+ ],
+ "dpi": 600,
+ "panels": [
+  {
+   "letter": "A",
+   "file": "fig1a_read_composition.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig1a_read_composition.png",
+   "sha256": "e843f25da96102828d809f20d74c3ecc976d87c37c3682811ee2aca7ebc155f8"
+  },
+  {
+   "letter": "B",
+   "file": "fig1d_lesion_accounting.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig1d_lesion_accounting.png",
+   "sha256": "2353afeecf3b4aa807547214f1ada7a9c2e7f5f7f0a4b8f0bf273f82252d4e44"
+  },
+  {
+   "letter": "C",
+   "file": "fig1b_rna_vs_dna_p1.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig1b_rna_vs_dna_p1.png",
+   "sha256": "7ed8b22f150d319347472d6173adde149ff302482e96789c0dad3efa2da547a1"
+  },
+  {
+   "letter": "D",
+   "file": "fig1c_share_labellings_p1.png",
+   "source": "SLIDES\\figures_cns\\v6\\fig1c_share_labellings_p1.png",
+   "sha256": "c6896f9818e1fbb2762217f5e8ee14ad6b94b95b9a2b87ea821fb0b187645432"
+  }
+ ]
+}

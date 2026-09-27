@@ -1,0 +1,56 @@
+% noaresults.sty -- every result in the manuscript arrives through a macro, never typed by hand.
+%
+% generated/numbers.tex (written by tools/results_macros.py from numbers_manifest.json at every build) defines,
+% for each key, either
+%   \noa@val@KEY  the formatted value, and \noa@src@KEY  the file#pointer it came from
+% or
+%   \noa@pend@KEY the job that will produce it.
+% This package turns those into the four commands the text uses.
+%
+%   \RESULT{c_share}          -> 0.466, or a red "XXX Result Pending-<job>" if it has not been produced yet
+%   \RESULTSRC{c_share}       -> the file#pointer, for the audit appendix
+%   \RESULTFIG{fig_decomposition} -> \includegraphics of the figure named in the manifest
+%   \PENDING{what}{who}       -> a red placeholder for prose that is waiting on something outside the pipeline
+%
+% In review mode (\noareviewtrue) every resolved value is followed by a small grey source tag, so a reader of the
+% draft can see where each number came from without opening the audit table.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{noaresults}[2026/09/27 U251 LITT manuscript: results by macro]
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+
+\newif\ifnoareview\noareviewfalse
+\DeclareOption{review}{\noareviewtrue}
+\ProcessOptions\relax
+
+\definecolor{noapend}{RGB}{200,30,30}
+\definecolor{noasrc}{RGB}{120,120,120}
+
+\newcommand{\noa@srctag}[1]{%
+  \ifnoareview\,{\scriptsize\color{noasrc}[\csname noa@src@#1\endcsname]}\fi}
+
+\newcommand{\RESULT}[1]{%
+  \ifcsname noa@val@#1\endcsname
+    \csname noa@val@#1\endcsname\noa@srctag{#1}%
+  \else
+    \ifcsname noa@pend@#1\endcsname
+      {\color{noapend}\textbf{XXX Result Pending-\csname noa@pend@#1\endcsname}}%
+    \else
+      {\color{noapend}\textbf{XXX Unknown result key: #1}}%
+    \fi
+  \fi}
+
+\newcommand{\RESULTSRC}[1]{%
+  \ifcsname noa@src@#1\endcsname\texttt{\small\csname noa@src@#1\endcsname}%
+  \else{\color{noapend}\textbf{XXX no source for #1}}\fi}
+
+\newcommand{\RESULTFIG}[1]{%
+  \ifcsname noa@fig@#1\endcsname
+    \includegraphics[width=\linewidth]{\csname noa@fig@#1\endcsname}%
+  \else
+    {\color{noapend}\textbf{XXX Figure Pending-\csname noa@figjob@#1\endcsname}}%
+  \fi}
+
+% prose waiting on something that is not a pipeline number (an accession, an author list, a reply from the lab)
+\newcommand{\PENDING}[2]{{\color{noapend}\textbf{[PENDING: #1 --- #2]}}}
+\endinput
