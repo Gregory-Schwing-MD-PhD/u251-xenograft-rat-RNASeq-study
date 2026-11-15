@@ -1,0 +1,12 @@
+sample,fastq_1,fastq_2,strandedness
+C2B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/C2B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/C2B_graft_R2.fq.gz,reverse
+IL64B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL64B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL64B_graft_R2.fq.gz,reverse
+IL66B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R2.fq.gz,reverse
+IL67B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R2.fq.gz,reverse
+IL68B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R2.fq.gz,reverse
+IL69B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R2.fq.gz,reverse
+N168B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N168B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N168B_graft_R2.fq.gz,reverse
+N269B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N269B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N269B_graft_R2.fq.gz,reverse
+NL70B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R2.fq.gz,reverse
+NL71B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R2.fq.gz,reverse
+IL69B_fullclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL69B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL69B_human_R2.fq.gz,reverse

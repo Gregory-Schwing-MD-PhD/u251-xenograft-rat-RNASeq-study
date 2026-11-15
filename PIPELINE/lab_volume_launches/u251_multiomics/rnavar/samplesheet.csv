@@ -1,0 +1,11 @@
+sample,fastq_1,fastq_2
+C2B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/C2B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/C2B_graft_R2.fq.gz
+IL64B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL64B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL64B_graft_R2.fq.gz
+IL66B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R2.fq.gz
+IL67B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R2.fq.gz
+IL68B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R2.fq.gz
+IL69B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R2.fq.gz
+N168B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N168B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N168B_graft_R2.fq.gz
+N269B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N269B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/N269B_graft_R2.fq.gz
+NL70B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R2.fq.gz
+NL71B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R2.fq.gz

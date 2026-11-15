@@ -1,0 +1,34 @@
+# stage_refs: the reference paths this job produces, as the downstream pipelines take them.
+# This job runs no Nextflow, so nothing reads this file as -params-file. It is the contract: rnavar, rnafusion,
+# rnasplice and the integration steps copy these values, and each of them gates on the matching
+# /rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/<step> marker before launching.
+
+# step gencode -> .done/gencode (GENCODE v44 = Ensembl 110, GRCh38 primary assembly; the release the published runs used)
+fasta:     /rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.genome.fa
+fasta_fai: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.genome.fa.fai
+gtf:       /rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.annotation.gtf
+
+# step known_sites -> .done/known_sites (Broad hg38 bundle, cut to chr1-22,X,Y,M, header rebuilt from the fai above)
+dbsnp:            /rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/dbsnp138.primary.vcf.gz
+dbsnp_tbi:        /rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/dbsnp138.primary.vcf.gz.tbi
+known_indels:     /rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/mills_1000g.primary.vcf.gz
+known_indels_tbi: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/mills_1000g.primary.vcf.gz.tbi
+
+# step vep -> .done/vep (Ensembl release-115 indexed cache; layout ${vep_cache}/${vep_species}/${vep_cache_version}_${vep_genome})
+vep_cache:         /rs/rs_grp_oschome/go2432/u251_multiomics/refs/vep_cache
+vep_cache_version: 115
+vep_genome:        GRCh38
+vep_species:       homo_sapiens
+
+# step rnafusion -> .done/rnafusion (nf-core/rnafusion 4.1.3 reference bundle, GENCODE v46, mirrored from S3)
+genomes_base:           /rs/rs_grp_oschome/go2432/u251_multiomics/refs/rnafusion
+genome:                 GRCh38
+genome_gencode_version: 46
+no_cosmic:              true      # required: cosmic.db was removed (it was 0 bytes on S3)
+read_length:            100       # the S3 STAR index has sjdbOverhang 99
+
+# step chain -> .done/chain (UCSC liftOver hg38 -> rn7; rn7 = mRatBN7.2, the host run's rat genome)
+hg38_to_rn7_chain: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/chains/hg38ToRn7.over.chain.gz
+
+# step rediportal (optional) -> .done/rediportal, or refs/rediportal/NOT_AVAILABLE
+rediportal_hg38: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/rediportal/TABLE1_hg38_v3.txt.gz

@@ -1,0 +1,5 @@
+c5134b464df2577fee97ce693b7e0b83  run_dexseq_exon.R
+5220ddf92dc9d46177c99e4b92bea573  run_dexseq_dtu.R
+34ef168316bb8f7f26d66d85cdf3b3a4  run_stager.R
+c82be75ec05459de1f586902305ce65b  suppa_split_file.R
+c14830c40df37c5597eb92a68d2de708  run_drimseq_filter.R

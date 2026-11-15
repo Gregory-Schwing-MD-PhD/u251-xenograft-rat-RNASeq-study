@@ -1,0 +1,2 @@
+bootstrap: docker
+from: go2432/bioconductor:latest

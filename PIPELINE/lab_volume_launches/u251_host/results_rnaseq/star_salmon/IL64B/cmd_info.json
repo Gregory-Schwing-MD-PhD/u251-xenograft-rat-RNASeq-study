@@ -1,0 +1,10 @@
+{
+    "salmon_version": "1.10.3",
+    "geneMap": "Rattus_norvegicus.mRatBN7.2.110.filtered.gtf",
+    "threads": "6",
+    "libType": "ISR",
+    "targets": "genome.transcripts.fa",
+    "alignments": "IL64B.Aligned.toTranscriptome.out.bam",
+    "output": "IL64B",
+    "auxDir": "aux_info"
+}

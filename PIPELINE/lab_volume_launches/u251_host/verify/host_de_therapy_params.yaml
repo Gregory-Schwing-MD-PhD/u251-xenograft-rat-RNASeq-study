@@ -1,0 +1,49 @@
+study_name: "U251_Host_Rat"
+outdir: "/rs/rs_grp_oschome/go2432/u251_host/results_de_therapy"
+max_cpus: 16
+deseq2_cores: 8
+
+# host_therapy only (Recurrent_U2 vs Primary_U2, six tumours), GSEA on. Identical to ANALYSIS/host/host_de_params.yaml
+# except outdir and filtering_min_abundance: the matrix given to this run is already the original run's
+# 17,451-gene universe (>= 10 reads in >= 1 of all nine samples, CUSTOM_MATRIXFILTER), cut to the six tumours;
+# 0 keeps that universe unchanged, so every DESeq2 and GSEA input equals the original run's.
+
+# --- INPUTS ---
+gtf: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/rat/Rattus_norvegicus.mRatBN7.2.110.gtf.gz"
+gene_sets_files: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/pathways/rat/combined_rat.gmt"
+# --- GSEA (small-N safe) ---
+gsea_run: true
+gsea_permute: "gene_set"          # required for N<7
+gsea_metric: "Diff_of_Classes"    # required for N<3 (Signal2Noise crashes)
+gsea_nperm: 1000
+gsea_rnd_seed: "1234"
+gsea_scoring_scheme: "weighted"
+gsea_sort: "real"
+gsea_order: "descending"
+gsea_set_max: 500
+gsea_set_min: 15
+gsea_norm: "meandiv"
+gsea_rnd_type: "no_balance"
+gsea_make_sets: true
+gsea_median: false
+gsea_num: 100
+gsea_plot_top_x: 20
+gsea_save_rnd_lists: false
+gsea_zip_report: false
+
+# --- gProfiler2 ORA ---
+gprofiler2_run: true
+gprofiler2_organism: "rnorvegicus"
+
+# --- DESeq2 / filtering ---
+filtering_min_abundance: 0
+deseq2_vs_method: "rlog"
+deseq2_min_replicates_for_replace: 99    # disable outlier replacement at small N
+differential_min_fold_change: 1.5
+differential_subset_to_contrast_samples: true
+
+# --- Exploratory ---
+exploratory_main_variable: "Classification"
+exploratory_n_features: 5000
+exploratory_clustering_method: "ward.D2"
+exploratory_cor_method: "spearman"

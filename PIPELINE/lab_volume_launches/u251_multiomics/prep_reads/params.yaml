@@ -1,0 +1,37 @@
+# prep_reads settings. run.sbatch reads these; keep them flat `key: value` (no nesting, no quotes).
+# Every value here is a setting that is not a tool default; README.md says why each one is what it is.
+
+# Tools
+pigz: /wsu/el7/pre-compiled/python/3.7/bin/pigz
+pigz_threads: 6                # single-stream compression; the one-pass R2 clip runs two compressors at 4 threads each
+
+# Takara SMARTer Stranded Total RNA-Seq v2 Pico (634411): the first 3 nt of Read 2 come from the Pico v2 SMART
+# adapter (template-switching oligo), not the template. The clip itself is fixed in run.sbatch as
+# awk 'NR%4==2||NR%4==0{print substr($0,4);next}{print}'  (3 nt off the sequence and quality lines of R2 only).
+r2_clip_nt: 3                  # used by the length-accounting check: clipped length = raw length - 3, for every read
+max_clipped_len: 98            # raw reads are 35-101 nt (FastQC, both published runs) -> clipped 32-98
+
+# Gate A (before any output is written): is the artefact in these reads? First gate_records R2 records.
+# FastQC of C2B, IL64B, IL68B, NL70B: R2 pos 1-2 C 2.7-5.8 %, A 4.4-9.0 %; R2 pos 5-9 C 18.9-33.9 %.
+gate_records: 1000000
+gate_c12_max: 0.08             # mean C fraction at R2 positions 1-2 must be below this
+gate_a12_max: 0.10             # mean A fraction at R2 positions 1-2 must be below this
+gate_c59_min: 0.15             # mean C fraction at R2 positions 5-9 must be above this
+# Check g (after clipping): the first positions are now template, whose positions 4-5 read 19-28 % C.
+post_c12_min: 0.10
+
+# xengsort classify counts (U/ANALYSIS/xengsort_out/<lib>.txt), host,graft,both. The job parses the log and refuses
+# to run unless it equals this. graft+both reproduces the published human run's FastQC count for every library.
+expected_C2B: 450649,84519445,11022904
+expected_IL64B: 90003153,314037,4546256
+expected_IL66B: 51160559,25459283,8298076
+expected_IL67B: 36298116,31886295,5512307
+expected_IL68B: 32216898,32225887,5441545
+expected_IL69B: 19642823,49327614,6013633
+expected_N168B: 74411463,435428,4086055
+expected_N269B: 67885104,3823923,4423374
+expected_NL70B: 35387952,31293679,5345807
+expected_NL71B: 52351099,29210358,5811628
+
+# collect_prep.sbatch: a library counts as human-rich when graft/(host+graft+both) is at least this.
+human_rich_min: 0.20

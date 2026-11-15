@@ -1,0 +1,11 @@
+library,arm,graft_only_column,published_column,host_column,xengsort_log
+C2B,culture,C2B_graft,C2B,,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/C2B.txt
+IL64B,control,IL64B_graft,IL64B,IL64B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/IL64B.txt
+IL66B,recurrent,IL66B_graft,IL66B,IL66B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/IL66B.txt
+IL67B,primary,IL67B_graft,IL67B,IL67B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/IL67B.txt
+IL68B,primary,IL68B_graft,IL68B,IL68B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/IL68B.txt
+IL69B,primary,IL69B_graft,IL69B,IL69B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/IL69B.txt
+N168B,contralateral,N168B_graft,N168B,N168B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/N168B.txt
+N269B,contralateral,N269B_graft,N269B,N269B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/N269B.txt
+NL70B,recurrent,NL70B_graft,NL70B,NL70B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/NL70B.txt
+NL71B,recurrent,NL71B_graft,NL71B,NL71B,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out/NL71B.txt

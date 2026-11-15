@@ -1,0 +1,6 @@
+org.label-schema.build-arch: amd64
+org.label-schema.build-date: Saturday_26_September_2026_7:3:39_EDT
+org.label-schema.schema-version: 1.0
+org.label-schema.usage.singularity.deffile.bootstrap: docker
+org.label-schema.usage.singularity.deffile.from: go2432/bioconductor:latest
+org.label-schema.usage.singularity.version: 3.8.6

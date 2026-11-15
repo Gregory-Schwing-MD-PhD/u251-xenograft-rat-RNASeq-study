@@ -1,0 +1,7 @@
+sample,fastq_1,fastq_2,strandedness,condition
+IL67B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL67B_graft_R2.fq.gz,reverse,primary
+IL68B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL68B_graft_R2.fq.gz,reverse,primary
+IL69B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL69B_graft_R2.fq.gz,reverse,primary
+IL66B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/IL66B_graft_R2.fq.gz,reverse,recurrent
+NL70B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL70B_graft_R2.fq.gz,reverse,recurrent
+NL71B_graft,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/graft_clip/NL71B_graft_R2.fq.gz,reverse,recurrent

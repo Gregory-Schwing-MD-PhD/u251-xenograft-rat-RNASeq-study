@@ -1,0 +1,21 @@
+# rnaseq_graft: nf-core/rnaseq 3.22.2 on the graft-only U251 reads (R2 clipped once, upstream, by prep_reads).
+# Same release, reference and settings as the published human run (U/rnaseq_params.yaml, results_human_final), so
+# only the input reads change: graft-only instead of graft+both, and the Takara 3-nt R2 artefact removed.
+# Every line below that is not a pipeline default is explained in README.md.
+input:  "/rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/samplesheet.csv"
+outdir: "/rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results"
+
+# GENCODE v44 (Ensembl 110) GRCh38 primary assembly: the same two files the published run used.
+fasta: "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/GRCh38.primary_assembly.genome.fa.gz"
+gtf:   "/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/GRCh38.primary_assembly.annotation.gtf.gz"
+
+aligner: "star_salmon"                 # the default, written out: STAR 2.7.11b + salmon 1.10.3, as published
+skip_bbsplit: true                     # the default in 3.22.2, written out: species separation was done by xengsort
+featurecounts_group_type: "gene_type"  # GENCODE GTFs carry gene_type, not gene_biotype (as published)
+save_reference: true                   # keep the human STAR and salmon indices this time (never saved before)
+extra_trimgalore_args: null            # the default, written out: the R2 clip was applied upstream; --clip_r2 here
+                                       # would remove 3 template bases a second time
+
+# Left at their defaults, as in the published run: gencode (false), min_mapped_reads (5), markduplicates (on),
+# trimmer (trimgalore, adapter auto-detected), min_trimmed_reads (10000). No max_cpus/max_memory: grid.config sets
+# process.resourceLimits instead.

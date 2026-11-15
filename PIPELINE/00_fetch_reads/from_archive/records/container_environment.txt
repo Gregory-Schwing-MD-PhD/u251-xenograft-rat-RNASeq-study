@@ -1,0 +1,27 @@
+=== /.singularity.d/env/10-docker2singularity.sh ===
+#!/bin/sh
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+export R_VERSION="${R_VERSION:-"4.3.3"}"
+export R_HOME="${R_HOME:-"/usr/local/lib/R"}"
+export TZ="${TZ:-"Etc/UTC"}"
+export CRAN="${CRAN:-"https://p3m.dev/cran/__linux__/jammy/2024-04-23"}"
+export LANG="${LANG:-"en_US.UTF-8"}"
+export S6_VERSION="${S6_VERSION:-"v2.1.0.2"}"
+export RSTUDIO_VERSION="${RSTUDIO_VERSION:-"2023.12.0+369"}"
+export DEFAULT_USER="${DEFAULT_USER:-"rstudio"}"
+export PANDOC_VERSION="${PANDOC_VERSION:-"default"}"
+export QUARTO_VERSION="${QUARTO_VERSION:-"default"}"
+export BIOCONDUCTOR_USE_CONTAINER_REPOSITORY="${BIOCONDUCTOR_USE_CONTAINER_REPOSITORY:-"TRUE"}"
+export TARGETARCH="${TARGETARCH:-"amd64"}"
+export TARGETPLATFORM="${TARGETPLATFORM:-"linux/amd64"}"
+export PLATFORM="${PLATFORM:-"linux/amd64"}"
+export LIBSBML_CFLAGS="${LIBSBML_CFLAGS:-"-I/usr/include"}"
+export LIBSBML_LIBS="${LIBSBML_LIBS:-"-lsbml"}"
+export BIOCONDUCTOR_DOCKER_VERSION="${BIOCONDUCTOR_DOCKER_VERSION:-"3.18.29"}"
+export BIOCONDUCTOR_VERSION="${BIOCONDUCTOR_VERSION:-"3.18"}"
+export BIOCONDUCTOR_NAME="${BIOCONDUCTOR_NAME:-"bioconductor_docker"}"
+
+=== /.singularity.d/env/90-environment.sh ===
+#!/bin/sh
+# Custom environment shell code should follow
+

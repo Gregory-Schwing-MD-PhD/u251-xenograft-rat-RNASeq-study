@@ -1,0 +1,128 @@
+{
+ "checks": {
+  "0": {
+   "data": {
+    "commit": "1d0494ae3402d1a46e0adadad24f81a0ff855c77",
+    "nextflow": "23.10.0",
+    "nextflow_exit": "0",
+    "param_mismatch": []
+   },
+   "status": "PASS",
+   "title": "run, versions, applied params"
+  },
+  "1": {
+   "data": {
+    "failed_attempts": 1,
+    "salmon_branch_ran": false
+   },
+   "status": "PASS",
+   "title": "trace: expected processes, nothing forbidden"
+  },
+  "2": {
+   "data": {},
+   "status": "PASS",
+   "title": "commands: strand, read length, unpaired statistics, DRIMSeq filter"
+  },
+  "3": {
+   "data": {},
+   "status": "PASS",
+   "title": "inputs: xengsort graft pairs -> TrimGalore -> STAR"
+  },
+  "4": {
+   "data": {},
+   "status": "PASS",
+   "title": "read lengths: R1 max 101, R2 max 98 (clip applied once, upstream)"
+  },
+  "5": {
+   "data": {
+    "independent": {
+     "IL66B_graft": {
+      "antisense_share": 0.9890343216504824,
+      "counts": {
+       "+fwd": 3621,
+       "+rev": 353932,
+       "-fwd": 696463,
+       "-rev": 8025
+      }
+     },
+     "IL67B_graft": {
+      "antisense_share": 0.9880661313808804,
+      "counts": {
+       "+fwd": 5542,
+       "+rev": 484939,
+       "-fwd": 937978,
+       "-rev": 11644
+      }
+     },
+     "IL68B_graft": {
+      "antisense_share": 0.9877965158098772,
+      "counts": {
+       "+fwd": 6065,
+       "+rev": 540502,
+       "-fwd": 1106057,
+       "-rev": 14277
+      }
+     },
+     "IL69B_graft": {
+      "antisense_share": 0.9868632928433244,
+      "counts": {
+       "+fwd": 9348,
+       "+rev": 801474,
+       "-fwd": 1620553,
+       "-rev": 22893
+      }
+     },
+     "NL70B_graft": {
+      "antisense_share": 0.9880074854500507,
+      "counts": {
+       "+fwd": 5210,
+       "+rev": 477449,
+       "-fwd": 923761,
+       "-rev": 11798
+      }
+     },
+     "NL71B_graft": {
+      "antisense_share": 0.9881676115593971,
+      "counts": {
+       "+fwd": 5356,
+       "+rev": 437465,
+       "-fwd": 873618,
+       "-rev": 10343
+      }
+     }
+    },
+    "salmon": {},
+    "worst": 0.0
+   },
+   "status": "FAIL",
+   "title": "strand: salmon ISR and R1 orientation on named genes"
+  },
+  "6": {
+   "data": {
+    "dexseq_rows": {
+     "IL66B_graft": 699611,
+     "IL67B_graft": 699611,
+     "IL68B_graft": 699611,
+     "IL69B_graft": 699611,
+     "NL70B_graft": 699611,
+     "NL71B_graft": 699611
+    }
+   },
+   "status": "PASS",
+   "title": "completeness: six samples everywhere"
+  },
+  "7": {
+   "data": {},
+   "status": "PASS",
+   "title": "null inputs: files, containers, pipeline scripts, option strings"
+  }
+ },
+ "failed": [
+  "5"
+ ],
+ "finished": "2026-09-27 05:52:45",
+ "hard_pass": false,
+ "results": "/rs/rs_grp_oschome/go2432/u251_multiomics/rnasplice/results",
+ "started": "2026-09-27 05:49:24",
+ "warned": []
+}
