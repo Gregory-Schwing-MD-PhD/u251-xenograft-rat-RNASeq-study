@@ -1,0 +1,88 @@
+# integration_rna_prep settings. run.sbatch and prep_rna_refs.R read these; keep them flat `key: value` (no nesting,
+# no quotes, no " #" inside a value). README.md says why each non-default value is what it is.
+
+# ---------------------------------------------------------------- locations (grid)
+U: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study
+M: /rs/rs_grp_oschome/go2432/u251_multiomics
+I: /rs/rs_grp_oschome/go2432/u251_multiomics/integration
+refs_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/integration/refs
+
+# ---------------------------------------------------------------- inputs of the published human run (read only)
+gtf: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/GRCh38.primary_assembly.annotation.gtf.gz
+gtf_md5sums: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/MD5SUMS
+gtf_md5sums_name: gencode.v44.primary_assembly.annotation.gtf.gz
+gtf_version_text: version 44 (Ensembl 110)
+counts_published: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_counts.tsv
+tpm_published: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_tpm.tsv
+fastqc_raw: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/multiqc/star_salmon/multiqc_report_data/multiqc_fastqc_fastqc_raw.txt
+
+# ---------------------------------------------------------------- graft-only sensitivity rerun (IRP_MODE=graft)
+counts_graft: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/salmon.merged.gene_counts.tsv
+tpm_graft: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/salmon.merged.gene_tpm.tsv
+graft_checks: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/checks.json
+graft_suffix: _graft
+graft_max_deferrals: 8
+
+# ---------------------------------------------------------------- item 1: calibrated human share
+libraries: C2B,IL64B,IL66B,IL67B,IL68B,IL69B,N168B,N269B,NL70B,NL71B
+expected_total_pairs: 822628276
+human_calibrator: C2B
+rat_calibrators: IL64B,N168B
+# Groups (ANALYSIS/SAMPLE_KEY.md): used only to label rows; nothing here compares the groups.
+group_primary: IL67B,IL68B,IL69B
+group_recurrent: IL66B,NL70B,NL71B
+# Rates stated in the spec (SELECTION S8). The job computes them from the xengsort logs and refuses to run unless each
+# computed rate rounds to the stated value (4 decimals: +-0.00005; 3 decimals: +-0.0005).
+stated_human_graft: 0.8619
+stated_human_both: 0.1124
+stated_human_host: 0.0046
+stated_rat_host: 0.9359,0.9357
+stated_rat_graft: 0.0033,0.0055
+stated_rat_both: 0.047,0.051
+h_agree_tol: 0.03
+
+# ---------------------------------------------------------------- item 2: rat reads per gene
+rat_leak_mark: 0.1
+leak_min_count_selfcheck: 20
+
+# ---------------------------------------------------------------- item 3: MGMT and CDKN2A/CDKN2B loci
+locus_targets: MGMT,CDKN2A,CDKN2B
+posctrl_tpm_lo: 1
+posctrl_tpm_hi: 5
+posctrl_n: 2
+mapq_unique: 255
+sam_exclude_flags: 0x904
+poisson_ub_level: 0.95
+
+# ---------------------------------------------------------------- items 5 and 6: DepMap arms and identity
+tpm_min: 1
+arm_min_genes: 20
+identity_top_var_genes: 5000
+depmap_lineage: CNS/Brain
+depmap_family: ACH-000232,ACH-001172,ACH-001198
+depmap_family_names: U251MG,U251MGDM,SNB19
+depmap_mgmt_posctrl: T98G
+# All histone genes (replication-dependent and replacement), the same rule as rnaseq_graft check 8. DepMap is poly(A)
+# RNA and Pico v2 is total RNA; replication-dependent histone mRNAs carry no poly(A) tail.
+histone_regex: ^(H1-[0-9]+|H2A[CJWXZ][0-9A-Z]*|H2B[CUW][0-9A-Z]*|H3C[0-9]+|H3-[0-9][0-9A-Z]*|H4C[0-9]+|H4-16)$
+rrbs_loci_prefixes: MGMT_,CDKN2A_,CDKN2B_,GAPDH_
+
+# ---------------------------------------------------------------- item 4: references (name url md5|record), GET only
+ref_01: OmicsExpressionProteinCodingGenesTPMLogp1.csv https://ndownloader.figshare.com/files/51065489 71794802b750ce77c422dad0720a40af
+ref_02: OmicsCNSegmentsProfile.csv https://ndownloader.figshare.com/files/51065333 79fc5cf5c46f215ef085dddaa0e56860
+ref_03: OmicsProfiles.csv https://ndownloader.figshare.com/files/51065723 7195088a5fc41eddb3f896c6e984a992
+ref_04: OmicsDefaultModelProfiles.csv https://ndownloader.figshare.com/files/51065339 4d342a03701c0a4c0742fedb56c1de40
+ref_05: OmicsSignaturesProfile.csv https://ndownloader.figshare.com/files/51065729 94f8afe88b5a896126b4f122d836bb44
+ref_06: Model.csv https://ndownloader.figshare.com/files/51065297 675210d17675f3517b0ce39a3c274f16
+ref_07: README.txt https://ndownloader.figshare.com/files/51065795 54628c15a10b9ff6536db245cfed5231
+ref_08: CCLE_RRBS_TSS1kb_20181022.txt.gz https://data.broadinstitute.org/ccle/CCLE_RRBS_TSS1kb_20181022.txt.gz a228ad21f1016fb6508f6252d5187a2a
+ref_09: EPIC.hg38.manifest.gencode.v36.tsv.gz https://github.com/zhou-lab/InfiniumAnnotationV1/raw/main/Anno/EPIC/EPIC.hg38.manifest.gencode.v36.tsv.gz record
+ref_10: cytoBand.hg38.txt.gz https://hgdownload.soe.ucsc.edu/goldenPath/hg38/database/cytoBand.txt.gz record
+
+# ---------------------------------------------------------------- containers (looked up in img_dirs, in order)
+img_dirs: /rs/rs_grp_oschome/go2432/u251_multiomics/singularity,/rs/rs_grp_oschome/go2432/singularity_cache
+img_r: depot.galaxyproject.org-singularity-bioconductor-deseq2-1.34.0--r41hc247a5b_3.img
+img_r_url: https://depot.galaxyproject.org/singularity/bioconductor-deseq2:1.34.0--r41hc247a5b_3
+img_samtools: depot.galaxyproject.org-singularity-samtools-1.21--h50ea8bc_0.img
+img_samtools_url: https://depot.galaxyproject.org/singularity/samtools:1.21--h50ea8bc_0
+singularity: /wsu/home/go/go24/go2432/mambaforge/envs/nextflow/bin/singularity

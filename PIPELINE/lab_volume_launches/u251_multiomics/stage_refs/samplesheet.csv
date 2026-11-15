@@ -1,0 +1,11 @@
+reference,grid_path,done_marker,used_by
+gencode_v44_fasta,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.genome.fa,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/gencode,rnavar;rnasplice;known_sites
+gencode_v44_fai,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.genome.fa.fai,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/gencode,rnavar;known_sites
+gencode_v44_gtf,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.annotation.gtf,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/gencode,rnavar;rnasplice
+dbsnp138,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/dbsnp138.primary.vcf.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/known_sites,rnavar
+mills_1000g,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/known_sites/mills_1000g.primary.vcf.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/known_sites,rnavar
+vep_cache_115,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/vep_cache/homo_sapiens/115_GRCh38,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/vep,rnavar
+rnafusion_bundle_gencode_v46,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/rnafusion,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/rnafusion,rnafusion
+hg38ToRn7_chain,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/chains/hg38ToRn7.over.chain.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/chain,rnavar_integration
+rediportal_hg38_v3,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/rediportal/TABLE1_hg38_v3.txt.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/rediportal,rnavar_integration (optional)
+bcftools_1.21_image,/rs/rs_grp_oschome/go2432/singularity_cache/depot.galaxyproject.org-singularity-bcftools-1.21--h8b25389_0.img,/rs/rs_grp_oschome/go2432/u251_multiomics/refs/.done/containers,known_sites;rnavar_integration

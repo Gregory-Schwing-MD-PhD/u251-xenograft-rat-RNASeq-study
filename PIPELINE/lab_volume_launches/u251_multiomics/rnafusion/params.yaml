@@ -1,0 +1,24 @@
+# nf-core/rnafusion 4.1.3, pass 1. Pass 2 is the same file with --whitelist <pass-2 list> on the command line.
+# Every key below exists in the 4.1.3 schema (nextflow_schema.json at tag 4.1.3, commit 76ad76e7c3); why each one is
+# set is in README.md, "Settings that are not the defaults".
+input:  /rs/rs_grp_oschome/go2432/u251_multiomics/rnafusion/samplesheet.csv
+outdir: /rs/rs_grp_oschome/go2432/u251_multiomics/rnafusion/results
+
+# references: the S3 bundle mirrored and checked by stage_refs (M/refs/.done/rnafusion); nothing is built or downloaded
+genomes_base: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/rnafusion
+genome: GRCh38
+genome_gencode_version: 46
+
+tools: arriba,starfusion,fusioncatcher,fusionreport,fusioninspector,ctatsplicing
+tools_cutoff: 2          # a fusion needs 2 of the 3 callers to reach fusion-report's filtered list and FusionInspector
+no_cosmic: true          # FUSIONREPORT_DETECT runs with --no-cosmic; the S3 cosmic.db is 0 bytes and was removed
+read_length: 100         # matches the S3 STAR index (genomeParameters.txt sjdbOverhang 99); nothing is rebuilt from it
+skip_qc: false           # Picard/GATK duplication and STAR mapping rates are compared with the published human run
+
+# the eight U251MG fusions of CCLE_Fusions_20181130.txt (private to U251MG among 1,017 lines); the schema requires .tsv
+whitelist: /rs/rs_grp_oschome/go2432/u251_multiomics/rnafusion/whitelist_pass1.tsv
+
+# seq_platform deliberately unset: conf/modules.config l.290 writes "'SM:<id>'' PL:<platform>'" when it is set, which
+# fuses SM and PL into one read-group token.
+# fastp deliberately not in tools: trimming would rename nothing but would drop and shorten reads, and the audit matches
+# supporting read names back to the input FASTQs and to the xengsort 'both' names.

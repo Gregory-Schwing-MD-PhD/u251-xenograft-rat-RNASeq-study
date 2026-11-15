@@ -1,0 +1,47 @@
+# human_de_null settings. run.sbatch reads these (flat `key: value`, no quotes, no nesting, no '#' inside a value) and
+# passes them to the two R scripts as key=value arguments. README.md says why each value is what it is.
+# Fixed in bin/human_de_null_de.R, because they are the pipeline's DESEQ2_DIFFERENTIAL settings and R0 tests them:
+#   design ~ 0 + Classification; salmon gene lengths as avgTxLength; Wald test, fitType parametric, sfType ratio,
+#   minReplicatesForReplace 99, useT FALSE, minmu 0.5, lfcThreshold 0, altHypothesis greaterAbs, independent
+#   filtering, BH. p and padj come from the unshrunk test; the table's log2FoldChange is lfcShrink(type ashr).
+
+# ---- inputs, pass A (the analysis of record: the published graft+both counts)
+passA_counts: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_counts.tsv
+passA_lengths: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_lengths.tsv
+
+# ---- inputs, pass B (pre-registered rat-leak sensitivity: graft-only counts from rnaseq_graft, columns <lib>_graft)
+passB_counts: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/salmon.merged.gene_counts.tsv
+passB_lengths: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/salmon.merged.gene_lengths.tsv
+passB_required_checks: 0,1,2,3,4,10
+
+# ---- the published run (nf-core/differentialabundance 1.5.0, results_therapy_v3)
+metadata: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/metadata_therapy.csv
+published_table: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_therapy_v3/tables/differential/therapy_impact.deseq2.results.tsv
+published_filtered: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_therapy_v3/tables/differential/therapy_impact.deseq2.results_filtered.tsv
+published_sizefactors: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_therapy_v3/other/deseq2/therapy_impact.deseq2.sizefactors.tsv
+published_params: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_therapy_v3/pipeline_info/params_2026-05-24_19-23-04.json
+published_design_params: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/therapy_v3_params.yaml
+broad_gsea_dir: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_therapy_v3/report/gsea/therapy_impact/combined_human
+gmt_dir: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/pathways/human
+
+# ---- containers and R library (images are exec'd by absolute path; nothing is pulled)
+deseq2_image: /rs/rs_grp_oschome/go2432/singularity_cache/depot.galaxyproject.org-singularity-bioconductor-deseq2-1.34.0--r41hc247a5b_3.img
+expect_deseq2: 1.34.0
+bioconductor_image: /rs/rs_grp_oschome/go2432/singularity_cache/go2432-bioconductor.sif
+rlib: /rs/rs_grp_oschome/go2432/Rlib
+
+# ---- DESeq2 (therapy_v3_params.yaml and the published params JSON)
+filtering_min_abundance: 10
+filtering_min_samples: 1
+deseq2_alpha: 0.1
+padj_cut: 0.05
+differential_min_fold_change: 1.5
+lfc_shrink: ashr
+r0_tolerance: 0.0001
+rp_block_set: KEGG_MEDICUS_REFERENCE_TRANSLATION_INITIATION
+
+# ---- fgsea
+gsea_nperm: 10000
+gsea_set_min: 15
+gsea_set_max: 500
+gsea_seed: 1234

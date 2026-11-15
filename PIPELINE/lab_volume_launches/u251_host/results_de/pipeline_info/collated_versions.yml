@@ -1,0 +1,15 @@
+DESEQ2_DIFFERENTIAL:
+  r-base: 4.1.3
+  bioconductor-deseq2: 1.34.0
+GTF_TO_TABLE:
+  atlas-gene-annotation-manipulation: 1.1.1
+GUNZIP_GTF:
+  gunzip: 1.1
+TABULAR_TO_GSEA_CHIP:
+  bash: 4.2.25 3
+VALIDATOR:
+  r-base: 4.3.3
+  r-shinyngs: 1.8.8
+Workflow:
+    nf-core/differentialabundance: v1.5.0-g3dd360f
+    Nextflow: 25.10.2

@@ -1,0 +1,409 @@
+diff --git a/bin/dmp_limma.R b/bin/dmp_limma.R
+index 3257b42..ed32b7f 100755
+--- a/bin/dmp_limma.R
++++ b/bin/dmp_limma.R
+@@ -236,7 +236,8 @@ tryCatch({
+         }, error = function(e) {
+           message("ERROR in contrast ", cn, " (method=", method, "): ", conditionMessage(e))
+           write.csv(data.frame(), file.path(out_dir, paste0("DMP_", cn, ".csv")), row.names=FALSE)
+-          summ$n_FDR_0.05[summ$contrast==cn] <<- 0L
++          # u251 patch P3: a failed contrast is NA, not a plausible-looking zero
++          summ$n_FDR_0.05[summ$contrast==cn] <<- NA_integer_
+         })
+       }
+ 
+diff --git a/bin/dmr_dmrcate.R b/bin/dmr_dmrcate.R
+index 7fa93ea..8dcdced 100755
+--- a/bin/dmr_dmrcate.R
++++ b/bin/dmr_dmrcate.R
+@@ -239,44 +239,80 @@ tryCatch({
+ 
+       dmr_summary <- list()
+ 
++      # u251 patch P3: the array type follows the probe IDs (EPICv2 IDs carry a _XXnn suffix,
++      # EPIC v1 IDs do not); unpatched, arraytype was hard-wired to "EPICv2".
++      dmr_arraytype <- if (any(grepl("_", rownames(M_use), fixed=TRUE))) "EPICv2" else "EPICv1"
++      message("[DMR] cpg.annotate arraytype: ", dmr_arraytype, " | extractRanges genome: ", genome_build)
++
+       for (cn in colnames(cont_mat)) {
+         out_csv <- file.path(dmr_dir, paste0("DMRcate_", cn, "_ranges.csv"))
+         dmr_summary[[cn]] <- tryCatch({
+-          ann <- DMRcate::cpg.annotate(
+-            object=M_use, datatype="array", what="M",
+-            analysis.type="differential",
+-            design=design,
+-            contrasts=TRUE,
+-            cont.matrix=cont_mat,
+-            coef=cn,
+-            arraytype="EPICv2",
+-            epicv2Filter=posreps_strategy,
+-            epicv2Remap=isTRUE(epicv2_remap),
+-            fdr=0.05
+-          )
++          if (dmr_arraytype == "EPICv2") {
++            ann <- DMRcate::cpg.annotate(
++              object=M_use, datatype="array", what="M",
++              analysis.type="differential",
++              design=design,
++              contrasts=TRUE,
++              cont.matrix=cont_mat,
++              coef=cn,
++              arraytype="EPICv2",
++              epicv2Filter=posreps_strategy,
++              epicv2Remap=isTRUE(epicv2_remap),
++              fdr=0.05
++            )
++          } else {
++            ann <- DMRcate::cpg.annotate(
++              object=M_use, datatype="array", what="M",
++              analysis.type="differential",
++              design=design,
++              contrasts=TRUE,
++              cont.matrix=cont_mat,
++              coef=cn,
++              arraytype="EPICv1",
++              fdr=0.05
++            )
++          }
+ 
+           is_sig <- S4Vectors::mcols(ann@ranges)$is.sig
+           n_sig <- sum(is_sig, na.rm=TRUE)
+ 
+           if (is.na(n_sig) || n_sig == 0) {
++            # a true zero: no individually significant CpG, so no DMR can be formed
+             write.csv(data.frame(), out_csv, row.names=FALSE)
+-            data.frame(contrast=cn, nDMR=0)
++            data.frame(contrast=cn, n_sig_cpg=n_sig, nDMR=0L, status="no_significant_cpg")
+           } else {
+-            dmr <- DMRcate::dmrcate(ann, lambda=1000, C=2)
+-            gr <- try(DMRcate::extractRanges(dmr, genome=genome_build), silent=TRUE)
+-            if (inherits(gr,"try-error") || is.null(gr) || length(gr)==0) {
++            # dmrcate() stops when the significant CpGs form no region; that is a true zero, any
++            # other error is not and is re-raised to the NA branch below
++            dmr <- tryCatch(DMRcate::dmrcate(ann, lambda=1000, C=2), error = function(e) {
++              if (grepl("sig[a-z]*ficant regions found|K >= 2", conditionMessage(e))) {
++                message("[DMR] ", cn, ": ", conditionMessage(e))
++                NULL
++              } else stop(e)
++            })
++            if (is.null(dmr)) {
+               write.csv(data.frame(), out_csv, row.names=FALSE)
+-              data.frame(contrast=cn, nDMR=0)
++              data.frame(contrast=cn, n_sig_cpg=n_sig, nDMR=0L, status="no_region")
+             } else {
+-              df_out <- as.data.frame(gr)
+-              write.csv(df_out, out_csv, row.names=FALSE)
+-              data.frame(contrast=cn, nDMR=nrow(df_out))
++              gr <- tryCatch(DMRcate::extractRanges(dmr, genome=genome_build), error = function(e) {
++                message("ERROR in contrast ", cn, " (method=", method, ") extractRanges: ", conditionMessage(e))
++                NULL
++              })
++              if (is.null(gr)) {
++                # the DMRs exist but could not be annotated: record NA, never 0
++                write.csv(data.frame(), out_csv, row.names=FALSE)
++                data.frame(contrast=cn, n_sig_cpg=n_sig, nDMR=NA_integer_, status="error_extractRanges")
++              } else {
++                df_out <- as.data.frame(gr)
++                write.csv(df_out, out_csv, row.names=FALSE)
++                data.frame(contrast=cn, n_sig_cpg=n_sig, nDMR=nrow(df_out), status="ok")
++              }
+             }
+           }
+         }, error = function(e) {
+           message("ERROR in contrast ", cn, " (method=", method, "): ", conditionMessage(e))
+           write.csv(data.frame(), out_csv, row.names=FALSE)
+-          data.frame(contrast=cn, nDMR=0)
++          # u251 patch P3: a failed contrast is NA, not a plausible-looking zero
++          data.frame(contrast=cn, n_sig_cpg=NA_integer_, nDMR=NA_integer_, status="error")
+         })
+       }
+ 
+diff --git a/bin/filter_xy_noncg_beads.R b/bin/filter_xy_noncg_beads.R
+index 4796d43..a98e24e 100755
+--- a/bin/filter_xy_noncg_beads.R
++++ b/bin/filter_xy_noncg_beads.R
+@@ -36,7 +36,14 @@ if (filter_beads && (is.null(rg_path) || !file.exists(rg_path))) {
+ if (is.null(beta_path) || !file.exists(beta_path)) stop("Beta norm RDS not found: ", beta_path)
+ 
+ req("minfi")
+-anno_pkg <- paste0("IlluminaHumanMethylationEPICv2anno.", anno_str)
++# u251 patch P2: EPIC v1 annotations (ilm10b*) live in IlluminaHumanMethylationEPICanno.*, not in the
++# EPICv2 package; unpatched, --annotation ilm10b4.hg19 asked for a package that does not exist.
++anno_pkg <- if (grepl("^ilm10b", anno_str)) {
++  paste0("IlluminaHumanMethylationEPICanno.", anno_str)
++} else {
++  paste0("IlluminaHumanMethylationEPICv2anno.", anno_str)
++}
++say("Annotation package:", anno_pkg)
+ req(anno_pkg)
+ 
+ tryCatch({
+@@ -120,6 +127,15 @@ tryCatch({
+ 
+   # ── 1) Restrict to probes in annotation ─────────────────────────────────────
+   present <- intersect(rownames(anno), rownames(beta_pre))
++  # u251 patch P2: a probe-ID scheme that does not match the annotation (v1 IDs against v2 rownames,
++  # cg00000029 vs cg00000029_TC21) used to leave 0 probes without an error. Stop instead.
++  frac_present <- length(present) / max(1L, nrow(beta_pre))
++  say("Probes found in", anno_pkg, ":", length(present), "of", nrow(beta_pre),
++      sprintf("(%.2f%%)", 100 * frac_present))
++  if (frac_present < 0.90) {
++    stop("Only ", length(present), " of ", nrow(beta_pre), " probes are in ", anno_pkg,
++         ": the probe IDs do not match this annotation.")
++  }
+   beta0   <- beta_pre[present, , drop=FALSE]
+ 
+   # ── 2) XY chromosomes ───────────────────────────────────────────────────────
+diff --git a/bin/import_idat.R b/bin/import_idat.R
+index ac3dcb1..f9f605e 100755
+--- a/bin/import_idat.R
++++ b/bin/import_idat.R
+@@ -32,6 +32,32 @@ force_epicv2_annotation <- function(rg, annotation_string) {
+   rg
+ }
+ 
++# u251 patch P1: set the annotation for the array minfi actually detected. Unpatched, the EPICv2
++# annotation was stamped onto every RGChannelSet inside try(silent=TRUE), so EPIC v1 intensities
++# were later indexed with the v2 manifest. A mismatch between the IDATs and --annotation now stops.
++set_annotation_for_array <- function(rg, annotation_string) {
++  arr <- annotation(rg)[["array"]]
++  say("minfi detected array:", arr, "| --annotation:", annotation_string)
++  if (identical(arr, "IlluminaHumanMethylationEPICv2")) {
++    return(force_epicv2_annotation(rg, annotation_string))
++  }
++  if (!identical(arr, "IlluminaHumanMethylationEPIC")) {
++    stop("Unsupported array type detected by minfi: ", arr)
++  }
++  if (!grepl("^ilm10b[0-9]+\\.hg(19|38)$", annotation_string)) {
++    stop("IDATs are EPIC v1 but --annotation is '", annotation_string,
++         "'. Use an EPIC v1 annotation, e.g. ilm10b4.hg19.")
++  }
++  annotation(rg) <- c(array = "IlluminaHumanMethylationEPIC", annotation = annotation_string)
++  pkg <- paste0("IlluminaHumanMethylationEPICanno.", annotation_string)
++  if (!requireNamespace(pkg, quietly = TRUE)) stop("Annotation package not installed: ", pkg)
++  if (!requireNamespace("IlluminaHumanMethylationEPICmanifest", quietly = TRUE)) {
++    stop("Manifest package not installed: IlluminaHumanMethylationEPICmanifest")
++  }
++  say("Annotation set to:", paste(annotation(rg), collapse = " / "))
++  rg
++}
++
+ tryCatch({
+   say("== Import IDATs + sample sheet ==")
+   say("sample_sheet:", sample_sheet)
+@@ -82,7 +108,7 @@ tryCatch({
+   }
+ 
+   rg0 <- minfi::read.metharray.exp(targets = targets, extended = TRUE, verbose = TRUE)
+-  rg0 <- force_epicv2_annotation(rg0, annotation_v)
++  rg0 <- set_annotation_for_array(rg0, annotation_v)
+   minfi::sampleNames(rg0) <- targets$Sample_Name
+ 
+   saveRDS(rg0, file = "rg0.rds")
+diff --git a/bin/log_versions.R b/bin/log_versions.R
+index 20aec34..8c21ad1 100755
+--- a/bin/log_versions.R
++++ b/bin/log_versions.R
+@@ -31,6 +31,9 @@ tryCatch({
+       "minfi","sesame","sesameData","DMRcate","limma","sva",
+       "IlluminaHumanMethylationEPICv2manifest",
+       "IlluminaHumanMethylationEPICv2anno.20a1.hg38",
++      "IlluminaHumanMethylationEPICmanifest",
++      "IlluminaHumanMethylationEPICanno.ilm10b4.hg19",
++      "optparse","ExperimentHub","AnnotationHub",
+       "readr","dplyr","ggplot2","matrixStats","tibble",
+       "FlowSorted.Blood.EPIC","ChAMP","pheatmap","missmethyl"
+     ))
+diff --git a/bin/sesame_poobah_qc.R b/bin/sesame_poobah_qc.R
+index 3b2d434..c7a1da7 100755
+--- a/bin/sesame_poobah_qc.R
++++ b/bin/sesame_poobah_qc.R
+@@ -9,7 +9,8 @@ option_list <- list(
+   make_option("--p-det",           type="double",    default=0.05,          dest="p_det",          help="pOOBAH p-value threshold"),
+   make_option("--fail-sample-fr",  type="double",    default=0.10,          dest="fail_sample_fr", help="Max fraction of failed probes per sample"),
+   make_option("--fail-probe-fr",   type="double",    default=0.10,          dest="fail_probe_fr",  help="Max fraction of failed samples per probe"),
+-  make_option("--out-beta",        type="character", default="beta_norm.rds",       dest="out_beta",    help="Output beta RDS"),
++  make_option("--fail-sample-scope", type="character", default="unmasked",  dest="fail_sample_scope", help="Denominator of the per-sample fail rate: 'unmasked' (probes not masked by the prep steps other than P) or 'all' (every probe; the unpatched behaviour)"),
++  make_option("--out-beta",       type="character", default="beta_norm.rds",       dest="out_beta",    help="Output beta RDS"),
+   make_option("--out-rg",          type="character", default="rg_filtered.rds",     dest="out_rg",      help="Output filtered RG RDS"),
+   make_option("--out-targets",     type="character", default="targets_filtered.tsv", dest="out_targets", help="Output filtered targets TSV")
+ )
+@@ -21,7 +22,9 @@ sesame_prep  <- opt$sesame_prep
+ p_det        <- opt$p_det
+ fail_s_fr    <- opt$fail_sample_fr
+ fail_p_fr    <- opt$fail_probe_fr
+-out_beta     <- opt$out_beta
++fail_s_scope <- opt$fail_sample_scope
++if (!(fail_s_scope %in% c("unmasked", "all"))) stop("--fail-sample-scope must be 'unmasked' or 'all', not '", fail_s_scope, "'")
++out_beta    <- opt$out_beta
+ out_rg       <- opt$out_rg
+ out_targets  <- opt$out_targets
+ 
+@@ -71,7 +74,40 @@ tryCatch({
+   beta_ses <- beta_ses[, targets$Sample_Name, drop=FALSE]
+ 
+   # Sample filtering
+-  fail_rate_sample <- colMeans(is.na(beta_ses))
++  # u251 patch P6: the Q step (qualityMask) sets a fixed ~11-12% of EPIC v1 probes to NA in every
++  # array, so counting every NA as a failure put even good arrays above the 0.10 default. With
++  # scope 'unmasked' the rate is the share of probes that survive every prep step except P (same
++  # prep string with P removed) and are then set to NA, i.e. the pOOBAH detection failures the
++  # parameter describes. Scope 'all' is the unpatched rate.
++  fail_rate_all <- colMeans(is.na(beta_ses))
++  n_masked_noP  <- setNames(rep(NA_integer_, ncol(beta_ses)), colnames(beta_ses))
++  fail_rate_unm <- setNames(rep(NA_real_, ncol(beta_ses)), colnames(beta_ses))
++  if (fail_s_scope == "unmasked") {
++    prep_noP <- gsub("P", "", sesame_prep, fixed=TRUE)
++    if (nzchar(prep_noP) && prep_noP != sesame_prep) {
++      beta_noP <- sesame_betas(idats, prep=prep_noP, pval_threshold=p_det)
++      if (is.null(colnames(beta_noP)) || any(colnames(beta_noP)=="")) colnames(beta_noP) <- names(idats)
++      beta_noP <- beta_noP[rownames(beta_ses), targets$Sample_Name, drop=FALSE]
++      ok_noP   <- !is.na(beta_noP)
++      n_odd <- sum(!ok_noP & !is.na(beta_ses))
++      if (n_odd > 0) say("WARNING:", n_odd, "probe-sample values are NA without P but not with P (outside both numerator and denominator)")
++      n_masked_noP  <- colSums(!ok_noP)
++      fail_rate_unm <- colSums(is.na(beta_ses) & ok_noP) / colSums(ok_noP)
++    } else if (prep_noP == sesame_prep) {
++      # no P step: every NA comes from another mask and no probe failed detection
++      n_masked_noP  <- colSums(is.na(beta_ses))
++      fail_rate_unm <- setNames(rep(0, ncol(beta_ses)), colnames(beta_ses))
++    } else {
++      # P is the only step: every NA is a detection failure
++      n_masked_noP  <- setNames(rep(0L, ncol(beta_ses)), colnames(beta_ses))
++      fail_rate_unm <- fail_rate_all
++    }
++    say("Masked by '", prep_noP, "' (no P) per sample: ", paste(range(n_masked_noP), collapse=" - "),
++        " of ", nrow(beta_ses), " probes", sep="")
++  }
++  fail_rate_sample <- if (fail_s_scope == "unmasked") fail_rate_unm else fail_rate_all
++  say("Sample fail rate scope:", fail_s_scope, "| threshold", fail_s_fr, "|",
++      paste(sprintf("%s %.4f (all NA %.4f)", names(fail_rate_sample), fail_rate_sample, fail_rate_all), collapse="; "))
+   keep_samp <- fail_rate_sample <= fail_s_fr
+   say("Samples: initial =", ncol(beta_ses), "| kept =", sum(keep_samp))
+   if (any(!keep_samp)) {
+@@ -97,12 +133,16 @@ tryCatch({
+   save_png("02_hist_failrate_per_sample_masking.png", {
+     hist(fail_rate_sample, breaks=30,
+          main="Per-sample failed probe rate (SeSAMe masking)",
+-         xlab="Proportion of probes masked as NA in beta matrix")
++         xlab=paste0("Per-sample fail rate (scope: ", fail_s_scope, ")"))
+     abline(v=fail_s_fr, lty=2)
+   })
+ 
++  # u251 patch P6: FailRate is the rate the filter used; the other columns make both definitions visible
+   readr::write_csv(
+-    data.frame(Sample=names(fail_rate_sample), FailRate=as.numeric(fail_rate_sample)),
++    data.frame(Sample=names(fail_rate_sample), FailRate=as.numeric(fail_rate_sample),
++               Scope=fail_s_scope, FailRate_allNA=as.numeric(fail_rate_all),
++               FailRate_unmasked=as.numeric(fail_rate_unm), N_masked_without_P=as.integer(n_masked_noP),
++               N_probes=nrow(beta_ses)),
+     "masking_failrate_per_sample.csv"
+   )
+   readr::write_csv(
+diff --git a/bin/split_collapse.R b/bin/split_collapse.R
+index 7e139e1..592b8f0 100755
+--- a/bin/split_collapse.R
++++ b/bin/split_collapse.R
+@@ -11,7 +11,8 @@ option_list <- list(
+   make_option("--out-clean",      type="character", default="beta_clean.rds",              dest="out_clean", help="Output clean DMP beta RDS (SNP/CH filtered + collapsed)"),
+   make_option("--do-rmsnpandch",  type="character", default="true",  dest="do_rmsnpandch",  help="Run rmSNPandCH (true/false)"),
+   make_option("--snp-dist-bp",    type="double",    default=2,       dest="snp_dist_bp",    help="SNP distance in bp for rmSNPandCH"),
+-  make_option("--snp-maf",        type="double",    default=0.01,    dest="snp_maf",        help="MAF cutoff for rmSNPandCH")
++  make_option("--snp-maf",        type="double",    default=0.01,    dest="snp_maf",        help="MAF cutoff for rmSNPandCH"),
++  make_option("--exclude-probes", type="character", default="",      dest="exclude_probes", help="Optional file of probe IDs (one per line) removed from both the DMP and DMR branches")
+ )
+ opt <- parse_args(OptionParser(option_list=option_list))
+ 
+@@ -29,6 +30,26 @@ req("DMRcate"); req("sesame")
+ tryCatch({
+   beta_in <- readRDS(beta_path)
+ 
++  # u251 patch P4: a user-supplied exclusion list (here: probes lit by rat DNA in a human/rat mixture),
++  # applied before the split so that both the DMP table and the DMR regions are built without them.
++  exclude_file <- opt$exclude_probes
++  if (!is.null(exclude_file) && nzchar(exclude_file)) {
++    if (!file.exists(exclude_file)) stop("--exclude-probes file not found: ", exclude_file)
++    excl <- unique(trimws(readLines(exclude_file, warn=FALSE)))
++    excl <- excl[nzchar(excl) & !startsWith(excl, "#")]
++    hit  <- rownames(beta_in) %in% excl
++    say("Exclusion list:", exclude_file, "|", length(excl), "IDs |", sum(hit), "of", nrow(beta_in),
++        "probes removed |", length(setdiff(excl, rownames(beta_in))), "listed IDs not present")
++    if (length(excl) > 0 && sum(hit) == 0) stop("--exclude-probes matched no probe: check the probe-ID scheme")
++    beta_in <- beta_in[!hit, , drop=FALSE]
++    writeLines(c(paste("exclude_file", exclude_file, sep="\t"),
++                 paste("ids_listed", length(excl), sep="\t"),
++                 paste("probes_removed", sum(hit), sep="\t"),
++                 paste("probes_kept", nrow(beta_in), sep="\t")), "exclusion_summary.tsv")
++  } else {
++    writeLines("exclude_file\tnone", "exclusion_summary.tsv")
++  }
++
+   say("== Split pipelines: DMP vs DMR + collapse EPICv2 replicates ==")
+ 
+   # DMR branch: SNP filtering without cross-hybridisation removal
+diff --git a/conf/modules.config b/conf/modules.config
+index 540b3ca..5665130 100644
+--- a/conf/modules.config
++++ b/conf/modules.config
+@@ -58,7 +58,8 @@ process {
+             "--sesame-prep    '${params.sesame_prep}'",
+             "--p-det          ${params.p_det}",
+             "--fail-sample-fr ${params.fail_sample_fr}",
+-            "--fail-probe-fr  ${params.fail_probe_fr}"
++            "--fail-probe-fr  ${params.fail_probe_fr}",
++            "--fail-sample-scope ${params.fail_sample_scope}"
+         ].join(' ').trim() }
+         stageInMode = 'symlink'
+         publishDir  = [
+@@ -137,7 +138,8 @@ process {
+         ext.args   = { [
+             "--do-rmsnpandch ${params.do_rmsnpandch}",
+             "--snp-dist-bp   ${params.snp_dist_bp}",
+-            "--snp-maf       ${params.snp_maf}"
++            "--snp-maf       ${params.snp_maf}",
++            params.exclude_probes ? "--exclude-probes '${params.exclude_probes}'" : ''
+         ].join(' ').trim() }
+         publishDir = [
+             path: { "${params.outdir}/split_collapse" },
+diff --git a/modules/local/split_collapse/main.nf b/modules/local/split_collapse/main.nf
+index a501c71..c0f77eb 100644
+--- a/modules/local/split_collapse/main.nf
++++ b/modules/local/split_collapse/main.nf
+@@ -11,6 +11,7 @@ process SPLIT_COLLAPSE {
+     output:
+     path "beta_for_DMR_uncollapsed.rds", emit: beta_dmr_rds
+     path "beta_clean.rds"              , emit: beta_clean_rds
++    path "exclusion_summary.tsv"       , emit: exclusion_summary
+     path "versions.yml"                , emit: versions
+ 
+     when:
+@@ -37,6 +38,7 @@ process SPLIT_COLLAPSE {
+     """
+     touch beta_for_DMR_uncollapsed.rds
+     touch beta_clean.rds
++    touch exclusion_summary.tsv
+ 
+     cat <<-END_VERSIONS > versions.yml
+     "${task.process}":
+diff --git a/nextflow.config b/nextflow.config
+index 602f3d3..935edb6 100644
+--- a/nextflow.config
++++ b/nextflow.config
+@@ -24,6 +24,8 @@ params {
+     // QC thresholds (SeSAMe pOOBAH)
+     p_det                      = 0.05
+     fail_sample_fr             = 0.10
++    // u251 patch P6: per-sample fail rate over probes not masked by the non-P prep steps ('all' = unpatched)
++    fail_sample_scope          = 'unmasked'
+     fail_probe_fr              = 0.10
+ 
+     // SeSAMe configuration
+@@ -33,6 +35,8 @@ params {
+     do_rmsnpandch              = true
+     snp_dist_bp                = 2
+     snp_maf                    = 0.01
++    // u251 patch P4: optional file of probe IDs removed before the DMP/DMR split
++    exclude_probes             = null
+ 
+     // Optional cell composition estimation
+     do_estimate_cellcomp       = true

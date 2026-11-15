@@ -1,0 +1,55 @@
+# rnasplice: nf-core/rnasplice 1.0.4 (commit 1d0494ae3402d1a46e0adadad24f81a0ff855c77), Nextflow 23.10.0.
+# Recurrent (IL66B, NL70B, NL71B) against primary (IL67B, IL68B, IL69B), graft-only reads, R2 clipped once upstream.
+# Every line that is not a pipeline default is explained in README.md. Nominal FDR from this run is not reported on its
+# own: every count is ranked against the 10 balanced relabellings computed outside the pipeline (null/).
+input:     "/rs/rs_grp_oschome/go2432/u251_multiomics/rnasplice/samplesheet.csv"
+contrasts: "/rs/rs_grp_oschome/go2432/u251_multiomics/rnasplice/contrasts.csv"
+outdir:    "/rs/rs_grp_oschome/go2432/u251_multiomics/rnasplice/results"
+source:    "fastq"
+
+# GENCODE v44 (Ensembl 110) GRCh38 primary assembly, unzipped and md5-checked by stage_refs (M/refs/.done/gencode)
+fasta: "/rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.genome.fa"
+gtf:   "/rs/rs_grp_oschome/go2432/u251_multiomics/refs/gencode_v44/GRCh38.primary_assembly.annotation.gtf"
+gencode: true                 # GENCODE annotation; only affects the salmon index, which is not built here (pseudo_aligner null)
+igenomes_ignore: true         # never fall back to an iGenomes reference
+
+aligner: "star_salmon"
+pseudo_aligner: null          # default 'salmon' reruns DTU and SUPPA on pseudo-alignment: two result sets to choose between
+
+# rMATS
+rmats: true
+rmats_read_len: 100           # default 40; usage.md: give the median for variable-length reads (R1 35-101, R2 32-98)
+rmats_paired_stats: false     # default true pairs tumour i of one arm with tumour i of the other: the design is unpaired
+rmats_novel_splice_site: false
+
+# DEXSeq exon usage (DEU)
+dexseq_exon: true
+edger_exon: false             # not independent evidence (same counts, different model); default true
+save_dexseq_annotation: true  # publish the flattened GFF: the null re-runs run_dexseq_exon.R on it
+
+# DEXSeq transcript usage (DTU) after the DRIMSeq filter, stageR confirmation
+dexseq_dtu: true
+dtu_txi: "dtuScaledTPM"
+# the config (4/2/2) and the schema (6/0/0) disagree, so all six are set; 3 = the smaller group (Love, Soneson & Patro 2018)
+min_samps_gene_expr: 6
+min_gene_expr: 10
+min_samps_feature_expr: 3
+min_feature_expr: 10
+min_samps_feature_prop: 3
+min_feature_prop: 0.1
+
+# SUPPA2
+suppa: true
+diffsplice_paired: false      # default true adds -pa (paired replicates): the design is unpaired
+diffsplice_method: "empirical"
+diffsplice_gene_correction: true
+
+sashimi_plot: false           # MISO plots only; default true
+
+# Nextflow 23.10 pipeline: resource caps are params, not process.resourceLimits
+max_cpus: 40
+max_memory: "240.GB"
+max_time: "96.h"
+
+# NOT set on purpose: clip_r2 (TrimGalore ext.args hold only --fastqc/--nextseq, so it is not wired to anything; the
+# 3-nt Takara R2 clip was applied once upstream by prep_reads).

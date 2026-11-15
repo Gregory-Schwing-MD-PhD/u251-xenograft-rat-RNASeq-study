@@ -1,0 +1,11 @@
+sample,fastq_1,fastq_2,strandedness
+C2B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/C2B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/C2B_human_R2.fq.gz,reverse
+IL64B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL64B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL64B_human_R2.fq.gz,reverse
+IL66B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL66B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL66B_human_R2.fq.gz,reverse
+IL67B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL67B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL67B_human_R2.fq.gz,reverse
+IL68B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL68B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL68B_human_R2.fq.gz,reverse
+IL69B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/IL69B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/IL69B_human_R2.fq.gz,reverse
+N168B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/N168B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/N168B_human_R2.fq.gz,reverse
+N269B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/N269B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/N269B_human_R2.fq.gz,reverse
+NL70B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/NL70B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/NL70B_human_R2.fq.gz,reverse
+NL71B_humclip,/wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/sorted_fastqs/NL71B_human_R1.fq.gz,/rs/rs_grp_oschome/go2432/u251_multiomics/reads/human_clip/NL71B_human_R2.fq.gz,reverse

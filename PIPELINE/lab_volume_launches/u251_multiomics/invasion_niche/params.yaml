@@ -1,0 +1,76 @@
+# invasion_niche parameters. Flat YAML (one key per line, lists comma-separated) so that base R can read it
+# (bin/inv_common.R read_params) inside either container. Every non-default choice is explained in README.md.
+# U = grid clone of the repository, H = host (rat) analyses, M = multi-omics build root.
+
+outdir: /rs/rs_grp_oschome/go2432/u251_multiomics/invasion_niche/results
+
+# ---- inputs (read only)
+graft_counts: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/salmon.merged.gene_counts.tsv
+graft_picard_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/results/star_salmon/picard_metrics
+graft_checks: /rs/rs_grp_oschome/go2432/u251_multiomics/rnaseq_graft/checks.json
+pub_counts: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/results_human_final/star_salmon/salmon.merged.gene_counts.tsv
+human_gtf: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/human/GRCh38.primary_assembly.annotation.gtf.gz
+rat_gtf: /rs/rs_grp_oschome/go2432/u251_host/results_rnaseq/genome/Rattus_norvegicus.mRatBN7.2.110.filtered.gtf
+host_counts: /rs/rs_grp_oschome/go2432/u251_host/results_rnaseq/star_salmon/salmon.merged.gene_counts.tsv
+host_fits_dir: /rs/rs_grp_oschome/go2432/u251_host/verify/results/fits
+host_fits_manifest: /rs/rs_grp_oschome/go2432/u251_host/verify/results/fits.tsv
+host_r1_mmp13: /rs/rs_grp_oschome/go2432/u251_host/verify/results/r1_mmp13.tsv
+host_r2_splits: /rs/rs_grp_oschome/go2432/u251_host/verify/results/r2_relabel_splits.tsv
+xengsort_dir: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/xengsort_out
+index_seq_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/reads/index_seq
+passA_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/de_null/results/passA
+passB_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/de_null/results/passB
+
+# ---- references built inside the job (idempotent) and gene-set sources
+gene_tables_dir: /rs/rs_grp_oschome/go2432/u251_multiomics/refs/gene_tables
+genesets_src: /rs/rs_grp_oschome/go2432/u251_multiomics/invasion_niche/genesets_src
+ivygap_matrix: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/cibersort/signatures_online/ivygap2018_anatomic4.txt
+spread_signatures: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/spread/signatures
+msigdb_gmt_hallmark: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/pathways/human/hs.hallmark.v2023.2.gmt
+msigdb_gmt_c2: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/pathways/human/hs.c2_curated.v2023.2.gmt
+msigdbr_lib: /wsu/home/go/go24/go2432/u251-xenograft-murine-RNASeq-study/ANALYSIS/refs/R_libs
+Rlib: /rs/rs_grp_oschome/go2432/Rlib
+
+# ---- design
+libraries: C2B,IL64B,IL66B,IL67B,IL68B,IL69B,N168B,N269B,NL70B,NL71B
+primary: IL67B,IL68B,IL69B
+recurrent: IL66B,NL70B,NL71B
+controls: IL64B,N168B
+# SRA spot counts of SRR39547363-SRR39547372 (trace.ncbi.nlm.nih.gov runinfo, read 2026-09-27); the ten xengsort
+# totals must equal them as a set (the denominator check of part A)
+sra_spots: 98064329,96163607,79526498,78075952,74995455,71012968,76595534,86470512,73342144,88381277
+seed: 20260927
+
+# ---- A. Y dosage
+y_genes: RPS4Y1,DDX3Y,KDM5D,UTY,USP9Y,EIF1AY,ZFY,TXLNGY,NLGN4Y,PRKY,TMSB4Y
+yx_pairs: RPS4Y1/RPS4X,DDX3Y/DDX3X,KDM5D/KDM5C,UTY/KDM6A,EIF1AY/EIF1AX,ZFY/ZFX,USP9Y/USP9X
+y_targets: IL64B,N168B,N269B
+# preliminary values from the published graft+both counts (per cent of the library); reported as reproduced or not
+y_expected_pub: N269B=3.4-4.2;N168B=0.26-0.34;IL64B=0-0.03
+
+# ---- B. contralateral state
+thin_draws: 200
+universe_min_mean_cpm: 10
+background_max_share: 0.10
+axis_min_abs_log2: 1
+
+# ---- C. programmes
+gsva_min_size: 10
+gsva_max_size: 500
+fgsea_nperm: 10000
+fgsea_min_size: 10
+fgsea_max_size: 500
+fit_min_count: 10
+fit_min_samples: 3
+primary_sets: ivygap_LE,venkataramani2022_invasivity_high,HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION,ANASTASSIOU_MULTICANCER_INVASIVENESS_SIGNATURE
+optional_sets_missing: Darmanis 2017 (Table S6 is an embedded image); Hoelzinger 2005 and Gill 2014 (tables only in the article body, full text not downloadable, pnas.org 403); Mariani 2001 (no free full text)
+
+# ---- D. host niche (rat gene ids resolved from the rat GTF by name)
+panel_myeloid: Cd68,Ptprc,Lyz2,Cd74,Spp1,Aif1
+panel_reactive_glia: Gfap,Vim,Timp1
+panel_fibroblast_collagen: Col1a1,Col3a1,Lum,Postn,Pdgfrb
+panel_meninges: Ptgds,Slc6a13,Slc47a1,Crabp2
+panel_neuron: Rbfox3,Snap25,Syt1
+panel_white_matter: Mbp,Plp1,Mog
+mmp13_stroma: Col1a1,Postn,Pdgfrb
+mmp13_myeloid: Cd68,Aif1,Ptprc

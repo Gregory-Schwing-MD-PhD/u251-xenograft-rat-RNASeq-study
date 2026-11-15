@@ -1,0 +1,9 @@
+PROOF1 fetched_md5 b816880eb9a2df3d7c2e7b9f512a2cb0 local_md5 b816880eb9a2df3d7c2e7b9f512a2cb0 archive_md5 b816880eb9a2df3d7c2e7b9f512a2cb0 fetched_bytes 729736688 local_bytes 729736688
+PROOF1 byte-identical
+PROOF2 SRR39547366_1.fastq.gz bytes 3257970229 md5 18d0791ad9488aa02ac075d6cd4bfd3a
+PROOF2 SRR39547366_2.fastq.gz bytes 3451447707 md5 45ff4ee9325ff119e629fa0c68710c3e
+PROOF2 archive SRR39547366_1.fastq.gz	3257970229	18d0791ad9488aa02ac075d6cd4bfd3a
+PROOF2 archive SRR39547366_2.fastq.gz	3451447707	45ff4ee9325ff119e629fa0c68710c3e
+PROOF2 note: the lab volume holds no original FASTQ of any GSE338105 library, so the archive md5 is the check
+CONTAINER not proven: the image's definition is 'bootstrap: docker / from: go2432/bioconductor:latest' (singularity 3.8.6, 2026-09-26); pulling docker://go2432/bioconductor@sha256:702432d4e850e03ec6e26760f589f7603a351ad6c77793981fa86d9ae40543ae with apptainer 1.3.2 on a one-core box was cut at 40 minutes while it built the SIF; nothing compared. The original's package list (350 packages, R 4.3.3) is DOCKER/R_packages.tsv.
+DERIVED not proven in this run: the comparison of IL68B_R1_50.fq.gz with SRR39547366_1 cut to 50 bases stalled before it started (box asx10) and was stopped.
